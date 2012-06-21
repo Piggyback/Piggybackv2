@@ -3,7 +3,7 @@
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1179"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
         <!--You Tube View Controller-->
@@ -94,7 +94,7 @@
                     <navigationItem key="navigationItem" id="TOa-Dg-9jp"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-188" y="155"/>
+            <point key="canvasLocation" x="-72" y="128"/>
         </scene>
     </scenes>
     <resources>
