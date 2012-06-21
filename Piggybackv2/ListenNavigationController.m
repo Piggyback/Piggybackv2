@@ -26,7 +26,7 @@
     return [super initWithRootViewController:rootViewController];
 }
 
-- (void) awakeFromNib
+- (void)awakeFromNib
 {
     [super awakeFromNib];
     [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"listen-view-titlebar"] forBarMetrics:UIBarMetricsDefault];

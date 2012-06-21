@@ -57,6 +57,8 @@
 		F9FE6E601593D0030031EC49 /* ListenNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE6E5F1593D0030031EC49 /* ListenNavigationController.m */; };
 		F9FE6E631593D0110031EC49 /* WatchNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE6E621593D0110031EC49 /* WatchNavigationController.m */; };
 		F9FE6E661593D0270031EC49 /* ExploreNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE6E651593D0270031EC49 /* ExploreNavigationController.m */; };
+		F9FE6E791593DF530031EC49 /* continue-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FE6E771593DF530031EC49 /* continue-button.png */; };
+		F9FE6E7A1593DF530031EC49 /* continue-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FE6E781593DF530031EC49 /* continue-button@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +126,8 @@
 		F9FE6E621593D0110031EC49 /* WatchNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchNavigationController.m; sourceTree = "<group>"; };
 		F9FE6E641593D0270031EC49 /* ExploreNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreNavigationController.h; sourceTree = "<group>"; };
 		F9FE6E651593D0270031EC49 /* ExploreNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreNavigationController.m; sourceTree = "<group>"; };
+		F9FE6E771593DF530031EC49 /* continue-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "continue-button.png"; sourceTree = "<group>"; };
+		F9FE6E781593DF530031EC49 /* continue-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "continue-button@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +235,8 @@
 		F9B478711593C16F00C20A53 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F9FE6E771593DF530031EC49 /* continue-button.png */,
+				F9FE6E781593DF530031EC49 /* continue-button@2x.png */,
 				F9FE6E511593CFC60031EC49 /* explore-view-titlebar.png */,
 				F9FE6E521593CFC60031EC49 /* explore-view-titlebar@2x.png */,
 				F9FE6E531593CFC60031EC49 /* listen-view-titlebar.png */,
@@ -353,6 +359,8 @@
 				F9FE6E5A1593CFC60031EC49 /* listen-view-titlebar@2x.png in Resources */,
 				F9FE6E5B1593CFC60031EC49 /* watch-view-titlebar.png in Resources */,
 				F9FE6E5C1593CFC60031EC49 /* watch-view-titlebar@2x.png in Resources */,
+				F9FE6E791593DF530031EC49 /* continue-button.png in Resources */,
+				F9FE6E7A1593DF530031EC49 /* continue-button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
