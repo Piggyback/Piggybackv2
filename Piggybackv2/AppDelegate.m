@@ -12,6 +12,9 @@
 
 @implementation AppDelegate
 
+NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
+NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
+
 @synthesize window = _window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

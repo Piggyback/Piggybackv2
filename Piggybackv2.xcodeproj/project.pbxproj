@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3E9A5D491593C48500635873 /* AccountLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D481593C48500635873 /* AccountLinkViewController.m */; };
 		3E9A5D4D1593C66000635873 /* PiggybackTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D4C1593C66000635873 /* PiggybackTabBarController.m */; };
+		3E9A5D541593C92D00635873 /* BZFoursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D511593C92D00635873 /* BZFoursquare.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3E9A5D551593C92D00635873 /* BZFoursquareRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D531593C92D00635873 /* BZFoursquareRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3E9A5D571593C96E00635873 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9A5D561593C96E00635873 /* MobileCoreServices.framework */; };
 		3EE8DB0E1593BF9A009DCCA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8DB0D1593BF9A009DCCA3 /* UIKit.framework */; };
 		3EE8DB101593BF9A009DCCA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8DB0F1593BF9A009DCCA3 /* Foundation.framework */; };
 		3EE8DB121593BF9A009DCCA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8DB111593BF9A009DCCA3 /* CoreGraphics.framework */; };
@@ -49,6 +52,11 @@
 		3E9A5D481593C48500635873 /* AccountLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountLinkViewController.m; sourceTree = "<group>"; };
 		3E9A5D4B1593C66000635873 /* PiggybackTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PiggybackTabBarController.h; sourceTree = "<group>"; };
 		3E9A5D4C1593C66000635873 /* PiggybackTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PiggybackTabBarController.m; sourceTree = "<group>"; };
+		3E9A5D501593C92D00635873 /* BZFoursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZFoursquare.h; sourceTree = "<group>"; };
+		3E9A5D511593C92D00635873 /* BZFoursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZFoursquare.m; sourceTree = "<group>"; };
+		3E9A5D521593C92D00635873 /* BZFoursquareRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZFoursquareRequest.h; sourceTree = "<group>"; };
+		3E9A5D531593C92D00635873 /* BZFoursquareRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZFoursquareRequest.m; sourceTree = "<group>"; };
+		3E9A5D561593C96E00635873 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3EE8DB091593BF9A009DCCA3 /* Piggybackv2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Piggybackv2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE8DB0D1593BF9A009DCCA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3EE8DB0F1593BF9A009DCCA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -93,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E9A5D571593C96E00635873 /* MobileCoreServices.framework in Frameworks */,
 				3EE8DB0E1593BF9A009DCCA3 /* UIKit.framework in Frameworks */,
 				3EE8DB101593BF9A009DCCA3 /* Foundation.framework in Frameworks */,
 				3EE8DB121593BF9A009DCCA3 /* CoreGraphics.framework in Frameworks */,
@@ -102,11 +111,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E9A5D4E1593C8E000635873 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				3E9A5D4F1593C92D00635873 /* BZFoursquare */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		3E9A5D4F1593C92D00635873 /* BZFoursquare */ = {
+			isa = PBXGroup;
+			children = (
+				3E9A5D501593C92D00635873 /* BZFoursquare.h */,
+				3E9A5D511593C92D00635873 /* BZFoursquare.m */,
+				3E9A5D521593C92D00635873 /* BZFoursquareRequest.h */,
+				3E9A5D531593C92D00635873 /* BZFoursquareRequest.m */,
+			);
+			path = BZFoursquare;
+			sourceTree = "<group>";
+		};
 		3EE8DAFE1593BF9A009DCCA3 = {
 			isa = PBXGroup;
 			children = (
 				3EE8DB131593BF9A009DCCA3 /* Piggybackv2 */,
 				F9B478711593C16F00C20A53 /* Resources */,
+				3E9A5D4E1593C8E000635873 /* Libraries */,
 				3EE8DB0C1593BF9A009DCCA3 /* Frameworks */,
 				3EE8DB0A1593BF9A009DCCA3 /* Products */,
 			);
@@ -123,6 +152,7 @@
 		3EE8DB0C1593BF9A009DCCA3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3E9A5D561593C96E00635873 /* MobileCoreServices.framework */,
 				3EE8DB0D1593BF9A009DCCA3 /* UIKit.framework */,
 				3EE8DB0F1593BF9A009DCCA3 /* Foundation.framework */,
 				3EE8DB111593BF9A009DCCA3 /* CoreGraphics.framework */,
@@ -283,6 +313,8 @@
 				3EE8DB1E1593BF9A009DCCA3 /* AppDelegate.m in Sources */,
 				3E9A5D491593C48500635873 /* AccountLinkViewController.m in Sources */,
 				3E9A5D4D1593C66000635873 /* PiggybackTabBarController.m in Sources */,
+				3E9A5D541593C92D00635873 /* BZFoursquare.m in Sources */,
+				3E9A5D551593C92D00635873 /* BZFoursquareRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
