@@ -255,11 +255,11 @@
             </objects>
             <point key="canvasLocation" x="1310" y="427"/>
         </scene>
-        <!--Navigation Controller - Explore-->
+        <!--Explore Navigation Controller - Explore-->
         <scene sceneID="A0o-aw-Fnv">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="giY-96-j3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="god-vQ-fK5" sceneMemberID="viewController">
+                <navigationController id="god-vQ-fK5" customClass="ExploreNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Explore" image="places-icon.png" id="Ij2-C5-UhO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="F9o-WV-Xl1">
@@ -274,11 +274,11 @@
             </objects>
             <point key="canvasLocation" x="784" y="-145"/>
         </scene>
-        <!--Navigation Controller - Listen-->
+        <!--Listen Navigation Controller - Listen-->
         <scene sceneID="koT-o5-TU0">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vex-na-kEl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="4TQ-Gx-mf7" sceneMemberID="viewController">
+                <navigationController id="4TQ-Gx-mf7" customClass="ListenNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Listen" image="music-icon.png" id="K4a-A4-2BJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="rjs-DQ-xtX">
@@ -293,11 +293,11 @@
             </objects>
             <point key="canvasLocation" x="784" y="427"/>
         </scene>
-        <!--Navigation Controller - Watch-->
+        <!--Watch Navigation Controller - Watch-->
         <scene sceneID="PV9-vi-AcB">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P87-vb-uZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="eB7-NQ-J2m" sceneMemberID="viewController">
+                <navigationController id="eB7-NQ-J2m" customClass="WatchNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Watch" image="movie-icon.png" id="i5L-XS-4v9"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Meu-5F-jEz">
@@ -336,8 +336,17 @@
                 <relationship kind="action" name="youtubeConnect:"/>
             </relationships>
         </class>
+        <class className="ExploreNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreNavigationController.h"/>
+        </class>
+        <class className="ListenNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListenNavigationController.h"/>
+        </class>
         <class className="PiggybackTabBarController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PiggybackTabBarController.h"/>
+        </class>
+        <class className="WatchNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WatchNavigationController.h"/>
         </class>
         <class className="YouTubeCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/YouTubeCell.h"/>

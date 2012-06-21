@@ -10,4 +10,6 @@
 
 @interface YouTubeTableViewController : UITableViewController
 
+- (void)getFavoritesFromAmbassadors:(NSMutableSet*)users;
+
 @end

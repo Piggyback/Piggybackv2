@@ -57,7 +57,7 @@
 }
 
 - (IBAction)continueButton:(id)sender {
-    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

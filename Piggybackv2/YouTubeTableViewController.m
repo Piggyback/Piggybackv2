@@ -398,10 +398,6 @@
 {
     [super viewDidLoad];
     
-    // get favorites from all ambassadors
-    NSMutableSet *youtubeAmbassadors = [NSMutableSet setWithObjects:@"kimikul",@"mlgao",@"andyjiang",nil];
-    [self getFavoritesFromAmbassadors:youtubeAmbassadors];
-    
     // call youtube api to get my hash for my realtime activity feed
 //    [self getMyActivityStreamHash];
 
