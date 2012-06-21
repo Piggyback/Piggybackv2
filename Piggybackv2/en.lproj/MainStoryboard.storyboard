@@ -3,7 +3,7 @@
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1179"/>
     </dependencies>
     <scenes>
         <!--You Tube View Controller-->
@@ -94,17 +94,17 @@
                     <navigationItem key="navigationItem" id="TOa-Dg-9jp"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-72" y="128"/>
+            <point key="canvasLocation" x="-57" y="121"/>
         </scene>
     </scenes>
     <resources>
-        <image name="foursquare-icon.png" width="16" height="16"/>
-        <image name="link-view-titlebar-drop-shadow.png" width="16" height="16"/>
-        <image name="music-section-divider.png" width="16" height="16"/>
-        <image name="places-section-divider.png" width="16" height="16"/>
-        <image name="spotify-icon.png" width="16" height="16"/>
-        <image name="videos-section-divider.png" width="16" height="16"/>
-        <image name="youtube-icon.png" width="16" height="16"/>
+        <image name="foursquare-icon.png" width="50" height="50"/>
+        <image name="link-view-titlebar-drop-shadow.png" width="320" height="50"/>
+        <image name="music-section-divider.png" width="320" height="26"/>
+        <image name="places-section-divider.png" width="320" height="26"/>
+        <image name="spotify-icon.png" width="50" height="50"/>
+        <image name="videos-section-divider.png" width="320" height="26"/>
+        <image name="youtube-icon.png" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
