@@ -42,9 +42,10 @@
 
 - (IBAction)spotifyConnect:(id)sender {
     if ([sender isOn] == YES) {
-        
+        SPLoginViewController *spotifyLogin = [SPLoginViewController loginControllerForSession:[SPSession sharedSession]];
+        [self presentViewController:spotifyLogin animated:YES completion:nil];
     } else {
-        
+        [[SPSession sharedSession] logout:^{}];
     }
 }
 

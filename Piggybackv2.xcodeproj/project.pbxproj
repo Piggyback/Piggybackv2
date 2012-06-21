@@ -7,6 +7,68 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E3165331593D51700344F36 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3165321593D51700344F36 /* SystemConfiguration.framework */; };
+		3E3165351593D51C00344F36 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3165341593D51C00344F36 /* CFNetwork.framework */; };
+		3E3165371593D52000344F36 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3165361593D52000344F36 /* libstdc++.dylib */; };
+		3E3165391593D52400344F36 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3165381593D52400344F36 /* CoreAudio.framework */; };
+		3E31653B1593D52900344F36 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E31653A1593D52900344F36 /* AudioToolbox.framework */; };
+		3E31653D1593D52D00344F36 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E31653C1593D52D00344F36 /* AVFoundation.framework */; };
+		3E3168401593D8D700344F36 /* libCocoaLibSpotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E31683B1593D8D000344F36 /* libCocoaLibSpotify.a */; };
+		3E51D6791593DF0000EEBD36 /* SPLoginResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6781593DF0000EEBD36 /* SPLoginResources.bundle */; };
+		3E51D6E81593E04F00EEBD36 /* book-icon-badge.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6B21593E04F00EEBD36 /* book-icon-badge.png */; };
+		3E51D6E91593E04F00EEBD36 /* book-icon-badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6B31593E04F00EEBD36 /* book-icon-badge@2x.png */; };
+		3E51D6EA1593E04F00EEBD36 /* book-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6B41593E04F00EEBD36 /* book-icon.png */; };
+		3E51D6EB1593E04F00EEBD36 /* book-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6B51593E04F00EEBD36 /* book-icon@2x.png */; };
+		3E51D6EC1593E04F00EEBD36 /* continue-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6B61593E04F00EEBD36 /* continue-button.png */; };
+		3E51D6ED1593E04F00EEBD36 /* continue-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6B71593E04F00EEBD36 /* continue-button@2x.png */; };
+		3E51D6EE1593E04F00EEBD36 /* explore-view-titlebar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6B81593E04F00EEBD36 /* explore-view-titlebar.png */; };
+		3E51D6EF1593E04F00EEBD36 /* explore-view-titlebar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6B91593E04F00EEBD36 /* explore-view-titlebar@2x.png */; };
+		3E51D6F01593E04F00EEBD36 /* foursquare-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6BA1593E04F00EEBD36 /* foursquare-icon.png */; };
+		3E51D6F11593E04F00EEBD36 /* foursquare-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6BB1593E04F00EEBD36 /* foursquare-icon@2x.png */; };
+		3E51D6F21593E04F00EEBD36 /* gao-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6BC1593E04F00EEBD36 /* gao-rounded-corners.png */; };
+		3E51D6F31593E04F00EEBD36 /* harrison-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6BD1593E04F00EEBD36 /* harrison-rounded-corners.png */; };
+		3E51D6F41593E04F00EEBD36 /* heart-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6BE1593E04F00EEBD36 /* heart-button.png */; };
+		3E51D6F51593E04F00EEBD36 /* heart-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6BF1593E04F00EEBD36 /* heart-button@2x.png */; };
+		3E51D6F61593E04F00EEBD36 /* heart-pressed-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6C01593E04F00EEBD36 /* heart-pressed-button.png */; };
+		3E51D6F71593E04F00EEBD36 /* heart-pressed-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6C11593E04F00EEBD36 /* heart-pressed-button@2x.png */; };
+		3E51D6F81593E04F00EEBD36 /* hsiao-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6C21593E04F00EEBD36 /* hsiao-rounded-corners.png */; };
+		3E51D6F91593E04F00EEBD36 /* jiang-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6C31593E04F00EEBD36 /* jiang-rounded-corners.png */; };
+		3E51D6FA1593E04F00EEBD36 /* link-view-title-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6C41593E04F00EEBD36 /* link-view-title-bar.png */; };
+		3E51D6FB1593E04F00EEBD36 /* link-view-title-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6C51593E04F00EEBD36 /* link-view-title-bar@2x.png */; };
+		3E51D6FC1593E04F00EEBD36 /* link-view-titlebar-drop-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6C61593E04F00EEBD36 /* link-view-titlebar-drop-shadow.png */; };
+		3E51D6FD1593E04F00EEBD36 /* link-view-titlebar-drop-shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6C71593E04F00EEBD36 /* link-view-titlebar-drop-shadow@2x.png */; };
+		3E51D6FE1593E04F00EEBD36 /* listen-view-titlebar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6C81593E04F00EEBD36 /* listen-view-titlebar.png */; };
+		3E51D6FF1593E04F00EEBD36 /* listen-view-titlebar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6C91593E04F00EEBD36 /* listen-view-titlebar@2x.png */; };
+		3E51D7001593E04F00EEBD36 /* movie-icon-badge.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6CA1593E04F00EEBD36 /* movie-icon-badge.png */; };
+		3E51D7011593E04F00EEBD36 /* movie-icon-badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6CB1593E04F00EEBD36 /* movie-icon-badge@2x.png */; };
+		3E51D7021593E04F00EEBD36 /* movie-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6CC1593E04F00EEBD36 /* movie-icon.png */; };
+		3E51D7031593E04F00EEBD36 /* movie-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6CD1593E04F00EEBD36 /* movie-icon@2x.png */; };
+		3E51D7041593E04F00EEBD36 /* music-icon-badge.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6CE1593E04F00EEBD36 /* music-icon-badge.png */; };
+		3E51D7051593E04F00EEBD36 /* music-icon-badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6CF1593E04F00EEBD36 /* music-icon-badge@2x.png */; };
+		3E51D7061593E04F00EEBD36 /* music-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6D01593E04F00EEBD36 /* music-icon.png */; };
+		3E51D7071593E04F00EEBD36 /* music-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6D11593E04F00EEBD36 /* music-icon@2x.png */; };
+		3E51D7081593E04F00EEBD36 /* music-section-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6D21593E04F00EEBD36 /* music-section-divider.png */; };
+		3E51D7091593E04F00EEBD36 /* music-section-divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6D31593E04F00EEBD36 /* music-section-divider@2x.png */; };
+		3E51D70A1593E04F00EEBD36 /* pelberg-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6D41593E04F00EEBD36 /* pelberg-rounded-corners.png */; };
+		3E51D70B1593E04F00EEBD36 /* places-icon-badge.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6D51593E04F00EEBD36 /* places-icon-badge.png */; };
+		3E51D70C1593E04F00EEBD36 /* places-icon-badge@2px.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6D61593E04F00EEBD36 /* places-icon-badge@2px.png */; };
+		3E51D70D1593E04F00EEBD36 /* places-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6D71593E04F00EEBD36 /* places-icon.png */; };
+		3E51D70E1593E04F00EEBD36 /* places-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6D81593E04F00EEBD36 /* places-icon@2x.png */; };
+		3E51D70F1593E04F00EEBD36 /* places-section-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6D91593E04F00EEBD36 /* places-section-divider.png */; };
+		3E51D7101593E04F00EEBD36 /* places-section-divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6DA1593E04F00EEBD36 /* places-section-divider@2x.png */; };
+		3E51D7111593E04F00EEBD36 /* silver-greenberg-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6DB1593E04F00EEBD36 /* silver-greenberg-rounded-corners.png */; };
+		3E51D7121593E04F00EEBD36 /* spotify-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6DC1593E04F00EEBD36 /* spotify-icon.png */; };
+		3E51D7131593E04F00EEBD36 /* spotify-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6DD1593E04F00EEBD36 /* spotify-icon@2x.png */; };
+		3E51D7141593E04F00EEBD36 /* todo-added-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6DE1593E04F00EEBD36 /* todo-added-button.png */; };
+		3E51D7151593E04F00EEBD36 /* todo-added-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6DF1593E04F00EEBD36 /* todo-added-button@2x.png */; };
+		3E51D7161593E04F00EEBD36 /* todo-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6E01593E04F00EEBD36 /* todo-button.png */; };
+		3E51D7171593E04F00EEBD36 /* todo-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6E11593E04F00EEBD36 /* todo-button@2x.png */; };
+		3E51D7181593E04F00EEBD36 /* videos-section-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6E21593E04F00EEBD36 /* videos-section-divider.png */; };
+		3E51D7191593E04F00EEBD36 /* videos-section-divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6E31593E04F00EEBD36 /* videos-section-divider@2x.png */; };
+		3E51D71A1593E04F00EEBD36 /* watch-view-titlebar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6E41593E04F00EEBD36 /* watch-view-titlebar.png */; };
+		3E51D71B1593E04F00EEBD36 /* watch-view-titlebar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6E51593E04F00EEBD36 /* watch-view-titlebar@2x.png */; };
+		3E51D71C1593E04F00EEBD36 /* youtube-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6E61593E04F00EEBD36 /* youtube-icon.png */; };
+		3E51D71D1593E04F00EEBD36 /* youtube-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6E71593E04F00EEBD36 /* youtube-icon@2x.png */; };
 		3E9A5D491593C48500635873 /* AccountLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D481593C48500635873 /* AccountLinkViewController.m */; };
 		3E9A5D4D1593C66000635873 /* PiggybackTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D4C1593C66000635873 /* PiggybackTabBarController.m */; };
 		3E9A5D541593C92D00635873 /* BZFoursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D511593C92D00635873 /* BZFoursquare.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -19,35 +81,95 @@
 		3EE8DB1A1593BF9A009DCCA3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8DB191593BF9A009DCCA3 /* main.m */; };
 		3EE8DB1E1593BF9A009DCCA3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */; };
 		3EE8DB211593BF9A009DCCA3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8DB1F1593BF9A009DCCA3 /* MainStoryboard.storyboard */; };
-		F9B478C11593C23C00C20A53 /* book-icon-badge.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478A71593C23C00C20A53 /* book-icon-badge.png */; };
-		F9B478C21593C23C00C20A53 /* book-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478A81593C23C00C20A53 /* book-icon.png */; };
-		F9B478C31593C23C00C20A53 /* foursquare-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478A91593C23C00C20A53 /* foursquare-icon.png */; };
-		F9B478C41593C23C00C20A53 /* gao-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478AA1593C23C00C20A53 /* gao-rounded-corners.png */; };
-		F9B478C51593C23C00C20A53 /* harrison-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478AB1593C23C00C20A53 /* harrison-rounded-corners.png */; };
-		F9B478C61593C23C00C20A53 /* hsiao-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478AC1593C23C00C20A53 /* hsiao-rounded-corners.png */; };
-		F9B478C71593C23C00C20A53 /* jiang-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478AD1593C23C00C20A53 /* jiang-rounded-corners.png */; };
-		F9B478C81593C23C00C20A53 /* link-view-title-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478AE1593C23C00C20A53 /* link-view-title-bar.png */; };
-		F9B478C91593C23C00C20A53 /* link-view-title-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478AF1593C23C00C20A53 /* link-view-title-bar@2x.png */; };
-		F9B478CA1593C23C00C20A53 /* link-view-titlebar-drop-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478B01593C23C00C20A53 /* link-view-titlebar-drop-shadow.png */; };
-		F9B478CB1593C23C00C20A53 /* movie-icon-badge.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478B11593C23C00C20A53 /* movie-icon-badge.png */; };
-		F9B478CC1593C23C00C20A53 /* movie-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478B21593C23C00C20A53 /* movie-icon.png */; };
-		F9B478CD1593C23C00C20A53 /* music-icon-badge.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478B31593C23C00C20A53 /* music-icon-badge.png */; };
-		F9B478CE1593C23C00C20A53 /* music-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478B41593C23C00C20A53 /* music-icon.png */; };
-		F9B478CF1593C23C00C20A53 /* music-section-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478B51593C23C00C20A53 /* music-section-divider.png */; };
-		F9B478D01593C23C00C20A53 /* music-section-divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478B61593C23C00C20A53 /* music-section-divider@2x.png */; };
-		F9B478D11593C23C00C20A53 /* pelberg-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478B71593C23C00C20A53 /* pelberg-rounded-corners.png */; };
-		F9B478D21593C23C00C20A53 /* places-icon-badge.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478B81593C23C00C20A53 /* places-icon-badge.png */; };
-		F9B478D31593C23C00C20A53 /* places-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478B91593C23C00C20A53 /* places-icon.png */; };
-		F9B478D41593C23C00C20A53 /* places-section-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478BA1593C23C00C20A53 /* places-section-divider.png */; };
-		F9B478D51593C23C00C20A53 /* places-section-divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478BB1593C23C00C20A53 /* places-section-divider@2x.png */; };
-		F9B478D61593C23C00C20A53 /* silver-greenberg-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478BC1593C23C00C20A53 /* silver-greenberg-rounded-corners.png */; };
-		F9B478D71593C23C00C20A53 /* spotify-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478BD1593C23C00C20A53 /* spotify-icon.png */; };
-		F9B478D81593C23C00C20A53 /* videos-section-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478BE1593C23C00C20A53 /* videos-section-divider.png */; };
-		F9B478D91593C23C00C20A53 /* videos-section-divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478BF1593C23C00C20A53 /* videos-section-divider@2x.png */; };
-		F9B478DA1593C23C00C20A53 /* youtube-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B478C01593C23C00C20A53 /* youtube-icon.png */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3E31683A1593D8D000344F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E3168311593D8CF00344F36 /* CocoaLibSpotify iOS Library.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 50AF49DC1439CBFE00E4A5EF;
+			remoteInfo = CocoaLibSpotify;
+		};
+		3E31683C1593D8D000344F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E3168311593D8CF00344F36 /* CocoaLibSpotify iOS Library.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 50D4F52B156BCDE800E237DD;
+			remoteInfo = CocoaLSTests;
+		};
+		3E31683E1593D8D400344F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E3168311593D8CF00344F36 /* CocoaLibSpotify iOS Library.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 50AF49DB1439CBFE00E4A5EF;
+			remoteInfo = CocoaLibSpotify;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		3E3165321593D51700344F36 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3E3165341593D51C00344F36 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		3E3165361593D52000344F36 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		3E3165381593D52400344F36 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		3E31653A1593D52900344F36 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		3E31653C1593D52D00344F36 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3E3168311593D8CF00344F36 /* CocoaLibSpotify iOS Library.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CocoaLibSpotify iOS Library.xcodeproj"; path = "spotify-ios-sdk/iOS Library/CocoaLibSpotify iOS Library.xcodeproj"; sourceTree = "<group>"; };
+		3E51D6781593DF0000EEBD36 /* SPLoginResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SPLoginResources.bundle; path = "spotify-ios-sdk/SPLoginResources.bundle"; sourceTree = SOURCE_ROOT; };
+		3E51D6B21593E04F00EEBD36 /* book-icon-badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book-icon-badge.png"; sourceTree = "<group>"; };
+		3E51D6B31593E04F00EEBD36 /* book-icon-badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book-icon-badge@2x.png"; sourceTree = "<group>"; };
+		3E51D6B41593E04F00EEBD36 /* book-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book-icon.png"; sourceTree = "<group>"; };
+		3E51D6B51593E04F00EEBD36 /* book-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book-icon@2x.png"; sourceTree = "<group>"; };
+		3E51D6B61593E04F00EEBD36 /* continue-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "continue-button.png"; sourceTree = "<group>"; };
+		3E51D6B71593E04F00EEBD36 /* continue-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "continue-button@2x.png"; sourceTree = "<group>"; };
+		3E51D6B81593E04F00EEBD36 /* explore-view-titlebar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "explore-view-titlebar.png"; sourceTree = "<group>"; };
+		3E51D6B91593E04F00EEBD36 /* explore-view-titlebar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "explore-view-titlebar@2x.png"; sourceTree = "<group>"; };
+		3E51D6BA1593E04F00EEBD36 /* foursquare-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "foursquare-icon.png"; sourceTree = "<group>"; };
+		3E51D6BB1593E04F00EEBD36 /* foursquare-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "foursquare-icon@2x.png"; sourceTree = "<group>"; };
+		3E51D6BC1593E04F00EEBD36 /* gao-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gao-rounded-corners.png"; sourceTree = "<group>"; };
+		3E51D6BD1593E04F00EEBD36 /* harrison-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "harrison-rounded-corners.png"; sourceTree = "<group>"; };
+		3E51D6BE1593E04F00EEBD36 /* heart-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-button.png"; sourceTree = "<group>"; };
+		3E51D6BF1593E04F00EEBD36 /* heart-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-button@2x.png"; sourceTree = "<group>"; };
+		3E51D6C01593E04F00EEBD36 /* heart-pressed-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-pressed-button.png"; sourceTree = "<group>"; };
+		3E51D6C11593E04F00EEBD36 /* heart-pressed-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-pressed-button@2x.png"; sourceTree = "<group>"; };
+		3E51D6C21593E04F00EEBD36 /* hsiao-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hsiao-rounded-corners.png"; sourceTree = "<group>"; };
+		3E51D6C31593E04F00EEBD36 /* jiang-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiang-rounded-corners.png"; sourceTree = "<group>"; };
+		3E51D6C41593E04F00EEBD36 /* link-view-title-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "link-view-title-bar.png"; sourceTree = "<group>"; };
+		3E51D6C51593E04F00EEBD36 /* link-view-title-bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "link-view-title-bar@2x.png"; sourceTree = "<group>"; };
+		3E51D6C61593E04F00EEBD36 /* link-view-titlebar-drop-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "link-view-titlebar-drop-shadow.png"; sourceTree = "<group>"; };
+		3E51D6C71593E04F00EEBD36 /* link-view-titlebar-drop-shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "link-view-titlebar-drop-shadow@2x.png"; sourceTree = "<group>"; };
+		3E51D6C81593E04F00EEBD36 /* listen-view-titlebar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "listen-view-titlebar.png"; sourceTree = "<group>"; };
+		3E51D6C91593E04F00EEBD36 /* listen-view-titlebar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "listen-view-titlebar@2x.png"; sourceTree = "<group>"; };
+		3E51D6CA1593E04F00EEBD36 /* movie-icon-badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "movie-icon-badge.png"; sourceTree = "<group>"; };
+		3E51D6CB1593E04F00EEBD36 /* movie-icon-badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "movie-icon-badge@2x.png"; sourceTree = "<group>"; };
+		3E51D6CC1593E04F00EEBD36 /* movie-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "movie-icon.png"; sourceTree = "<group>"; };
+		3E51D6CD1593E04F00EEBD36 /* movie-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "movie-icon@2x.png"; sourceTree = "<group>"; };
+		3E51D6CE1593E04F00EEBD36 /* music-icon-badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music-icon-badge.png"; sourceTree = "<group>"; };
+		3E51D6CF1593E04F00EEBD36 /* music-icon-badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music-icon-badge@2x.png"; sourceTree = "<group>"; };
+		3E51D6D01593E04F00EEBD36 /* music-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music-icon.png"; sourceTree = "<group>"; };
+		3E51D6D11593E04F00EEBD36 /* music-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music-icon@2x.png"; sourceTree = "<group>"; };
+		3E51D6D21593E04F00EEBD36 /* music-section-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music-section-divider.png"; sourceTree = "<group>"; };
+		3E51D6D31593E04F00EEBD36 /* music-section-divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music-section-divider@2x.png"; sourceTree = "<group>"; };
+		3E51D6D41593E04F00EEBD36 /* pelberg-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pelberg-rounded-corners.png"; sourceTree = "<group>"; };
+		3E51D6D51593E04F00EEBD36 /* places-icon-badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "places-icon-badge.png"; sourceTree = "<group>"; };
+		3E51D6D61593E04F00EEBD36 /* places-icon-badge@2px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "places-icon-badge@2px.png"; sourceTree = "<group>"; };
+		3E51D6D71593E04F00EEBD36 /* places-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "places-icon.png"; sourceTree = "<group>"; };
+		3E51D6D81593E04F00EEBD36 /* places-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "places-icon@2x.png"; sourceTree = "<group>"; };
+		3E51D6D91593E04F00EEBD36 /* places-section-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "places-section-divider.png"; sourceTree = "<group>"; };
+		3E51D6DA1593E04F00EEBD36 /* places-section-divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "places-section-divider@2x.png"; sourceTree = "<group>"; };
+		3E51D6DB1593E04F00EEBD36 /* silver-greenberg-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "silver-greenberg-rounded-corners.png"; sourceTree = "<group>"; };
+		3E51D6DC1593E04F00EEBD36 /* spotify-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spotify-icon.png"; sourceTree = "<group>"; };
+		3E51D6DD1593E04F00EEBD36 /* spotify-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spotify-icon@2x.png"; sourceTree = "<group>"; };
+		3E51D6DE1593E04F00EEBD36 /* todo-added-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "todo-added-button.png"; sourceTree = "<group>"; };
+		3E51D6DF1593E04F00EEBD36 /* todo-added-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "todo-added-button@2x.png"; sourceTree = "<group>"; };
+		3E51D6E01593E04F00EEBD36 /* todo-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "todo-button.png"; sourceTree = "<group>"; };
+		3E51D6E11593E04F00EEBD36 /* todo-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "todo-button@2x.png"; sourceTree = "<group>"; };
+		3E51D6E21593E04F00EEBD36 /* videos-section-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "videos-section-divider.png"; sourceTree = "<group>"; };
+		3E51D6E31593E04F00EEBD36 /* videos-section-divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "videos-section-divider@2x.png"; sourceTree = "<group>"; };
+		3E51D6E41593E04F00EEBD36 /* watch-view-titlebar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watch-view-titlebar.png"; sourceTree = "<group>"; };
+		3E51D6E51593E04F00EEBD36 /* watch-view-titlebar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watch-view-titlebar@2x.png"; sourceTree = "<group>"; };
+		3E51D6E61593E04F00EEBD36 /* youtube-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youtube-icon.png"; sourceTree = "<group>"; };
+		3E51D6E71593E04F00EEBD36 /* youtube-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youtube-icon@2x.png"; sourceTree = "<group>"; };
 		3E9A5D471593C48500635873 /* AccountLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountLinkViewController.h; sourceTree = "<group>"; };
 		3E9A5D481593C48500635873 /* AccountLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountLinkViewController.m; sourceTree = "<group>"; };
 		3E9A5D4B1593C66000635873 /* PiggybackTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PiggybackTabBarController.h; sourceTree = "<group>"; };
@@ -68,32 +190,6 @@
 		3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3EE8DB201593BF9A009DCCA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		F9B478A71593C23C00C20A53 /* book-icon-badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book-icon-badge.png"; sourceTree = "<group>"; };
-		F9B478A81593C23C00C20A53 /* book-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book-icon.png"; sourceTree = "<group>"; };
-		F9B478A91593C23C00C20A53 /* foursquare-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "foursquare-icon.png"; sourceTree = "<group>"; };
-		F9B478AA1593C23C00C20A53 /* gao-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gao-rounded-corners.png"; sourceTree = "<group>"; };
-		F9B478AB1593C23C00C20A53 /* harrison-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "harrison-rounded-corners.png"; sourceTree = "<group>"; };
-		F9B478AC1593C23C00C20A53 /* hsiao-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hsiao-rounded-corners.png"; sourceTree = "<group>"; };
-		F9B478AD1593C23C00C20A53 /* jiang-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiang-rounded-corners.png"; sourceTree = "<group>"; };
-		F9B478AE1593C23C00C20A53 /* link-view-title-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "link-view-title-bar.png"; sourceTree = "<group>"; };
-		F9B478AF1593C23C00C20A53 /* link-view-title-bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "link-view-title-bar@2x.png"; sourceTree = "<group>"; };
-		F9B478B01593C23C00C20A53 /* link-view-titlebar-drop-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "link-view-titlebar-drop-shadow.png"; sourceTree = "<group>"; };
-		F9B478B11593C23C00C20A53 /* movie-icon-badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "movie-icon-badge.png"; sourceTree = "<group>"; };
-		F9B478B21593C23C00C20A53 /* movie-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "movie-icon.png"; sourceTree = "<group>"; };
-		F9B478B31593C23C00C20A53 /* music-icon-badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music-icon-badge.png"; sourceTree = "<group>"; };
-		F9B478B41593C23C00C20A53 /* music-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music-icon.png"; sourceTree = "<group>"; };
-		F9B478B51593C23C00C20A53 /* music-section-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music-section-divider.png"; sourceTree = "<group>"; };
-		F9B478B61593C23C00C20A53 /* music-section-divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music-section-divider@2x.png"; sourceTree = "<group>"; };
-		F9B478B71593C23C00C20A53 /* pelberg-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pelberg-rounded-corners.png"; sourceTree = "<group>"; };
-		F9B478B81593C23C00C20A53 /* places-icon-badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "places-icon-badge.png"; sourceTree = "<group>"; };
-		F9B478B91593C23C00C20A53 /* places-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "places-icon.png"; sourceTree = "<group>"; };
-		F9B478BA1593C23C00C20A53 /* places-section-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "places-section-divider.png"; sourceTree = "<group>"; };
-		F9B478BB1593C23C00C20A53 /* places-section-divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "places-section-divider@2x.png"; sourceTree = "<group>"; };
-		F9B478BC1593C23C00C20A53 /* silver-greenberg-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "silver-greenberg-rounded-corners.png"; sourceTree = "<group>"; };
-		F9B478BD1593C23C00C20A53 /* spotify-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spotify-icon.png"; sourceTree = "<group>"; };
-		F9B478BE1593C23C00C20A53 /* videos-section-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "videos-section-divider.png"; sourceTree = "<group>"; };
-		F9B478BF1593C23C00C20A53 /* videos-section-divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "videos-section-divider@2x.png"; sourceTree = "<group>"; };
-		F9B478C01593C23C00C20A53 /* youtube-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youtube-icon.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +197,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E3168401593D8D700344F36 /* libCocoaLibSpotify.a in Frameworks */,
+				3E31653D1593D52D00344F36 /* AVFoundation.framework in Frameworks */,
+				3E31653B1593D52900344F36 /* AudioToolbox.framework in Frameworks */,
+				3E3165391593D52400344F36 /* CoreAudio.framework in Frameworks */,
+				3E3165371593D52000344F36 /* libstdc++.dylib in Frameworks */,
+				3E3165351593D51C00344F36 /* CFNetwork.framework in Frameworks */,
+				3E3165331593D51700344F36 /* SystemConfiguration.framework in Frameworks */,
 				3E9A5D571593C96E00635873 /* MobileCoreServices.framework in Frameworks */,
 				3EE8DB0E1593BF9A009DCCA3 /* UIKit.framework in Frameworks */,
 				3EE8DB101593BF9A009DCCA3 /* Foundation.framework in Frameworks */,
@@ -111,9 +214,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E3168321593D8CF00344F36 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3E31683B1593D8D000344F36 /* libCocoaLibSpotify.a */,
+				3E31683D1593D8D000344F36 /* CocoaLSTests.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3E9A5D4E1593C8E000635873 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3E3168311593D8CF00344F36 /* CocoaLibSpotify iOS Library.xcodeproj */,
 				3E9A5D4F1593C92D00635873 /* BZFoursquare */,
 			);
 			name = Libraries;
@@ -152,6 +265,12 @@
 		3EE8DB0C1593BF9A009DCCA3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3E31653C1593D52D00344F36 /* AVFoundation.framework */,
+				3E31653A1593D52900344F36 /* AudioToolbox.framework */,
+				3E3165381593D52400344F36 /* CoreAudio.framework */,
+				3E3165361593D52000344F36 /* libstdc++.dylib */,
+				3E3165341593D51C00344F36 /* CFNetwork.framework */,
+				3E3165321593D51700344F36 /* SystemConfiguration.framework */,
 				3E9A5D561593C96E00635873 /* MobileCoreServices.framework */,
 				3EE8DB0D1593BF9A009DCCA3 /* UIKit.framework */,
 				3EE8DB0F1593BF9A009DCCA3 /* Foundation.framework */,
@@ -189,32 +308,61 @@
 		F9B478711593C16F00C20A53 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F9B478A71593C23C00C20A53 /* book-icon-badge.png */,
-				F9B478A81593C23C00C20A53 /* book-icon.png */,
-				F9B478A91593C23C00C20A53 /* foursquare-icon.png */,
-				F9B478AA1593C23C00C20A53 /* gao-rounded-corners.png */,
-				F9B478AB1593C23C00C20A53 /* harrison-rounded-corners.png */,
-				F9B478AC1593C23C00C20A53 /* hsiao-rounded-corners.png */,
-				F9B478AD1593C23C00C20A53 /* jiang-rounded-corners.png */,
-				F9B478AE1593C23C00C20A53 /* link-view-title-bar.png */,
-				F9B478AF1593C23C00C20A53 /* link-view-title-bar@2x.png */,
-				F9B478B01593C23C00C20A53 /* link-view-titlebar-drop-shadow.png */,
-				F9B478B11593C23C00C20A53 /* movie-icon-badge.png */,
-				F9B478B21593C23C00C20A53 /* movie-icon.png */,
-				F9B478B31593C23C00C20A53 /* music-icon-badge.png */,
-				F9B478B41593C23C00C20A53 /* music-icon.png */,
-				F9B478B51593C23C00C20A53 /* music-section-divider.png */,
-				F9B478B61593C23C00C20A53 /* music-section-divider@2x.png */,
-				F9B478B71593C23C00C20A53 /* pelberg-rounded-corners.png */,
-				F9B478B81593C23C00C20A53 /* places-icon-badge.png */,
-				F9B478B91593C23C00C20A53 /* places-icon.png */,
-				F9B478BA1593C23C00C20A53 /* places-section-divider.png */,
-				F9B478BB1593C23C00C20A53 /* places-section-divider@2x.png */,
-				F9B478BC1593C23C00C20A53 /* silver-greenberg-rounded-corners.png */,
-				F9B478BD1593C23C00C20A53 /* spotify-icon.png */,
-				F9B478BE1593C23C00C20A53 /* videos-section-divider.png */,
-				F9B478BF1593C23C00C20A53 /* videos-section-divider@2x.png */,
-				F9B478C01593C23C00C20A53 /* youtube-icon.png */,
+				3E51D6B21593E04F00EEBD36 /* book-icon-badge.png */,
+				3E51D6B31593E04F00EEBD36 /* book-icon-badge@2x.png */,
+				3E51D6B41593E04F00EEBD36 /* book-icon.png */,
+				3E51D6B51593E04F00EEBD36 /* book-icon@2x.png */,
+				3E51D6B61593E04F00EEBD36 /* continue-button.png */,
+				3E51D6B71593E04F00EEBD36 /* continue-button@2x.png */,
+				3E51D6B81593E04F00EEBD36 /* explore-view-titlebar.png */,
+				3E51D6B91593E04F00EEBD36 /* explore-view-titlebar@2x.png */,
+				3E51D6BA1593E04F00EEBD36 /* foursquare-icon.png */,
+				3E51D6BB1593E04F00EEBD36 /* foursquare-icon@2x.png */,
+				3E51D6BC1593E04F00EEBD36 /* gao-rounded-corners.png */,
+				3E51D6BD1593E04F00EEBD36 /* harrison-rounded-corners.png */,
+				3E51D6BE1593E04F00EEBD36 /* heart-button.png */,
+				3E51D6BF1593E04F00EEBD36 /* heart-button@2x.png */,
+				3E51D6C01593E04F00EEBD36 /* heart-pressed-button.png */,
+				3E51D6C11593E04F00EEBD36 /* heart-pressed-button@2x.png */,
+				3E51D6C21593E04F00EEBD36 /* hsiao-rounded-corners.png */,
+				3E51D6C31593E04F00EEBD36 /* jiang-rounded-corners.png */,
+				3E51D6C41593E04F00EEBD36 /* link-view-title-bar.png */,
+				3E51D6C51593E04F00EEBD36 /* link-view-title-bar@2x.png */,
+				3E51D6C61593E04F00EEBD36 /* link-view-titlebar-drop-shadow.png */,
+				3E51D6C71593E04F00EEBD36 /* link-view-titlebar-drop-shadow@2x.png */,
+				3E51D6C81593E04F00EEBD36 /* listen-view-titlebar.png */,
+				3E51D6C91593E04F00EEBD36 /* listen-view-titlebar@2x.png */,
+				3E51D6CA1593E04F00EEBD36 /* movie-icon-badge.png */,
+				3E51D6CB1593E04F00EEBD36 /* movie-icon-badge@2x.png */,
+				3E51D6CC1593E04F00EEBD36 /* movie-icon.png */,
+				3E51D6CD1593E04F00EEBD36 /* movie-icon@2x.png */,
+				3E51D6CE1593E04F00EEBD36 /* music-icon-badge.png */,
+				3E51D6CF1593E04F00EEBD36 /* music-icon-badge@2x.png */,
+				3E51D6D01593E04F00EEBD36 /* music-icon.png */,
+				3E51D6D11593E04F00EEBD36 /* music-icon@2x.png */,
+				3E51D6D21593E04F00EEBD36 /* music-section-divider.png */,
+				3E51D6D31593E04F00EEBD36 /* music-section-divider@2x.png */,
+				3E51D6D41593E04F00EEBD36 /* pelberg-rounded-corners.png */,
+				3E51D6D51593E04F00EEBD36 /* places-icon-badge.png */,
+				3E51D6D61593E04F00EEBD36 /* places-icon-badge@2px.png */,
+				3E51D6D71593E04F00EEBD36 /* places-icon.png */,
+				3E51D6D81593E04F00EEBD36 /* places-icon@2x.png */,
+				3E51D6D91593E04F00EEBD36 /* places-section-divider.png */,
+				3E51D6DA1593E04F00EEBD36 /* places-section-divider@2x.png */,
+				3E51D6DB1593E04F00EEBD36 /* silver-greenberg-rounded-corners.png */,
+				3E51D6DC1593E04F00EEBD36 /* spotify-icon.png */,
+				3E51D6DD1593E04F00EEBD36 /* spotify-icon@2x.png */,
+				3E51D6DE1593E04F00EEBD36 /* todo-added-button.png */,
+				3E51D6DF1593E04F00EEBD36 /* todo-added-button@2x.png */,
+				3E51D6E01593E04F00EEBD36 /* todo-button.png */,
+				3E51D6E11593E04F00EEBD36 /* todo-button@2x.png */,
+				3E51D6E21593E04F00EEBD36 /* videos-section-divider.png */,
+				3E51D6E31593E04F00EEBD36 /* videos-section-divider@2x.png */,
+				3E51D6E41593E04F00EEBD36 /* watch-view-titlebar.png */,
+				3E51D6E51593E04F00EEBD36 /* watch-view-titlebar@2x.png */,
+				3E51D6E61593E04F00EEBD36 /* youtube-icon.png */,
+				3E51D6E71593E04F00EEBD36 /* youtube-icon@2x.png */,
+				3E51D6781593DF0000EEBD36 /* SPLoginResources.bundle */,
 			);
 			name = Resources;
 			path = Piggybackv2;
@@ -234,6 +382,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3E31683F1593D8D400344F36 /* PBXTargetDependency */,
 			);
 			name = Piggybackv2;
 			productName = Piggybackv2;
@@ -255,16 +404,40 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = 3EE8DAFE1593BF9A009DCCA3;
 			productRefGroup = 3EE8DB0A1593BF9A009DCCA3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3E3168321593D8CF00344F36 /* Products */;
+					ProjectRef = 3E3168311593D8CF00344F36 /* CocoaLibSpotify iOS Library.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3EE8DB081593BF9A009DCCA3 /* Piggybackv2 */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3E31683B1593D8D000344F36 /* libCocoaLibSpotify.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCocoaLibSpotify.a;
+			remoteRef = 3E31683A1593D8D000344F36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3E31683D1593D8D000344F36 /* CocoaLSTests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = CocoaLSTests.app;
+			remoteRef = 3E31683C1593D8D000344F36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3EE8DB071593BF9A009DCCA3 /* Resources */ = {
@@ -273,32 +446,61 @@
 			files = (
 				3EE8DB181593BF9A009DCCA3 /* InfoPlist.strings in Resources */,
 				3EE8DB211593BF9A009DCCA3 /* MainStoryboard.storyboard in Resources */,
-				F9B478C11593C23C00C20A53 /* book-icon-badge.png in Resources */,
-				F9B478C21593C23C00C20A53 /* book-icon.png in Resources */,
-				F9B478C31593C23C00C20A53 /* foursquare-icon.png in Resources */,
-				F9B478C41593C23C00C20A53 /* gao-rounded-corners.png in Resources */,
-				F9B478C51593C23C00C20A53 /* harrison-rounded-corners.png in Resources */,
-				F9B478C61593C23C00C20A53 /* hsiao-rounded-corners.png in Resources */,
-				F9B478C71593C23C00C20A53 /* jiang-rounded-corners.png in Resources */,
-				F9B478C81593C23C00C20A53 /* link-view-title-bar.png in Resources */,
-				F9B478C91593C23C00C20A53 /* link-view-title-bar@2x.png in Resources */,
-				F9B478CA1593C23C00C20A53 /* link-view-titlebar-drop-shadow.png in Resources */,
-				F9B478CB1593C23C00C20A53 /* movie-icon-badge.png in Resources */,
-				F9B478CC1593C23C00C20A53 /* movie-icon.png in Resources */,
-				F9B478CD1593C23C00C20A53 /* music-icon-badge.png in Resources */,
-				F9B478CE1593C23C00C20A53 /* music-icon.png in Resources */,
-				F9B478CF1593C23C00C20A53 /* music-section-divider.png in Resources */,
-				F9B478D01593C23C00C20A53 /* music-section-divider@2x.png in Resources */,
-				F9B478D11593C23C00C20A53 /* pelberg-rounded-corners.png in Resources */,
-				F9B478D21593C23C00C20A53 /* places-icon-badge.png in Resources */,
-				F9B478D31593C23C00C20A53 /* places-icon.png in Resources */,
-				F9B478D41593C23C00C20A53 /* places-section-divider.png in Resources */,
-				F9B478D51593C23C00C20A53 /* places-section-divider@2x.png in Resources */,
-				F9B478D61593C23C00C20A53 /* silver-greenberg-rounded-corners.png in Resources */,
-				F9B478D71593C23C00C20A53 /* spotify-icon.png in Resources */,
-				F9B478D81593C23C00C20A53 /* videos-section-divider.png in Resources */,
-				F9B478D91593C23C00C20A53 /* videos-section-divider@2x.png in Resources */,
-				F9B478DA1593C23C00C20A53 /* youtube-icon.png in Resources */,
+				3E51D6791593DF0000EEBD36 /* SPLoginResources.bundle in Resources */,
+				3E51D6E81593E04F00EEBD36 /* book-icon-badge.png in Resources */,
+				3E51D6E91593E04F00EEBD36 /* book-icon-badge@2x.png in Resources */,
+				3E51D6EA1593E04F00EEBD36 /* book-icon.png in Resources */,
+				3E51D6EB1593E04F00EEBD36 /* book-icon@2x.png in Resources */,
+				3E51D6EC1593E04F00EEBD36 /* continue-button.png in Resources */,
+				3E51D6ED1593E04F00EEBD36 /* continue-button@2x.png in Resources */,
+				3E51D6EE1593E04F00EEBD36 /* explore-view-titlebar.png in Resources */,
+				3E51D6EF1593E04F00EEBD36 /* explore-view-titlebar@2x.png in Resources */,
+				3E51D6F01593E04F00EEBD36 /* foursquare-icon.png in Resources */,
+				3E51D6F11593E04F00EEBD36 /* foursquare-icon@2x.png in Resources */,
+				3E51D6F21593E04F00EEBD36 /* gao-rounded-corners.png in Resources */,
+				3E51D6F31593E04F00EEBD36 /* harrison-rounded-corners.png in Resources */,
+				3E51D6F41593E04F00EEBD36 /* heart-button.png in Resources */,
+				3E51D6F51593E04F00EEBD36 /* heart-button@2x.png in Resources */,
+				3E51D6F61593E04F00EEBD36 /* heart-pressed-button.png in Resources */,
+				3E51D6F71593E04F00EEBD36 /* heart-pressed-button@2x.png in Resources */,
+				3E51D6F81593E04F00EEBD36 /* hsiao-rounded-corners.png in Resources */,
+				3E51D6F91593E04F00EEBD36 /* jiang-rounded-corners.png in Resources */,
+				3E51D6FA1593E04F00EEBD36 /* link-view-title-bar.png in Resources */,
+				3E51D6FB1593E04F00EEBD36 /* link-view-title-bar@2x.png in Resources */,
+				3E51D6FC1593E04F00EEBD36 /* link-view-titlebar-drop-shadow.png in Resources */,
+				3E51D6FD1593E04F00EEBD36 /* link-view-titlebar-drop-shadow@2x.png in Resources */,
+				3E51D6FE1593E04F00EEBD36 /* listen-view-titlebar.png in Resources */,
+				3E51D6FF1593E04F00EEBD36 /* listen-view-titlebar@2x.png in Resources */,
+				3E51D7001593E04F00EEBD36 /* movie-icon-badge.png in Resources */,
+				3E51D7011593E04F00EEBD36 /* movie-icon-badge@2x.png in Resources */,
+				3E51D7021593E04F00EEBD36 /* movie-icon.png in Resources */,
+				3E51D7031593E04F00EEBD36 /* movie-icon@2x.png in Resources */,
+				3E51D7041593E04F00EEBD36 /* music-icon-badge.png in Resources */,
+				3E51D7051593E04F00EEBD36 /* music-icon-badge@2x.png in Resources */,
+				3E51D7061593E04F00EEBD36 /* music-icon.png in Resources */,
+				3E51D7071593E04F00EEBD36 /* music-icon@2x.png in Resources */,
+				3E51D7081593E04F00EEBD36 /* music-section-divider.png in Resources */,
+				3E51D7091593E04F00EEBD36 /* music-section-divider@2x.png in Resources */,
+				3E51D70A1593E04F00EEBD36 /* pelberg-rounded-corners.png in Resources */,
+				3E51D70B1593E04F00EEBD36 /* places-icon-badge.png in Resources */,
+				3E51D70C1593E04F00EEBD36 /* places-icon-badge@2px.png in Resources */,
+				3E51D70D1593E04F00EEBD36 /* places-icon.png in Resources */,
+				3E51D70E1593E04F00EEBD36 /* places-icon@2x.png in Resources */,
+				3E51D70F1593E04F00EEBD36 /* places-section-divider.png in Resources */,
+				3E51D7101593E04F00EEBD36 /* places-section-divider@2x.png in Resources */,
+				3E51D7111593E04F00EEBD36 /* silver-greenberg-rounded-corners.png in Resources */,
+				3E51D7121593E04F00EEBD36 /* spotify-icon.png in Resources */,
+				3E51D7131593E04F00EEBD36 /* spotify-icon@2x.png in Resources */,
+				3E51D7141593E04F00EEBD36 /* todo-added-button.png in Resources */,
+				3E51D7151593E04F00EEBD36 /* todo-added-button@2x.png in Resources */,
+				3E51D7161593E04F00EEBD36 /* todo-button.png in Resources */,
+				3E51D7171593E04F00EEBD36 /* todo-button@2x.png in Resources */,
+				3E51D7181593E04F00EEBD36 /* videos-section-divider.png in Resources */,
+				3E51D7191593E04F00EEBD36 /* videos-section-divider@2x.png in Resources */,
+				3E51D71A1593E04F00EEBD36 /* watch-view-titlebar.png in Resources */,
+				3E51D71B1593E04F00EEBD36 /* watch-view-titlebar@2x.png in Resources */,
+				3E51D71C1593E04F00EEBD36 /* youtube-icon.png in Resources */,
+				3E51D71D1593E04F00EEBD36 /* youtube-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +521,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3E31683F1593D8D400344F36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CocoaLibSpotify;
+			targetProxy = 3E31683E1593D8D400344F36 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3EE8DB161593BF9A009DCCA3 /* InfoPlist.strings */ = {
@@ -388,9 +598,17 @@
 		3EE8DB281593BF9A009DCCA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					$CONFIGURATION_BUILD_DIR/include,
+					"\"$(SRCROOT)/spotify-ios-sdk/iOS Library/libspotify-12.1.45-iOS-universal\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Piggybackv2/Piggybackv2-Prefix.pch";
 				INFOPLIST_FILE = "Piggybackv2/Piggybackv2-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -399,9 +617,17 @@
 		3EE8DB291593BF9A009DCCA3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					$CONFIGURATION_BUILD_DIR/include,
+					"\"$(SRCROOT)/spotify-ios-sdk/iOS Library/libspotify-12.1.45-iOS-universal\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Piggybackv2/Piggybackv2-Prefix.pch";
 				INFOPLIST_FILE = "Piggybackv2/Piggybackv2-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

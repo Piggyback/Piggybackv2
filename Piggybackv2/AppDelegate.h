@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BZFoursquare.h"
+#import "CocoaLibSpotify.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, BZFoursquareSessionDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, BZFoursquareSessionDelegate, SPSessionDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) BZFoursquare *foursquare;
+@property (strong, nonatomic) SPPlaybackManager *playbackManager;
 
 @end
