@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E9A5D491593C48500635873 /* AccountLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D481593C48500635873 /* AccountLinkViewController.m */; };
+		3E9A5D4D1593C66000635873 /* PiggybackTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D4C1593C66000635873 /* PiggybackTabBarController.m */; };
 		3EE8DB0E1593BF9A009DCCA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8DB0D1593BF9A009DCCA3 /* UIKit.framework */; };
 		3EE8DB101593BF9A009DCCA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8DB0F1593BF9A009DCCA3 /* Foundation.framework */; };
 		3EE8DB121593BF9A009DCCA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8DB111593BF9A009DCCA3 /* CoreGraphics.framework */; };
@@ -43,6 +45,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E9A5D471593C48500635873 /* AccountLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountLinkViewController.h; sourceTree = "<group>"; };
+		3E9A5D481593C48500635873 /* AccountLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountLinkViewController.m; sourceTree = "<group>"; };
+		3E9A5D4B1593C66000635873 /* PiggybackTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PiggybackTabBarController.h; sourceTree = "<group>"; };
+		3E9A5D4C1593C66000635873 /* PiggybackTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PiggybackTabBarController.m; sourceTree = "<group>"; };
 		3EE8DB091593BF9A009DCCA3 /* Piggybackv2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Piggybackv2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE8DB0D1593BF9A009DCCA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3EE8DB0F1593BF9A009DCCA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -130,6 +136,10 @@
 				3EE8DB1F1593BF9A009DCCA3 /* MainStoryboard.storyboard */,
 				3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */,
 				3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */,
+				3E9A5D4B1593C66000635873 /* PiggybackTabBarController.h */,
+				3E9A5D4C1593C66000635873 /* PiggybackTabBarController.m */,
+				3E9A5D471593C48500635873 /* AccountLinkViewController.h */,
+				3E9A5D481593C48500635873 /* AccountLinkViewController.m */,
 				3EE8DB141593BF9A009DCCA3 /* Supporting Files */,
 			);
 			path = Piggybackv2;
@@ -271,6 +281,8 @@
 			files = (
 				3EE8DB1A1593BF9A009DCCA3 /* main.m in Sources */,
 				3EE8DB1E1593BF9A009DCCA3 /* AppDelegate.m in Sources */,
+				3E9A5D491593C48500635873 /* AccountLinkViewController.m in Sources */,
+				3E9A5D4D1593C66000635873 /* PiggybackTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

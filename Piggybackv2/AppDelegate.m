@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "PiggybackTabBarController.h"
+#import "AccountLinkViewController.h"
 
 @implementation AppDelegate
 
@@ -14,7 +16,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [self.window makeKeyAndVisible];
+    
+    PiggybackTabBarController *rootViewController = (PiggybackTabBarController *)self.window.rootViewController;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    AccountLinkViewController *accountLinkViewController = [storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
+    [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];
+    
     return YES;
 }
 							
