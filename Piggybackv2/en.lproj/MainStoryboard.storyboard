@@ -326,41 +326,6 @@
         <image name="videos-section-divider.png" width="320" height="26"/>
         <image name="youtube-icon.png" width="50" height="50"/>
     </resources>
-    <classes>
-        <class className="AccountLinkViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AccountLinkViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="continueButton:"/>
-                <relationship kind="action" name="foursquareConnect:"/>
-                <relationship kind="action" name="spotifyConnect:"/>
-                <relationship kind="action" name="youtubeConnect:"/>
-            </relationships>
-        </class>
-        <class className="ExploreNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreNavigationController.h"/>
-        </class>
-        <class className="ListenNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListenNavigationController.h"/>
-        </class>
-        <class className="PiggybackTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PiggybackTabBarController.h"/>
-        </class>
-        <class className="WatchNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WatchNavigationController.h"/>
-        </class>
-        <class className="YouTubeCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/YouTubeCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="nameOfVideo" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="YouTubeTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/YouTubeTableViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
