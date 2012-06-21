@@ -15,6 +15,7 @@
 @end
 
 @implementation AccountLinkViewController
+@synthesize youtubeToggle;
 
 - (void)viewDidLoad
 {
@@ -24,6 +25,7 @@
 
 - (void)viewDidUnload
 {
+    [self setYoutubeToggle:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -51,10 +53,10 @@
 
 - (IBAction)youtubeConnect:(id)sender {
     if ([sender isOn] == YES) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Link Your YouTube Account\n\n" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Link Your YouTube Account\n\n" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
         
         // create text view
-        UITextField *someTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 50, 245, 25)];
+        UITextField *someTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 43, 245, 25)];
         someTextField.layer.cornerRadius = 2;
         someTextField.layer.masksToBounds = YES;
         
@@ -81,5 +83,16 @@
 - (IBAction)continueButton:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
 }
+
+#pragma mark - youtube alert delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        self.youtubeToggle.on = FALSE;
+    } else if (buttonIndex == 1) {
+        NSLog(@"added youtube account");
+    }
+}
+
 
 @end
