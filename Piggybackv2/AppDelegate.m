@@ -16,11 +16,16 @@ NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWU
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 @synthesize window = _window;
+@synthesize foursquare = _foursquare;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [self.window makeKeyAndVisible];
+{    
+    // setting up foursquare
+    self.foursquare = [[BZFoursquare alloc] initWithClientID:FSQ_CLIENT_ID callbackURL:FSQ_CALLBACK_URL];
+    self.foursquare.sessionDelegate = self;
     
+    // always show modal account link page on startup
+    [self.window makeKeyAndVisible];
     PiggybackTabBarController *rootViewController = (PiggybackTabBarController *)self.window.rootViewController;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
@@ -29,7 +34,24 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     
     return YES;
 }
-							
+
+// Foursquare openURL handling
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self.foursquare handleOpenURL:url];
+}
+
+#pragma mark -
+#pragma mark - BZFoursquareSessionDelegate protocol methods
+- (void)foursquareDidAuthorize:(BZFoursquare *)foursquare {
+    NSLog(@"foursquare did authorize");
+}
+
+- (void)foursquareDidNotAuthorize:(BZFoursquare *)foursquare error:(NSDictionary *)errorInfo {
+    NSLog(@"foursquare failed to authorize: %@", errorInfo);
+}
+
+#pragma mark -
+#pragma mark - AppDelegate methods
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -40,6 +62,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [self.foursquare invalidateSession];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

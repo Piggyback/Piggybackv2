@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BZFoursquare.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, BZFoursquareRequestDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, BZFoursquareSessionDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) BZFoursquare *foursquare;
