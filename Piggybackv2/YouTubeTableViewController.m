@@ -192,10 +192,6 @@
     } else if ([elapsedTimeUnits second] <= 0) {
         number = 0;
     }
-    // check if unit number is greater then append s at the end
-    //    if (number > 1) {
-    //        unit = [NSString stringWithFormat:@"%@s", unit];
-    //    }
     
     NSString* elapsedTime = [NSString stringWithFormat:@"%d%@",number,unit];
     
