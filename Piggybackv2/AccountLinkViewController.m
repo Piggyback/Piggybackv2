@@ -7,6 +7,7 @@
 //
 
 #import "AccountLinkViewController.h"
+#import "AppDelegate.h"
 
 @interface AccountLinkViewController ()
 
@@ -33,9 +34,9 @@
 
 - (IBAction)foursquareConnect:(id)sender {
     if ([sender isOn] == YES) {
-        
+        [[(AppDelegate*)[[UIApplication sharedApplication] delegate] foursquare] startAuthorization];
     } else {
-        
+        [[(AppDelegate*)[[UIApplication sharedApplication] delegate] foursquare] invalidateSession];
     }
 }
 
