@@ -14,7 +14,6 @@
 		3EE8DB1A1593BF9A009DCCA3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8DB191593BF9A009DCCA3 /* main.m */; };
 		3EE8DB1E1593BF9A009DCCA3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */; };
 		3EE8DB211593BF9A009DCCA3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8DB1F1593BF9A009DCCA3 /* MainStoryboard.storyboard */; };
-		3EE8DB241593BF9A009DCCA3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8DB231593BF9A009DCCA3 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,15 +21,13 @@
 		3EE8DB0D1593BF9A009DCCA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3EE8DB0F1593BF9A009DCCA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3EE8DB111593BF9A009DCCA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		3EE8DB151593BF9A009DCCA3 /* Piggybackv2-Info.plist */ = {isa = PBXFileReference; path = "Piggybackv2-Info.plist"; sourceTree = "<group>"; };
+		3EE8DB151593BF9A009DCCA3 /* Piggybackv2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Piggybackv2-Info.plist"; sourceTree = "<group>"; };
 		3EE8DB171593BF9A009DCCA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3EE8DB191593BF9A009DCCA3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3EE8DB1B1593BF9A009DCCA3 /* Piggybackv2-Prefix.pch */ = {isa = PBXFileReference; path = "Piggybackv2-Prefix.pch"; sourceTree = "<group>"; };
-		3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		3EE8DB1B1593BF9A009DCCA3 /* Piggybackv2-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Piggybackv2-Prefix.pch"; sourceTree = "<group>"; };
+		3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3EE8DB201593BF9A009DCCA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		3EE8DB221593BF9A009DCCA3 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
-		3EE8DB231593BF9A009DCCA3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +74,9 @@
 		3EE8DB131593BF9A009DCCA3 /* Piggybackv2 */ = {
 			isa = PBXGroup;
 			children = (
+				3EE8DB1F1593BF9A009DCCA3 /* MainStoryboard.storyboard */,
 				3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */,
 				3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */,
-				3EE8DB1F1593BF9A009DCCA3 /* MainStoryboard.storyboard */,
-				3EE8DB221593BF9A009DCCA3 /* ViewController.h */,
-				3EE8DB231593BF9A009DCCA3 /* ViewController.m */,
 				3EE8DB141593BF9A009DCCA3 /* Supporting Files */,
 			);
 			path = Piggybackv2;
@@ -163,7 +158,6 @@
 			files = (
 				3EE8DB1A1593BF9A009DCCA3 /* main.m in Sources */,
 				3EE8DB1E1593BF9A009DCCA3 /* AppDelegate.m in Sources */,
-				3EE8DB241593BF9A009DCCA3 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
