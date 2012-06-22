@@ -28,6 +28,9 @@
 {
     [super viewDidLoad];
     
+    // get recent checkins from foursquare friends
+    
+    
     // get videos from youtube ambassadors
     NSMutableSet *youtubeAmbassadors = [NSMutableSet setWithObjects:@"kimikul",@"mlgao",@"andyjiang",nil];
     YouTubeTableViewController* youtubeVC = (YouTubeTableViewController*)[[self.viewControllers objectAtIndex:2] topViewController];
@@ -39,6 +42,10 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)dealloc {
+    NSLog(@"tab bar controller dealloc");
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

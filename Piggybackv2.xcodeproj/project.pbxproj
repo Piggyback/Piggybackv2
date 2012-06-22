@@ -69,6 +69,7 @@
 		3E51D71B1593E04F00EEBD36 /* watch-view-titlebar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6E51593E04F00EEBD36 /* watch-view-titlebar@2x.png */; };
 		3E51D71C1593E04F00EEBD36 /* youtube-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6E61593E04F00EEBD36 /* youtube-icon.png */; };
 		3E51D71D1593E04F00EEBD36 /* youtube-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E51D6E71593E04F00EEBD36 /* youtube-icon@2x.png */; };
+		3E51D72B159429B000EEBD36 /* ExploreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51D72A159429B000EEBD36 /* ExploreTableViewController.m */; };
 		3E9A5D491593C48500635873 /* AccountLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D481593C48500635873 /* AccountLinkViewController.m */; };
 		3E9A5D4D1593C66000635873 /* PiggybackTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D4C1593C66000635873 /* PiggybackTabBarController.m */; };
 		3E9A5D541593C92D00635873 /* BZFoursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D511593C92D00635873 /* BZFoursquare.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -176,6 +177,8 @@
 		3E51D6E51593E04F00EEBD36 /* watch-view-titlebar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watch-view-titlebar@2x.png"; sourceTree = "<group>"; };
 		3E51D6E61593E04F00EEBD36 /* youtube-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youtube-icon.png"; sourceTree = "<group>"; };
 		3E51D6E71593E04F00EEBD36 /* youtube-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "youtube-icon@2x.png"; sourceTree = "<group>"; };
+		3E51D729159429B000EEBD36 /* ExploreTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreTableViewController.h; sourceTree = "<group>"; };
+		3E51D72A159429B000EEBD36 /* ExploreTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreTableViewController.m; sourceTree = "<group>"; };
 		3E9A5D471593C48500635873 /* AccountLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountLinkViewController.h; sourceTree = "<group>"; };
 		3E9A5D481593C48500635873 /* AccountLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountLinkViewController.m; sourceTree = "<group>"; };
 		3E9A5D4B1593C66000635873 /* PiggybackTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PiggybackTabBarController.h; sourceTree = "<group>"; };
@@ -303,6 +306,8 @@
 				3EE8DB1F1593BF9A009DCCA3 /* MainStoryboard.storyboard */,
 				3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */,
 				3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */,
+				3E51D729159429B000EEBD36 /* ExploreTableViewController.h */,
+				3E51D72A159429B000EEBD36 /* ExploreTableViewController.m */,
 				F930520D1593C7B100E9DA06 /* YouTubeTableViewController.h */,
 				F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */,
 				3E9A5D4B1593C66000635873 /* PiggybackTabBarController.h */,
@@ -553,6 +558,7 @@
 				F9FE6E601593D0030031EC49 /* ListenNavigationController.m in Sources */,
 				F9FE6E631593D0110031EC49 /* WatchNavigationController.m in Sources */,
 				F9FE6E661593D0270031EC49 /* ExploreNavigationController.m in Sources */,
+				3E51D72B159429B000EEBD36 /* ExploreTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

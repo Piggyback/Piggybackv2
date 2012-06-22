@@ -412,6 +412,11 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)dealloc
+{
+    NSLog(@"youtube dealloc");
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
