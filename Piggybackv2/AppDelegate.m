@@ -10,6 +10,11 @@
 #import "PiggybackTabBarController.h"
 #import "AccountLinkViewController.h"
 #include "appkey.c"
+#import "ExploreTableViewController.h"
+
+@interface AppDelegate ()
+
+@end
 
 @implementation AppDelegate
 
@@ -22,6 +27,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    
     // setting up foursquare
     self.foursquare = [[BZFoursquare alloc] initWithClientID:FSQ_CLIENT_ID callbackURL:FSQ_CALLBACK_URL];
     self.foursquare.sessionDelegate = self;
@@ -38,7 +45,6 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [self.window makeKeyAndVisible];
     PiggybackTabBarController *rootViewController = (PiggybackTabBarController *)self.window.rootViewController;
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     AccountLinkViewController *accountLinkViewController = [storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
     [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];
     
@@ -54,6 +60,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 #pragma mark - BZFoursquareSessionDelegate protocol methods
 - (void)foursquareDidAuthorize:(BZFoursquare *)foursquare {
     NSLog(@"foursquare did authorize");
+    [(ExploreTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:1] topViewController] getRecentFriendCheckins];
 }
 
 - (void)foursquareDidNotAuthorize:(BZFoursquare *)foursquare error:(NSDictionary *)errorInfo {
