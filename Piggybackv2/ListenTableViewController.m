@@ -53,6 +53,7 @@
     self.topList = [SPToplist toplistForUserWithName:@"ptpells" inSession:[SPSession sharedSession]];
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
