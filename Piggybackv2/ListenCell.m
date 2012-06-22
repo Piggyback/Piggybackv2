@@ -11,5 +11,16 @@
 @implementation ListenCell
 
 @synthesize trackDetails = _trackDetails;
+@synthesize heart = _heart;
+@synthesize todo = _todo;
+
+- (IBAction)heart:(id)sender {
+    [self.heart setImage:[UIImage imageNamed:@"heart-pressed-button"] forState:UIControlStateNormal];
+}
+
+- (IBAction)todo:(id)sender {
+    [self.todo setImage:[UIImage imageNamed:@"todo-added-button"] forState:UIControlStateNormal];
+    
+}
 
 @end
