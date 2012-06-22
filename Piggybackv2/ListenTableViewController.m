@@ -10,6 +10,8 @@
 #import "CocoaLibSpotify.h"
 #import "ListenCell.h"
 #import "Constants.h"
+#import "SongViewController.h"
+#import "AppDelegate.h"
 
 @interface ListenTableViewController ()
 
@@ -144,12 +146,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"musicToSong"]) {
+        [segue.destinationViewController setTrack:[self.topTracks objectAtIndex:[self.tableView indexPathForCell:sender].row]];
+        [segue.destinationViewController setPlaybackManager:[(AppDelegate *)[[UIApplication sharedApplication] delegate] playbackManager]];
+    }
 }
 
 @end
