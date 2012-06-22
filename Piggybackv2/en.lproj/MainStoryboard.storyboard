@@ -3,7 +3,7 @@
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1179"/>
     </dependencies>
     <scenes>
         <!--Account Link View Controller-->
@@ -121,7 +121,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="YouTubeCell" rowHeight="70" id="dwn-x5-yva" customClass="YouTubeCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="YouTubeCell" rowHeight="70" id="dwn-x5-yva" customClass="WatchTableCell">
                                 <rect key="frame" x="0.0" y="22" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -270,23 +270,85 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="exploreCell" textLabel="VKZ-dO-CCb" style="IBUITableViewCellStyleDefault" id="q9c-DX-Wz7">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="exploreCell" rowHeight="70" id="q9c-DX-Wz7" customClass="ExploreTableCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VKZ-dO-CCb">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="mS1-mu-Qyk">
+                                            <rect key="frame" x="9" y="4" width="61" height="61"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="places-icon-badge.png" id="Ede-p2-rbj">
+                                            <rect key="frame" x="57" y="41" width="25" height="25"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Wei checked in to" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="EWF-6W-3Se">
+                                            <rect key="frame" x="74" y="0.0" width="210" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hot Pocket HQ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="kfO-tv-DQj">
+                                            <rect key="frame" x="74" y="20" width="210" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="13d" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="45z-58-SHg">
+                                            <rect key="frame" x="287" y="0.0" width="29" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ylZ-2u-C4b">
+                                            <rect key="frame" x="277" y="50" width="19" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal" image="heart-button.png">
+                                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="heart:" destination="dwn-x5-yva" eventType="touchUpInside" id="aJw-b8-jfT"/>
+                                                <action selector="heart:" destination="q9c-DX-Wz7" eventType="touchUpInside" id="cZh-vs-Bd8"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VWf-AG-RND">
+                                            <rect key="frame" x="298" y="49" width="20" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal" image="todo-button.png">
+                                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="todo:" destination="q9c-DX-Wz7" eventType="touchUpInside" id="0oz-bx-j6h"/>
+                                                <action selector="todo:" destination="dwn-x5-yva" eventType="touchUpInside" id="vdk-FI-jcM"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <outlet property="checkedInBy" destination="EWF-6W-3Se" id="stB-Md-7ic"/>
+                                    <outlet property="date" destination="45z-58-SHg" id="4d3-Ke-ADm"/>
+                                    <outlet property="heart" destination="ylZ-2u-C4b" id="Vpp-jb-TE7"/>
+                                    <outlet property="nameOfPlace" destination="kfO-tv-DQj" id="ffY-eM-hd9"/>
+                                    <outlet property="profilePic" destination="mS1-mu-Qyk" id="Igo-wx-K6d"/>
+                                    <outlet property="todo" destination="VWf-AG-RND" id="EZn-7P-5ZE"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -366,6 +428,7 @@
         <image name="movie-icon.png" width="30" height="30"/>
         <image name="music-icon.png" width="30" height="30"/>
         <image name="music-section-divider.png" width="320" height="26"/>
+        <image name="places-icon-badge.png" width="100" height="100"/>
         <image name="places-icon.png" width="30" height="30"/>
         <image name="places-section-divider.png" width="320" height="26"/>
         <image name="spotify-icon.png" width="50" height="50"/>
@@ -387,6 +450,19 @@
         <class className="ExploreNavigationController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreNavigationController.h"/>
         </class>
+        <class className="ExploreTableCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreTableCell.h"/>
+            <relationships>
+                <relationship kind="action" name="heart:"/>
+                <relationship kind="action" name="todo:"/>
+                <relationship kind="outlet" name="checkedInBy" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="nameOfPlace" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
+            </relationships>
+        </class>
         <class className="ExploreTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreTableViewController.h"/>
         </class>
@@ -399,8 +475,8 @@
         <class className="WatchNavigationController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/WatchNavigationController.h"/>
         </class>
-        <class className="YouTubeCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/YouTubeCell.h"/>
+        <class className="WatchTableCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WatchTableCell.h"/>
             <relationships>
                 <relationship kind="action" name="heart:"/>
                 <relationship kind="action" name="todo:"/>

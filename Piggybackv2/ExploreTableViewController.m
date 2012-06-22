@@ -8,6 +8,8 @@
 
 #import "ExploreTableViewController.h"
 #import "AppDelegate.h"
+#import "Constants.h"
+#import "ExploreTableCell.h"
 
 @interface ExploreTableViewController ()
 
@@ -88,65 +90,50 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return [self.results count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"exploreCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ExploreTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
-    cell.textLabel.text = [[[self.results objectAtIndex:indexPath.row] objectForKey:@"venue"] objectForKey:@"name"];
+    cell.nameOfPlace.text = [[[self.results objectAtIndex:indexPath.row] objectForKey:@"venue"] objectForKey:@"name"];
+    
+    NSString* fullName = [NSString stringWithFormat:@"%@ %@",[[[self.results objectAtIndex:indexPath.row] objectForKey:@"user"] objectForKey:@"firstName"],[[[self.results objectAtIndex:indexPath.row] objectForKey:@"user"] objectForKey:@"lastName"]];
+    cell.checkedInBy.text = [NSString stringWithFormat:@"%@ checked in to",fullName];
+    
+    if ([fullName isEqualToString:@"Matthew Harrison"]) {
+        cell.profilePic.image = [UIImage imageNamed:@"harrison-rounded-corners"];
+    } else if ([fullName isEqualToString:@"Andy Jiang"]) {
+        cell.profilePic.image = [UIImage imageNamed:@"jiang-rounded-corners"];
+    } else if ([fullName isEqualToString:@"Kim H"]) {
+        cell.profilePic.image = [UIImage imageNamed:@"hsiao-rounded-corners"];
+    } else if ([fullName isEqualToString:@"Joshua Lu"]) {
+        cell.profilePic.image = [UIImage imageNamed:@""];
+    } else if ([fullName isEqualToString:@"Ricky Yean"]) {
+        cell.profilePic.image = [UIImage imageNamed:@""];
+    } else if ([fullName isEqualToString:@"Sam Olstein"]) {
+        cell.profilePic.image = [UIImage imageNamed:@""];
+    } else if ([fullName isEqualToString:@"Michael Gao"]) {
+        cell.profilePic.image = [UIImage imageNamed:@"gao-rounded-corners"];
+    } else if ([fullName isEqualToString:@"Christine Vuong"]) {
+        cell.profilePic.image = [UIImage imageNamed:@""];        
+    }
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath 
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return VIDEOTABLEROWHEIGHT;
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
