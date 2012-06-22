@@ -173,8 +173,6 @@
         cell.profilePic.image = [UIImage imageNamed:@""];
     } else if ([fullName isEqualToString:@"Michael Gao"]) {
         cell.profilePic.image = [UIImage imageNamed:@"gao-rounded-corners"];
-    } else if ([fullName isEqualToString:@"Christine Vuong"]) {
-        cell.profilePic.image = [UIImage imageNamed:@""];        
     }
     
     NSString* epochTime = [[self.results objectAtIndex:indexPath.row] objectForKey:@"createdAt"];
