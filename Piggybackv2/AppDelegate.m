@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "PiggybackTabBarController.h"
 #import "AccountLinkViewController.h"
+#include "appkey.c"
 
 @implementation AppDelegate
 
@@ -17,12 +18,21 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 @synthesize window = _window;
 @synthesize foursquare = _foursquare;
+@synthesize playbackManager = _playbackManager;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {    
     // setting up foursquare
     self.foursquare = [[BZFoursquare alloc] initWithClientID:FSQ_CLIENT_ID callbackURL:FSQ_CALLBACK_URL];
     self.foursquare.sessionDelegate = self;
+    
+    // setting up spotify
+    [SPSession initializeSharedSessionWithApplicationKey:[NSData dataWithBytes:&g_appkey length:g_appkey_size] 
+											   userAgent:@"com.getpiggyback.Piggybackv2"
+										   loadingPolicy:SPAsyncLoadingManual
+												   error:nil];
+    [[SPSession sharedSession] setDelegate:self];
+
     
     // always show modal account link page on startup
     [self.window makeKeyAndVisible];
@@ -51,6 +61,46 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 }
 
 #pragma mark -
+#pragma mark SPSessionDelegate Methods
+
+-(UIViewController *)viewControllerToPresentLoginViewForSession:(SPSession *)aSession {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    AccountLinkViewController *accountLinkViewController = [storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
+	return accountLinkViewController;
+}
+
+-(void)sessionDidLoginSuccessfully:(SPSession *)aSession; {
+	// Invoked by SPSession after a successful login.
+    NSLog(@"logged into spotify");
+    
+    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
+}
+
+-(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error; {
+	// Invoked by SPSession after a failed login.
+    NSLog(@"failed to log into spotify");
+}
+
+-(void)sessionDidLogOut:(SPSession *)aSession {
+	NSLog(@"logged out of spotify");
+}
+
+-(void)session:(SPSession *)aSession didEncounterNetworkError:(NSError *)error; {}
+-(void)session:(SPSession *)aSession didLogMessage:(NSString *)aMessage; {}
+-(void)sessionDidChangeMetadata:(SPSession *)aSession; {}
+
+-(void)session:(SPSession *)aSession recievedMessageForUser:(NSString *)aMessage; {
+	return;
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message from Spotify"
+													message:aMessage
+												   delegate:nil
+										  cancelButtonTitle:@"OK"
+										  otherButtonTitles:nil];
+	[alert show];
+}
+
+
+#pragma mark -
 #pragma mark - AppDelegate methods
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -62,6 +112,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[SPSession sharedSession] logout:^{}];
     [self.foursquare invalidateSession];
 }
 
