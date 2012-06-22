@@ -29,6 +29,56 @@
     [self.tableView reloadData];
 }
 
+#pragma mark - private helper functions
+
+// get string for time elapsed e.g., "2 days ago"
+- (NSString*)timeElapsed:(NSDate*)date {
+    NSUInteger desiredComponents = NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit |  NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents* elapsedTimeUnits = [[NSCalendar currentCalendar] components:desiredComponents fromDate:date toDate:[NSDate date] options:0];
+    
+    NSInteger number = 0;
+    NSString* unit;
+    
+    if ([elapsedTimeUnits year] > 0) {
+        number = [elapsedTimeUnits year];
+        unit = [NSString stringWithFormat:@"yr"];
+    }
+    else if ([elapsedTimeUnits month] > 0) {
+        number = [elapsedTimeUnits month];
+        unit = [NSString stringWithFormat:@"mo"];
+    }
+    else if ([elapsedTimeUnits week] > 0) {
+        number = [elapsedTimeUnits week];
+        unit = [NSString stringWithFormat:@"wk"];
+    }
+    else if ([elapsedTimeUnits day] > 0) {
+        number = [elapsedTimeUnits day];
+        unit = [NSString stringWithFormat:@"d"];
+    }
+    else if ([elapsedTimeUnits hour] > 0) {
+        number = [elapsedTimeUnits hour];
+        unit = [NSString stringWithFormat:@"hr"];
+    }
+    else if ([elapsedTimeUnits minute] > 0) {
+        number = [elapsedTimeUnits minute];
+        unit = [NSString stringWithFormat:@"min"];
+    }
+    else if ([elapsedTimeUnits second] > 0) {
+        number = [elapsedTimeUnits second];
+        unit = [NSString stringWithFormat:@"sec"];
+    } else if ([elapsedTimeUnits second] <= 0) {
+        number = 0;
+    }
+    
+    NSString* elapsedTime = [NSString stringWithFormat:@"%d%@",number,unit];
+    
+    if (number == 0) {
+        elapsedTime = @"1sec";
+    }
+    
+    return elapsedTime;
+}
+
 #pragma mark -
 #pragma mark - Public Instance Methods
 - (void)getRecentFriendCheckins {
@@ -126,6 +176,10 @@
     } else if ([fullName isEqualToString:@"Christine Vuong"]) {
         cell.profilePic.image = [UIImage imageNamed:@""];        
     }
+    
+    NSString* epochTime = [[self.results objectAtIndex:indexPath.row] objectForKey:@"createdAt"];
+    NSDate *epochNSDate = [[NSDate alloc] initWithTimeIntervalSince1970:[epochTime doubleValue]];
+    cell.date.text = [self timeElapsed:epochNSDate];
     
     return cell;
 }
