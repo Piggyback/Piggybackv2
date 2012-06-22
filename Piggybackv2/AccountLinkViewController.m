@@ -58,7 +58,7 @@
 }
 
 - (IBAction)continueButton:(id)sender {
-    
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
