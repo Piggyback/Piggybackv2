@@ -7,7 +7,7 @@
 //
 
 #import "YouTubeTableViewController.h"
-#import "YouTubeCell.h"
+#import "WatchTableCell.h"
 #import "Constants.h"
 
 @interface YouTubeTableViewController ()
@@ -437,7 +437,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"YouTubeCell";
-    YouTubeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    WatchTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     NSDictionary* currentVideo = [self.videoList objectAtIndex:indexPath.row];
     cell.nameOfVideo.text = [currentVideo objectForKey:@"name"];
     
