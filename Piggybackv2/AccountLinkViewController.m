@@ -85,5 +85,15 @@
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - youtube alert delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        self.youtubeToggle.on = FALSE;
+    } else if (buttonIndex == 1) {
+        NSLog(@"added youtube account");
+    }
+}
+
 
 @end
