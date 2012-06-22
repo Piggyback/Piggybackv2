@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E2FAA2E15943BC000142705 /* ListenTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2FAA2D15943BC000142705 /* ListenTableViewController.m */; };
 		3E3165331593D51700344F36 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3165321593D51700344F36 /* SystemConfiguration.framework */; };
 		3E3165351593D51C00344F36 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3165341593D51C00344F36 /* CFNetwork.framework */; };
 		3E3165371593D52000344F36 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3165361593D52000344F36 /* libstdc++.dylib */; };
@@ -75,6 +76,7 @@
 		3E9A5D541593C92D00635873 /* BZFoursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D511593C92D00635873 /* BZFoursquare.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3E9A5D551593C92D00635873 /* BZFoursquareRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D531593C92D00635873 /* BZFoursquareRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3E9A5D571593C96E00635873 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9A5D561593C96E00635873 /* MobileCoreServices.framework */; };
+		3E9F8F2A1594453A006526B4 /* ListenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9F8F291594453A006526B4 /* ListenCell.m */; };
 		3EE8DB0E1593BF9A009DCCA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8DB0D1593BF9A009DCCA3 /* UIKit.framework */; };
 		3EE8DB101593BF9A009DCCA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8DB0F1593BF9A009DCCA3 /* Foundation.framework */; };
 		3EE8DB121593BF9A009DCCA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8DB111593BF9A009DCCA3 /* CoreGraphics.framework */; };
@@ -115,6 +117,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E2FAA2C15943BC000142705 /* ListenTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenTableViewController.h; sourceTree = "<group>"; };
+		3E2FAA2D15943BC000142705 /* ListenTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenTableViewController.m; sourceTree = "<group>"; };
 		3E3165321593D51700344F36 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3E3165341593D51C00344F36 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3E3165361593D52000344F36 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
@@ -188,6 +192,8 @@
 		3E9A5D521593C92D00635873 /* BZFoursquareRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZFoursquareRequest.h; sourceTree = "<group>"; };
 		3E9A5D531593C92D00635873 /* BZFoursquareRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZFoursquareRequest.m; sourceTree = "<group>"; };
 		3E9A5D561593C96E00635873 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		3E9F8F281594453A006526B4 /* ListenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenCell.h; sourceTree = "<group>"; };
+		3E9F8F291594453A006526B4 /* ListenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenCell.m; sourceTree = "<group>"; };
 		3EE8DB091593BF9A009DCCA3 /* Piggybackv2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Piggybackv2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE8DB0D1593BF9A009DCCA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3EE8DB0F1593BF9A009DCCA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -306,6 +312,8 @@
 				3EE8DB1F1593BF9A009DCCA3 /* MainStoryboard.storyboard */,
 				3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */,
 				3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */,
+				3E2FAA2C15943BC000142705 /* ListenTableViewController.h */,
+				3E2FAA2D15943BC000142705 /* ListenTableViewController.m */,
 				3E51D729159429B000EEBD36 /* ExploreTableViewController.h */,
 				3E51D72A159429B000EEBD36 /* ExploreTableViewController.m */,
 				F930520D1593C7B100E9DA06 /* YouTubeTableViewController.h */,
@@ -323,6 +331,8 @@
 				3EE8DB141593BF9A009DCCA3 /* Supporting Files */,
 				F930520A1593C53E00E9DA06 /* YouTubeCell.h */,
 				F930520B1593C53E00E9DA06 /* YouTubeCell.m */,
+				3E9F8F281594453A006526B4 /* ListenCell.h */,
+				3E9F8F291594453A006526B4 /* ListenCell.m */,
 			);
 			path = Piggybackv2;
 			sourceTree = "<group>";
@@ -559,6 +569,8 @@
 				F9FE6E631593D0110031EC49 /* WatchNavigationController.m in Sources */,
 				F9FE6E661593D0270031EC49 /* ExploreNavigationController.m in Sources */,
 				3E51D72B159429B000EEBD36 /* ExploreTableViewController.m in Sources */,
+				3E2FAA2E15943BC000142705 /* ListenTableViewController.m in Sources */,
+				3E9F8F2A1594453A006526B4 /* ListenCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

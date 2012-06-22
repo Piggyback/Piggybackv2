@@ -10,6 +10,7 @@
 #import "PiggybackTabBarController.h"
 #import "AccountLinkViewController.h"
 #include "appkey.c"
+#import "ListenTableViewController.h"
 #import "ExploreTableViewController.h"
 
 @interface AppDelegate ()
@@ -81,6 +82,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     NSLog(@"logged into spotify");
     
     self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
+    [(ListenTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] topViewController] getFriendsTopTracks];
 }
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error; {
