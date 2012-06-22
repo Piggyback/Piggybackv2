@@ -88,6 +88,11 @@
 		F930520F1593C7B100E9DA06 /* YouTubeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */; };
 		F93052121593C7FA00E9DA06 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F93052111593C7FA00E9DA06 /* Constants.m */; };
 		F9736E8715943BC3009DEB07 /* ExploreTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9736E8615943BC3009DEB07 /* ExploreTableCell.m */; };
+		F9C097641594E500000A0541 /* WatchTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C097631594E500000A0541 /* WatchTableCell.m */; };
+		F9C097691594E5D8000A0541 /* haines-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097651594E5D8000A0541 /* haines-rounded-corners.png */; };
+		F9C0976A1594E5D8000A0541 /* josh-lu-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */; };
+		F9C0976B1594E5D8000A0541 /* olstein-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */; };
+		F9C0976C1594E5D8000A0541 /* yean-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097681594E5D8000A0541 /* yean-rounded-corners.png */; };
 		F9FE6E601593D0030031EC49 /* ListenNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE6E5F1593D0030031EC49 /* ListenNavigationController.m */; };
 		F9FE6E631593D0110031EC49 /* WatchNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE6E621593D0110031EC49 /* WatchNavigationController.m */; };
 		F9FE6E661593D0270031EC49 /* ExploreNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE6E651593D0270031EC49 /* ExploreNavigationController.m */; };
@@ -208,14 +213,18 @@
 		3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3EE8DB201593BF9A009DCCA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		F930520A1593C53E00E9DA06 /* WatchTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WatchTableCell.h; path = /Users/gaobi/Developer/Calimucho/Piggybackv2/Piggybackv2/WatchTableCell.h; sourceTree = "<absolute>"; };
-		F930520B1593C53E00E9DA06 /* WatchTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WatchTableCell.m; path = /Users/gaobi/Developer/Calimucho/Piggybackv2/Piggybackv2/WatchTableCell.m; sourceTree = "<absolute>"; };
 		F930520D1593C7B100E9DA06 /* YouTubeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeTableViewController.h; sourceTree = "<group>"; };
 		F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeTableViewController.m; sourceTree = "<group>"; };
 		F93052101593C7FA00E9DA06 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		F93052111593C7FA00E9DA06 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		F9736E8515943BC3009DEB07 /* ExploreTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreTableCell.h; sourceTree = "<group>"; };
 		F9736E8615943BC3009DEB07 /* ExploreTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreTableCell.m; sourceTree = "<group>"; };
+		F9C097621594E500000A0541 /* WatchTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchTableCell.h; sourceTree = "<group>"; };
+		F9C097631594E500000A0541 /* WatchTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchTableCell.m; sourceTree = "<group>"; };
+		F9C097651594E5D8000A0541 /* haines-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haines-rounded-corners.png"; sourceTree = "<group>"; };
+		F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "josh-lu-rounded-corners.png"; sourceTree = "<group>"; };
+		F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olstein-rounded-corners.png"; sourceTree = "<group>"; };
+		F9C097681594E5D8000A0541 /* yean-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yean-rounded-corners.png"; sourceTree = "<group>"; };
 		F9FE6E5E1593D0030031EC49 /* ListenNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenNavigationController.h; sourceTree = "<group>"; };
 		F9FE6E5F1593D0030031EC49 /* ListenNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenNavigationController.m; sourceTree = "<group>"; };
 		F9FE6E611593D0110031EC49 /* WatchNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchNavigationController.h; sourceTree = "<group>"; };
@@ -343,14 +352,14 @@
 		3EE8DB141593BF9A009DCCA3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F9C097621594E500000A0541 /* WatchTableCell.h */,
+				F9C097631594E500000A0541 /* WatchTableCell.m */,
 				F93052101593C7FA00E9DA06 /* Constants.h */,
 				F93052111593C7FA00E9DA06 /* Constants.m */,
 				3EE8DB151593BF9A009DCCA3 /* Piggybackv2-Info.plist */,
 				3EE8DB161593BF9A009DCCA3 /* InfoPlist.strings */,
 				3EE8DB191593BF9A009DCCA3 /* main.m */,
 				3EE8DB1B1593BF9A009DCCA3 /* Piggybackv2-Prefix.pch */,
-				F930520A1593C53E00E9DA06 /* WatchTableCell.h */,
-				F930520B1593C53E00E9DA06 /* WatchTableCell.m */,
 				F9736E8515943BC3009DEB07 /* ExploreTableCell.h */,
 				F9736E8615943BC3009DEB07 /* ExploreTableCell.m */,
 				3E9F8F281594453A006526B4 /* ListenCell.h */,
@@ -362,6 +371,10 @@
 		F9B478711593C16F00C20A53 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F9C097651594E5D8000A0541 /* haines-rounded-corners.png */,
+				F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */,
+				F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */,
+				F9C097681594E5D8000A0541 /* yean-rounded-corners.png */,
 				3E51D6B21593E04F00EEBD36 /* book-icon-badge.png */,
 				3E51D6B31593E04F00EEBD36 /* book-icon-badge@2x.png */,
 				3E51D6B41593E04F00EEBD36 /* book-icon.png */,
@@ -555,6 +568,10 @@
 				3E51D71B1593E04F00EEBD36 /* watch-view-titlebar@2x.png in Resources */,
 				3E51D71C1593E04F00EEBD36 /* youtube-icon.png in Resources */,
 				3E51D71D1593E04F00EEBD36 /* youtube-icon@2x.png in Resources */,
+				F9C097691594E5D8000A0541 /* haines-rounded-corners.png in Resources */,
+				F9C0976A1594E5D8000A0541 /* josh-lu-rounded-corners.png in Resources */,
+				F9C0976B1594E5D8000A0541 /* olstein-rounded-corners.png in Resources */,
+				F9C0976C1594E5D8000A0541 /* yean-rounded-corners.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,6 +598,7 @@
 				3E9F8F2A1594453A006526B4 /* ListenCell.m in Sources */,
 				F9736E8715943BC3009DEB07 /* ExploreTableCell.m in Sources */,
 				3E9F8F3915944B37006526B4 /* SongViewController.m in Sources */,
+				F9C097641594E500000A0541 /* WatchTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

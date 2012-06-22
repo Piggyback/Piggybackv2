@@ -447,10 +447,14 @@
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ liked a video",[currentVideo objectForKey:@"uid"]];
     }
     
+    NSLog(@"uid is %@",[currentVideo objectForKey:@"uid"]);
+    
     if ([[currentVideo objectForKey:@"uid"] isEqualToString:@"mlgao"]) {
         cell.profilePic.image = [UIImage imageNamed:@"gao-rounded-corners.png"];
-    } else if ([[currentVideo objectForKey:@"uid"] isEqualToString:@"kimikul"]) {
-        cell.profilePic.image = [UIImage imageNamed:@"hsiao-rounded-corners.png"];
+//    } else if ([[currentVideo objectForKey:@"uid"] isEqualToString:@"kimikul"]) {
+//        cell.profilePic.image = [UIImage imageNamed:@"hsiao-rounded-corners.png"];
+    } else if ([[currentVideo objectForKey:@"uid"] isEqualToString:@"NerdsInNewYork"]) {
+        cell.profilePic.image = [UIImage imageNamed:@"haines-rounded-corners.png"];
     }
     
     cell.date.text = [self timeElapsed:[currentVideo objectForKey:@"date"]];

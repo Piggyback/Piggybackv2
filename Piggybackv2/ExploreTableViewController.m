@@ -166,11 +166,11 @@
     } else if ([fullName isEqualToString:@"Kim H"]) {
         cell.profilePic.image = [UIImage imageNamed:@"hsiao-rounded-corners"];
     } else if ([fullName isEqualToString:@"Joshua Lu"]) {
-        cell.profilePic.image = [UIImage imageNamed:@""];
+        cell.profilePic.image = [UIImage imageNamed:@"josh-lu-rounded-corners"];
     } else if ([fullName isEqualToString:@"Ricky Yean"]) {
-        cell.profilePic.image = [UIImage imageNamed:@""];
+        cell.profilePic.image = [UIImage imageNamed:@"yean-rounded-corners"];
     } else if ([fullName isEqualToString:@"Sam Olstein"]) {
-        cell.profilePic.image = [UIImage imageNamed:@""];
+        cell.profilePic.image = [UIImage imageNamed:@"olstein-rounded-corners"];
     } else if ([fullName isEqualToString:@"Michael Gao"]) {
         cell.profilePic.image = [UIImage imageNamed:@"gao-rounded-corners"];
     }
