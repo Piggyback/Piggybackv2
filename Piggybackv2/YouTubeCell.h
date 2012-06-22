@@ -14,5 +14,10 @@
 @property (nonatomic, weak) IBOutlet UILabel* favoritedBy;
 @property (nonatomic, weak) IBOutlet UIImageView* profilePic;
 @property (nonatomic, weak) IBOutlet UILabel* date;
+@property (nonatomic, weak) IBOutlet UIButton* heart;
+@property (nonatomic, weak) IBOutlet UIButton* todo;
+
+- (IBAction)heart:(id)sender;
+- (IBAction)todo:(id)sender;
 
 @end
