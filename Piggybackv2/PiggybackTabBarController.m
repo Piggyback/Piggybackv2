@@ -7,6 +7,7 @@
 //
 
 #import "PiggybackTabBarController.h"
+#import "YouTubeTableViewController.h"
 
 @interface PiggybackTabBarController ()
 
@@ -26,7 +27,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    // get videos from youtube ambassadors
+    NSMutableSet *youtubeAmbassadors = [NSMutableSet setWithObjects:@"kimikul",@"mlgao",@"andyjiang",nil];
+    YouTubeTableViewController* youtubeVC = (YouTubeTableViewController*)[[self.viewControllers objectAtIndex:2] topViewController];
+    [youtubeVC getFavoritesFromAmbassadors:youtubeAmbassadors];
+    
 }
 
 - (void)viewDidUnload

@@ -285,11 +285,21 @@
 				3EE8DB1F1593BF9A009DCCA3 /* MainStoryboard.storyboard */,
 				3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */,
 				3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */,
+				F930520D1593C7B100E9DA06 /* YouTubeTableViewController.h */,
+				F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */,
 				3E9A5D4B1593C66000635873 /* PiggybackTabBarController.h */,
 				3E9A5D4C1593C66000635873 /* PiggybackTabBarController.m */,
+				F9FE6E5E1593D0030031EC49 /* ListenNavigationController.h */,
+				F9FE6E5F1593D0030031EC49 /* ListenNavigationController.m */,
+				F9FE6E611593D0110031EC49 /* WatchNavigationController.h */,
+				F9FE6E621593D0110031EC49 /* WatchNavigationController.m */,
+				F9FE6E641593D0270031EC49 /* ExploreNavigationController.h */,
+				F9FE6E651593D0270031EC49 /* ExploreNavigationController.m */,
 				3E9A5D471593C48500635873 /* AccountLinkViewController.h */,
 				3E9A5D481593C48500635873 /* AccountLinkViewController.m */,
 				3EE8DB141593BF9A009DCCA3 /* Supporting Files */,
+				F930520A1593C53E00E9DA06 /* YouTubeCell.h */,
+				F930520B1593C53E00E9DA06 /* YouTubeCell.m */,
 			);
 			path = Piggybackv2;
 			sourceTree = "<group>";
@@ -297,6 +307,8 @@
 		3EE8DB141593BF9A009DCCA3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F93052101593C7FA00E9DA06 /* Constants.h */,
+				F93052111593C7FA00E9DA06 /* Constants.m */,
 				3EE8DB151593BF9A009DCCA3 /* Piggybackv2-Info.plist */,
 				3EE8DB161593BF9A009DCCA3 /* InfoPlist.strings */,
 				3EE8DB191593BF9A009DCCA3 /* main.m */,
@@ -513,10 +525,16 @@
 			files = (
 				3EE8DB1A1593BF9A009DCCA3 /* main.m in Sources */,
 				3EE8DB1E1593BF9A009DCCA3 /* AppDelegate.m in Sources */,
+				F930520C1593C53E00E9DA06 /* YouTubeCell.m in Sources */,
+				F930520F1593C7B100E9DA06 /* YouTubeTableViewController.m in Sources */,
+				F93052121593C7FA00E9DA06 /* Constants.m in Sources */,
 				3E9A5D491593C48500635873 /* AccountLinkViewController.m in Sources */,
 				3E9A5D4D1593C66000635873 /* PiggybackTabBarController.m in Sources */,
 				3E9A5D541593C92D00635873 /* BZFoursquare.m in Sources */,
 				3E9A5D551593C92D00635873 /* BZFoursquareRequest.m in Sources */,
+				F9FE6E601593D0030031EC49 /* ListenNavigationController.m in Sources */,
+				F9FE6E631593D0110031EC49 /* WatchNavigationController.m in Sources */,
+				F9FE6E661593D0270031EC49 /* ExploreNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +589,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -590,6 +612,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

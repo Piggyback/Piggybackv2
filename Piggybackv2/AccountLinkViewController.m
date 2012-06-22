@@ -8,12 +8,14 @@
 
 #import "AccountLinkViewController.h"
 #import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface AccountLinkViewController ()
 
 @end
 
 @implementation AccountLinkViewController
+@synthesize youtubeToggle;
 
 - (void)viewDidLoad
 {
@@ -23,6 +25,7 @@
 
 - (void)viewDidUnload
 {
+    [self setYoutubeToggle:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -51,6 +54,27 @@
 
 - (IBAction)youtubeConnect:(id)sender {
     if ([sender isOn] == YES) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Link Your YouTube Account\n\n" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+        
+        // create text view
+        UITextField *someTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 43, 245, 25)];
+        someTextField.layer.cornerRadius = 2;
+        someTextField.layer.masksToBounds = YES;
+        
+        // font of text
+        someTextField.placeholder = @"YouTube login name";
+        someTextField.backgroundColor = [UIColor whiteColor];
+        someTextField.textColor = [UIColor blackColor];
+        someTextField.font = [UIFont systemFontOfSize:14];
+        someTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        
+        // alignment and padding of text
+        someTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+        someTextField.leftView = paddingView;
+        someTextField.leftViewMode = UITextFieldViewModeAlways;
+        [alert addSubview:someTextField];
+        [alert show];
         
     } else {
         
@@ -60,5 +84,6 @@
 - (IBAction)continueButton:(id)sender {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 @end
