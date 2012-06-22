@@ -1,0 +1,15 @@
+//
+//  ListenCell.m
+//  Piggybackv2
+//
+//  Created by Michael Gao on 6/22/12.
+//  Copyright (c) 2012 Calimucho. All rights reserved.
+//
+
+#import "ListenCell.h"
+
+@implementation ListenCell
+
+@synthesize trackDetails = _trackDetails;
+
+@end

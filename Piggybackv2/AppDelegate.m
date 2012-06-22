@@ -10,6 +10,7 @@
 #import "PiggybackTabBarController.h"
 #import "AccountLinkViewController.h"
 #include "appkey.c"
+#import "ListenTableViewController.h"
 #import "ExploreTableViewController.h"
 
 @interface AppDelegate ()
@@ -81,6 +82,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     NSLog(@"logged into spotify");
     
     self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
+    [(ListenTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] topViewController] getFriendsTopTracks];
 }
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error; {
@@ -119,8 +121,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [[SPSession sharedSession] logout:^{}];
-    [self.foursquare invalidateSession];
+//    [[SPSession sharedSession] logout:^{}];
+//    [self.foursquare invalidateSession];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
