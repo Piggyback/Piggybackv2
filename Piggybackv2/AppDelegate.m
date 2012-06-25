@@ -170,16 +170,20 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // clear NSUserDefaults
     [[NSUserDefaults standardUserDefaults] setPersistentDomain:[NSDictionary dictionary] forName:[[NSBundle mainBundle] bundleIdentifier]];
     
-    //    LoginViewController *loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-    //    [self presentViewController:loginViewController animated:NO completion:nil];
-    //    
-    //    // release existing view controllers and create new instances for next user who logs in
-    //    UIViewController* compatibilityNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"compatibilityNavigationController"];
-    //    UIViewController* statusUpdateNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"statusUpdateNavigationController"];
-    //    UIViewController* topPicksNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"topPicksNavigationController"];
-    //    NSArray* newTabViewControllers = [NSArray arrayWithObjects:compatibilityNavigationController, statusUpdateNavigationController, topPicksNavigationController, nil];
-    //    self.viewControllers = newTabViewControllers;
-    //    self.selectedIndex = 0;
+    PiggybackTabBarController* rootViewController = (PiggybackTabBarController*)self.window.rootViewController;
+    [rootViewController dismissViewControllerAnimated:NO completion:nil]; // dismisses account view controller
+
+    LoginViewController *loginViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    [rootViewController presentViewController:loginViewController animated:NO completion:nil];
+    
+#warning - do not reset tabs
+    // release existing view controllers and create new instances for next user who logs in
+//    UIViewController* listenNavigationController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"listenNavigationController"];
+//    UIViewController* exploreNavigationController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"exploreNavigationController"];
+//    UIViewController* watchNavigationController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"watchNavigationController"];
+//    NSArray* newTabViewControllers = [NSArray arrayWithObjects:listenNavigationController, exploreNavigationController, watchNavigationController, nil];
+//    rootViewController.viewControllers = newTabViewControllers;
+//    rootViewController.selectedIndex = 0;
     
     NSLog(@"logged out");
 }

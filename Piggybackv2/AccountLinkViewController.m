@@ -95,5 +95,8 @@
     }
 }
 
+- (IBAction)logout:(id)sender {
+    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] facebook] logout];
+}
 
 @end
