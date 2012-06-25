@@ -12,6 +12,7 @@
 #include "appkey.c"
 #import "ListenTableViewController.h"
 #import "ExploreTableViewController.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,16 +20,20 @@
 
 @implementation AppDelegate
 
+NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 @synthesize window = _window;
 @synthesize foursquare = _foursquare;
 @synthesize playbackManager = _playbackManager;
+@synthesize facebook = _facebook;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {    
+    // set up storyboard and root view controller
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    PiggybackTabBarController *rootViewController = (PiggybackTabBarController *)self.window.rootViewController;
     
     // setting up foursquare
     self.foursquare = [[BZFoursquare alloc] initWithClientID:FSQ_CLIENT_ID callbackURL:FSQ_CALLBACK_URL];
@@ -40,21 +45,40 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 										   loadingPolicy:SPAsyncLoadingManual
 												   error:nil];
     [[SPSession sharedSession] setDelegate:self];
-
     
-    // always show modal account link page on startup
-    [self.window makeKeyAndVisible];
-    PiggybackTabBarController *rootViewController = (PiggybackTabBarController *)self.window.rootViewController;
+    // setting up facebook
+    self.facebook = [[Facebook alloc] initWithAppId:FB_APP_ID andDelegate:rootViewController];
     
-    AccountLinkViewController *accountLinkViewController = [storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
-    [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] 
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    
+    if (![self.facebook isSessionValid]) {
+        LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+        [self.window makeKeyAndVisible];
+        [rootViewController presentViewController:loginViewController animated:NO completion:nil];
+    } else {
+        AccountLinkViewController *accountLinkViewController = [storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
+        [self.window makeKeyAndVisible];
+        [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];
+    }
     
     return YES;
 }
 
 // Foursquare openURL handling
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [self.foursquare handleOpenURL:url];
+    if ([[[[url absoluteString] componentsSeparatedByString:@":"] objectAtIndex:0] isEqualToString:@"fb316977565057222"]) {
+        return [self.facebook handleOpenURL:url];
+    } else if ([[[[url absoluteString] componentsSeparatedByString:@":"] objectAtIndex:0] isEqualToString:@"piggyback"]) {
+        return [self.foursquare handleOpenURL:url];
+    } else {
+        NSLog(@"did not find a matching openURL");
+        return NO;
+    }
 }
 
 #pragma mark -
@@ -108,6 +132,13 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 	[alert show];
 }
 
+#pragma mark -
+#pragma mark - Facebook openURL methods
+
+// Pre iOS 4.2 support
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [self.facebook handleOpenURL:url]; 
+}
 
 #pragma mark -
 #pragma mark - AppDelegate methods

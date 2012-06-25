@@ -88,6 +88,11 @@
 		F930520F1593C7B100E9DA06 /* YouTubeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */; };
 		F93052121593C7FA00E9DA06 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F93052111593C7FA00E9DA06 /* Constants.m */; };
 		F9736E8715943BC3009DEB07 /* ExploreTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9736E8615943BC3009DEB07 /* ExploreTableCell.m */; };
+		F99418ED1598BDB300A4B08B /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F99418E01598BDB300A4B08B /* FBDialog.bundle */; };
+		F99418EE1598BDB300A4B08B /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F99418E61598BDB300A4B08B /* libfacebook_ios_sdk.a */; };
+		F99418F11598BE0C00A4B08B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99418F01598BE0C00A4B08B /* LoginViewController.m */; };
+		F99418F81598BEDA00A4B08B /* LoginWithFacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = F99418F61598BEDA00A4B08B /* LoginWithFacebookNormal.png */; };
+		F99418F91598BEDA00A4B08B /* LoginWithFacebookNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F99418F71598BEDA00A4B08B /* LoginWithFacebookNormal@2x.png */; };
 		F9C097641594E500000A0541 /* WatchTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C097631594E500000A0541 /* WatchTableCell.m */; };
 		F9C097691594E5D8000A0541 /* haines-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097651594E5D8000A0541 /* haines-rounded-corners.png */; };
 		F9C0976A1594E5D8000A0541 /* josh-lu-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */; };
@@ -219,6 +224,25 @@
 		F93052111593C7FA00E9DA06 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		F9736E8515943BC3009DEB07 /* ExploreTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreTableCell.h; sourceTree = "<group>"; };
 		F9736E8615943BC3009DEB07 /* ExploreTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreTableCell.m; sourceTree = "<group>"; };
+		F99418DE1598BDB300A4B08B /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
+		F99418DF1598BDB300A4B08B /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
+		F99418E01598BDB300A4B08B /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
+		F99418E11598BDB300A4B08B /* FBDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDialog.h; sourceTree = "<group>"; };
+		F99418E21598BDB300A4B08B /* FBFrictionlessRequestSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFrictionlessRequestSettings.h; sourceTree = "<group>"; };
+		F99418E31598BDB300A4B08B /* FBLoginDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginDialog.h; sourceTree = "<group>"; };
+		F99418E41598BDB300A4B08B /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
+		F99418E51598BDB300A4B08B /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		F99418E61598BDB300A4B08B /* libfacebook_ios_sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfacebook_ios_sdk.a; sourceTree = "<group>"; };
+		F99418E71598BDB300A4B08B /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		F99418E81598BDB300A4B08B /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		F99418E91598BDB300A4B08B /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		F99418EA1598BDB300A4B08B /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		F99418EB1598BDB300A4B08B /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		F99418EC1598BDB300A4B08B /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		F99418EF1598BE0C00A4B08B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		F99418F01598BE0C00A4B08B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		F99418F61598BEDA00A4B08B /* LoginWithFacebookNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginWithFacebookNormal.png; sourceTree = "<group>"; };
+		F99418F71598BEDA00A4B08B /* LoginWithFacebookNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginWithFacebookNormal@2x.png"; sourceTree = "<group>"; };
 		F9C097621594E500000A0541 /* WatchTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchTableCell.h; sourceTree = "<group>"; };
 		F9C097631594E500000A0541 /* WatchTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchTableCell.m; sourceTree = "<group>"; };
 		F9C097651594E5D8000A0541 /* haines-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haines-rounded-corners.png"; sourceTree = "<group>"; };
@@ -249,6 +273,7 @@
 				3EE8DB0E1593BF9A009DCCA3 /* UIKit.framework in Frameworks */,
 				3EE8DB101593BF9A009DCCA3 /* Foundation.framework in Frameworks */,
 				3EE8DB121593BF9A009DCCA3 /* CoreGraphics.framework in Frameworks */,
+				F99418EE1598BDB300A4B08B /* libfacebook_ios_sdk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +292,7 @@
 		3E9A5D4E1593C8E000635873 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				F99418DD1598BDB300A4B08B /* facebook-ios-sdk */,
 				3E63207215945EAC000F4886 /* CocoaLibSpotify iOS Library.xcodeproj */,
 				3E9A5D4F1593C92D00635873 /* BZFoursquare */,
 			);
@@ -326,6 +352,8 @@
 				3EE8DB1F1593BF9A009DCCA3 /* MainStoryboard.storyboard */,
 				3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */,
 				3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */,
+				F99418EF1598BE0C00A4B08B /* LoginViewController.h */,
+				F99418F01598BE0C00A4B08B /* LoginViewController.m */,
 				3E2FAA2C15943BC000142705 /* ListenTableViewController.h */,
 				3E2FAA2D15943BC000142705 /* ListenTableViewController.m */,
 				3E9F8F3715944B37006526B4 /* SongViewController.h */,
@@ -368,9 +396,33 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F99418DD1598BDB300A4B08B /* facebook-ios-sdk */ = {
+			isa = PBXGroup;
+			children = (
+				F99418DE1598BDB300A4B08B /* Facebook.h */,
+				F99418DF1598BDB300A4B08B /* FBConnect.h */,
+				F99418E01598BDB300A4B08B /* FBDialog.bundle */,
+				F99418E11598BDB300A4B08B /* FBDialog.h */,
+				F99418E21598BDB300A4B08B /* FBFrictionlessRequestSettings.h */,
+				F99418E31598BDB300A4B08B /* FBLoginDialog.h */,
+				F99418E41598BDB300A4B08B /* FBRequest.h */,
+				F99418E51598BDB300A4B08B /* JSON.h */,
+				F99418E61598BDB300A4B08B /* libfacebook_ios_sdk.a */,
+				F99418E71598BDB300A4B08B /* NSObject+SBJSON.h */,
+				F99418E81598BDB300A4B08B /* NSString+SBJSON.h */,
+				F99418E91598BDB300A4B08B /* SBJSON.h */,
+				F99418EA1598BDB300A4B08B /* SBJsonBase.h */,
+				F99418EB1598BDB300A4B08B /* SBJsonParser.h */,
+				F99418EC1598BDB300A4B08B /* SBJsonWriter.h */,
+			);
+			path = "facebook-ios-sdk";
+			sourceTree = "<group>";
+		};
 		F9B478711593C16F00C20A53 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F99418F61598BEDA00A4B08B /* LoginWithFacebookNormal.png */,
+				F99418F71598BEDA00A4B08B /* LoginWithFacebookNormal@2x.png */,
 				F9C097651594E5D8000A0541 /* haines-rounded-corners.png */,
 				F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */,
 				F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */,
@@ -572,6 +624,9 @@
 				F9C0976A1594E5D8000A0541 /* josh-lu-rounded-corners.png in Resources */,
 				F9C0976B1594E5D8000A0541 /* olstein-rounded-corners.png in Resources */,
 				F9C0976C1594E5D8000A0541 /* yean-rounded-corners.png in Resources */,
+				F99418ED1598BDB300A4B08B /* FBDialog.bundle in Resources */,
+				F99418F81598BEDA00A4B08B /* LoginWithFacebookNormal.png in Resources */,
+				F99418F91598BEDA00A4B08B /* LoginWithFacebookNormal@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +654,7 @@
 				F9736E8715943BC3009DEB07 /* ExploreTableCell.m in Sources */,
 				3E9F8F3915944B37006526B4 /* SongViewController.m in Sources */,
 				F9C097641594E500000A0541 /* WatchTableCell.m in Sources */,
+				F99418F11598BE0C00A4B08B /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,6 +751,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Piggybackv2/Piggybackv2-Prefix.pch";
 				INFOPLIST_FILE = "Piggybackv2/Piggybackv2-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/facebook-ios-sdk\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -715,6 +775,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Piggybackv2/Piggybackv2-Prefix.pch";
 				INFOPLIST_FILE = "Piggybackv2/Piggybackv2-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/facebook-ios-sdk\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
