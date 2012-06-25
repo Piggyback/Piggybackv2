@@ -47,7 +47,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [[SPSession sharedSession] setDelegate:self];
     
     // setting up facebook
-    self.facebook = [[Facebook alloc] initWithAppId:FB_APP_ID andDelegate:rootViewController];
+    self.facebook = [[Facebook alloc] initWithAppId:FB_APP_ID andDelegate:self];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"FBAccessTokenKey"] 
@@ -61,15 +61,13 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
         [self.window makeKeyAndVisible];
         [rootViewController presentViewController:loginViewController animated:NO completion:nil];
     } else {
-        AccountLinkViewController *accountLinkViewController = [storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
-        [self.window makeKeyAndVisible];
-        [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];
+        // do nothing (default behavior is to show tab bar controller)
     }
     
     return YES;
 }
 
-// Foursquare openURL handling
+// Foursquare and Facebook openURL handling
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     if ([[[[url absoluteString] componentsSeparatedByString:@":"] objectAtIndex:0] isEqualToString:@"fb316977565057222"]) {
         return [self.facebook handleOpenURL:url];
@@ -79,6 +77,11 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
         NSLog(@"did not find a matching openURL");
         return NO;
     }
+}
+
+// Pre iOS 4.2 support
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [self.facebook handleOpenURL:url]; 
 }
 
 #pragma mark -
@@ -133,13 +136,57 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 }
 
 #pragma mark -
-#pragma mark - Facebook openURL methods
-
-// Pre iOS 4.2 support
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [self.facebook handleOpenURL:url]; 
+#pragma mark -- FBSessionDelegate methods
+- (void)fbDidLogin {
+    Facebook *facebook = [(AppDelegate *)[[UIApplication sharedApplication] delegate] facebook];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+    
+    // dismiss login view 
+    PiggybackTabBarController* rootViewController = (PiggybackTabBarController*)self.window.rootViewController;
+    [rootViewController dismissViewControllerAnimated:NO completion:nil]; // dismisses loginViewController
+    
+    // show account link page when you log in for the first time
+    AccountLinkViewController *accountLinkViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
+    [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];    
+    NSLog(@"logged in");
 }
 
+- (void)fbDidNotLogin:(BOOL)cancelled {
+    NSLog(@"did not log in");
+}
+
+-(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
+    NSLog(@"token extended");
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:accessToken forKey:@"FBAccessTokenKey"];
+    [defaults setObject:expiresAt forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+}
+
+- (void)fbDidLogout {
+    // clear NSUserDefaults
+    [[NSUserDefaults standardUserDefaults] setPersistentDomain:[NSDictionary dictionary] forName:[[NSBundle mainBundle] bundleIdentifier]];
+    
+    //    LoginViewController *loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    //    [self presentViewController:loginViewController animated:NO completion:nil];
+    //    
+    //    // release existing view controllers and create new instances for next user who logs in
+    //    UIViewController* compatibilityNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"compatibilityNavigationController"];
+    //    UIViewController* statusUpdateNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"statusUpdateNavigationController"];
+    //    UIViewController* topPicksNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"topPicksNavigationController"];
+    //    NSArray* newTabViewControllers = [NSArray arrayWithObjects:compatibilityNavigationController, statusUpdateNavigationController, topPicksNavigationController, nil];
+    //    self.viewControllers = newTabViewControllers;
+    //    self.selectedIndex = 0;
+    
+    NSLog(@"logged out");
+}
+
+- (void)fbSessionInvalidated {
+    
+}
 #pragma mark -
 #pragma mark - AppDelegate methods
 - (void)applicationWillResignActive:(UIApplication *)application

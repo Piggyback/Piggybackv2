@@ -41,6 +41,10 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void)dealloc {
+    NSLog(@"login view controller dealloc");
+}
+
 #pragma mark - IBAction definitions
 
 - (IBAction)loginWithFacebook:(id)sender {

@@ -11,7 +11,7 @@
 #import "CocoaLibSpotify.h"
 #import "FBConnect.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, BZFoursquareSessionDelegate, SPSessionDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, BZFoursquareSessionDelegate, SPSessionDelegate, FBSessionDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) BZFoursquare *foursquare;

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
 
-@interface PiggybackTabBarController : UITabBarController <FBSessionDelegate>
+@interface PiggybackTabBarController : UITabBarController
 
 @end
