@@ -13,6 +13,8 @@
 #import "ListenTableViewController.h"
 #import "ExploreTableViewController.h"
 #import "LoginViewController.h"
+#import <RestKit/RestKit.h>
+#import <RestKit/CoreData.h>
 
 @interface AppDelegate ()
 
@@ -20,6 +22,7 @@
 
 @implementation AppDelegate
 
+NSString* RK_BASE_URL = @"";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
@@ -35,6 +38,18 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     PiggybackTabBarController *rootViewController = (PiggybackTabBarController *)self.window.rootViewController;
     
+    // set up restkit
+    RKObjectManager* objectManager = [RKObjectManager objectManagerWithBaseURL:[NSURL URLWithString:RK_BASE_URL]];
+    objectManager.acceptMIMEType = RKMIMETypeJSON;
+    objectManager.serializationMIMEType = RKMIMETypeJSON;
+    objectManager.client.requestQueue.showsNetworkActivityIndicatorWhenBusy = YES;
+    objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:@"Piggybackv2.sqlite"];
+    [RKObjectManager setSharedManager:objectManager];
+    
+    //    NSString* seedDatabaseName = nil;
+    //    NSString* databaseName = @"Piggybackv2.sqlite";
+//    objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:databaseName usingSeedDatabaseName:seedDatabaseName managedObjectModel:nil delegate:self];
+
     // setting up foursquare
     self.foursquare = [[BZFoursquare alloc] initWithClientID:FSQ_CLIENT_ID callbackURL:FSQ_CALLBACK_URL];
     self.foursquare.sessionDelegate = self;

@@ -12,6 +12,8 @@
 #import "AccountLinkViewController.h"
 #import "Constants.h"
 #import "PBUser.h"
+#import <RestKit/RestKit.h>
+#import <RestKit/CoreData.h>
 
 @interface PiggybackTabBarController ()
 @end
@@ -28,17 +30,21 @@
     [defaults setObject:[meGraphApiResult objectForKey:@"last_name"] forKey:@"LastName"];
     [defaults setObject:[meGraphApiResult objectForKey:@"id"] forKey:@"FBID"];
     [defaults setObject:[meGraphApiResult objectForKey:@"email"] forKey:@"Email"];
-    
-    // create and store new user in core data if doesnt exist yet
-//    PBUser *newUser = [PBUser object];
-//    newUser.fbid = [NSNumber numberWithLongLong:[[defaults objectForKey:@"FBID"] longLongValue]];
-//    newUser.email = [defaults objectForKey:@"Email"];
-//    newUser.firstName = [defaults objectForKey:@"FirstName"];
-//    newUser.lastName = [defaults objectForKey:@"LastName"];
-    
-    // create and store new user in database if doesnt exist yet
-    
     [defaults synchronize];
+
+#warning - row in core data is not unique
+    // create and store new user in core data if doesnt exist yet
+    PBUser *newUser = [PBUser object];
+    newUser.fbid = [NSNumber numberWithLongLong:[[defaults objectForKey:@"FBID"] longLongValue]];
+    newUser.email = [defaults objectForKey:@"Email"];
+    newUser.firstName = [defaults objectForKey:@"FirstName"];
+    newUser.lastName = [defaults objectForKey:@"LastName"];
+    [[RKObjectManager sharedManager].objectStore save:nil];
+        
+    // create and store new user in database if doesnt exist yet
+    // restkit will return core data pbuser object which will automatically be put into core data
+    // find a way to 
+    
 }
 
 - (void)getFriendsOfCurrentUser {
