@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Facebook.h"
 
 @interface LoginViewController : UIViewController
 
 - (IBAction)loginWithFacebook:(id)sender;
+- (void)getAndStoreCurrentUserFbInformationAndUid;
 
 @end

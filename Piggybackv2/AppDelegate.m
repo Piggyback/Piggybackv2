@@ -144,13 +144,17 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
     
-    // dismiss login view 
+    // get current user
     PiggybackTabBarController* rootViewController = (PiggybackTabBarController*)self.window.rootViewController;
+    [(LoginViewController*)[rootViewController presentedViewController] getAndStoreCurrentUserFbInformationAndUid];
+    
+    // dismiss login view 
     [rootViewController dismissViewControllerAnimated:NO completion:nil]; // dismisses loginViewController
     
     // show account link page when you log in for the first time
     AccountLinkViewController *accountLinkViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
-    [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];    
+    [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];  
+    
     NSLog(@"logged in");
 }
 
@@ -214,6 +218,9 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
+    [(ListenTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] topViewController] getFriendsTopTracks];
+    
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

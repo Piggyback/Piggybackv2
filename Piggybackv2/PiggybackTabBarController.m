@@ -10,12 +10,36 @@
 #import "YouTubeTableViewController.h"
 #import "AppDelegate.h"
 #import "AccountLinkViewController.h"
+#import "Constants.h"
 
 @interface PiggybackTabBarController ()
-
 @end
 
 @implementation PiggybackTabBarController
+@synthesize currentFbAPICall = _currentFbAPICall;
+
+#pragma mark - FBRequestDelegate methods
+
+- (void)request:(FBRequest *)request didLoad:(id)result { 
+    NSLog(@"request did load");
+    switch (self.currentFbAPICall) {
+        case fbAPIGraphMeFromLogin:
+        {
+            NSLog(@"ID: %@", [result objectForKey:@"id"]);
+            //            [self storeCurrentUserFbInformation:result];
+            //            [self getCurrentUserUidFromLogin:[result objectForKey:@"id"]];
+            break;
+        }
+        default: 
+            break;
+    }
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"FBRequestDelegate Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+	[alert show];
+}
 
 #pragma mark - view lifecycle
 

@@ -8,12 +8,25 @@
 
 #import "LoginViewController.h"
 #import "AppDelegate.h"
+#import "PiggybackTabBarController.h"
+#import "Constants.h"
 
 @interface LoginViewController ()
-
 @end
 
 @implementation LoginViewController
+
+#pragma mark - public helper functions
+
+- (void)getAndStoreCurrentUserFbInformationAndUid {
+    Facebook *facebook = [(AppDelegate *)[[UIApplication sharedApplication] delegate] facebook];
+    
+    // Uid is retrieved from request:didLoad: method (FBRequestDelegate method) -- for synchronous purposes
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    PiggybackTabBarController* rootViewController = (PiggybackTabBarController*)appDelegate.window.rootViewController; 
+    rootViewController.currentFbAPICall = fbAPIGraphMeFromLogin;
+    [facebook requestWithGraphPath:@"me" andDelegate:rootViewController];
+}
 
 #pragma mark - view lifecycle
 
@@ -48,7 +61,7 @@
 #pragma mark - IBAction definitions
 
 - (IBAction)loginWithFacebook:(id)sender {
-    NSArray *permissions = [[NSArray alloc] initWithObjects:@"user_likes", @"friends_likes", nil];
+    NSArray *permissions = [[NSArray alloc] initWithObjects:@"email", nil];
     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] facebook] authorize:permissions];
 }
 
