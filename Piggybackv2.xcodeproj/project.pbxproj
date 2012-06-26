@@ -87,6 +87,9 @@
 		3EE8DB211593BF9A009DCCA3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8DB1F1593BF9A009DCCA3 /* MainStoryboard.storyboard */; };
 		F930520F1593C7B100E9DA06 /* YouTubeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */; };
 		F93052121593C7FA00E9DA06 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F93052111593C7FA00E9DA06 /* Constants.m */; };
+		F93C2F77159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F93C2F75159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld */; };
+		F93C2F7B159A52DD00FACE47 /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F93C2F7A159A52DD00FACE47 /* PBUser.m */; };
+		F93C2F7D159A585500FACE47 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F7C159A585500FACE47 /* CoreData.framework */; };
 		F9736E8715943BC3009DEB07 /* ExploreTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9736E8615943BC3009DEB07 /* ExploreTableCell.m */; };
 		F99418ED1598BDB300A4B08B /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F99418E01598BDB300A4B08B /* FBDialog.bundle */; };
 		F99418EE1598BDB300A4B08B /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F99418E61598BDB300A4B08B /* libfacebook_ios_sdk.a */; };
@@ -222,6 +225,10 @@
 		F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeTableViewController.m; sourceTree = "<group>"; };
 		F93052101593C7FA00E9DA06 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		F93052111593C7FA00E9DA06 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		F93C2F76159A4E4E00FACE47 /* Piggybackv2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Piggybackv2.xcdatamodel; sourceTree = "<group>"; };
+		F93C2F79159A52DC00FACE47 /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
+		F93C2F7A159A52DD00FACE47 /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
+		F93C2F7C159A585500FACE47 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F9736E8515943BC3009DEB07 /* ExploreTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreTableCell.h; sourceTree = "<group>"; };
 		F9736E8615943BC3009DEB07 /* ExploreTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreTableCell.m; sourceTree = "<group>"; };
 		F99418DE1598BDB300A4B08B /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -262,6 +269,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F93C2F7D159A585500FACE47 /* CoreData.framework in Frameworks */,
 				3E63208115945F16000F4886 /* libCocoaLibSpotify.a in Frameworks */,
 				3E31653D1593D52D00344F36 /* AVFoundation.framework in Frameworks */,
 				3E31653B1593D52900344F36 /* AudioToolbox.framework in Frameworks */,
@@ -313,7 +321,9 @@
 		3EE8DAFE1593BF9A009DCCA3 = {
 			isa = PBXGroup;
 			children = (
+				F93C2F7C159A585500FACE47 /* CoreData.framework */,
 				3EE8DB131593BF9A009DCCA3 /* Piggybackv2 */,
+				F93C2F78159A514000FACE47 /* PB Core Data Classes */,
 				F9B478711593C16F00C20A53 /* Resources */,
 				3E9A5D4E1593C8E000635873 /* Libraries */,
 				3EE8DB0C1593BF9A009DCCA3 /* Frameworks */,
@@ -350,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				3EE8DB1F1593BF9A009DCCA3 /* MainStoryboard.storyboard */,
+				F93C2F75159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld */,
 				3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */,
 				3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */,
 				F99418EF1598BE0C00A4B08B /* LoginViewController.h */,
@@ -394,6 +405,15 @@
 				3E9F8F291594453A006526B4 /* ListenCell.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F93C2F78159A514000FACE47 /* PB Core Data Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F93C2F79159A52DC00FACE47 /* PBUser.h */,
+				F93C2F7A159A52DD00FACE47 /* PBUser.m */,
+			);
+			name = "PB Core Data Classes";
 			sourceTree = "<group>";
 		};
 		F99418DD1598BDB300A4B08B /* facebook-ios-sdk */ = {
@@ -655,6 +675,8 @@
 				3E9F8F3915944B37006526B4 /* SongViewController.m in Sources */,
 				F9C097641594E500000A0541 /* WatchTableCell.m in Sources */,
 				F99418F11598BE0C00A4B08B /* LoginViewController.m in Sources */,
+				F93C2F77159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld in Sources */,
+				F93C2F7B159A52DD00FACE47 /* PBUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -811,6 +833,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F93C2F75159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F93C2F76159A4E4E00FACE47 /* Piggybackv2.xcdatamodel */,
+			);
+			currentVersion = F93C2F76159A4E4E00FACE47 /* Piggybackv2.xcdatamodel */;
+			path = Piggybackv2.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3EE8DB001593BF9A009DCCA3 /* Project object */;
 }
