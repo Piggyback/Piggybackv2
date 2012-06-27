@@ -10,11 +10,15 @@
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "ExploreTableCell.h"
+#import "PBFriend.h"
+#import <RestKit/RestKit.h>
+#import <RestKit/CoreData.h>
 
 @interface ExploreTableViewController ()
 
 @property (nonatomic, strong) BZFoursquareRequest *request;
 @property (nonatomic, strong) NSArray *results;
+@property int requestType;
 
 @end
 
@@ -22,6 +26,7 @@
 
 @synthesize request = _request;
 @synthesize results = _results;
+@synthesize requestType = _requestType;
 
 #pragma mark - Getters & Setters
 - (void)setResults:(NSArray *)results {
@@ -84,6 +89,14 @@
 - (void)getRecentFriendCheckins {
     NSLog(@"getting recent friends checkins...");
     self.request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:@"checkins/recent" HTTPMethod:@"GET" parameters:nil delegate:self];
+    self.requestType = fsAPIGetRecentCheckins;
+    [self.request start];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)getFoursquareFriends {
+    self.request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:@"users/self/friends" HTTPMethod:@"GET" parameters:nil delegate:self];
+    self.requestType = fsAPIGetFriends;
     [self.request start];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
@@ -93,9 +106,33 @@
 
 - (void)requestDidFinishLoading:(BZFoursquareRequest *)request {
     NSLog(@"success: %@", request.response);
-    self.results = [request.response objectForKey:@"recent"];
-    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    if (self.requestType == fsAPIGetRecentCheckins) {
+        self.results = [request.response objectForKey:@"recent"];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    } else if (self.requestType == fsAPIGetFriends) {
+        // link foursquare id's with friends and store in friends db
+        NSArray* foursquareFriends = [[request.response objectForKey:@"friends"] objectForKey:@"items"];
+        for (NSDictionary* foursquareFriend in foursquareFriends) {
+            if ([[foursquareFriend objectForKey:@"contact"] objectForKey:@"facebook"]) {
+                
+                // add foursquare acct to friend based on fbid match
+                NSLog(@"fb id is %@",[[foursquareFriend objectForKey:@"contact"] objectForKey:@"facebook"]);
+                NSLog(@"foursquare id that matches is %@",[foursquareFriend objectForKey:@"id"]);
+                
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fbid = %@",[NSNumber numberWithLongLong:[[[foursquareFriend objectForKey:@"contact"] objectForKey:@"facebook"] longLongValue]]];
+                NSArray *friendArray = [PBFriend objectsWithPredicate:predicate];
+                if ([friendArray count] > 0) {
+                    PBFriend *friend = [friendArray objectAtIndex:0];
+                    [friend setValue:[foursquareFriend objectForKey:@"id"] forKey:@"foursquareId"];
+                }
+
+                // add foursquare acct to friend based on email match
+            }
+        }
+        
+        [[RKObjectManager sharedManager].objectStore save:nil];
+
+    }
 }
 
 - (void)request:(BZFoursquareRequest *)request didFailWithError:(NSError *)error {

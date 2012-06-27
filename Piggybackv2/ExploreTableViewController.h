@@ -11,6 +11,7 @@
 
 @interface ExploreTableViewController : UITableViewController <BZFoursquareRequestDelegate>
 
+- (void)getFoursquareFriends;
 - (void)getRecentFriendCheckins;
 
 @end

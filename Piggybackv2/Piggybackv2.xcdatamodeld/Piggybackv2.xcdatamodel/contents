@@ -9,19 +9,25 @@
     <entity name="PBFriend" representedClassName="PBFriend" syncable="YES">
         <attribute name="fbid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="foursquareId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spotifyId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="youtubeId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="PBUser" representedClassName="PBUser" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fbid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="foursquareId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spotifyId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="youtubeId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="ambassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBAmbassador" inverseName="follower" inverseEntity="PBAmbassador" syncable="YES"/>
     </entity>
     <elements>
         <element name="PBUser" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="PBFriend" positionX="286" positionY="54" width="128" height="90"/>
+        <element name="PBFriend" positionX="286" positionY="54" width="128" height="135"/>
         <element name="PBAmbassador" positionX="403" positionY="171" width="128" height="105"/>
     </elements>
 </model>
