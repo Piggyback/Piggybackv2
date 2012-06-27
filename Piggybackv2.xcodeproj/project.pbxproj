@@ -88,12 +88,14 @@
 		F930520F1593C7B100E9DA06 /* YouTubeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */; };
 		F93052121593C7FA00E9DA06 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F93052111593C7FA00E9DA06 /* Constants.m */; };
 		F93C2F77159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F93C2F75159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld */; };
-		F93C2F7B159A52DD00FACE47 /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F93C2F7A159A52DD00FACE47 /* PBUser.m */; };
 		F93C2F7D159A585500FACE47 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F7C159A585500FACE47 /* CoreData.framework */; };
 		F93C2F95159A5B7900FACE47 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F8A159A5A6700FACE47 /* libRestKit.a */; };
 		F93C2F97159A5B9400FACE47 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F96159A5B9400FACE47 /* Security.framework */; };
 		F93C2F99159A5BA000FACE47 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F98159A5BA000FACE47 /* QuartzCore.framework */; };
 		F93C2F9B159A5BA900FACE47 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F9A159A5BA900FACE47 /* libxml2.dylib */; };
+		F96F82BC159B605900F42859 /* PBFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F96F82BB159B605900F42859 /* PBFriend.m */; };
+		F96F82BF159B605900F42859 /* PBAmbassador.m in Sources */ = {isa = PBXBuildFile; fileRef = F96F82BE159B605900F42859 /* PBAmbassador.m */; };
+		F96F82C2159B605900F42859 /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F96F82C1159B605900F42859 /* PBUser.m */; };
 		F9736E8715943BC3009DEB07 /* ExploreTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9736E8615943BC3009DEB07 /* ExploreTableCell.m */; };
 		F99418ED1598BDB300A4B08B /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F99418E01598BDB300A4B08B /* FBDialog.bundle */; };
 		F99418EE1598BDB300A4B08B /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F99418E61598BDB300A4B08B /* libfacebook_ios_sdk.a */; };
@@ -272,13 +274,17 @@
 		F93052101593C7FA00E9DA06 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		F93052111593C7FA00E9DA06 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		F93C2F76159A4E4E00FACE47 /* Piggybackv2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Piggybackv2.xcdatamodel; sourceTree = "<group>"; };
-		F93C2F79159A52DC00FACE47 /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
-		F93C2F7A159A52DD00FACE47 /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
 		F93C2F7C159A585500FACE47 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F93C2F7E159A5A6600FACE47 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		F93C2F96159A5B9400FACE47 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F93C2F98159A5BA000FACE47 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F93C2F9A159A5BA900FACE47 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		F96F82BA159B605900F42859 /* PBFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBFriend.h; path = Piggybackv2/PBFriend.h; sourceTree = "<group>"; };
+		F96F82BB159B605900F42859 /* PBFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBFriend.m; path = Piggybackv2/PBFriend.m; sourceTree = "<group>"; };
+		F96F82BD159B605900F42859 /* PBAmbassador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBAmbassador.h; path = Piggybackv2/PBAmbassador.h; sourceTree = "<group>"; };
+		F96F82BE159B605900F42859 /* PBAmbassador.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBAmbassador.m; path = Piggybackv2/PBAmbassador.m; sourceTree = "<group>"; };
+		F96F82C0159B605900F42859 /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
+		F96F82C1159B605900F42859 /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
 		F9736E8515943BC3009DEB07 /* ExploreTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreTableCell.h; sourceTree = "<group>"; };
 		F9736E8615943BC3009DEB07 /* ExploreTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreTableCell.m; sourceTree = "<group>"; };
 		F99418DE1598BDB300A4B08B /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -468,8 +474,12 @@
 		F93C2F78159A514000FACE47 /* PB Core Data Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F93C2F79159A52DC00FACE47 /* PBUser.h */,
-				F93C2F7A159A52DD00FACE47 /* PBUser.m */,
+				F96F82C0159B605900F42859 /* PBUser.h */,
+				F96F82C1159B605900F42859 /* PBUser.m */,
+				F96F82BD159B605900F42859 /* PBAmbassador.h */,
+				F96F82BE159B605900F42859 /* PBAmbassador.m */,
+				F96F82BA159B605900F42859 /* PBFriend.h */,
+				F96F82BB159B605900F42859 /* PBFriend.m */,
 			);
 			name = "PB Core Data Classes";
 			sourceTree = "<group>";
@@ -786,7 +796,9 @@
 				F9C097641594E500000A0541 /* WatchTableCell.m in Sources */,
 				F99418F11598BE0C00A4B08B /* LoginViewController.m in Sources */,
 				F93C2F77159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld in Sources */,
-				F93C2F7B159A52DD00FACE47 /* PBUser.m in Sources */,
+				F96F82BC159B605900F42859 /* PBFriend.m in Sources */,
+				F96F82BF159B605900F42859 /* PBAmbassador.m in Sources */,
+				F96F82C2159B605900F42859 /* PBUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

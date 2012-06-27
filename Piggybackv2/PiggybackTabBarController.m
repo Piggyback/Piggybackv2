@@ -12,6 +12,7 @@
 #import "AccountLinkViewController.h"
 #import "Constants.h"
 #import "PBUser.h"
+#import "PBFriend.h"
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData.h>
 
@@ -50,15 +51,31 @@
 - (void)getFriendsOfCurrentUser {
     Facebook *facebook = [(AppDelegate*)[[UIApplication sharedApplication] delegate] facebook];
     self.currentFbAPICall = fbAPIGraphMeFriends;
-    [facebook requestWithGraphPath:@"me/friends" andDelegate:self];
+    [facebook requestWithGraphPath:@"me/friends?limit=5000" andDelegate:self];
 }
 
-- (void)storeCurrentUsersFriends:(id)meGraphApiResult {
+- (void)storeCurrentUsersFriendsInCoreData:(id)meGraphApiResult {
     NSLog(@"friend results are %@",[meGraphApiResult objectForKey:@"data"]);
     
-//    for (NSDictionary* friend in [meGraphApiResult objectForKey:@"data"]) {
+    for (NSDictionary* friend in [meGraphApiResult objectForKey:@"data"]) {
+        PBFriend* newFriend = [PBFriend object];
+        newFriend.fbid = [NSNumber numberWithLongLong:[[friend objectForKey:@"id"] longLongValue]];
         
-//    }
+        // parse name into first and last
+        NSArray* nameComponents = [[friend objectForKey:@"name"] componentsSeparatedByString:@" "];
+        if ([nameComponents count] > 0) {
+            newFriend.firstName = [nameComponents objectAtIndex:0];
+            NSString* lastName = @"";
+            for (int i = 1; i < [nameComponents count]; i++) {
+                lastName = [NSString stringWithFormat:@"%@ %@",lastName, [nameComponents objectAtIndex:i]];
+            }
+            if ([lastName length] > 0) {
+                lastName = [lastName substringWithRange:NSMakeRange(1,[lastName length]-1)];
+            }
+            newFriend.lastName = lastName;
+        }
+    }
+    [[RKObjectManager sharedManager].objectStore save:nil];
 }
 
 #pragma mark - FBRequestDelegate methods
@@ -75,7 +92,7 @@
     
         case fbAPIGraphMeFriends: 
         {
-            [self storeCurrentUsersFriends:result];
+            [self storeCurrentUsersFriendsInCoreData:result];
             break;
         }
         default: 

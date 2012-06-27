@@ -15,6 +15,8 @@
 #import "LoginViewController.h"
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData.h>
+#import "PBUser.h"
+#import "PBAmbassador.h"
 
 @interface AppDelegate ()
 
@@ -46,9 +48,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:@"Piggybackv2.sqlite"];
     [RKObjectManager setSharedManager:objectManager];
     
-    //    NSString* seedDatabaseName = nil;
-    //    NSString* databaseName = @"Piggybackv2.sqlite";
-//    objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:databaseName usingSeedDatabaseName:seedDatabaseName managedObjectModel:nil delegate:self];
+    [self setupRestkitRouting];
+    [self setupRestkitMapping];
 
     // setting up foursquare
     self.foursquare = [[BZFoursquare alloc] initWithClientID:FSQ_CLIENT_ID callbackURL:FSQ_CALLBACK_URL];
@@ -82,7 +83,52 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     return YES;
 }
 
-// Foursquare and Facebook openURL handling
+#pragma mark -
+#pragma mark - setting up restkit mapping and routing
+
+- (void)setupRestkitRouting {
+    RKObjectRouter *router = [RKObjectManager sharedManager].router;
+    [router routeClass:[PBUser class] toResourcePath:@"" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBAmbassador class] toResourcePath:@"" forMethod:RKRequestMethodPOST];
+}
+
+- (void)setupRestkitMapping {
+
+    // mapping declarations
+    RKObjectManager *objectManager = [RKObjectManager sharedManager];
+    RKManagedObjectMapping* userMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBUser" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping* ambassadorMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBAmbassador" inManagedObjectStore:objectManager.objectStore];
+    
+    // user mapping
+    userMapping.primaryKeyAttribute = @"uid";
+    [userMapping mapAttributes:@"uid",@"fbid",@"firstName",@"lastName",@"email",nil];
+    [userMapping mapRelationship:@"ambassadors" withMapping:ambassadorMapping];
+    [objectManager.mappingProvider setMapping:userMapping forKeyPath:@"user"];
+    
+    // ambassador mapping
+    [ambassadorMapping mapAttributes:@"followerId",@"ambasadorId",@"type",nil];
+    [ambassadorMapping mapRelationship:@"follower" withMapping:userMapping];
+    [ambassadorMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerId"];
+    [objectManager.mappingProvider setMapping:ambassadorMapping forKeyPath:@"ambassador"];
+    
+    // serialization declarations
+    RKObjectMapping *userSerializationMapping = [RKObjectMapping mappingForClassWithName:@"PBUser"];
+    RKObjectMapping *ambassadorSerializationMapping = [RKObjectMapping mappingForClassWithName:@"PBAmbassador"];
+
+    // user serialization
+    [userSerializationMapping mapAttributes:@"uid",@"fbid",@"firstName",@"lastName",@"email",nil];
+    [userSerializationMapping mapKeyPath:@"ambassadors" toRelationship:@"ambassadors" withMapping:ambassadorSerializationMapping];
+    [objectManager.mappingProvider setSerializationMapping:userSerializationMapping forClass:[PBUser class]];
+    
+    // ambassador serialization
+    [ambassadorSerializationMapping mapAttributes:@"followerId",@"ambassadorId",@"type",nil];
+    [objectManager.mappingProvider setSerializationMapping:ambassadorSerializationMapping forClass:[PBAmbassador class]];
+    
+}
+
+#pragma mark -
+#pragma mark - handling facebook and foursquare openURL redirects
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     if ([[[[url absoluteString] componentsSeparatedByString:@":"] objectAtIndex:0] isEqualToString:@"fb316977565057222"]) {
         return [self.facebook handleOpenURL:url];
