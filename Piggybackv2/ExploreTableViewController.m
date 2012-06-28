@@ -164,6 +164,8 @@
                 }
                 [[RKObjectManager sharedManager].objectStore save:nil];
             }
+            [self.requestDict removeObjectForKey:request.description];
+            NSLog(@"current requests includes %@",self.requestDict);
         }
     }
 }
