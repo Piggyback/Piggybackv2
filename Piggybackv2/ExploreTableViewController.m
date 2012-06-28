@@ -16,22 +16,29 @@
 
 @interface ExploreTableViewController ()
 
-@property (nonatomic, strong) BZFoursquareRequest *request;
-@property (nonatomic, strong) NSArray *results;
-@property int requestType;
+@property (nonatomic, strong) NSMutableDictionary *requestDict;
+@property (nonatomic, strong) NSArray *checkins;
 
 @end
 
 @implementation ExploreTableViewController
 
-@synthesize request = _request;
-@synthesize results = _results;
-@synthesize requestType = _requestType;
+@synthesize requestDict = _requestDict;
+@synthesize checkins = _checkins;
 
 #pragma mark - Getters & Setters
-- (void)setResults:(NSArray *)results {
-    _results = results;
-    [self.tableView reloadData];
+-(NSArray*)checkins {
+    if (!_checkins) {
+        _checkins = [[NSArray alloc] init];
+    }
+    return _checkins;
+}
+
+- (NSMutableDictionary*)requestDict {
+    if (!_requestDict) {
+        _requestDict = [[NSMutableDictionary alloc] init];
+    }
+    return _requestDict;
 }
 
 #pragma mark - private helper functions
@@ -87,24 +94,27 @@
 #pragma mark -
 #pragma mark - Public Instance Methods
 - (void)getFoursquareSelf {
-    self.request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:@"users/self" HTTPMethod:@"GET" parameters:nil delegate:self];
-    self.requestType = fsAPIGetSelf;
-    [self.request start];
+    BZFoursquareRequest* request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:@"users/self" HTTPMethod:@"GET" parameters:nil delegate:self];
+//    self.requestType = fsAPIGetSelf;
+    [self.requestDict setObject:@"getSelf" forKey:request.description];
+//    NSLog(@"request description before is %@",self.request.description);
+    [request start];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 - (void)getFoursquareFriends {
-    self.request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:@"users/self/friends" HTTPMethod:@"GET" parameters:nil delegate:self];
-    self.requestType = fsAPIGetFriends;
-    [self.request start];
+    BZFoursquareRequest* request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:@"users/self/friends" HTTPMethod:@"GET" parameters:nil delegate:self];
+//    self.requestType = fsAPIGetFriends;
+    [self.requestDict setObject:@"getFriends" forKey:request.description];
+    [request start];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 - (void)getRecentFriendCheckins {
-    NSLog(@"getting recent friends checkins...");
-    self.request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:@"checkins/recent" HTTPMethod:@"GET" parameters:nil delegate:self];
-    self.requestType = fsAPIGetRecentCheckins;
-    [self.request start];
+    BZFoursquareRequest* request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:@"checkins/recent" HTTPMethod:@"GET" parameters:nil delegate:self];
+//    self.requestType = fsAPIGetRecentCheckins;
+    [self.requestDict setObject:@"getFriendCheckins" forKey:request.description];
+    [request start];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
@@ -113,41 +123,48 @@
 
 - (void)requestDidFinishLoading:(BZFoursquareRequest *)request {
     NSLog(@"success: %@", request.response);
-    if (self.requestType == fsAPIGetSelf) {
-        // get my foursquare id
-        if ([[[request.response objectForKey:@"user"] objectForKey:@"relationship"] isEqualToString:@"self"]) {
-            NSString* myFoursquareId = [[request.response objectForKey:@"user"] objectForKey:@"id"];
+    for (NSString* currentRequest in [self.requestDict allKeys]) {
+        if ([request.description isEqualToString:currentRequest]) {
             
-            #warning - api to add foursquare id to my account
-            NSLog(@"my foursquare acct is %@",myFoursquareId);
-            
-        }
-    } else if (self.requestType == fsAPIGetRecentCheckins) {
-        self.results = [request.response objectForKey:@"recent"];
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    } else if (self.requestType == fsAPIGetFriends) {
-        // link foursquare id's with friends and store in friends db
-        NSArray* foursquareFriends = [[request.response objectForKey:@"friends"] objectForKey:@"items"];
-        for (NSDictionary* foursquareFriend in foursquareFriends) {
-            if ([[foursquareFriend objectForKey:@"contact"] objectForKey:@"facebook"]) {
-                
-                // add foursquare acct to friend based on fbid match
-                NSLog(@"fb id is %@",[[foursquareFriend objectForKey:@"contact"] objectForKey:@"facebook"]);
-                NSLog(@"foursquare id that matches is %@",[foursquareFriend objectForKey:@"id"]);
-                
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fbid = %@",[NSNumber numberWithLongLong:[[[foursquareFriend objectForKey:@"contact"] objectForKey:@"facebook"] longLongValue]]];
-                NSArray *friendArray = [PBFriend objectsWithPredicate:predicate];
-                if ([friendArray count] > 0) {
-                    PBFriend *friend = [friendArray objectAtIndex:0];
-                    [friend setValue:[NSNumber numberWithLong:[[foursquareFriend objectForKey:@"id"] intValue]] forKey:@"foursquareId"];
+            // get my foursquare id
+            if ([[self.requestDict objectForKey:currentRequest] isEqualToString:@"getSelf"]) {
+                if ([[[request.response objectForKey:@"user"] objectForKey:@"relationship"] isEqualToString:@"self"]) {
+                    NSString* myFoursquareId = [[request.response objectForKey:@"user"] objectForKey:@"id"];
+                    #warning - api to add foursquare id to my account
+                    NSLog(@"my foursquare acct is %@",myFoursquareId);
                 }
+            }
+            
+            // get friends checkins
+            else if ([[self.requestDict objectForKey:currentRequest] isEqualToString:@"getFriendCheckins"]) {
+                self.checkins = [request.response objectForKey:@"recent"];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            }
+            
+            // get friends
+            else if ([[self.requestDict objectForKey:currentRequest] isEqualToString:@"getFriends"]) {
+                // link foursquare id's with friends and store in friends db
+                NSArray* foursquareFriends = [[request.response objectForKey:@"friends"] objectForKey:@"items"];
+                for (NSDictionary* foursquareFriend in foursquareFriends) {
+                    if ([[foursquareFriend objectForKey:@"contact"] objectForKey:@"facebook"]) {
+                        
+                        // add foursquare acct to friend based on fbid match
+                        NSLog(@"fb id is %@",[[foursquareFriend objectForKey:@"contact"] objectForKey:@"facebook"]);
+                        NSLog(@"foursquare id that matches is %@",[foursquareFriend objectForKey:@"id"]);
+                        
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fbid = %@",[NSNumber numberWithLongLong:[[[foursquareFriend objectForKey:@"contact"] objectForKey:@"facebook"] longLongValue]]];
+                        NSArray *friendArray = [PBFriend objectsWithPredicate:predicate];
+                        if ([friendArray count] > 0) {
+                            PBFriend *friend = [friendArray objectAtIndex:0];
+                            [friend setValue:[NSNumber numberWithLong:[[foursquareFriend objectForKey:@"id"] intValue]] forKey:@"foursquareId"];
+                        }
 
-                // add foursquare acct to friend based on email match
+                        // add foursquare acct to friend based on email match
+                    }
+                }
+                [[RKObjectManager sharedManager].objectStore save:nil];
             }
         }
-        
-        [[RKObjectManager sharedManager].objectStore save:nil];
-
     }
 }
 
@@ -198,7 +215,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.results count];
+    return [self.checkins count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -207,9 +224,9 @@
     ExploreTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
-    cell.nameOfPlace.text = [[[self.results objectAtIndex:indexPath.row] objectForKey:@"venue"] objectForKey:@"name"];
+    cell.nameOfPlace.text = [[[self.checkins objectAtIndex:indexPath.row] objectForKey:@"venue"] objectForKey:@"name"];
     
-    NSString* fullName = [NSString stringWithFormat:@"%@ %@",[[[self.results objectAtIndex:indexPath.row] objectForKey:@"user"] objectForKey:@"firstName"],[[[self.results objectAtIndex:indexPath.row] objectForKey:@"user"] objectForKey:@"lastName"]];
+    NSString* fullName = [NSString stringWithFormat:@"%@ %@",[[[self.checkins objectAtIndex:indexPath.row] objectForKey:@"user"] objectForKey:@"firstName"],[[[self.checkins objectAtIndex:indexPath.row] objectForKey:@"user"] objectForKey:@"lastName"]];
     cell.checkedInBy.text = [NSString stringWithFormat:@"%@ checked in to",fullName];
     
     if ([fullName isEqualToString:@"Matthew Harrison"]) {
@@ -228,7 +245,7 @@
         cell.profilePic.image = [UIImage imageNamed:@"gao-rounded-corners"];
     }
     
-    NSString* epochTime = [[self.results objectAtIndex:indexPath.row] objectForKey:@"createdAt"];
+    NSString* epochTime = [[self.checkins objectAtIndex:indexPath.row] objectForKey:@"createdAt"];
     NSDate *epochNSDate = [[NSDate alloc] initWithTimeIntervalSince1970:[epochTime doubleValue]];
     cell.date.text = [self timeElapsed:epochNSDate];
     
