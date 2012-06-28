@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
+#import <RestKit/RestKit.h>
+#import <RestKit/CoreData.h>
 
-@interface PiggybackTabBarController : UITabBarController <FBRequestDelegate>
+@interface PiggybackTabBarController : UITabBarController <FBRequestDelegate, RKObjectLoaderDelegate>
 
 @property int currentFbAPICall;
 

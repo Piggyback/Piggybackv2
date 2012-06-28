@@ -24,7 +24,7 @@
 
 @implementation AppDelegate
 
-NSString* RK_BASE_URL = @"";
+NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
@@ -88,8 +88,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 - (void)setupRestkitRouting {
     RKObjectRouter *router = [RKObjectManager sharedManager].router;
-    [router routeClass:[PBUser class] toResourcePath:@"" forMethod:RKRequestMethodPOST];
-    [router routeClass:[PBAmbassador class] toResourcePath:@"" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBUser class] toResourcePath:@"/addUser" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBAmbassador class] toResourcePath:@"/addAmbassador" forMethod:RKRequestMethodPOST];
 }
 
 - (void)setupRestkitMapping {
@@ -101,7 +101,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     
     // user mapping
     userMapping.primaryKeyAttribute = @"uid";
-    [userMapping mapAttributes:@"uid",@"fbid",@"firstName",@"lastName",@"email",nil];
+    [userMapping mapAttributes:@"uid",@"fbid",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",nil];
     [userMapping mapRelationship:@"ambassadors" withMapping:ambassadorMapping];
     [objectManager.mappingProvider setMapping:userMapping forKeyPath:@"user"];
     
@@ -116,7 +116,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKObjectMapping *ambassadorSerializationMapping = [RKObjectMapping mappingForClassWithName:@"PBAmbassador"];
 
     // user serialization
-    [userSerializationMapping mapAttributes:@"uid",@"fbid",@"firstName",@"lastName",@"email",nil];
+    [userSerializationMapping mapAttributes:@"uid",@"fbid",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",nil];
     [userSerializationMapping mapKeyPath:@"ambassadors" toRelationship:@"ambassadors" withMapping:ambassadorSerializationMapping];
     [objectManager.mappingProvider setSerializationMapping:userSerializationMapping forClass:[PBUser class]];
     

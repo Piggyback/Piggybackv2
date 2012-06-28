@@ -39,12 +39,10 @@
     newUser.email = [defaults objectForKey:@"Email"];
     newUser.firstName = [defaults objectForKey:@"FirstName"];
     newUser.lastName = [defaults objectForKey:@"LastName"];
-    [[RKObjectManager sharedManager].objectStore save:nil];
+    newUser.isPiggybackUser = [NSNumber numberWithInt:1];
         
     // restkit will return core data pbuser object which will automatically be put into core data. remove above chunk of code
-    
-    #warning - use api to add myself into user table
-    
+    [[RKObjectManager sharedManager] postObject:newUser delegate:self];
 }
 
 - (void)getFriendsOfCurrentUser {
@@ -103,6 +101,14 @@
     NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"FBRequestDelegate Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 	[alert show];
+}
+
+#pragma mark - RKObjectLoaderDelegate methods
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
+}
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
 }
 
 #pragma mark - view lifecycle
