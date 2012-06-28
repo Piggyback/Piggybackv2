@@ -33,7 +33,6 @@
     [defaults setObject:[meGraphApiResult objectForKey:@"email"] forKey:@"Email"];
     [defaults synchronize];
 
-#warning - row in core data is not unique
     // create and store new user in core data if doesnt exist yet
     PBUser *newUser = [PBUser object];
     newUser.fbid = [NSNumber numberWithLongLong:[[defaults objectForKey:@"FBID"] longLongValue]];
@@ -42,9 +41,9 @@
     newUser.lastName = [defaults objectForKey:@"LastName"];
     [[RKObjectManager sharedManager].objectStore save:nil];
         
-    // create and store new user in database if doesnt exist yet
-    // restkit will return core data pbuser object which will automatically be put into core data
-    // find a way to 
+    // restkit will return core data pbuser object which will automatically be put into core data. remove above chunk of code
+    
+    #warning - use api to add myself into user table
     
 }
 

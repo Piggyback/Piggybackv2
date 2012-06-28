@@ -150,6 +150,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 - (void)foursquareDidAuthorize:(BZFoursquare *)foursquare {
     NSLog(@"foursquare did authorize");
     
+//    [(ExploreTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:1] topViewController] getFoursquareSelf];
+    
     // first time you log in, get foursquare friends and store usernames into friends core data db
     [(ExploreTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:1] topViewController] getFoursquareFriends];
     

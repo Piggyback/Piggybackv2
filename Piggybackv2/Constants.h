@@ -22,6 +22,7 @@ typedef enum fbApiCall {
 } fbApiCall;
 
 typedef enum fsApiCall {
+    fsAPIGetSelf,
     fsAPIGetFriends,
     fsAPIGetRecentCheckins
 } fsApiCall;

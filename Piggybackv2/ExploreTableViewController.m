@@ -86,10 +86,9 @@
 
 #pragma mark -
 #pragma mark - Public Instance Methods
-- (void)getRecentFriendCheckins {
-    NSLog(@"getting recent friends checkins...");
-    self.request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:@"checkins/recent" HTTPMethod:@"GET" parameters:nil delegate:self];
-    self.requestType = fsAPIGetRecentCheckins;
+- (void)getFoursquareSelf {
+    self.request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:@"users/self" HTTPMethod:@"GET" parameters:nil delegate:self];
+    self.requestType = fsAPIGetSelf;
     [self.request start];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
@@ -101,12 +100,29 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
+- (void)getRecentFriendCheckins {
+    NSLog(@"getting recent friends checkins...");
+    self.request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:@"checkins/recent" HTTPMethod:@"GET" parameters:nil delegate:self];
+    self.requestType = fsAPIGetRecentCheckins;
+    [self.request start];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
 #pragma mark -
 #pragma mark BZFoursquareRequestDelegate
 
 - (void)requestDidFinishLoading:(BZFoursquareRequest *)request {
     NSLog(@"success: %@", request.response);
-    if (self.requestType == fsAPIGetRecentCheckins) {
+    if (self.requestType == fsAPIGetSelf) {
+        // get my foursquare id
+        if ([[[request.response objectForKey:@"user"] objectForKey:@"relationship"] isEqualToString:@"self"]) {
+            NSString* myFoursquareId = [[request.response objectForKey:@"user"] objectForKey:@"id"];
+            
+            #warning - api to add foursquare id to my account
+            NSLog(@"my foursquare acct is %@",myFoursquareId);
+            
+        }
+    } else if (self.requestType == fsAPIGetRecentCheckins) {
         self.results = [request.response objectForKey:@"recent"];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } else if (self.requestType == fsAPIGetFriends) {
