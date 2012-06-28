@@ -123,7 +123,7 @@
                 NSArray *friendArray = [PBFriend objectsWithPredicate:predicate];
                 if ([friendArray count] > 0) {
                     PBFriend *friend = [friendArray objectAtIndex:0];
-                    [friend setValue:[foursquareFriend objectForKey:@"id"] forKey:@"foursquareId"];
+                    [friend setValue:[NSNumber numberWithLong:[[foursquareFriend objectForKey:@"id"] intValue]] forKey:@"foursquareId"];
                 }
 
                 // add foursquare acct to friend based on email match
