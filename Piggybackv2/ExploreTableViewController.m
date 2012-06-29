@@ -140,7 +140,7 @@
                         me.foursquareId = [NSNumber numberWithLongLong:[myFoursquareId longLongValue]];
                         NSLog(@"foursquare id added is %@",me.foursquareId);
                         NSLog(@"my name is %@",me.firstName);
-//                        [[RKObjectManager sharedManager] putObject:me delegate:self];
+                        [[RKObjectManager sharedManager] putObject:me delegate:self];
                     }
                     
                 }
@@ -168,7 +168,6 @@
                         if ([friendArray count] > 0) {
                             PBFriend *friend = [friendArray objectAtIndex:0];
                             friend.foursquareId = [NSNumber numberWithLongLong:[[foursquareFriend objectForKey:@"id"] longLongValue]];
-//                            [friend setValue:[NSNumber numberWithLong:[[foursquareFriend objectForKey:@"id"] intValue]] forKey:@"foursquareId"];
                         }
 
                         // add foursquare acct to friend based on email match
@@ -192,10 +191,15 @@
 #pragma mark - restkit delegate
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
+    NSLog(@"objects from foursquare id insert is %@",objects);
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
-    NSLog(@"restkit failed with error");
+    NSLog(@"restkit failed with error from foursquare insert");
+}
+
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
+    NSLog(@"Retrieved JSON: %@", [response bodyAsString]);
 }
 
 #pragma mark -
