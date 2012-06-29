@@ -35,14 +35,22 @@
 
     // create and store new user in core data if doesnt exist yet
     PBUser *newUser = [PBUser object];
-    newUser.fbid = [NSNumber numberWithLongLong:[[defaults objectForKey:@"FBID"] longLongValue]];
+    newUser.fbId = [NSNumber numberWithLongLong:[[defaults objectForKey:@"FBID"] longLongValue]];
     newUser.email = [defaults objectForKey:@"Email"];
     newUser.firstName = [defaults objectForKey:@"FirstName"];
     newUser.lastName = [defaults objectForKey:@"LastName"];
-    newUser.isPiggybackUser = [NSNumber numberWithInt:1];
+//    newUser.isPiggybackUser = [NSNumber numberWithBool:YES];
         
     // restkit will return core data pbuser object which will automatically be put into core data. remove above chunk of code
+    
     [[RKObjectManager sharedManager] postObject:newUser delegate:self];
+    
+//    RKURL *rkUrl = [RKURL URLWithBaseURL:[NSURL URLWithString:@"http://piggybackv2.herokuapp.com"] resourcePath:@"/addUser"];
+//    RKObjectLoader* loader = [[RKObjectLoader alloc] initWithURL:rkUrl mappingProvider:[RKObjectManager sharedManager].mappingProvider];
+//    loader.method = RKRequestMethodPOST;
+//    loader.delegate = self;
+//    loader.objectMapping = [[RKObjectManager sharedManager].mappingProvider objectMappingForClass:[PBUser class]];
+//    [loader send];
 }
 
 - (void)getFriendsOfCurrentUser {
@@ -56,7 +64,7 @@
     
     for (NSDictionary* friend in [meGraphApiResult objectForKey:@"data"]) {
         PBFriend* newFriend = [PBFriend object];
-        newFriend.fbid = [NSNumber numberWithLongLong:[[friend objectForKey:@"id"] longLongValue]];
+        newFriend.fbId = [NSNumber numberWithLongLong:[[friend objectForKey:@"id"] longLongValue]];
         
         // parse name into first and last
         NSArray* nameComponents = [[friend objectForKey:@"name"] componentsSeparatedByString:@" "];
@@ -106,9 +114,21 @@
 #pragma mark - RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
+    
+    // store my uid in defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[(PBUser*)[objects objectAtIndex:0] uid] forKey:@"UID"];
+    [defaults synchronize];
+    
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
+    NSLog(@"restkit failed with error");
+}
+
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
+
+    NSLog(@"Retrieved JSON: %@", [response bodyAsString]);
 }
 
 #pragma mark - view lifecycle

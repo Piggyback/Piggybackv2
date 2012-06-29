@@ -13,7 +13,7 @@
 @implementation PBUser
 
 @dynamic email;
-@dynamic fbid;
+@dynamic fbId;
 @dynamic firstName;
 @dynamic foursquareId;
 @dynamic lastName;

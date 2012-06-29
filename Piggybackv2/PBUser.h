@@ -14,7 +14,7 @@
 @interface PBUser : NSManagedObject
 
 @property (nonatomic, retain) NSString * email;
-@property (nonatomic, retain) NSNumber * fbid;
+@property (nonatomic, retain) NSNumber * fbId;
 @property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSNumber * foursquareId;
 @property (nonatomic, retain) NSString * lastName;

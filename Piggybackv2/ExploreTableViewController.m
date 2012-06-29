@@ -13,6 +13,7 @@
 #import "PBFriend.h"
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData.h>
+#import "PBUser.h"
 
 @interface ExploreTableViewController ()
 
@@ -130,8 +131,18 @@
             if ([[self.requestDict objectForKey:currentRequest] isEqualToString:@"getSelf"]) {
                 if ([[[request.response objectForKey:@"user"] objectForKey:@"relationship"] isEqualToString:@"self"]) {
                     NSString* myFoursquareId = [[request.response objectForKey:@"user"] objectForKey:@"id"];
-                    #warning - api to add foursquare id to my account
-                    NSLog(@"my foursquare acct is %@",myFoursquareId);
+                    
+                    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+                    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid = %@",[defaults objectForKey:@"UID"]];
+                    NSArray *userArray = [PBUser objectsWithPredicate:predicate];
+                    if ([userArray count] > 0) {
+                        PBUser *me = [userArray objectAtIndex:0];
+                        me.foursquareId = [NSNumber numberWithLongLong:[myFoursquareId longLongValue]];
+                        NSLog(@"foursquare id added is %@",me.foursquareId);
+                        NSLog(@"my name is %@",me.firstName);
+//                        [[RKObjectManager sharedManager] putObject:me delegate:self];
+                    }
+                    
                 }
             }
             
@@ -152,11 +163,12 @@
                         NSLog(@"fb id is %@",[[foursquareFriend objectForKey:@"contact"] objectForKey:@"facebook"]);
                         NSLog(@"foursquare id that matches is %@",[foursquareFriend objectForKey:@"id"]);
                         
-                        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fbid = %@",[NSNumber numberWithLongLong:[[[foursquareFriend objectForKey:@"contact"] objectForKey:@"facebook"] longLongValue]]];
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fbId = %@",[NSNumber numberWithLongLong:[[[foursquareFriend objectForKey:@"contact"] objectForKey:@"facebook"] longLongValue]]];
                         NSArray *friendArray = [PBFriend objectsWithPredicate:predicate];
                         if ([friendArray count] > 0) {
                             PBFriend *friend = [friendArray objectAtIndex:0];
-                            [friend setValue:[NSNumber numberWithLong:[[foursquareFriend objectForKey:@"id"] intValue]] forKey:@"foursquareId"];
+                            friend.foursquareId = [NSNumber numberWithLongLong:[[foursquareFriend objectForKey:@"id"] longLongValue]];
+//                            [friend setValue:[NSNumber numberWithLong:[[foursquareFriend objectForKey:@"id"] intValue]] forKey:@"foursquareId"];
                         }
 
                         // add foursquare acct to friend based on email match
@@ -174,6 +186,16 @@
     NSLog(@"failure: %@", error);
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+#pragma mark - 
+#pragma mark - restkit delegate
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
+}
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
+    NSLog(@"restkit failed with error");
 }
 
 #pragma mark -

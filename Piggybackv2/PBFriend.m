@@ -11,7 +11,7 @@
 
 @implementation PBFriend
 
-@dynamic fbid;
+@dynamic fbId;
 @dynamic firstName;
 @dynamic foursquareId;
 @dynamic lastName;
