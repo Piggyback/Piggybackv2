@@ -57,24 +57,30 @@
 - (void)storeCurrentUsersFriendsInCoreData:(id)meGraphApiResult {
     NSLog(@"friend results are %@",[meGraphApiResult objectForKey:@"data"]);
     
+    // add friends to core data if they are not in it yet
     for (NSDictionary* friend in [meGraphApiResult objectForKey:@"data"]) {
-        PBFriend* newFriend = [PBFriend object];
-        newFriend.fbId = [NSNumber numberWithLongLong:[[friend objectForKey:@"id"] longLongValue]];
-        
-        // parse name into first and last
-        NSArray* nameComponents = [[friend objectForKey:@"name"] componentsSeparatedByString:@" "];
-        if ([nameComponents count] > 0) {
-            newFriend.firstName = [nameComponents objectAtIndex:0];
-            NSString* lastName = @"";
-            for (int i = 1; i < [nameComponents count]; i++) {
-                lastName = [NSString stringWithFormat:@"%@ %@",lastName, [nameComponents objectAtIndex:i]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fbId = %@",[NSNumber numberWithLongLong:[[friend objectForKey:@"id"] longLongValue]]];
+        NSArray *friendArray = [PBFriend objectsWithPredicate:predicate];
+        if ([friendArray count] == 0) {
+            PBFriend* newFriend = [PBFriend object];
+            newFriend.fbId = [NSNumber numberWithLongLong:[[friend objectForKey:@"id"] longLongValue]];
+            
+            // parse name into first and last
+            NSArray* nameComponents = [[friend objectForKey:@"name"] componentsSeparatedByString:@" "];
+            if ([nameComponents count] > 0) {
+                newFriend.firstName = [nameComponents objectAtIndex:0];
+                NSString* lastName = @"";
+                for (int i = 1; i < [nameComponents count]; i++) {
+                    lastName = [NSString stringWithFormat:@"%@ %@",lastName, [nameComponents objectAtIndex:i]];
+                }
+                if ([lastName length] > 0) {
+                    lastName = [lastName substringWithRange:NSMakeRange(1,[lastName length]-1)];
+                }
+                newFriend.lastName = lastName;
             }
-            if ([lastName length] > 0) {
-                lastName = [lastName substringWithRange:NSMakeRange(1,[lastName length]-1)];
-            }
-            newFriend.lastName = lastName;
         }
-    }
+
+    }  
     [[RKObjectManager sharedManager].objectStore save:nil];
 }
 
