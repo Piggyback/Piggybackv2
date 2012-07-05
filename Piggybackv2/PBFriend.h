@@ -2,7 +2,7 @@
 //  PBFriend.h
 //  Piggybackv2
 //
-//  Created by Kimberly Hsiao on 6/28/12.
+//  Created by Kimberly Hsiao on 7/5/12.
 //  Copyright (c) 2012 Calimucho. All rights reserved.
 //
 
@@ -18,5 +18,6 @@
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSString * spotifyUsername;
 @property (nonatomic, retain) NSString * youtubeUsername;
+@property (nonatomic, retain) NSData * thumbnail;
 
 @end

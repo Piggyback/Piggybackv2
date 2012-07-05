@@ -12,6 +12,7 @@
         <attribute name="foursquareId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="spotifyUsername" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="youtubeUsername" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="PBUser" representedClassName="PBUser" syncable="YES">
@@ -28,7 +29,7 @@
     </entity>
     <elements>
         <element name="PBAmbassador" positionX="403" positionY="171" width="128" height="105"/>
-        <element name="PBFriend" positionX="286" positionY="54" width="128" height="135"/>
+        <element name="PBFriend" positionX="286" positionY="54" width="128" height="150"/>
         <element name="PBUser" positionX="160" positionY="192" width="128" height="195"/>
     </elements>
 </model>

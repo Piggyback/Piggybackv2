@@ -9,6 +9,8 @@
 #import "AccountLinkViewController.h"
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SetAmbassadorsViewController.h"
+#import "PiggybackTabBarController.h"
 
 @interface AccountLinkViewController ()
 
@@ -83,6 +85,17 @@
 
 - (IBAction)continueButton:(id)sender {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    // display set ambassadors view
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    PiggybackTabBarController* rootViewController = (PiggybackTabBarController*)appDelegate.window.rootViewController;
+    SetAmbassadorsViewController *setAmbassadorsViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
+    [rootViewController presentViewController:setAmbassadorsViewController animated:NO completion:nil]; 
+    [appDelegate.window makeKeyAndVisible];
+
+//    SetAmbassadorsViewController *setAmbassadorsViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
+//    [rootViewController presentViewController:setAmbassadorsViewController animated:NO completion:nil];
+//    [appDelegate.window makeKeyAndVisible];
 }
 
 #pragma mark - youtube alert delegate
