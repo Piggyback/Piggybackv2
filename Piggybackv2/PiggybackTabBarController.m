@@ -78,14 +78,13 @@
                 }
                 newFriend.lastName = lastName;
 
-//                NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",[friend objectForKey:@"id"]];
-//                newFriend.thumbnail = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]];
-//                NSLog(@"thumbnail is %@",newFriend.thumbnail);
+                NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",[friend objectForKey:@"id"]];
+                newFriend.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
+                [[RKObjectManager sharedManager].objectStore save:nil];
             }
         }
 
     }  
-    [[RKObjectManager sharedManager].objectStore save:nil];
 }
 
 #pragma mark - FBRequestDelegate methods

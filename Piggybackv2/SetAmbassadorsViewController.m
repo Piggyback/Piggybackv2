@@ -12,6 +12,7 @@
 #import "PBFriend.h"
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface SetAmbassadorsViewController ()
 @property (nonatomic, strong) NSArray* friends;
@@ -47,15 +48,19 @@
     static NSString *CellIdentifier = @"setAmbassadorCell";
     SetAmbassadorCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    cell.profilePic.layer.cornerRadius = 5.0;
+    cell.profilePic.layer.masksToBounds = YES;
+    
     PBFriend* friend = [self.friends objectAtIndex:indexPath.row];
     cell.name.text = [NSString stringWithFormat:@"%@ %@",friend.firstName, friend.lastName];
     
+    cell.profilePic.image = friend.thumbnail;
     return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath 
 {
-    return VIDEOTABLEROWHEIGHT;
+    return SETAMBASSADORSROWHEIGHT;
 }
 
 #pragma mark - Table view delegate
@@ -98,9 +103,11 @@
 #pragma mark - ib actions
 
 - (IBAction)readyButton:(id)sender {
-    self.friends = [PBFriend allObjects];
+    NSSortDescriptor *sortDescriptorFirstName = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
+    NSSortDescriptor *sortDescriptorLastName = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptorFirstName,sortDescriptorLastName,nil];
+    self.friends = [[PBFriend allObjects] sortedArrayUsingDescriptors:sortDescriptors];
     [self.tableView reloadData];
-    NSLog(@"friends are %@",self.friends);
 //    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
