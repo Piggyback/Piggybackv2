@@ -1,0 +1,86 @@
+
+                                 libspotify 12.1.45
+                   ----------------------------------------
+
+                       Copyright © 2006-2012 Spotify Ltd
+
+1.  INTRODUCTION
+
+    This is the libspotify C API package.  With it, you can write applications
+    that utilize the Spotify music streaming service.
+
+
+2.  PACKAGE STRUCTURE
+
+    The package is structured as follows:
+
+      libspotify-12.1.45-iOS/
+        ChangeLog                    Contains description of new and changed
+                                     functionality in libspotify
+        README                       This README file
+        LICENSE                      License governing the library,
+                                     and associated files.
+        licenses.xhtml               License governing third party libraries
+                                     included in libspotify.
+        libspotify.framework         The libspotify framework,
+                                     including the header and shared library.
+        doc/
+          html/                      Documentation in HTML format
+                                     This information is also available online.
+          images/                    Graphics for use with applications
+                                     using libspotify. See section 6 below.
+        man3/                        Manual pages for libspotify
+        examples/                    Root directory for the example
+                                     source code
+
+
+3.  COMPATIBILITY AND REQUIREMENTS
+
+    The library was compiled as a universal binary for armv6, armv7 and i386.
+
+    It requires:
+    - iOS 4.0 or later
+
+4.  INSTALLATION
+    
+4.1 Linking with an iOS app using Xcode 4
+
+    1. Drag and drop libspotify.framework to the "Frameworks" group in
+       the project navigator.
+    2. In the project navigator, select your project. Select your target
+       and select the "Build Phases" tab.
+    3. In the "Link Binary With Libraries" group, click on the "+" button.
+    4. Select CFNetwork.framework and click "Add".
+    5. Repeat this with libstdc++.dylib.
+    
+    There are additional things you can and should do as an audio app;
+    setting the audio session category and activity; setting your background
+    modes in info.plist; checking Reachability; and so on.
+    
+4.2 Examples
+    There are a number of examples in doc/examples, but they are mostly Unix
+    command line examples. For Objective-C examples, see the CocoaLibSpotify
+    wrapper and sample apps at https://github.com/spotify/cocoalibspotify/.
+
+
+5.  APPLICATION KEYS
+
+    The example programs require a file called appkey.c which is not present in
+    the package.  You will need to request an application key at the
+    developer website at http://developer.spotify.com/ before being able to
+    run them.
+
+
+6.  LOGOTYPES AND TRADEMARK
+
+    The graphics found in the images/ subdirectory are available for use in
+    applications using libspotify. The terms and conditions for the use of these
+    are available on http://developer.spotify.com/.
+
+    A text file is included in images/, containing the text to be used in
+    non-graphical applications.
+
+
+7.  LICENSE
+
+    You should have received a separate LICENSE file together with this README.
