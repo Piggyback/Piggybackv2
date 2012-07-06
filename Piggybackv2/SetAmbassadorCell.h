@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PBFriend.h"
 
 @interface SetAmbassadorCell : UITableViewCell
 
@@ -15,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet UIButton* followMusic;
 @property (nonatomic, weak) IBOutlet UIButton* followPlaces;
 @property (nonatomic, weak) IBOutlet UIButton* followVideos;
+@property (nonatomic, strong) PBFriend* friend;
 
 - (IBAction)clickFollowMusic;
 - (IBAction)clickFollowPlaces;

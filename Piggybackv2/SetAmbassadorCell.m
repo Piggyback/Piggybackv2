@@ -7,6 +7,9 @@
 //
 
 #import "SetAmbassadorCell.h"
+#import <RestKit/RestKit.h>
+#import <RestKit/CoreData.h>
+#import "PBUser.h"
 
 @interface SetAmbassadorCell ()
 @property BOOL musicOn;
@@ -26,21 +29,6 @@
 @synthesize placesOn = _placesOn;
 @synthesize videosOn = _videosOn;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 #pragma mark - ib actions
 
@@ -49,11 +37,12 @@
     if (!self.musicOn) {
         [self.followMusic setImage:[UIImage imageNamed:@"follow-music-button-pressed"] forState:UIControlStateNormal];
         self.musicOn = YES;
-        // call APi to add music ambassador
+        
+        PBUser *newUser = [PBUser object];
+//        newUser.fbid = 
     } else {
         [self.followMusic setImage:[UIImage imageNamed:@"follow-music-button-normal"] forState:UIControlStateNormal];
         self.musicOn = NO;
-        // call API to remove music ambassador
     }
 }
 

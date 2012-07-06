@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "FBImageToDataTransformer.h"
 
 @class PBAmbassador;
+
+//@interface UserFBImageToDataTransformer : NSValueTransformer {
+//}
+//@end
 
 @interface PBUser : NSManagedObject
 
@@ -22,6 +27,7 @@
 @property (nonatomic, retain) NSNumber * uid;
 @property (nonatomic, retain) NSString * youtubeUsername;
 @property (nonatomic, retain) NSNumber * isPiggybackUser;
+@property (nonatomic, retain) UIImage * thumbnail;
 @property (nonatomic, retain) NSSet *ambassadors;
 @end
 

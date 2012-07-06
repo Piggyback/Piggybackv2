@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "FBImageToDataTransformer.h"
 
-@interface FBImageToDataTransformer : NSValueTransformer {
-}
-@end
+//@interface FriendFBImageToDataTransformer : NSValueTransformer {
+//}
+//@end
 
 @interface PBFriend : NSManagedObject
 
