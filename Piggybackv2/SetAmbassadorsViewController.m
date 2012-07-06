@@ -15,27 +15,34 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface SetAmbassadorsViewController ()
-@property (nonatomic, strong) NSMutableArray* friends;
+@property (nonatomic, strong) NSArray* friends;
+@property (nonatomic, strong) NSArray *displayFriends;
 @end
 
 @implementation SetAmbassadorsViewController
+@synthesize searchBar = _searchBar;
 @synthesize tableView = _tableView;
-@synthesize searchText = _searchText;
 @synthesize friends = _friends;
+@synthesize displayFriends = _displayFriends;
 
 #pragma mark - setters and getters
 
-- (NSMutableArray*)friends {
+- (NSArray*)friends {
     if (!_friends) {
-        _friends = [[NSMutableArray alloc] init];
+        _friends = [[NSArray alloc] init];
     }
     return _friends;
+}
+
+- (void)setDisplayFriends:(NSArray *)displayFriends {
+    _displayFriends = displayFriends;
+    [self.tableView reloadData];
 }
 
 #pragma mark - private methods
 
 - (void)hideKeyboard {
-    [self.searchText resignFirstResponder]; 
+    [self.view endEditing:YES];
 }
 
 #pragma mark - Table view data source
@@ -47,7 +54,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.friends count];
+    return [self.displayFriends count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -58,7 +65,7 @@
     cell.profilePic.layer.cornerRadius = 5.0;
     cell.profilePic.layer.masksToBounds = YES;
     
-    PBFriend* friend = [self.friends objectAtIndex:indexPath.row];
+    PBFriend* friend = [self.displayFriends objectAtIndex:indexPath.row];
     cell.name.text = [NSString stringWithFormat:@"%@ %@",friend.firstName, friend.lastName];
     cell.profilePic.image = [UIImage imageNamed:@"blankFacebookPhoto.gif"];
     
@@ -111,6 +118,48 @@
 
 }
 
+#pragma mark - searchbar delegate methods
+- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
+    NSMutableArray *searchArray = [[NSMutableArray alloc] init];
+    NSMutableArray *lastNameSearchArray = [[NSMutableArray alloc] init];
+    BOOL alreadyAdded = NO;
+    
+    for (PBFriend *currentFriend in self.friends) {
+        alreadyAdded = NO;
+        NSString *currentFriendName = [NSString stringWithFormat:@"%@ %@", currentFriend.firstName, currentFriend.lastName];
+        NSRange range = {0, [searchText length]};
+        if ([searchText length] <= [currentFriendName length]) {
+            NSRange nameRange = [currentFriendName rangeOfString:searchText options:NSCaseInsensitiveSearch range:range];
+        
+            if (nameRange.length > 0) {
+                [searchArray addObject:currentFriend];
+                alreadyAdded = YES;
+            }
+        }
+        
+        if ([searchText length] <= [currentFriend.lastName length]) {
+            NSRange lastNameRange = [currentFriend.lastName rangeOfString:searchText options:NSCaseInsensitiveSearch range:range];
+            if (lastNameRange.length > 0 && !alreadyAdded) {
+                [lastNameSearchArray addObject:currentFriend];
+            }
+        }
+    }
+    
+    [searchArray addObjectsFromArray:lastNameSearchArray];
+    
+    if (![searchText isEqualToString:@""]) {
+        self.displayFriends = searchArray;
+    } else {
+        self.displayFriends = self.friends;
+    }
+    
+}
+
+#pragma mark - UIScrollViewDelegate protocol methods
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self hideKeyboard];
+}
+
 #pragma mark - view lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -125,23 +174,34 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"display friends");
     
-    // hide keyboard when tap outside
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    gestureRecognizer.cancelsTouchesInView = NO;
-    [self.tableView addGestureRecognizer:gestureRecognizer];
+    // replace keyboard 'Search' button with 'Done'
+    for (UIView *searchBarSubview in [self.searchBar subviews]) {
+        if ([searchBarSubview conformsToProtocol:@protocol(UITextInputTraits)]) {
+            @try {
+                [(UITextField *)searchBarSubview setReturnKeyType:UIReturnKeyDone];
+                [(UITextField *)searchBarSubview setKeyboardAppearance:UIKeyboardAppearanceAlert];
+                [(UITextField *)searchBarSubview setEnablesReturnKeyAutomatically:NO];
+                [(UITextField *)searchBarSubview addTarget:self action:@selector(hideKeyboard) forControlEvents:UIControlEventEditingDidEndOnExit];
+            }
+            @catch (NSException * e) {
+
+            }
+        }
+    }
 
     NSSortDescriptor *sortDescriptorFirstName = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
     NSSortDescriptor *sortDescriptorLastName = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptorFirstName,sortDescriptorLastName,nil];
-    self.friends = [[[PBFriend allObjects] sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
-    [self.tableView reloadData];
+    self.friends = [[PBFriend allObjects] sortedArrayUsingDescriptors:sortDescriptors];
+    self.displayFriends = self.friends;
 }
 
 - (void)viewDidUnload
 {
     [self setTableView:nil];
-    [self setSearchText:nil];
+    [self setSearchBar:nil];
     [super viewDidUnload];
 }
 

@@ -282,6 +282,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 //    [[SPSession sharedSession] logout:^{}];
 //    [self.foursquare invalidateSession];
+    [_facebook logout];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

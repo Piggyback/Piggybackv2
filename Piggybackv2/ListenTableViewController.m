@@ -56,7 +56,7 @@
     [[SPSession sharedSession] userForURL:[NSURL URLWithString:@"spotify:user:lemikegao"] callback:^(SPUser *user) {
         NSLog(@"user: %@", user);
     }];
-//    self.topList = [SPToplist toplistForUserWithName:@"ptpells" inSession:[SPSession sharedSession]];
+    self.topList = [SPToplist toplistForUserWithName:@"ptpells" inSession:[SPSession sharedSession]];
 }
 
 
