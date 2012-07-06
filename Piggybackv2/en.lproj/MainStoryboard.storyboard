@@ -3,7 +3,7 @@
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1179"/>
     </dependencies>
     <scenes>
         <!--Account Link View Controller-->
@@ -82,7 +82,7 @@
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Kg9-dw-cUO">
-                                <rect key="frame" x="20" y="403" width="280" height="37"/>
+                                <rect key="frame" x="20" y="415" width="280" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Continue" image="continue-button.png">
@@ -100,6 +100,21 @@
                                 <rect key="frame" x="0.0" y="-1" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jtf-ni-mDL">
+                                <rect key="frame" x="272" y="4" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logout:" destination="j3d-Tp-khV" eventType="touchUpInside" id="4Hr-gi-46R"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -110,6 +125,37 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="-269" y="155"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="0pC-hP-6Wt">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j9u-Lz-tZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="loginViewController" id="Hbm-VP-TcO" customClass="LoginViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kqk-IR-ICw">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NhI-ZE-Y77">
+                                <rect key="frame" x="81" y="215" width="159" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="LoginWithFacebookNormal.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginWithFacebook:" destination="Hbm-VP-TcO" eventType="touchUpInside" id="rm4-dU-iau"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-279" y="780"/>
         </scene>
         <!--You Tube Table View Controller-->
         <scene sceneID="oFN-5W-dMF">
@@ -214,7 +260,7 @@
         <scene sceneID="LpD-vD-ZfM">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DvT-bb-FbP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tabBarController definesPresentationContext="YES" id="Pev-yS-Wqq" customClass="PiggybackTabBarController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="piggybackTabBarController" definesPresentationContext="YES" id="Pev-yS-Wqq" customClass="PiggybackTabBarController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="B0u-pg-EB0">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -229,6 +275,136 @@
                 </tabBarController>
             </objects>
             <point key="canvasLocation" x="286" y="155"/>
+        </scene>
+        <!--Set Ambassadors View Controller-->
+        <scene sceneID="82c-dL-Bff">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0mV-ep-PFA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="setAmbassadorsViewController" id="cuu-gE-v5A" customClass="SetAmbassadorsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t94-3j-EA9">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zq2-St-O4k">
+                                <rect key="frame" x="0.0" y="76" width="320" height="332"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="setAmbassadorCell" rowHeight="50" id="xJs-WW-wDM" customClass="SetAmbassadorCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="Otr-nY-JqK">
+                                                    <rect key="frame" x="4" y="4" width="40" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael W." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="2Jj-Dx-WkQ">
+                                                    <rect key="frame" x="51" y="11" width="119" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iWo-BP-JJI">
+                                                    <rect key="frame" x="178" y="4" width="40" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="follow-music-button-normal.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="clickFollowMusic" destination="xJs-WW-wDM" eventType="touchUpInside" id="D56-z3-3GS"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Gjm-B6-LkA">
+                                                    <rect key="frame" x="226" y="4" width="40" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="follow-places-button-normal.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="clickFollowPlaces" destination="xJs-WW-wDM" eventType="touchUpInside" id="6vh-jI-2Yp"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8pJ-PJ-BEH">
+                                                    <rect key="frame" x="274" y="4" width="40" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="follow-video-button-normal.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="clickFollowVideos" destination="xJs-WW-wDM" eventType="touchUpInside" id="deb-bw-4Uf"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="followMusic" destination="iWo-BP-JJI" id="Pg0-EO-fei"/>
+                                            <outlet property="followPlaces" destination="Gjm-B6-LkA" id="9bc-bA-fS8"/>
+                                            <outlet property="followVideos" destination="8pJ-PJ-BEH" id="SHs-Ei-YBu"/>
+                                            <outlet property="name" destination="2Jj-Dx-WkQ" id="Zp5-Gg-Fqd"/>
+                                            <outlet property="profilePic" destination="Otr-nY-JqK" id="PCI-Ci-spQ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="cuu-gE-v5A" id="fP5-4Q-CI6"/>
+                                    <outlet property="delegate" destination="cuu-gE-v5A" id="YKt-H1-3ui"/>
+                                </connections>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="follow-header.png" id="9ZV-oq-YKZ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SdC-nn-4cA">
+                                <rect key="frame" x="20" y="416" width="280" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="follow-i'm-ready-button.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="readyButton:" destination="cuu-gE-v5A" eventType="touchUpInside" id="tea-U9-XLm"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for a friend" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="9lg-Uy-UfK">
+                                <rect key="frame" x="2" y="45" width="316" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchText" destination="9lg-Uy-UfK" id="VT7-rq-4xg"/>
+                        <outlet property="tableView" destination="zq2-St-O4k" id="Dy9-Ot-NnH"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="286" y="754"/>
         </scene>
         <!--Listen Table View Controller-->
         <scene sceneID="6gf-Kl-GTr">
@@ -500,7 +676,7 @@
         <scene sceneID="A0o-aw-Fnv">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="giY-96-j3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="god-vQ-fK5" customClass="ListenNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="listenNavigationController" id="god-vQ-fK5" customClass="ListenNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Listen" image="music-icon.png" id="Ij2-C5-UhO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="F9o-WV-Xl1">
@@ -519,7 +695,7 @@
         <scene sceneID="koT-o5-TU0">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vex-na-kEl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="4TQ-Gx-mf7" customClass="ExploreNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="exploreNavigationController" id="4TQ-Gx-mf7" customClass="ExploreNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Explore" image="places-icon.png" id="K4a-A4-2BJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="rjs-DQ-xtX">
@@ -538,7 +714,7 @@
         <scene sceneID="PV9-vi-AcB">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P87-vb-uZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="eB7-NQ-J2m" customClass="WatchNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="watchNavigationController" id="eB7-NQ-J2m" customClass="WatchNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Watch" image="movie-icon.png" id="i5L-XS-4v9"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Meu-5F-jEz">
@@ -555,7 +731,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="LoginWithFacebookNormal.png" width="159" height="29"/>
         <image name="continue-button.png" width="278" height="45"/>
+        <image name="follow-header.png" width="320" height="48"/>
+        <image name="follow-i'm-ready-button.png" width="278" height="45"/>
+        <image name="follow-music-button-normal.png" width="44" height="44"/>
+        <image name="follow-places-button-normal.png" width="44" height="44"/>
+        <image name="follow-video-button-normal.png" width="44" height="44"/>
         <image name="foursquare-icon.png" width="50" height="50"/>
         <image name="heart-button.png" width="25" height="22"/>
         <image name="heart-pressed-button.png" width="25" height="22"/>
@@ -621,8 +803,35 @@
         <class className="ListenTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ListenTableViewController.h"/>
         </class>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginWithFacebook:"/>
+            </relationships>
+        </class>
         <class className="PiggybackTabBarController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PiggybackTabBarController.h"/>
+        </class>
+        <class className="SetAmbassadorCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetAmbassadorCell.h"/>
+            <relationships>
+                <relationship kind="action" name="clickFollowMusic"/>
+                <relationship kind="action" name="clickFollowPlaces"/>
+                <relationship kind="action" name="clickFollowVideos"/>
+                <relationship kind="outlet" name="followMusic" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="followPlaces" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="followVideos" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="SetAmbassadorsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetAmbassadorsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="readyButton:"/>
+                <relationship kind="outlet" name="searchText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="SongViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SongViewController.h"/>

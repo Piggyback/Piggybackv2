@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "BZFoursquare.h"
+#import <RestKit/RestKit.h>
+#import <RestKit/CoreData.h>
 
-@interface ExploreTableViewController : UITableViewController <BZFoursquareRequestDelegate>
+@interface ExploreTableViewController : UITableViewController <BZFoursquareRequestDelegate, RKObjectLoaderDelegate>
 
+- (void)getFoursquareSelf;
+- (void)getFoursquareFriends;
 - (void)getRecentFriendCheckins;
 
 @end

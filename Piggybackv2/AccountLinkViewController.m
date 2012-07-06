@@ -9,6 +9,8 @@
 #import "AccountLinkViewController.h"
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SetAmbassadorsViewController.h"
+#import "PiggybackTabBarController.h"
 
 @interface AccountLinkViewController ()
 
@@ -82,7 +84,11 @@
 }
 
 - (IBAction)continueButton:(id)sender {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    // display set ambassadors view
+    SetAmbassadorsViewController* setAmbassadorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
+    [self presentViewController:setAmbassadorsViewController animated:YES completion:nil];
 }
 
 #pragma mark - youtube alert delegate
@@ -95,5 +101,8 @@
     }
 }
 
+- (IBAction)logout:(id)sender {
+    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] facebook] logout];
+}
 
 @end
