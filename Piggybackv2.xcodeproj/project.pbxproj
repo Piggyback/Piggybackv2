@@ -106,6 +106,8 @@
 		F91B3DBD15A636FD00D8E815 /* follow-video-button-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DAD15A636FD00D8E815 /* follow-video-button-pressed.png */; };
 		F91B3DBE15A636FD00D8E815 /* follow-video-button-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DAE15A636FD00D8E815 /* follow-video-button-pressed@2x.png */; };
 		F91B3DCD15A6502E00D8E815 /* PBFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F91B3DCC15A6502E00D8E815 /* PBFriend.m */; };
+		F91B3DD415A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DD215A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png */; };
+		F91B3DD515A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DD315A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png */; };
 		F930520F1593C7B100E9DA06 /* YouTubeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */; };
 		F93052121593C7FA00E9DA06 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F93052111593C7FA00E9DA06 /* Constants.m */; };
 		F93C2F77159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F93C2F75159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld */; };
@@ -313,6 +315,8 @@
 		F91B3DAE15A636FD00D8E815 /* follow-video-button-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow-video-button-pressed@2x.png"; sourceTree = "<group>"; };
 		F91B3DCB15A6502D00D8E815 /* PBFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBFriend.h; path = Piggybackv2/PBFriend.h; sourceTree = "<group>"; };
 		F91B3DCC15A6502E00D8E815 /* PBFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBFriend.m; path = Piggybackv2/PBFriend.m; sourceTree = "<group>"; };
+		F91B3DD215A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search magnfiying glass tab bar engraved 30x30 300dpi.png"; sourceTree = "<group>"; };
+		F91B3DD315A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png"; sourceTree = "<group>"; };
 		F930520D1593C7B100E9DA06 /* YouTubeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeTableViewController.h; sourceTree = "<group>"; };
 		F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeTableViewController.m; sourceTree = "<group>"; };
 		F93052101593C7FA00E9DA06 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -563,6 +567,8 @@
 		F9B478711593C16F00C20A53 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F91B3DD215A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png */,
+				F91B3DD315A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png */,
 				F91B3D9F15A636FD00D8E815 /* follow-header.png */,
 				F91B3DA015A636FD00D8E815 /* follow-header@2x.png */,
 				F91B3DA115A636FD00D8E815 /* follow-i'm-ready-button.png */,
@@ -841,6 +847,8 @@
 				F91B3DBC15A636FD00D8E815 /* follow-video-button-normal@2x.png in Resources */,
 				F91B3DBD15A636FD00D8E815 /* follow-video-button-pressed.png in Resources */,
 				F91B3DBE15A636FD00D8E815 /* follow-video-button-pressed@2x.png in Resources */,
+				F91B3DD415A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png in Resources */,
+				F91B3DD515A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

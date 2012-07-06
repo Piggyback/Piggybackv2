@@ -20,6 +20,7 @@
 
 @implementation SetAmbassadorsViewController
 @synthesize tableView = _tableView;
+@synthesize searchText = _searchText;
 @synthesize friends = _friends;
 
 #pragma mark - setters and getters
@@ -29,6 +30,12 @@
         _friends = [[NSArray alloc] init];
     }
     return _friends;
+}
+
+#pragma mark - private methods
+
+- (void)hideKeyboard {
+    [self.searchText resignFirstResponder]; 
 }
 
 #pragma mark - Table view data source
@@ -84,6 +91,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // hide keyboard when tap outside
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:gestureRecognizer];
+
+    
 //    self.friends = [PBFriend objectsWithPredicate:nil];
 //    [self.tableView reloadData];
 //    NSLog(@"friends are %@",self.friends);
@@ -92,6 +106,7 @@
 - (void)viewDidUnload
 {
     [self setTableView:nil];
+    [self setSearchText:nil];
     [super viewDidUnload];
 }
 

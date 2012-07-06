@@ -223,10 +223,10 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [rootViewController dismissViewControllerAnimated:NO completion:nil]; // dismisses loginViewController
     
     // show account link page when you log in for the first time
-    SetAmbassadorsViewController* setAmbassadorsViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
-    [rootViewController presentViewController:setAmbassadorsViewController animated:NO completion:nil];
-//    AccountLinkViewController *accountLinkViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
-//    [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];  
+//    SetAmbassadorsViewController* setAmbassadorsViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
+//    [rootViewController presentViewController:setAmbassadorsViewController animated:NO completion:nil];
+    AccountLinkViewController *accountLinkViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
+    [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];  
     
     NSLog(@"logged in");
 }

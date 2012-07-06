@@ -11,6 +11,7 @@
 @interface SetAmbassadorsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextField *searchText;
 
 - (IBAction)readyButton:(id)sender;
 

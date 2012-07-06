@@ -84,18 +84,11 @@
 }
 
 - (IBAction)continueButton:(id)sender {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
     // display set ambassadors view
-    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    PiggybackTabBarController* rootViewController = (PiggybackTabBarController*)appDelegate.window.rootViewController;
-    SetAmbassadorsViewController *setAmbassadorsViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
-    [rootViewController presentViewController:setAmbassadorsViewController animated:NO completion:nil]; 
-    [appDelegate.window makeKeyAndVisible];
-
-//    SetAmbassadorsViewController *setAmbassadorsViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
-//    [rootViewController presentViewController:setAmbassadorsViewController animated:NO completion:nil];
-//    [appDelegate.window makeKeyAndVisible];
+    SetAmbassadorsViewController* setAmbassadorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
+    [self presentViewController:setAmbassadorsViewController animated:NO completion:nil];
 }
 
 #pragma mark - youtube alert delegate

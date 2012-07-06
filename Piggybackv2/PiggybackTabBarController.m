@@ -57,34 +57,36 @@
 - (void)storeCurrentUsersFriendsInCoreData:(id)meGraphApiResult {
     NSLog(@"friend results are %@",[meGraphApiResult objectForKey:@"data"]);
     
-    // add friends to core data if they are not in it yet
-    for (NSDictionary* friend in [meGraphApiResult objectForKey:@"data"]) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fbId = %@",[NSNumber numberWithLongLong:[[friend objectForKey:@"id"] longLongValue]]];
-        NSArray *friendArray = [PBFriend objectsWithPredicate:predicate];
-        if ([friendArray count] == 0) {
-            PBFriend* newFriend = [PBFriend object];
-            newFriend.fbId = [NSNumber numberWithLongLong:[[friend objectForKey:@"id"] longLongValue]];
-            
-            // parse name into first and last
-            NSArray* nameComponents = [[friend objectForKey:@"name"] componentsSeparatedByString:@" "];
-            if ([nameComponents count] > 0) {
-                newFriend.firstName = [nameComponents objectAtIndex:0];
-                NSString* lastName = @"";
-                for (int i = 1; i < [nameComponents count]; i++) {
-                    lastName = [NSString stringWithFormat:@"%@ %@",lastName, [nameComponents objectAtIndex:i]];
-                }
-                if ([lastName length] > 0) {
-                    lastName = [lastName substringWithRange:NSMakeRange(1,[lastName length]-1)];
-                }
-                newFriend.lastName = lastName;
+    // add friends to core data if they are not in it yet - do in background thread!
+    dispatch_queue_t storeFriendsQueue = dispatch_queue_create("storeFriendsInCoreData",NULL);
+    dispatch_async(storeFriendsQueue, ^{
+        for (NSDictionary* friend in [meGraphApiResult objectForKey:@"data"]) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fbId = %@",[NSNumber numberWithLongLong:[[friend objectForKey:@"id"] longLongValue]]];
+            NSArray *friendArray = [PBFriend objectsWithPredicate:predicate];
+            if ([friendArray count] == 0) {
+                PBFriend* newFriend = [PBFriend object];
+                newFriend.fbId = [NSNumber numberWithLongLong:[[friend objectForKey:@"id"] longLongValue]];
+                
+                // parse name into first and last
+                NSArray* nameComponents = [[friend objectForKey:@"name"] componentsSeparatedByString:@" "];
+                if ([nameComponents count] > 0) {
+                    newFriend.firstName = [nameComponents objectAtIndex:0];
+                    NSString* lastName = @"";
+                    for (int i = 1; i < [nameComponents count]; i++) {
+                        lastName = [NSString stringWithFormat:@"%@ %@",lastName, [nameComponents objectAtIndex:i]];
+                    }
+                    if ([lastName length] > 0) {
+                        lastName = [lastName substringWithRange:NSMakeRange(1,[lastName length]-1)];
+                    }
+                    newFriend.lastName = lastName;
 
-                NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",[friend objectForKey:@"id"]];
-                newFriend.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
-                [[RKObjectManager sharedManager].objectStore save:nil];
+                    NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",[friend objectForKey:@"id"]];
+                    newFriend.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
+                    [[RKObjectManager sharedManager].objectStore save:nil];
+                }
             }
-        }
-
-    }  
+        }  
+    });
 }
 
 #pragma mark - FBRequestDelegate methods
