@@ -108,6 +108,7 @@
 		F91B3DCD15A6502E00D8E815 /* PBFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F91B3DCC15A6502E00D8E815 /* PBFriend.m */; };
 		F91B3DD415A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DD215A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png */; };
 		F91B3DD515A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DD315A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png */; };
+		F91B3DD715A778A600D8E815 /* blankFacebookPhoto.gif in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DD615A778A600D8E815 /* blankFacebookPhoto.gif */; };
 		F930520F1593C7B100E9DA06 /* YouTubeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */; };
 		F93052121593C7FA00E9DA06 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F93052111593C7FA00E9DA06 /* Constants.m */; };
 		F93C2F77159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F93C2F75159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld */; };
@@ -317,6 +318,7 @@
 		F91B3DCC15A6502E00D8E815 /* PBFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBFriend.m; path = Piggybackv2/PBFriend.m; sourceTree = "<group>"; };
 		F91B3DD215A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search magnfiying glass tab bar engraved 30x30 300dpi.png"; sourceTree = "<group>"; };
 		F91B3DD315A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png"; sourceTree = "<group>"; };
+		F91B3DD615A778A600D8E815 /* blankFacebookPhoto.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = blankFacebookPhoto.gif; sourceTree = "<group>"; };
 		F930520D1593C7B100E9DA06 /* YouTubeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeTableViewController.h; sourceTree = "<group>"; };
 		F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeTableViewController.m; sourceTree = "<group>"; };
 		F93052101593C7FA00E9DA06 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 		F9B478711593C16F00C20A53 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F91B3DD615A778A600D8E815 /* blankFacebookPhoto.gif */,
 				F91B3DD215A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png */,
 				F91B3DD315A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png */,
 				F91B3D9F15A636FD00D8E815 /* follow-header.png */,
@@ -849,6 +852,7 @@
 				F91B3DBE15A636FD00D8E815 /* follow-video-button-pressed@2x.png in Resources */,
 				F91B3DD415A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png in Resources */,
 				F91B3DD515A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png in Resources */,
+				F91B3DD715A778A600D8E815 /* blankFacebookPhoto.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

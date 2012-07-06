@@ -60,6 +60,7 @@
     
     PBFriend* friend = [self.friends objectAtIndex:indexPath.row];
     cell.name.text = [NSString stringWithFormat:@"%@ %@",friend.firstName, friend.lastName];
+    cell.profilePic.image = [UIImage imageNamed:@"blankFacebookPhoto.gif"];
     
     // if thumbnail already stored in local friend array, then display thumbnail
     if (friend.thumbnail) {
