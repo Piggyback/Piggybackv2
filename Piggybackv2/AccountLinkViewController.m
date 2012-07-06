@@ -88,7 +88,7 @@
     
     // display set ambassadors view
     SetAmbassadorsViewController* setAmbassadorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
-    [self presentViewController:setAmbassadorsViewController animated:NO completion:nil];
+    [self presentViewController:setAmbassadorsViewController animated:YES completion:nil];
 }
 
 #pragma mark - youtube alert delegate

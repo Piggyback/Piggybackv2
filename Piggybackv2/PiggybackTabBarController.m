@@ -79,13 +79,10 @@
                         lastName = [lastName substringWithRange:NSMakeRange(1,[lastName length]-1)];
                     }
                     newFriend.lastName = lastName;
-
-                    NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",[friend objectForKey:@"id"]];
-                    newFriend.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
-                    [[RKObjectManager sharedManager].objectStore save:nil];
                 }
             }
         }  
+       [[RKObjectManager sharedManager].objectStore save:nil];
     });
 }
 

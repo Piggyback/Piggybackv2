@@ -15,7 +15,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface SetAmbassadorsViewController ()
-@property (nonatomic, strong) NSArray* friends;
+@property (nonatomic, strong) NSMutableArray* friends;
 @end
 
 @implementation SetAmbassadorsViewController
@@ -25,9 +25,9 @@
 
 #pragma mark - setters and getters
 
-- (NSArray*)friends {
+- (NSMutableArray*)friends {
     if (!_friends) {
-        _friends = [[NSArray alloc] init];
+        _friends = [[NSMutableArray alloc] init];
     }
     return _friends;
 }
@@ -61,7 +61,40 @@
     PBFriend* friend = [self.friends objectAtIndex:indexPath.row];
     cell.name.text = [NSString stringWithFormat:@"%@ %@",friend.firstName, friend.lastName];
     
-    cell.profilePic.image = friend.thumbnail;
+    // if thumbnail already stored in local friend array, then display thumbnail
+    if (friend.thumbnail) {
+        cell.profilePic.image = friend.thumbnail;
+    } 
+    
+    // if thumbnail not stored in local friend array, fetch it and store it in core data and local friend array
+    else {
+        dispatch_queue_t getFriendPicQueue = dispatch_queue_create("storeFriendsInCoreData",NULL);
+        dispatch_async(getFriendPicQueue, ^{
+            
+            // store thumbnail in core data if it is not yet
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(fbId = %@) AND (thumbnail == nil)",friend.fbId];
+            NSArray *friendArray = [PBFriend objectsWithPredicate:predicate];
+            if ([friendArray count] > 0) {
+                NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",friend.fbId];
+                PBFriend* newFriend = [friendArray objectAtIndex:0];
+                newFriend.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
+                [[RKObjectManager sharedManager].objectStore save:nil];
+                
+                // display thumbnail in tableview
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell.profilePic.image = newFriend.thumbnail;
+                });
+                
+                // set thumbnail in local friend array to reflect core data
+                if (friend.fbId = newFriend.fbId) {
+                    friend.thumbnail = newFriend.thumbnail;
+                }
+            }
+        });
+    }
+        
+//    cell.profilePic.image = friend.thumbnail;
+
     return cell;
 }
 
@@ -97,10 +130,11 @@
     gestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:gestureRecognizer];
 
-    
-//    self.friends = [PBFriend objectsWithPredicate:nil];
-//    [self.tableView reloadData];
-//    NSLog(@"friends are %@",self.friends);
+    NSSortDescriptor *sortDescriptorFirstName = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
+    NSSortDescriptor *sortDescriptorLastName = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptorFirstName,sortDescriptorLastName,nil];
+    self.friends = [[[PBFriend allObjects] sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidUnload
@@ -118,12 +152,7 @@
 #pragma mark - ib actions
 
 - (IBAction)readyButton:(id)sender {
-    NSSortDescriptor *sortDescriptorFirstName = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
-    NSSortDescriptor *sortDescriptorLastName = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptorFirstName,sortDescriptorLastName,nil];
-    self.friends = [[PBFriend allObjects] sortedArrayUsingDescriptors:sortDescriptors];
-    [self.tableView reloadData];
-//    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
