@@ -7,12 +7,10 @@
 //
 
 #import "SetAmbassadorsViewController.h"
-#import "SetAmbassadorCell.h"
 #import "Constants.h"
 #import "PBFriend.h"
-#import <RestKit/RestKit.h>
-#import <RestKit/CoreData.h>
 #import <QuartzCore/QuartzCore.h>
+#import "PBUser.h"
 
 @interface SetAmbassadorsViewController ()
 @property (nonatomic, strong) NSArray* friends;
@@ -45,6 +43,38 @@
     [self.view endEditing:YES];
 }
 
+#pragma mark - SetAmbassadorDelegate methods
+- (void)setAmbassadorForType:(NSString *)type {
+    // add user
+#warning - continue here
+    PBUser *newUser = [PBUser object];
+    newUser.fbId = [NSNumber numberWithLongLong:[@"1414" longLongValue]];
+    NSLog(@"new user fbid: %@", newUser.fbId);
+    newUser.email = @"test@email.com";
+    newUser.firstName = @"first_test";
+    newUser.lastName = @"last_test";
+    newUser.isPiggybackUser = [NSNumber numberWithBool:NO];
+    
+    [[RKObjectManager sharedManager] postObject:newUser delegate:self];
+}
+
+#pragma mark - RKObjectLoaderDelegate methods
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
+    
+    NSLog(@"objects from user insert are %@",objects);
+    
+}
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
+    NSLog(@"restkit failed with error from setting ambassador user creation");
+}
+
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
+    NSLog(@"Retrieved JSON2: %@", [response bodyAsString]);
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -61,6 +91,7 @@
 {
     static NSString *CellIdentifier = @"setAmbassadorCell";
     SetAmbassadorCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell.setAmbassadorDelegate = self;
     
     cell.profilePic.layer.cornerRadius = 5.0;
     cell.profilePic.layer.masksToBounds = YES;

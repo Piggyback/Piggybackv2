@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SetAmbassadorCell.h"
+#import <RestKit/RestKit.h>
+#import <RestKit/CoreData.h>
 
-@interface SetAmbassadorsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SetAmbassadorsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, SetAmbassadorDelegate, RKObjectLoaderDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 

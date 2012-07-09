@@ -156,37 +156,37 @@
 			remoteGlobalIDString = 50AF49DB1439CBFE00E4A5EF;
 			remoteInfo = CocoaLibSpotify;
 		};
-		C4501E6F15A77D99005B7253 /* PBXContainerItemProxy */ = {
+		C43A953F15A8B5630008A593 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C4501E6715A77D99005B7253 /* RestKit.xcodeproj */;
+			containerPortal = C43A953715A8B5630008A593 /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 25160D1614564E810060A5C5;
 			remoteInfo = RestKit;
 		};
-		C4501E7115A77D99005B7253 /* PBXContainerItemProxy */ = {
+		C43A954115A8B5630008A593 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C4501E6715A77D99005B7253 /* RestKit.xcodeproj */;
+			containerPortal = C43A953715A8B5630008A593 /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 25160D2614564E820060A5C5;
 			remoteInfo = RestKitTests;
 		};
-		C4501E7315A77D99005B7253 /* PBXContainerItemProxy */ = {
+		C43A954315A8B5630008A593 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C4501E6715A77D99005B7253 /* RestKit.xcodeproj */;
+			containerPortal = C43A953715A8B5630008A593 /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 25160E62145651060060A5C5;
 			remoteInfo = RestKitFramework;
 		};
-		C4501E7515A77D99005B7253 /* PBXContainerItemProxy */ = {
+		C43A954515A8B5630008A593 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C4501E6715A77D99005B7253 /* RestKit.xcodeproj */;
+			containerPortal = C43A953715A8B5630008A593 /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 25160E78145651060060A5C5;
 			remoteInfo = RestKitFrameworkTests;
 		};
-		C4501E7715A77D99005B7253 /* PBXContainerItemProxy */ = {
+		C43A954715A8B5630008A593 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C4501E6715A77D99005B7253 /* RestKit.xcodeproj */;
+			containerPortal = C43A953715A8B5630008A593 /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 259C301615128079003066A2;
 			remoteInfo = RestKitResources;
@@ -325,6 +325,7 @@
 		3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3EE8DB201593BF9A009DCCA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		C43A953715A8B5630008A593 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		C4501E5115A77C17005B7253 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		C4501E5215A77C17005B7253 /* FBConnect.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBConnect.bundle; sourceTree = "<group>"; };
 		C4501E5315A77C17005B7253 /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
@@ -341,7 +342,6 @@
 		C4501E5E15A77C17005B7253 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		C4501E5F15A77C17005B7253 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		C4501E6015A77C17005B7253 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
-		C4501E6715A77D99005B7253 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		C4501E7D15A77E07005B7253 /* SPLoginResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SPLoginResources.bundle; path = "spotify-ios-sdk/iOS Library/SPLoginResources.bundle"; sourceTree = SOURCE_ROOT; };
 		F9074290159C1A7300CC168E /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
 		F9074291159C1A7300CC168E /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
@@ -442,7 +442,7 @@
 		3E9A5D4E1593C8E000635873 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				C4501E6715A77D99005B7253 /* RestKit.xcodeproj */,
+				C43A953715A8B5630008A593 /* RestKit.xcodeproj */,
 				C4501E5015A77C17005B7253 /* facebook-ios-sdk */,
 				3E63207215945EAC000F4886 /* CocoaLibSpotify iOS Library.xcodeproj */,
 				3E9A5D4F1593C92D00635873 /* BZFoursquare */,
@@ -558,6 +558,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C43A953815A8B5630008A593 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C43A954015A8B5630008A593 /* libRestKit.a */,
+				C43A954215A8B5630008A593 /* RestKitTests.octest */,
+				C43A954415A8B5630008A593 /* RestKit.framework */,
+				C43A954615A8B5630008A593 /* RestKitFrameworkTests.octest */,
+				C43A954815A8B5630008A593 /* RestKitResources.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C4501E5015A77C17005B7253 /* facebook-ios-sdk */ = {
 			isa = PBXGroup;
 			children = (
@@ -579,18 +591,6 @@
 				C4501E6015A77C17005B7253 /* SBJsonWriter.h */,
 			);
 			path = "facebook-ios-sdk";
-			sourceTree = "<group>";
-		};
-		C4501E6815A77D99005B7253 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C4501E7015A77D99005B7253 /* libRestKit.a */,
-				C4501E7215A77D99005B7253 /* RestKitTests.octest */,
-				C4501E7415A77D99005B7253 /* RestKit.framework */,
-				C4501E7615A77D99005B7253 /* RestKitFrameworkTests.octest */,
-				C4501E7815A77D99005B7253 /* RestKitResources.bundle */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		F93C2F78159A514000FACE47 /* PB Core Data Classes */ = {
@@ -754,8 +754,8 @@
 					ProjectRef = 3E63207215945EAC000F4886 /* CocoaLibSpotify iOS Library.xcodeproj */;
 				},
 				{
-					ProductGroup = C4501E6815A77D99005B7253 /* Products */;
-					ProjectRef = C4501E6715A77D99005B7253 /* RestKit.xcodeproj */;
+					ProductGroup = C43A953815A8B5630008A593 /* Products */;
+					ProjectRef = C43A953715A8B5630008A593 /* RestKit.xcodeproj */;
 				},
 				{
 					ProductGroup = F93C2F7F159A5A6600FACE47 /* Products */;
@@ -784,39 +784,39 @@
 			remoteRef = 3E63207D15945EAC000F4886 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C4501E7015A77D99005B7253 /* libRestKit.a */ = {
+		C43A954015A8B5630008A593 /* libRestKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRestKit.a;
-			remoteRef = C4501E6F15A77D99005B7253 /* PBXContainerItemProxy */;
+			remoteRef = C43A953F15A8B5630008A593 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C4501E7215A77D99005B7253 /* RestKitTests.octest */ = {
+		C43A954215A8B5630008A593 /* RestKitTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = RestKitTests.octest;
-			remoteRef = C4501E7115A77D99005B7253 /* PBXContainerItemProxy */;
+			remoteRef = C43A954115A8B5630008A593 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C4501E7415A77D99005B7253 /* RestKit.framework */ = {
+		C43A954415A8B5630008A593 /* RestKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = RestKit.framework;
-			remoteRef = C4501E7315A77D99005B7253 /* PBXContainerItemProxy */;
+			remoteRef = C43A954315A8B5630008A593 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C4501E7615A77D99005B7253 /* RestKitFrameworkTests.octest */ = {
+		C43A954615A8B5630008A593 /* RestKitFrameworkTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = RestKitFrameworkTests.octest;
-			remoteRef = C4501E7515A77D99005B7253 /* PBXContainerItemProxy */;
+			remoteRef = C43A954515A8B5630008A593 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C4501E7815A77D99005B7253 /* RestKitResources.bundle */ = {
+		C43A954815A8B5630008A593 /* RestKitResources.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = RestKitResources.bundle;
-			remoteRef = C4501E7715A77D99005B7253 /* PBXContainerItemProxy */;
+			remoteRef = C43A954715A8B5630008A593 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F93C2F8A159A5A6700FACE47 /* libRestKit.a */ = {

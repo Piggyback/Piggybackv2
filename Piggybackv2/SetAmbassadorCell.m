@@ -25,6 +25,7 @@
 @synthesize musicOn = _musicOn;
 @synthesize placesOn = _placesOn;
 @synthesize videosOn = _videosOn;
+@synthesize setAmbassadorDelegate = _setAmbassadorDelegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -50,6 +51,7 @@
         [self.followMusic setImage:[UIImage imageNamed:@"follow-music-button-pressed"] forState:UIControlStateNormal];
         self.musicOn = YES;
         // call APi to add music ambassador
+        [self.setAmbassadorDelegate setAmbassadorForType:@"music"];
     } else {
         [self.followMusic setImage:[UIImage imageNamed:@"follow-music-button-normal"] forState:UIControlStateNormal];
         self.musicOn = NO;
