@@ -55,7 +55,7 @@
 }
 
 - (void)storeCurrentUsersFriendsInCoreData:(id)meGraphApiResult {
-    NSLog(@"friend results are %@",[meGraphApiResult objectForKey:@"data"]);
+//    NSLog(@"friend results are %@",[meGraphApiResult objectForKey:@"data"]);
     
     // add friends to core data if they are not in it yet - do in background thread!
     dispatch_queue_t storeFriendsQueue = dispatch_queue_create("storeFriendsInCoreData",NULL);

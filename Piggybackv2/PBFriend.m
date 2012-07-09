@@ -15,6 +15,7 @@
 @dynamic firstName;
 @dynamic foursquareId;
 @dynamic lastName;
+@dynamic email;
 @dynamic spotifyUsername;
 @dynamic youtubeUsername;
 @dynamic thumbnail;

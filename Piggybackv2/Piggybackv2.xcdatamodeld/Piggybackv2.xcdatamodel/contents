@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="PBAmbassador" representedClassName="PBAmbassador" syncable="YES">
-        <attribute name="ambassadorId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="followerId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ambassadorType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ambassadorUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="followerUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="follower" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="ambassadors" inverseEntity="PBUser" syncable="YES"/>
     </entity>
     <entity name="PBFriend" representedClassName="PBFriend" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fbId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="foursquareId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -29,7 +31,7 @@
         <relationship name="ambassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBAmbassador" inverseName="follower" inverseEntity="PBAmbassador" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PBAmbassador" positionX="403" positionY="171" width="128" height="105"/>
+        <element name="PBAmbassador" positionX="403" positionY="171" width="128" height="120"/>
         <element name="PBFriend" positionX="286" positionY="54" width="128" height="150"/>
         <element name="PBUser" positionX="160" positionY="192" width="128" height="210"/>
     </elements>

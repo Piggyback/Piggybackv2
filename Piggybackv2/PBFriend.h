@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSNumber * foursquareId;
 @property (nonatomic, retain) NSString * lastName;
+@property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * spotifyUsername;
 @property (nonatomic, retain) NSString * youtubeUsername;
 @property (nonatomic, retain) UIImage * thumbnail;

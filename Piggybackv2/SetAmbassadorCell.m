@@ -28,7 +28,8 @@
 @synthesize musicOn = _musicOn;
 @synthesize placesOn = _placesOn;
 @synthesize videosOn = _videosOn;
-
+@synthesize setAmbassadorDelegate = _setAmbassadorDelegate;
+@synthesize friend = _friend;
 
 #pragma mark - ib actions
 
@@ -36,13 +37,12 @@
     NSLog(@"clicked on music!");
     if (!self.musicOn) {
         [self.followMusic setImage:[UIImage imageNamed:@"follow-music-button-pressed"] forState:UIControlStateNormal];
-        self.musicOn = YES;
-        
-        PBUser *newUser = [PBUser object];
-//        newUser.fbid = 
+        self.musicOn = YES;        
+        [self.setAmbassadorDelegate setAmbassador:self.friend ForType:@"music"];
     } else {
         [self.followMusic setImage:[UIImage imageNamed:@"follow-music-button-normal"] forState:UIControlStateNormal];
         self.musicOn = NO;
+        [self.setAmbassadorDelegate removeAmbassador:self.friend ForType:@"music"];
     }
 }
 
@@ -50,9 +50,11 @@
     if (!self.placesOn) {
         [self.followPlaces setImage:[UIImage imageNamed:@"follow-places-button-pressed"] forState:UIControlStateNormal];
         self.placesOn = YES;
+        [self.setAmbassadorDelegate setAmbassador:self.friend ForType:@"places"];
     } else {
         [self.followPlaces setImage:[UIImage imageNamed:@"follow-places-button-normal"] forState:UIControlStateNormal];
         self.placesOn = NO;
+        [self.setAmbassadorDelegate removeAmbassador:self.friend ForType:@"places"];
     }
 }
 
@@ -60,9 +62,11 @@
     if (!self.videosOn) {
         [self.followVideos setImage:[UIImage imageNamed:@"follow-video-button-pressed"] forState:UIControlStateNormal];
         self.videosOn = YES;
+        [self.setAmbassadorDelegate setAmbassador:self.friend ForType:@"videos"];
     } else {
         [self.followVideos setImage:[UIImage imageNamed:@"follow-video-button-normal"] forState:UIControlStateNormal];
         self.videosOn = NO;
+        [self.setAmbassadorDelegate removeAmbassador:self.friend ForType:@"videos"];
     }
 }
 

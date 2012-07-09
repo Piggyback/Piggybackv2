@@ -50,6 +50,12 @@
 }
 
 - (void)getFriendsTopTracks {
+    [SPUser userWithURL:[NSURL URLWithString:@"spotify:user:facebook:1230930066"] inSession:[SPSession sharedSession] callback:^(SPUser *user) {
+        NSLog(@"user: %@", user);
+    }];
+    [[SPSession sharedSession] userForURL:[NSURL URLWithString:@"spotify:user:lemikegao"] callback:^(SPUser *user) {
+        NSLog(@"user: %@", user);
+    }];
     self.topList = [SPToplist toplistForUserWithName:@"ptpells" inSession:[SPSession sharedSession]];
 }
 

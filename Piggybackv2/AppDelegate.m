@@ -93,6 +93,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [router routeClass:[PBUser class] toResourcePath:@"/addUser" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBUser class] toResourcePath:@"/updateUser" forMethod:RKRequestMethodPUT];
     [router routeClass:[PBAmbassador class] toResourcePath:@"/addAmbassador" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBAmbassador class] toResourcePath:@"/removeAmbassador" forMethod:RKRequestMethodPUT];
 }
 
 - (void)setupRestkitMapping {
@@ -109,9 +110,9 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [objectManager.mappingProvider setMapping:userMapping forKeyPath:@"PBUser"];
     
     // ambassador mapping
-    [ambassadorMapping mapAttributes:@"followerId",@"ambasadorId",@"type",nil];
-    [ambassadorMapping mapRelationship:@"follower" withMapping:userMapping];
-    [ambassadorMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerId"];
+    [ambassadorMapping mapAttributes:@"followerUid",@"ambasadorUid",@"ambassadorType",nil];
+//    [ambassadorMapping mapRelationship:@"follower" withMapping:userMapping];
+//    [ambassadorMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerId"];
     [objectManager.mappingProvider setMapping:ambassadorMapping forKeyPath:@"ambassador"];
     
     // serialization declarations
@@ -124,7 +125,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [objectManager.mappingProvider setSerializationMapping:userSerializationMapping forClass:[PBUser class]];
     
     // ambassador serialization
-    [ambassadorSerializationMapping mapAttributes:@"followerId",@"ambassadorId",@"type",nil];
+    [ambassadorSerializationMapping mapAttributes:@"followerUid",@"ambassadorUid",@"ambassadorType",nil];
     [objectManager.mappingProvider setSerializationMapping:ambassadorSerializationMapping forClass:[PBAmbassador class]];
     
 }
@@ -282,6 +283,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 //    [[SPSession sharedSession] logout:^{}];
 //    [self.foursquare invalidateSession];
+    [_facebook logout];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
