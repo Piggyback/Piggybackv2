@@ -310,7 +310,6 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
             [self sendProviderDeviceToken:token andUid:[defaults objectForKey:@"UID"]];
         } else {
             [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"DeviceTokenAdded"];
-            NSLog(@"setting device token added: %@", [defaults objectForKey:@"DeviceTokenAdded"]);
         }
     }
 }

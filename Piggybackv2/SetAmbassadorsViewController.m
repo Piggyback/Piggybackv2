@@ -46,7 +46,6 @@
 #pragma mark - SetAmbassadorDelegate methods
 - (void)setAmbassadorForType:(NSString *)type {
     // add user
-#warning - continue here
     PBUser *newUser = [PBUser object];
     newUser.fbId = [NSNumber numberWithLongLong:[@"1414" longLongValue]];
     NSLog(@"new user fbid: %@", newUser.fbId);

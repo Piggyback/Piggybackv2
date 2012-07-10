@@ -150,7 +150,6 @@
 //    [defaults synchronize];
     
     // add device token to DB if not already added
-    NSLog(@"device token added: %@", [defaults objectForKey:@"DeviceTokenAdded"]);
     if ([[defaults objectForKey:@"DeviceTokenAdded"] isEqualToNumber:[NSNumber numberWithBool:NO]]) {
         [self sendProviderDeviceToken:[defaults objectForKey:@"DeviceToken"] andUid:[defaults objectForKey:@"UID"]];
     }
