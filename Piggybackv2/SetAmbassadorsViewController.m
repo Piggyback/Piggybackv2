@@ -167,7 +167,7 @@
         [self removeAmbassador:friend ForType:type];
         for (NSIndexPath* indexPath in [self.tableView indexPathsForVisibleRows]) {
             if ([(SetAmbassadorCell*)[self.tableView cellForRowAtIndexPath:indexPath] friend] == friend) {
-                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
             }
         }
     } else {
@@ -175,7 +175,7 @@
         [self setAmbassador:friend ForType:type];
         for (NSIndexPath* indexPath in [self.tableView indexPathsForVisibleRows]) {
             if ([(SetAmbassadorCell*)[self.tableView cellForRowAtIndexPath:indexPath] friend] == friend) {
-                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
             }
         }
     }
