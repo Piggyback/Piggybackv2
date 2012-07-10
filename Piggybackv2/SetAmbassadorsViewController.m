@@ -181,32 +181,6 @@
     }
 }
 
-//- (void)clickMusicButton:(PBFriend*)friend {
-//    [self.selectedMusicAmbassadorIndexes addObject:friend.fbId];
-//    NSLog(@"selected music amb are %@",self.selectedMusicAmbassadorIndexes);
-//}
-//
-//- (void)unclickMusicButton:(PBFriend*)friend {
-//    [self.selectedMusicAmbassadorIndexes removeObject:friend.fbId];
-//    NSLog(@"selected music amb are %@",self.selectedMusicAmbassadorIndexes);
-//}
-//
-//- (void)clickPlacesButton:(PBFriend*)friend {
-//    [self.selectedPlacesAmbassadorIndexes addObject:friend.fbId];
-//}
-//
-//- (void)unclickPlacesButton:(PBFriend*)friend {
-//    [self.selectedPlacesAmbassadorIndexes removeObject:friend.fbId];
-//}
-//
-//- (void)clickVideosButton:(PBFriend*)friend {
-//    [self.selectedVideosAmbassadorIndexes addObject:friend.fbId];
-//}
-//
-//- (void)unclickVideosButton:(PBFriend*)friend {
-//    [self.selectedVideosAmbassadorIndexes removeObject:friend.fbId];
-//}
-
 #pragma mark - RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
