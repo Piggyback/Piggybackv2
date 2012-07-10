@@ -72,6 +72,7 @@
 }
 
 #pragma mark - SetAmbassadorDelegate methods
+
 - (void)setAmbassador:(PBFriend*)friend ForType:(NSString *)type {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
@@ -151,30 +152,60 @@
     }
 }
 
-- (void)clickMusicButton:(PBFriend*)friend {
-    [self.selectedMusicAmbassadorIndexes addObject:friend.fbId];
-    NSLog(@"selected music amb are %@",self.selectedMusicAmbassadorIndexes);
+- (void)clickFollow:(PBFriend*)friend forType:(NSString*)type {
+    NSMutableSet* ambassadors = [[NSMutableSet alloc] init];
+    if ([type isEqualToString:@"music"]) {
+        ambassadors = self.selectedMusicAmbassadorIndexes;
+    } else if ([type isEqualToString:@"places"]) {
+        ambassadors = self.selectedPlacesAmbassadorIndexes;
+    } else if ([type isEqualToString:@"videos"]) {
+        ambassadors = self.selectedVideosAmbassadorIndexes;
+    }
+
+    if ([ambassadors containsObject:friend.fbId]) {
+        [ambassadors removeObject:friend.fbId];
+        [self removeAmbassador:friend ForType:type];
+        for (NSIndexPath* indexPath in [self.tableView indexPathsForVisibleRows]) {
+            if ([(SetAmbassadorCell*)[self.tableView cellForRowAtIndexPath:indexPath] friend] == friend) {
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
+            }
+        }
+    } else {
+        [ambassadors addObject:friend.fbId];
+        [self setAmbassador:friend ForType:type];
+        for (NSIndexPath* indexPath in [self.tableView indexPathsForVisibleRows]) {
+            if ([(SetAmbassadorCell*)[self.tableView cellForRowAtIndexPath:indexPath] friend] == friend) {
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
+            }
+        }
+    }
 }
 
-- (void)unclickMusicButton:(PBFriend*)friend {
-    [self.selectedMusicAmbassadorIndexes removeObject:friend.fbId];
-    NSLog(@"selected music amb are %@",self.selectedMusicAmbassadorIndexes);
-}
-- (void)clickPlacesButton:(PBFriend*)friend {
-    [self.selectedPlacesAmbassadorIndexes addObject:friend.fbId];
-}
-
-- (void)unclickPlacesButton:(PBFriend*)friend {
-    [self.selectedPlacesAmbassadorIndexes removeObject:friend.fbId];
-}
-
-- (void)clickVideosButton:(PBFriend*)friend {
-    [self.selectedVideosAmbassadorIndexes addObject:friend.fbId];
-}
-
-- (void)unclickVideosButton:(PBFriend*)friend {
-    [self.selectedVideosAmbassadorIndexes removeObject:friend.fbId];
-}
+//- (void)clickMusicButton:(PBFriend*)friend {
+//    [self.selectedMusicAmbassadorIndexes addObject:friend.fbId];
+//    NSLog(@"selected music amb are %@",self.selectedMusicAmbassadorIndexes);
+//}
+//
+//- (void)unclickMusicButton:(PBFriend*)friend {
+//    [self.selectedMusicAmbassadorIndexes removeObject:friend.fbId];
+//    NSLog(@"selected music amb are %@",self.selectedMusicAmbassadorIndexes);
+//}
+//
+//- (void)clickPlacesButton:(PBFriend*)friend {
+//    [self.selectedPlacesAmbassadorIndexes addObject:friend.fbId];
+//}
+//
+//- (void)unclickPlacesButton:(PBFriend*)friend {
+//    [self.selectedPlacesAmbassadorIndexes removeObject:friend.fbId];
+//}
+//
+//- (void)clickVideosButton:(PBFriend*)friend {
+//    [self.selectedVideosAmbassadorIndexes addObject:friend.fbId];
+//}
+//
+//- (void)unclickVideosButton:(PBFriend*)friend {
+//    [self.selectedVideosAmbassadorIndexes removeObject:friend.fbId];
+//}
 
 #pragma mark - RKObjectLoaderDelegate methods
 
