@@ -380,21 +380,22 @@
     NSLog(@"display friends");
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *myUID = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];
+    NSNumber *myUID = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];    
 
-    NSLog(@"defaults are %@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
-    
-
-    // get music ambassadors and add to array
-    NSPredicate *getMusicAmbassadors = [NSPredicate predicateWithFormat:@"(followerUid = %@) AND (ambassadorType = %@)",myUID,@"music"];
-    NSLog(@"myuid is %@",myUID);
-    NSArray* musicAmbassadors = [PBAmbassador objectsWithPredicate:getMusicAmbassadors];
-    for (PBAmbassador* musicAmbassador in musicAmbassadors) {
-        NSLog(@"hihi");
-        NSPredicate *getMusicAmbassadorUser = [NSPredicate predicateWithFormat:@"(uid = %@)",musicAmbassador.ambassadorUid];
-        PBUser* musicAmbassadorUser = [PBUser objectWithPredicate:getMusicAmbassadorUser];
-        if (musicAmbassadorUser) {
-            [self.selectedMusicAmbassadorIndexes addObject:musicAmbassadorUser.fbId];
+    // get existing ambassadors and add to array
+    NSPredicate *getAmbassadors = [NSPredicate predicateWithFormat:@"(followerUid = %@)",myUID];
+    NSArray* myAmbassadors = [PBAmbassador objectsWithPredicate:getAmbassadors];
+    for (PBAmbassador* ambassador in myAmbassadors) {
+        NSPredicate *getAmbassadorUser = [NSPredicate predicateWithFormat:@"(uid = %@)",ambassador.ambassadorUid];
+        PBUser* ambassadorUser = [PBUser objectWithPredicate:getAmbassadorUser];
+        if (ambassadorUser) {
+            if ([ambassador.ambassadorType isEqualToString:@"music"]) {
+                [self.selectedMusicAmbassadorIndexes addObject:ambassadorUser.fbId];
+            } else if ([ambassador.ambassadorType isEqualToString:@"places"]) {
+                [self.selectedPlacesAmbassadorIndexes addObject:ambassadorUser.fbId];
+            } else if ([ambassador.ambassadorType isEqualToString:@"videos"]) {
+                [self.selectedVideosAmbassadorIndexes addObject:ambassadorUser.fbId];
+            }
         }
     }
     
