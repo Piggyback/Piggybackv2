@@ -36,8 +36,8 @@
 
     // store new user in core data and server db if not exists yet
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fbId = %@",[defaults objectForKey:@"FBID"]];
-    NSArray *userArray = [PBUser objectsWithPredicate:predicate];
-    if ([userArray count] == 0) {
+    PBUser *user = [PBUser objectWithPredicate:predicate];
+    if (!user) {
         PBUser *newUser = [PBUser object];
         newUser.fbId = [NSNumber numberWithLongLong:[[defaults objectForKey:@"FBID"] longLongValue]];
         newUser.email = [defaults objectForKey:@"Email"];
@@ -46,6 +46,9 @@
         newUser.isPiggybackUser = [NSNumber numberWithBool:YES];
         
         [[RKObjectManager sharedManager] postObject:newUser delegate:self];
+    } else {
+        [defaults setObject:user.uid forKey:@"UID"];
+        [defaults synchronize];
     }
 }
 
@@ -176,9 +179,9 @@
     [super viewDidLoad];
     
     // get videos from youtube ambassadors
-    NSMutableSet *youtubeAmbassadors = [NSMutableSet setWithObjects:@"nerdsinnewyork",@"mlgao",nil];
-    YouTubeTableViewController* youtubeVC = (YouTubeTableViewController*)[[self.viewControllers objectAtIndex:2] topViewController];
-    [youtubeVC getFavoritesFromAmbassadors:youtubeAmbassadors];
+//    NSMutableSet *youtubeAmbassadors = [NSMutableSet setWithObjects:@"nerdsinnewyork",@"mlgao",nil];
+//    YouTubeTableViewController* youtubeVC = (YouTubeTableViewController*)[[self.viewControllers objectAtIndex:2] topViewController];
+//    [youtubeVC getFavoritesFromAmbassadors:youtubeAmbassadors];
     
 }
 

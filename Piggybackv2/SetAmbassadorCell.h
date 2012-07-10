@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PBFriend.h"
 
 @protocol SetAmbassadorDelegate
 
-- (void)setAmbassadorForType:(NSString*)type;
+- (void)clickFollow:(PBFriend*)friend forType:(NSString*)type;
+- (void)setAmbassador:(PBFriend*)friend ForType:(NSString*)type;
+- (void)removeAmbassador:(PBFriend*)friend ForType:(NSString*)type;
 
 @end
 
@@ -21,6 +24,7 @@
 @property (nonatomic, weak) IBOutlet UIButton* followMusic;
 @property (nonatomic, weak) IBOutlet UIButton* followPlaces;
 @property (nonatomic, weak) IBOutlet UIButton* followVideos;
+@property (nonatomic, strong) PBFriend* friend;
 @property (nonatomic, weak) id<SetAmbassadorDelegate> setAmbassadorDelegate;
 
 - (IBAction)clickFollowMusic;

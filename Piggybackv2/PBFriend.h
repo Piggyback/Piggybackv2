@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "FBImageToDataTransformer.h"
 
-@interface FBImageToDataTransformer : NSValueTransformer {
-}
-@end
+//@interface FriendFBImageToDataTransformer : NSValueTransformer {
+//}
+//@end
 
 @interface PBFriend : NSManagedObject
 
@@ -19,6 +20,7 @@
 @property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSNumber * foursquareId;
 @property (nonatomic, retain) NSString * lastName;
+@property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * spotifyUsername;
 @property (nonatomic, retain) NSString * youtubeUsername;
 @property (nonatomic, retain) UIImage * thumbnail;

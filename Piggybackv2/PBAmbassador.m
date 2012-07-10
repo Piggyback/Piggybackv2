@@ -12,9 +12,10 @@
 
 @implementation PBAmbassador
 
-@dynamic ambassadorId;
-@dynamic followerId;
-@dynamic type;
+@dynamic ambassadorUid;
+@dynamic followerUid;
+@dynamic ambassadorType;
+@dynamic deleted;
 @dynamic follower;
 
 @end

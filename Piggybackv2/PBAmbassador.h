@@ -13,9 +13,10 @@
 
 @interface PBAmbassador : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * ambassadorId;
-@property (nonatomic, retain) NSNumber * followerId;
-@property (nonatomic, retain) NSString * type;
+@property (nonatomic, retain) NSNumber * ambassadorUid;
+@property (nonatomic, retain) NSNumber * followerUid;
+@property (nonatomic, retain) NSString * ambassadorType;
+@property (nonatomic, retain) NSNumber * deleted;
 @property (nonatomic, retain) PBUser *follower;
 
 @end

@@ -72,6 +72,17 @@
 }
 
 #pragma mark - SetAmbassadorDelegate methods
+<<<<<<< HEAD
+- (void)setAmbassadorForType:(NSString *)type {
+    // add user
+    PBUser *newUser = [PBUser object];
+    newUser.fbId = [NSNumber numberWithLongLong:[@"1414" longLongValue]];
+    NSLog(@"new user fbid: %@", newUser.fbId);
+    newUser.email = @"test@email.com";
+    newUser.firstName = @"first_test";
+    newUser.lastName = @"last_test";
+    newUser.isPiggybackUser = [NSNumber numberWithBool:NO];
+=======
 
 - (void)setAmbassador:(PBFriend*)friend ForType:(NSString *)type {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -79,6 +90,7 @@
     // check if user exists already
     NSPredicate *userPredicate = [NSPredicate predicateWithFormat:@"fbId = %@",friend.fbId];
     PBUser *friendUser = [PBUser objectWithPredicate:userPredicate];
+>>>>>>> 1bbe00a40fe1cc1577da2687fdcf03ab92467452
     
     // if user does not exist, add user
     if (!friendUser) {
