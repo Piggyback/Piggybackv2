@@ -34,38 +34,43 @@
 #pragma mark - ib actions
 
 - (IBAction)clickFollowMusic {
-    NSLog(@"clicked on music!");
     if (!self.musicOn) {
+        self.musicOn = YES;
         [self.followMusic setImage:[UIImage imageNamed:@"follow-music-button-pressed"] forState:UIControlStateNormal];
-        self.musicOn = YES;        
+        [self.setAmbassadorDelegate clickMusicButton:self.friend];
         [self.setAmbassadorDelegate setAmbassador:self.friend ForType:@"music"];
     } else {
-        [self.followMusic setImage:[UIImage imageNamed:@"follow-music-button-normal"] forState:UIControlStateNormal];
         self.musicOn = NO;
+        [self.followMusic setImage:[UIImage imageNamed:@"follow-music-button-normal"] forState:UIControlStateNormal];
+        [self.setAmbassadorDelegate unclickMusicButton:self.friend];
         [self.setAmbassadorDelegate removeAmbassador:self.friend ForType:@"music"];
     }
 }
 
 - (IBAction)clickFollowPlaces {
     if (!self.placesOn) {
-        [self.followPlaces setImage:[UIImage imageNamed:@"follow-places-button-pressed"] forState:UIControlStateNormal];
         self.placesOn = YES;
+        [self.followPlaces setImage:[UIImage imageNamed:@"follow-places-button-pressed"] forState:UIControlStateNormal];
+        [self.setAmbassadorDelegate clickPlacesButton:self.friend];
         [self.setAmbassadorDelegate setAmbassador:self.friend ForType:@"places"];
     } else {
-        [self.followPlaces setImage:[UIImage imageNamed:@"follow-places-button-normal"] forState:UIControlStateNormal];
         self.placesOn = NO;
+        [self.followPlaces setImage:[UIImage imageNamed:@"follow-places-button-normal"] forState:UIControlStateNormal];
+        [self.setAmbassadorDelegate unclickPlacesButton:self.friend];
         [self.setAmbassadorDelegate removeAmbassador:self.friend ForType:@"places"];
     }
 }
 
 - (IBAction)clickFollowVideos {
     if (!self.videosOn) {
-        [self.followVideos setImage:[UIImage imageNamed:@"follow-video-button-pressed"] forState:UIControlStateNormal];
         self.videosOn = YES;
+        [self.followVideos setImage:[UIImage imageNamed:@"follow-video-button-pressed"] forState:UIControlStateNormal];
+        [self.setAmbassadorDelegate clickVideosButton:self.friend];
         [self.setAmbassadorDelegate setAmbassador:self.friend ForType:@"videos"];
     } else {
-        [self.followVideos setImage:[UIImage imageNamed:@"follow-video-button-normal"] forState:UIControlStateNormal];
         self.videosOn = NO;
+        [self.followVideos setImage:[UIImage imageNamed:@"follow-video-button-normal"] forState:UIControlStateNormal];
+        [self.setAmbassadorDelegate unclickVideosButton:self.friend];
         [self.setAmbassadorDelegate removeAmbassador:self.friend ForType:@"videos"];
     }
 }

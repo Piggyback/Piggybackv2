@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E2620" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Pev-yS-Wqq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Pev-yS-Wqq">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1179"/>
     </dependencies>
     <scenes>
         <!--Account Link View Controller-->
@@ -504,7 +504,13 @@
                             <outlet property="delegate" destination="dqy-L5-N9p" id="Wyk-px-NxB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="fpH-Ph-F7N"/>
+                    <navigationItem key="navigationItem" id="fpH-Ph-F7N">
+                        <barButtonItem key="rightBarButtonItem" title="Ambassadors" id="dSJ-8f-G59">
+                            <connections>
+                                <action selector="setAmbassadors:" destination="dqy-L5-N9p" id="Y9h-6F-bEY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1310" y="-145"/>
@@ -768,115 +774,6 @@
         <image name="videos-section-divider.png" width="320" height="26"/>
         <image name="youtube-icon.png" width="50" height="50"/>
     </resources>
-    <classes>
-        <class className="AccountLinkViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AccountLinkViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="continueButton:"/>
-                <relationship kind="action" name="foursquareConnect:"/>
-                <relationship kind="action" name="spotifyConnect:"/>
-                <relationship kind="action" name="youtubeConnect:"/>
-                <relationship kind="outlet" name="youtubeToggle" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-        <class className="ExploreNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreNavigationController.h"/>
-        </class>
-        <class className="ExploreTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreTableCell.h"/>
-            <relationships>
-                <relationship kind="action" name="heart:"/>
-                <relationship kind="action" name="todo:"/>
-                <relationship kind="outlet" name="checkedInBy" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameOfPlace" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="ExploreTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreTableViewController.h"/>
-        </class>
-        <class className="ListenCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListenCell.h"/>
-            <relationships>
-                <relationship kind="action" name="heart:"/>
-                <relationship kind="action" name="todo:"/>
-                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="trackDetails" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ListenNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListenNavigationController.h"/>
-        </class>
-        <class className="ListenTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListenTableViewController.h"/>
-        </class>
-        <class className="LoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="loginWithFacebook:"/>
-            </relationships>
-        </class>
-        <class className="PiggybackTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PiggybackTabBarController.h"/>
-        </class>
-        <class className="SetAmbassadorCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetAmbassadorCell.h"/>
-            <relationships>
-                <relationship kind="action" name="clickFollowMusic"/>
-                <relationship kind="action" name="clickFollowPlaces"/>
-                <relationship kind="action" name="clickFollowVideos"/>
-                <relationship kind="outlet" name="followMusic" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="followPlaces" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="followVideos" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="SetAmbassadorsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetAmbassadorsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="readyButton:"/>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SongViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SongViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="playTrack:"/>
-                <relationship kind="action" name="setTrackPosition:"/>
-                <relationship kind="outlet" name="albumInfo" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="playButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="positionSlider" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="trackArtist" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="trackCover" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="trackTitle" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="WatchNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WatchNavigationController.h"/>
-        </class>
-        <class className="WatchTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WatchTableCell.h"/>
-            <relationships>
-                <relationship kind="action" name="heart:"/>
-                <relationship kind="action" name="todo:"/>
-                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameOfVideo" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="YouTubeTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/YouTubeTableViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

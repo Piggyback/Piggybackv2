@@ -12,6 +12,8 @@
 #import "Constants.h"
 #import "SongViewController.h"
 #import "AppDelegate.h"
+#import "SetAmbassadorsViewController.h"
+#import "PiggybackTabBarController.h"
 
 @interface ListenTableViewController ()
 
@@ -162,6 +164,14 @@
         [segue.destinationViewController setTrack:[self.topTracks objectAtIndex:[self.tableView indexPathForCell:sender].row]];
         [segue.destinationViewController setPlaybackManager:[(AppDelegate *)[[UIApplication sharedApplication] delegate] playbackManager]];
     }
+}
+
+- (IBAction)setAmbassadors:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    PiggybackTabBarController* rootViewController = (PiggybackTabBarController*)appDelegate.window.rootViewController;
+    SetAmbassadorsViewController *setAmbassadorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
+    [appDelegate.window makeKeyAndVisible];
+    [rootViewController presentViewController:setAmbassadorsViewController animated:NO completion:nil];
 }
 
 @end

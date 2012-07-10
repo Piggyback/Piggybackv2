@@ -11,6 +11,12 @@
 
 @protocol SetAmbassadorDelegate
 
+- (void)clickMusicButton:(PBFriend*)friend;
+- (void)unclickMusicButton:(PBFriend*)friend;
+- (void)clickPlacesButton:(PBFriend*)friend;
+- (void)unclickPlacesButton:(PBFriend*)friend;
+- (void)clickVideosButton:(PBFriend*)friend;
+- (void)unclickVideosButton:(PBFriend*)friend;
 - (void)setAmbassador:(PBFriend*)friend ForType:(NSString*)type;
 - (void)removeAmbassador:(PBFriend*)friend ForType:(NSString*)type;
 

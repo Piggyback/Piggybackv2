@@ -16,6 +16,9 @@
 @interface SetAmbassadorsViewController ()
 @property (nonatomic, strong) NSArray* friends;
 @property (nonatomic, strong) NSArray *displayFriends;
+@property (nonatomic, strong) NSMutableSet *selectedMusicAmbassadorIndexes;
+@property (nonatomic, strong) NSMutableSet *selectedPlacesAmbassadorIndexes;
+@property (nonatomic, strong) NSMutableSet *selectedVideosAmbassadorIndexes;
 @end
 
 @implementation SetAmbassadorsViewController
@@ -23,6 +26,9 @@
 @synthesize tableView = _tableView;
 @synthesize friends = _friends;
 @synthesize displayFriends = _displayFriends;
+@synthesize selectedMusicAmbassadorIndexes = _selectedMusicAmbassadorIndexes;
+@synthesize selectedPlacesAmbassadorIndexes = _selectedPlacesAmbassadorIndexes;
+@synthesize selectedVideosAmbassadorIndexes = _selectedVideosAmbassadorIndexes;
 
 #pragma mark - setters and getters
 
@@ -36,6 +42,27 @@
 - (void)setDisplayFriends:(NSArray *)displayFriends {
     _displayFriends = displayFriends;
     [self.tableView reloadData];
+}
+
+- (NSMutableSet*)selectedMusicAmbassadorIndexes {
+    if (!_selectedMusicAmbassadorIndexes) {
+        _selectedMusicAmbassadorIndexes = [[NSMutableSet alloc] init];
+    }
+    return _selectedMusicAmbassadorIndexes;
+}
+
+- (NSMutableSet*)selectedPlacesAmbassadorIndexes {
+    if (!_selectedPlacesAmbassadorIndexes) {
+        _selectedPlacesAmbassadorIndexes = [[NSMutableSet alloc] init];
+    }
+    return _selectedPlacesAmbassadorIndexes;
+}
+
+- (NSMutableSet*)selectedVideosAmbassadorIndexes {
+    if (!_selectedVideosAmbassadorIndexes) {
+        _selectedVideosAmbassadorIndexes = [[NSMutableSet alloc] init];
+    }
+    return _selectedVideosAmbassadorIndexes;
 }
 
 #pragma mark - private methods
@@ -70,6 +97,7 @@
             loader.onDidLoadObjects = ^(NSArray* objects) {                
                 PBAmbassador *newAmbassador = [PBAmbassador object];
                 newAmbassador.ambassadorUid = [[objects objectAtIndex:0] uid];
+                NSLog(@"new ambassador uid is %@",newAmbassador.ambassadorUid);
                 newAmbassador.followerUid = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];
                 newAmbassador.ambassadorType = type;
                 
@@ -89,6 +117,8 @@
         if (!addedAmbassador) {
             PBAmbassador *newAmbassador = [PBAmbassador object];
             newAmbassador.ambassadorUid = friendUser.uid;
+#warning - timing issue here, where sometimes the user is created just before and does not have a uid yet
+            NSLog(@"frienduser uid is %@",newAmbassador.ambassadorUid);
             newAmbassador.followerUid = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];
             newAmbassador.ambassadorType = type;
             
@@ -108,15 +138,42 @@
     //fetch ambassador from user
     NSPredicate* ambassadorPredicate = [NSPredicate predicateWithFormat:@"(followerUid = %@) AND (ambassadorUid = %@) AND (ambassadorType = %@)", myUID, removedUser.uid, type];
     PBAmbassador *removedAmbassador = [PBAmbassador objectWithPredicate:ambassadorPredicate];
-    [[RKObjectManager sharedManager] putObject:removedAmbassador usingBlock:^(RKObjectLoader* loader) {
-        loader.onDidLoadObjects = ^(NSArray* objects) {
-            // delete ambassador row from core data
-            RKManagedObjectStore *objectStore = [[RKObjectManager sharedManager] objectStore];
-            [[objectStore managedObjectContextForCurrentThread] deleteObject:removedAmbassador];
-            [objectStore save:nil];
-            NSLog(@"removed ambassador!");  
-        };
-    }];
+    if (removedAmbassador) {
+        [[RKObjectManager sharedManager] putObject:removedAmbassador usingBlock:^(RKObjectLoader* loader) {
+            loader.onDidLoadObjects = ^(NSArray* objects) {
+                // delete ambassador row from core data
+                RKManagedObjectStore *objectStore = [[RKObjectManager sharedManager] objectStore];
+                [[objectStore managedObjectContextForCurrentThread] deleteObject:removedAmbassador];
+                [objectStore save:nil];
+                NSLog(@"removed ambassador!");  
+            };
+        }];
+    }
+}
+
+- (void)clickMusicButton:(PBFriend*)friend {
+    [self.selectedMusicAmbassadorIndexes addObject:friend.fbId];
+    NSLog(@"selected music amb are %@",self.selectedMusicAmbassadorIndexes);
+}
+
+- (void)unclickMusicButton:(PBFriend*)friend {
+    [self.selectedMusicAmbassadorIndexes removeObject:friend.fbId];
+    NSLog(@"selected music amb are %@",self.selectedMusicAmbassadorIndexes);
+}
+- (void)clickPlacesButton:(PBFriend*)friend {
+    [self.selectedPlacesAmbassadorIndexes addObject:friend.fbId];
+}
+
+- (void)unclickPlacesButton:(PBFriend*)friend {
+    [self.selectedPlacesAmbassadorIndexes removeObject:friend.fbId];
+}
+
+- (void)clickVideosButton:(PBFriend*)friend {
+    [self.selectedVideosAmbassadorIndexes addObject:friend.fbId];
+}
+
+- (void)unclickVideosButton:(PBFriend*)friend {
+    [self.selectedVideosAmbassadorIndexes removeObject:friend.fbId];
 }
 
 #pragma mark - RKObjectLoaderDelegate methods
@@ -156,10 +213,33 @@
     cell.profilePic.layer.cornerRadius = 5.0;
     cell.profilePic.layer.masksToBounds = YES;
     
+    // get current friend and set cell
+    NSLog(@"indexrow is %i",indexPath.row);
     PBFriend* friend = [self.displayFriends objectAtIndex:indexPath.row];
+    cell.friend = friend;
     cell.name.text = [NSString stringWithFormat:@"%@ %@",friend.firstName, friend.lastName];
     cell.profilePic.image = [UIImage imageNamed:@"blankFacebookPhoto.gif"];
-    cell.friend = friend;
+    
+    // display music button
+    if ([self.selectedMusicAmbassadorIndexes containsObject:friend.fbId]) {
+        [cell.followMusic setImage:[UIImage imageNamed:@"follow-music-button-pressed"] forState:UIControlStateNormal];
+    } else {
+        [cell.followMusic setImage:[UIImage imageNamed:@"follow-music-button-normal"] forState:UIControlStateNormal];
+    }
+    
+    // display places button
+    if ([self.selectedPlacesAmbassadorIndexes containsObject:friend.fbId]) {
+        [cell.followPlaces setImage:[UIImage imageNamed:@"follow-places-button-pressed"] forState:UIControlStateNormal];
+    } else {
+        [cell.followPlaces setImage:[UIImage imageNamed:@"follow-places-button-normal"] forState:UIControlStateNormal];
+    }
+    
+    // display video button
+    if ([self.selectedVideosAmbassadorIndexes containsObject:friend.fbId]) {
+        [cell.followVideos setImage:[UIImage imageNamed:@"follow-video-button-pressed"] forState:UIControlStateNormal];
+    } else {
+        [cell.followVideos setImage:[UIImage imageNamed:@"follow-video-button-normal"] forState:UIControlStateNormal];
+    }
     
     // if thumbnail already stored in local friend array, then display thumbnail
     if (friend.thumbnail) {
@@ -267,6 +347,25 @@
 {
     [super viewDidLoad];
     NSLog(@"display friends");
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *myUID = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];
+
+    NSLog(@"defaults are %@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
+    
+
+    // get music ambassadors and add to array
+    NSPredicate *getMusicAmbassadors = [NSPredicate predicateWithFormat:@"(followerUid = %@) AND (ambassadorType = %@)",myUID,@"music"];
+    NSLog(@"myuid is %@",myUID);
+    NSArray* musicAmbassadors = [PBAmbassador objectsWithPredicate:getMusicAmbassadors];
+    for (PBAmbassador* musicAmbassador in musicAmbassadors) {
+        NSLog(@"hihi");
+        NSPredicate *getMusicAmbassadorUser = [NSPredicate predicateWithFormat:@"(uid = %@)",musicAmbassador.ambassadorUid];
+        PBUser* musicAmbassadorUser = [PBUser objectWithPredicate:getMusicAmbassadorUser];
+        if (musicAmbassadorUser) {
+            [self.selectedMusicAmbassadorIndexes addObject:musicAmbassadorUser.fbId];
+        }
+    }
     
     // replace keyboard 'Search' button with 'Done'
     for (UIView *searchBarSubview in [self.searchBar subviews]) {
