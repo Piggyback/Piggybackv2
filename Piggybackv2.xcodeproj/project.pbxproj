@@ -1073,6 +1073,7 @@
 		3EE8DB281593BF9A009DCCA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					$CONFIGURATION_BUILD_DIR/include,
 					"\"$(SRCROOT)/spotify-ios-sdk/iOS Library/libspotify-12.1.45-iOS-universal\"",
@@ -1090,6 +1091,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1097,6 +1099,7 @@
 		3EE8DB291593BF9A009DCCA3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					$CONFIGURATION_BUILD_DIR/include,
 					"\"$(SRCROOT)/spotify-ios-sdk/iOS Library/libspotify-12.1.45-iOS-universal\"",
@@ -1114,6 +1117,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

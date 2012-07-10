@@ -72,7 +72,7 @@
         userNames = [userNames substringWithRange:NSMakeRange(1,[userNames length]-1)];
     }
     
-    NSLog(@"user names is %@",userNames);
+//    NSLog(@"user names is %@",userNames);
     
     NSString* newVideosQuery = [NSString stringWithFormat:@"https://gdata.youtube.com/feeds/api/events?v=2&author=%@&key=AI39si67YD40HCVtvnAj--EzmTmuFjZCzIYHskBFuRa6jf1KWkbSK_3TpQDLRIJfcNeT4UiGB1eLWz6KjUN3SPn02feOfLt19w&alt=json",userNames];
     
@@ -132,7 +132,7 @@
         userNames = [userNames substringWithRange:NSMakeRange(1,[userNames length]-1)];
     }
     
-    NSLog(@"user names is %@",userNames);
+//    NSLog(@"user names is %@",userNames);
     
     NSString* newVideosQuery = [NSString stringWithFormat:@"https://gdata.youtube.com/feeds/api/events?v=2&author=%@&key=AI39si67YD40HCVtvnAj--EzmTmuFjZCzIYHskBFuRa6jf1KWkbSK_3TpQDLRIJfcNeT4UiGB1eLWz6KjUN3SPn02feOfLt19w&alt=json",userNames];
         
@@ -295,7 +295,7 @@
                     NSComparisonResult result = [[b objectForKey:@"date"] compare:[a objectForKey:@"date"]];
                     return result;
                 }] mutableCopy];
-                NSLog(@"video list is %@",self.videoList);
+//                NSLog(@"video list is %@",self.videoList);
                 [self.tableView reloadData];
             }
             
@@ -314,7 +314,7 @@
                         break;
                     }
                 }
-                NSLog(@"hash dictionary is %@",self.hashToUserID);
+//                NSLog(@"hash dictionary is %@",self.hashToUserID);
             }
             
             else if ([[[self.currentConnections objectForKey:currentConnection] objectForKey:@"userInfo"] isEqualToString:@"sup"]) {
@@ -326,7 +326,7 @@
                 NSMutableSet *usersWithNewVideos = [[NSMutableSet alloc] init];
                 for (NSDictionary* user in [self.hashToUserID allObjects]) {
                     NSString* hash = [[user allKeys] objectAtIndex:0];
-                    NSLog(@"my hash is %@",hash);
+//                    NSLog(@"my hash is %@",hash);
                     for (NSArray* update in [youtubeSupDict objectForKey:@"updates"]) {
                         if ([hash isEqualToString:[update objectAtIndex:0]]) {
                             [usersWithNewVideos addObject:user];
@@ -337,7 +337,7 @@
                 
                 // if your ambassadors have updated, get their newly favorited videos
                 if ([usersWithNewVideos count] != 0) {
-                    NSLog(@"users with new videos %@",usersWithNewVideos);
+//                    NSLog(@"users with new videos %@",usersWithNewVideos);
                     [self pullNewVideosFromUsers:usersWithNewVideos];
                 }
             }
@@ -349,7 +349,7 @@
                 youtubeNewVideosDict = [NSJSONSerialization JSONObjectWithData:[[self.currentConnections objectForKey:currentConnection] objectForKey:@"responseData"] options:NSJSONWritingPrettyPrinted error:&error];
                 
             
-                NSLog(@"new favorited videos %@",youtubeNewVideosDict);
+//                NSLog(@"new favorited videos %@",youtubeNewVideosDict);
                 // find newly favorited videos from your ambassadors and call the api to get more info on these videos
                 NSDictionary *newEntries = [[youtubeNewVideosDict objectForKey:@"feed"] objectForKey:@"entry"];
                 for (NSDictionary* newEntry in newEntries) {
@@ -380,7 +380,7 @@
                 }
             }
             [self.currentConnections removeObjectForKey:connection.description];
-            NSLog(@"current connections includes %@",self.currentConnections);
+//            NSLog(@"current connections includes %@",self.currentConnections);
         }
     }
 }
@@ -447,7 +447,7 @@
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ liked a video",[currentVideo objectForKey:@"uid"]];
     }
     
-    NSLog(@"uid is %@",[currentVideo objectForKey:@"uid"]);
+//    NSLog(@"uid is %@",[currentVideo objectForKey:@"uid"]);
     
     if ([[currentVideo objectForKey:@"uid"] isEqualToString:@"mlgao"]) {
         cell.profilePic.image = [UIImage imageNamed:@"gao-rounded-corners.png"];

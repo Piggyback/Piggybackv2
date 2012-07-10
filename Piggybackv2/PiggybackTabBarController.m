@@ -15,6 +15,7 @@
 #import "PBFriend.h"
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData.h>
+#import <RestKit/RKRequestSerialization.h>
 
 @interface PiggybackTabBarController ()
 @end
@@ -31,7 +32,7 @@
     [defaults setObject:[meGraphApiResult objectForKey:@"last_name"] forKey:@"LastName"];
     [defaults setObject:[meGraphApiResult objectForKey:@"id"] forKey:@"FBID"];
     [defaults setObject:[meGraphApiResult objectForKey:@"email"] forKey:@"Email"];
-    [defaults synchronize];
+//    [defaults synchronize];
 
     // store new user in core data and server db if not exists yet
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fbId = %@",[defaults objectForKey:@"FBID"]];
@@ -86,6 +87,19 @@
     });
 }
 
+- (void)sendProviderDeviceToken:(NSString *)deviceToken andUid:(NSNumber *)Uid {
+    NSLog(@"in send provider device token from tab bar");
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:deviceToken, @"deviceToken", Uid, @"uid", nil];
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    NSError *error = nil;
+    NSString *json = [parser stringFromObject:params error:&error];
+    
+    if (!error) {
+        [[RKClient sharedClient] post:@"/addIphonePushToken" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"DeviceTokenAdded"];
+    }
+}
+
 #pragma mark - FBRequestDelegate methods
 
 - (void)request:(FBRequest *)request didLoad:(id)result { 
@@ -114,6 +128,16 @@
 	[alert show];
 }
 
+#pragma mark - RKRequestDelegate methods
+
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {  
+//    NSLog(@"add device token did load response: %@",[response bodyAsString]);
+}
+
+- (void)request:(RKRequest *)request didFailLoadWithError:(NSError *)error {
+    NSLog(@"restkit failed with error from adding push token from tab bar: %@", error);
+}
+
 #pragma mark - RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
@@ -123,16 +147,18 @@
     // store my uid in defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[(PBUser*)[objects objectAtIndex:0] uid] forKey:@"UID"];
-    [defaults synchronize];
+//    [defaults synchronize];
+    
+    // add device token to DB if not already added
+    NSLog(@"device token added: %@", [defaults objectForKey:@"DeviceTokenAdded"]);
+    if ([[defaults objectForKey:@"DeviceTokenAdded"] isEqualToNumber:[NSNumber numberWithBool:NO]]) {
+        [self sendProviderDeviceToken:[defaults objectForKey:@"DeviceToken"] andUid:[defaults objectForKey:@"UID"]];
+    }
     
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
-    NSLog(@"restkit failed with error from user creation");
-}
-
-- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
-    NSLog(@"Retrieved JSON: %@", [response bodyAsString]);
+    NSLog(@"restkit failed with error from user creation: %@", error);
 }
 
 #pragma mark - view lifecycle

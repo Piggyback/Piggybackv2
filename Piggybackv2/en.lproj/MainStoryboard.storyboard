@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E2620" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Pev-yS-Wqq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2809" systemVersion="11E2620" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Pev-yS-Wqq">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
-        <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1884"/>
     </dependencies>
     <scenes>
         <!--Account Link View Controller-->
         <scene sceneID="COF-W7-zGk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zVv-uw-M7W" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="accountLinkViewController" id="j3d-Tp-khV" customClass="AccountLinkViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lyp-dH-G0V">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -39,26 +37,26 @@
                                 <rect key="frame" x="20" y="280" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Foursquare" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="dhn-10-Ye3">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="Foursquare" autoshrinkMode="minimumFontSize" id="dhn-10-Ye3">
                                 <rect key="frame" x="84" y="193" width="150" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Spotify" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="KYV-mo-Bc4">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="Spotify" autoshrinkMode="minimumFontSize" id="KYV-mo-Bc4">
                                 <rect key="frame" x="84" y="91" width="150" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YouTube" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="52J-5c-LPA">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="YouTube" autoshrinkMode="minimumFontSize" id="52J-5c-LPA">
                                 <rect key="frame" x="84" y="294" width="150" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Wpb-Vb-mGJ">
                                 <rect key="frame" x="221" y="190" width="79" height="27"/>
@@ -123,13 +121,13 @@
                         <outlet property="youtubeToggle" destination="erE-0z-5dU" id="iYx-KA-OII"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zVv-uw-M7W" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-269" y="155"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="0pC-hP-6Wt">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j9u-Lz-tZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="loginViewController" id="Hbm-VP-TcO" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kqk-IR-ICw">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -154,13 +152,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j9u-Lz-tZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-279" y="780"/>
         </scene>
         <!--You Tube Table View Controller-->
         <scene sceneID="oFN-5W-dMF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ous-s3-GTY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="K9y-hq-mDG" customClass="YouTubeTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lcj-yG-gWO">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -182,26 +180,26 @@
                                             <rect key="frame" x="57" y="41" width="25" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Wei favorited a video" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="QyL-5P-TEy">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="Michael Wei favorited a video" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="QyL-5P-TEy">
                                             <rect key="frame" x="74" y="0.0" width="210" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Koalas In Paris" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="kyy-fz-vus">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="Koalas In Paris" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="kyy-fz-vus">
                                             <rect key="frame" x="74" y="20" width="210" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="13d" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="F2B-W4-ofQ">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="13d" textAlignment="right" autoshrinkMode="minimumFontSize" id="F2B-W4-ofQ">
                                             <rect key="frame" x="282" y="0.0" width="34" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lib-2F-F55">
                                             <rect key="frame" x="277" y="50" width="19" height="16"/>
@@ -253,13 +251,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="D6A-kM-w25"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ous-s3-GTY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1310" y="1012"/>
         </scene>
         <!--Piggyback Tab Bar Controller-->
         <scene sceneID="LpD-vD-ZfM">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DvT-bb-FbP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController storyboardIdentifier="piggybackTabBarController" definesPresentationContext="YES" id="Pev-yS-Wqq" customClass="PiggybackTabBarController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="B0u-pg-EB0">
@@ -273,13 +271,13 @@
                         <segue destination="eB7-NQ-J2m" kind="relationship" relationship="viewControllers" id="l7o-Hf-tfD"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DvT-bb-FbP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="286" y="155"/>
         </scene>
         <!--Set Ambassadors View Controller-->
         <scene sceneID="82c-dL-Bff">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0mV-ep-PFA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="setAmbassadorsViewController" id="cuu-gE-v5A" customClass="SetAmbassadorsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t94-3j-EA9">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -309,12 +307,12 @@
                                                     <rect key="frame" x="4" y="4" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael W." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="2Jj-Dx-WkQ">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="Michael W." adjustsFontSizeToFit="NO" autoshrinkMode="none" id="2Jj-Dx-WkQ">
                                                     <rect key="frame" x="51" y="11" width="119" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iWo-BP-JJI">
                                                     <rect key="frame" x="178" y="4" width="40" height="40"/>
@@ -406,6 +404,7 @@
                         <outlet property="tableView" destination="zq2-St-O4k" id="Dy9-Ot-NnH"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0mV-ep-PFA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="nsF-PS-tUF">
                     <connections>
                         <outlet property="delegate" destination="cuu-gE-v5A" id="UdS-ZO-98w"/>
@@ -420,7 +419,6 @@
         <!--Listen Table View Controller-->
         <scene sceneID="6gf-Kl-GTr">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0dN-Wl-0es" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="dqy-L5-N9p" customClass="ListenTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="RAE-uV-xHM">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -442,19 +440,19 @@
                                             <rect key="frame" x="57" y="41" width="25" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Peter Pelberg added a top track" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="Lzv-LB-EaA">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="Peter Pelberg added a top track" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="Lzv-LB-EaA">
                                             <rect key="frame" x="74" y="0.0" width="210" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&quot;Boyfriend&quot; - Justin Bieber" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="1w4-ye-pGR">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="&quot;Boyfriend&quot; - Justin Bieber" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="1w4-ye-pGR">
                                             <rect key="frame" x="74" y="20" width="210" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QX2-v5-kQ2">
                                             <rect key="frame" x="277" y="50" width="19" height="16"/>
@@ -506,42 +504,42 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="fpH-Ph-F7N"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0dN-Wl-0es" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1310" y="-145"/>
         </scene>
         <!--Song View Controller-->
         <scene sceneID="Tni-D7-vm2">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6pp-MG-GOL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="2C0-6h-HDa" customClass="SongViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QNU-CH-dZt">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Boyfriend" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="eOv-Do-zRs">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="Boyfriend" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="eOv-Do-zRs">
                                 <rect key="frame" x="53" y="231" width="215" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Justin Bieber" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="BCb-QO-zoe">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="Justin Bieber" autoshrinkMode="minimumFontSize" id="BCb-QO-zoe">
                                 <rect key="frame" x="53" y="260" width="215" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="t1W-hF-cbQ">
                                 <rect key="frame" x="53" y="8" width="215" height="215"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Believe (2012)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="0QU-jh-2GI">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="Believe (2012)" autoshrinkMode="minimumFontSize" id="0QU-jh-2GI">
                                 <rect key="frame" x="53" y="289" width="215" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8Fm-c3-fOp">
                                 <rect key="frame" x="7" y="320" width="40" height="37"/>
@@ -579,13 +577,13 @@
                         <outlet property="trackTitle" destination="eOv-Do-zRs" id="dym-il-mMI"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6pp-MG-GOL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1784" y="-145"/>
         </scene>
         <!--Explore Table View Controller-->
         <scene sceneID="2Mp-kt-ieW">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FPG-1Z-vTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="exploreTableViewController" id="Jfr-po-rYX" customClass="ExploreTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="s4S-XR-Ppk">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -607,26 +605,26 @@
                                             <rect key="frame" x="57" y="41" width="25" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Wei checked in to" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="EWF-6W-3Se">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="Michael Wei checked in to" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="EWF-6W-3Se">
                                             <rect key="frame" x="74" y="0.0" width="210" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hot Pocket HQ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="kfO-tv-DQj">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="Hot Pocket HQ" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="kfO-tv-DQj">
                                             <rect key="frame" x="74" y="20" width="210" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="13d" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="45z-58-SHg">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="13d" textAlignment="right" autoshrinkMode="minimumFontSize" id="45z-58-SHg">
                                             <rect key="frame" x="282" y="0.0" width="34" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ylZ-2u-C4b">
                                             <rect key="frame" x="277" y="50" width="19" height="16"/>
@@ -680,13 +678,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="LgW-b1-VKc"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FPG-1Z-vTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1310" y="427"/>
         </scene>
         <!--Listen Navigation Controller - Listen-->
         <scene sceneID="A0o-aw-Fnv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="giY-96-j3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="listenNavigationController" id="god-vQ-fK5" customClass="ListenNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Listen" image="music-icon.png" id="Ij2-C5-UhO"/>
                     <toolbarItems/>
@@ -699,13 +697,13 @@
                         <segue destination="dqy-L5-N9p" kind="relationship" relationship="rootViewController" id="bQ4-Cy-plN"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="giY-96-j3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="784" y="-145"/>
         </scene>
         <!--Explore Navigation Controller - Explore-->
         <scene sceneID="koT-o5-TU0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vex-na-kEl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="exploreNavigationController" id="4TQ-Gx-mf7" customClass="ExploreNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Explore" image="places-icon.png" id="K4a-A4-2BJ"/>
                     <toolbarItems/>
@@ -718,13 +716,13 @@
                         <segue destination="Jfr-po-rYX" kind="relationship" relationship="rootViewController" id="W4h-Qs-EyG"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vex-na-kEl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="784" y="427"/>
         </scene>
         <!--Watch Navigation Controller - Watch-->
         <scene sceneID="PV9-vi-AcB">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="P87-vb-uZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="watchNavigationController" id="eB7-NQ-J2m" customClass="WatchNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Watch" image="movie-icon.png" id="i5L-XS-4v9"/>
                     <toolbarItems/>
@@ -737,6 +735,7 @@
                         <segue destination="K9y-hq-mDG" kind="relationship" relationship="rootViewController" id="Dij-ps-s20"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P87-vb-uZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="784" y="1012"/>
         </scene>
@@ -768,115 +767,6 @@
         <image name="videos-section-divider.png" width="320" height="26"/>
         <image name="youtube-icon.png" width="50" height="50"/>
     </resources>
-    <classes>
-        <class className="AccountLinkViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AccountLinkViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="continueButton:"/>
-                <relationship kind="action" name="foursquareConnect:"/>
-                <relationship kind="action" name="spotifyConnect:"/>
-                <relationship kind="action" name="youtubeConnect:"/>
-                <relationship kind="outlet" name="youtubeToggle" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-        <class className="ExploreNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreNavigationController.h"/>
-        </class>
-        <class className="ExploreTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreTableCell.h"/>
-            <relationships>
-                <relationship kind="action" name="heart:"/>
-                <relationship kind="action" name="todo:"/>
-                <relationship kind="outlet" name="checkedInBy" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameOfPlace" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="ExploreTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreTableViewController.h"/>
-        </class>
-        <class className="ListenCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListenCell.h"/>
-            <relationships>
-                <relationship kind="action" name="heart:"/>
-                <relationship kind="action" name="todo:"/>
-                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="trackDetails" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ListenNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListenNavigationController.h"/>
-        </class>
-        <class className="ListenTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListenTableViewController.h"/>
-        </class>
-        <class className="LoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="loginWithFacebook:"/>
-            </relationships>
-        </class>
-        <class className="PiggybackTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PiggybackTabBarController.h"/>
-        </class>
-        <class className="SetAmbassadorCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetAmbassadorCell.h"/>
-            <relationships>
-                <relationship kind="action" name="clickFollowMusic"/>
-                <relationship kind="action" name="clickFollowPlaces"/>
-                <relationship kind="action" name="clickFollowVideos"/>
-                <relationship kind="outlet" name="followMusic" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="followPlaces" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="followVideos" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="SetAmbassadorsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetAmbassadorsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="readyButton:"/>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SongViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SongViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="playTrack:"/>
-                <relationship kind="action" name="setTrackPosition:"/>
-                <relationship kind="outlet" name="albumInfo" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="playButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="positionSlider" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="trackArtist" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="trackCover" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="trackTitle" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="WatchNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WatchNavigationController.h"/>
-        </class>
-        <class className="WatchTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WatchTableCell.h"/>
-            <relationships>
-                <relationship kind="action" name="heart:"/>
-                <relationship kind="action" name="todo:"/>
-                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameOfVideo" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="YouTubeTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/YouTubeTableViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

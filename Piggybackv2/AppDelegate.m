@@ -18,6 +18,7 @@
 #import "PBUser.h"
 #import "PBAmbassador.h"
 #import "SetAmbassadorsViewController.h"
+#import <RestKit/RKRequestSerialization.h>
 
 @interface AppDelegate ()
 
@@ -26,7 +27,7 @@
 @implementation AppDelegate
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
-NSString* RK_BASE_URL = @"http://localhost:5000";
+NSString* RK_BASE_URL = @"http://10.0.4.194:5000";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
@@ -42,13 +43,21 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     PiggybackTabBarController *rootViewController = (PiggybackTabBarController *)self.window.rootViewController;
     
-    // set up restkit
+    // set up restkit object manager
     RKObjectManager* objectManager = [RKObjectManager objectManagerWithBaseURL:[NSURL URLWithString:RK_BASE_URL]];
     objectManager.acceptMIMEType = RKMIMETypeJSON;
     objectManager.serializationMIMEType = RKMIMETypeJSON;
     objectManager.client.requestQueue.showsNetworkActivityIndicatorWhenBusy = YES;
     objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:@"Piggybackv2.sqlite"];
     [RKObjectManager setSharedManager:objectManager];
+    
+    // set up restkit client (for sending requests w/o core data integration)
+    RKClient *client = [RKClient clientWithBaseURLString:RK_BASE_URL];
+    [client setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [RKClient setSharedClient:client];
+
+    // set up remote push notifications
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert];
     
     [self setupRestkitRouting];
     [self setupRestkitMapping];
@@ -268,6 +277,58 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 - (void)fbSessionInvalidated {
     
 }
+
+#pragma mark -
+#pragma mark - Remote notification delegation methods
+
+- (void)sendProviderDeviceToken:(NSString *)deviceToken andUid:(NSNumber *)Uid {
+    NSLog(@"adding device token from app delegate");
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:deviceToken, @"deviceToken", Uid, @"uid", nil];
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    NSError *error = nil;
+    NSString *json = [parser stringFromObject:params error:&error];
+    
+    if (!error) {
+        [[RKClient sharedClient] post:@"/addIphonePushToken" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"DeviceTokenAdded"];
+    }
+}
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *token = [deviceToken description];
+    token = [token stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"device token obtained: %@", token);
+    
+    // store device token in defaults if it doesn't exist or it changed
+    if (![defaults objectForKey:@"DeviceToken"] || ![[defaults objectForKey:@"DeviceToken"] isEqualToString:token]) {
+        [defaults setObject:token forKey:@"DeviceToken"];
+        
+        // add to DB if already have UID
+        if ([defaults objectForKey:@"UID"]) {
+            [self sendProviderDeviceToken:token andUid:[defaults objectForKey:@"UID"]];
+        } else {
+            [defaults setObject:[NSNumber numberWithBool:NO] forKey:@"DeviceTokenAdded"];
+            NSLog(@"setting device token added: %@", [defaults objectForKey:@"DeviceTokenAdded"]);
+        }
+    }
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Error in registration. Error: %@", error);
+}
+
+#pragma mark - RKRequestDelegate methods
+
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {  
+    NSLog(@"objects from push notification are %@",[response bodyAsString]);
+}
+
+- (void)request:(RKRequest *)request didFailLoadWithError:(NSError *)error {
+    NSLog(@"restkit failed with error from push notification: %@", error);
+}
+
 #pragma mark -
 #pragma mark - AppDelegate methods
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -282,7 +343,6 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 //    [[SPSession sharedSession] logout:^{}];
 //    [self.foursquare invalidateSession];
-    [_facebook logout];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

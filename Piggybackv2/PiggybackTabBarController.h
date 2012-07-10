@@ -11,7 +11,7 @@
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData.h>
 
-@interface PiggybackTabBarController : UITabBarController <FBRequestDelegate, RKObjectLoaderDelegate>
+@interface PiggybackTabBarController : UITabBarController <FBRequestDelegate, RKObjectLoaderDelegate, RKRequestDelegate>
 
 @property int currentFbAPICall;
 

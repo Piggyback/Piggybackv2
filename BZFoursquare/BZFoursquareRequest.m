@@ -56,7 +56,7 @@ static NSString * _BZGetMIMEBoundary() {
     NSDate *date = [NSDate date];
     NSTimeInterval ti = [date timeIntervalSinceReferenceDate];
     NSInteger microSec = floor((ti - floor(ti)) * 1000000.0);
-    return [NSString stringWithFormat:@"Multipart_%@%06ld", [formatter stringFromDate:date], microSec];
+    return [NSString stringWithFormat:@"Multipart_%@%06d", [formatter stringFromDate:date], microSec];
 }
 
 @interface BZFoursquareRequest ()

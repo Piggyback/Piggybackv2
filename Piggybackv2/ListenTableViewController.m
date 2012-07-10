@@ -57,6 +57,7 @@
         NSLog(@"user: %@", user);
     }];
     self.topList = [SPToplist toplistForUserWithName:@"ptpells" inSession:[SPSession sharedSession]];
+//    self.topList = [SPToplist toplistForUserWithName:@"kimikul" inSession:[SPSession sharedSession]];
 }
 
 
