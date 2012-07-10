@@ -154,13 +154,13 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 - (void)foursquareDidAuthorize:(BZFoursquare *)foursquare {
     NSLog(@"foursquare did authorize");
     
-    [(ExploreTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:1] topViewController] getFoursquareSelf];
+//    [(ExploreTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:1] topViewController] getFoursquareSelf];
     
     // first time you log in, get foursquare friends and store usernames into friends core data db
-    [(ExploreTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:1] topViewController] getFoursquareFriends];
+//    [(ExploreTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:1] topViewController] getFoursquareFriends];
     
     // get foursquare friend checkins
-    [(ExploreTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:1] topViewController] getRecentFriendCheckins];
+//    [(ExploreTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:1] topViewController] getRecentFriendCheckins];
 }
 
 - (void)foursquareDidNotAuthorize:(BZFoursquare *)foursquare error:(NSDictionary *)errorInfo {
@@ -180,8 +180,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 	// Invoked by SPSession after a successful login.
     NSLog(@"logged into spotify");
     
-    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
-    [(ListenTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] topViewController] getFriendsTopTracks];
+//    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
+//    [(ListenTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] topViewController] getFriendsTopTracks];
 }
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error; {
@@ -293,8 +293,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
-    [(ListenTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] topViewController] getFriendsTopTracks];
+//    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
+//    [(ListenTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] topViewController] getFriendsTopTracks];
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }

@@ -154,9 +154,9 @@
     [super viewDidLoad];
     
     // get videos from youtube ambassadors
-    NSMutableSet *youtubeAmbassadors = [NSMutableSet setWithObjects:@"nerdsinnewyork",@"mlgao",nil];
-    YouTubeTableViewController* youtubeVC = (YouTubeTableViewController*)[[self.viewControllers objectAtIndex:2] topViewController];
-    [youtubeVC getFavoritesFromAmbassadors:youtubeAmbassadors];
+//    NSMutableSet *youtubeAmbassadors = [NSMutableSet setWithObjects:@"nerdsinnewyork",@"mlgao",nil];
+//    YouTubeTableViewController* youtubeVC = (YouTubeTableViewController*)[[self.viewControllers objectAtIndex:2] topViewController];
+//    [youtubeVC getFavoritesFromAmbassadors:youtubeAmbassadors];
     
 }
 
