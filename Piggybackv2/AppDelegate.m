@@ -18,6 +18,7 @@
 #import "PBUser.h"
 #import "PBAmbassador.h"
 #import "SetAmbassadorsViewController.h"
+#import "HomeViewController.h"
 
 @interface AppDelegate ()
 
@@ -180,8 +181,10 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 	// Invoked by SPSession after a successful login.
     NSLog(@"logged into spotify");
     
-//    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
-//    [(ListenTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] topViewController] getFriendsTopTracks];
+    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
+    
+    // get top tracks from friends
+//    [(HomeViewController*)[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] getFriendsTopTracks];
 }
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error; {

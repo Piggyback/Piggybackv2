@@ -15,4 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *videosFilterButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+- (void)getFriendsTopTracks;
+
 @end

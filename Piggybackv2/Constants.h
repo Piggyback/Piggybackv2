@@ -16,6 +16,7 @@ extern float const VIDEOTHUMBNAILMARGIN;
 extern float const VIDEONAMETEXTWIDTH;
 extern float const VIDEOTABLEROWHEIGHT;
 extern float const SETAMBASSADORSROWHEIGHT;
+extern float const HOMETABLEROWHEIGHT;
 
 typedef enum fbApiCall {
     fbAPIGraphMeFromLogin,
