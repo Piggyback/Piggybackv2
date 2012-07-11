@@ -88,8 +88,6 @@
 		C4501E6215A77C17005B7253 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4501E5415A77C17005B7253 /* FBDialog.bundle */; };
 		C4501E6315A77C17005B7253 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4501E5A15A77C17005B7253 /* libfacebook_ios_sdk.a */; };
 		C4501E7E15A77E07005B7253 /* SPLoginResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4501E7D15A77E07005B7253 /* SPLoginResources.bundle */; };
-		F9074292159C1A7300CC168E /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F9074291159C1A7300CC168E /* PBUser.m */; };
-		F9074295159C1A7400CC168E /* PBAmbassador.m in Sources */ = {isa = PBXBuildFile; fileRef = F9074294159C1A7400CC168E /* PBAmbassador.m */; };
 		F91B3D9B15A6340300D8E815 /* SetAmbassadorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F91B3D9A15A6340300D8E815 /* SetAmbassadorCell.m */; };
 		F91B3D9E15A6365100D8E815 /* SetAmbassadorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F91B3D9D15A6365100D8E815 /* SetAmbassadorsViewController.m */; };
 		F91B3DAF15A636FD00D8E815 /* follow-header.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3D9F15A636FD00D8E815 /* follow-header.png */; };
@@ -167,6 +165,8 @@
 		F9C0976B1594E5D8000A0541 /* olstein-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */; };
 		F9C0976C1594E5D8000A0541 /* yean-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097681594E5D8000A0541 /* yean-rounded-corners.png */; };
 		F9D4C6AD15AE02790090EA6C /* PBMusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D4C6AC15AE02790090EA6C /* PBMusicItem.m */; };
+		F9D4C6B315AE446D0090EA6C /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D4C6B215AE446D0090EA6C /* PBUser.m */; };
+		F9D4C6B615AE446E0090EA6C /* PBAmbassador.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D4C6B515AE446D0090EA6C /* PBAmbassador.m */; };
 		F9FE6E601593D0030031EC49 /* ListenNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE6E5F1593D0030031EC49 /* ListenNavigationController.m */; };
 		F9FE6E631593D0110031EC49 /* WatchNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE6E621593D0110031EC49 /* WatchNavigationController.m */; };
 		F9FE6E661593D0270031EC49 /* ExploreNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE6E651593D0270031EC49 /* ExploreNavigationController.m */; };
@@ -381,10 +381,6 @@
 		C4501E5F15A77C17005B7253 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		C4501E6015A77C17005B7253 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		C4501E7D15A77E07005B7253 /* SPLoginResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SPLoginResources.bundle; path = "spotify-ios-sdk/iOS Library/SPLoginResources.bundle"; sourceTree = SOURCE_ROOT; };
-		F9074290159C1A7300CC168E /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
-		F9074291159C1A7300CC168E /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
-		F9074293159C1A7400CC168E /* PBAmbassador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBAmbassador.h; path = Piggybackv2/PBAmbassador.h; sourceTree = "<group>"; };
-		F9074294159C1A7400CC168E /* PBAmbassador.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBAmbassador.m; path = Piggybackv2/PBAmbassador.m; sourceTree = "<group>"; };
 		F91B3D9915A6340300D8E815 /* SetAmbassadorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorCell.h; sourceTree = "<group>"; };
 		F91B3D9A15A6340300D8E815 /* SetAmbassadorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAmbassadorCell.m; sourceTree = "<group>"; };
 		F91B3D9C15A6365100D8E815 /* SetAmbassadorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorsViewController.h; sourceTree = "<group>"; };
@@ -474,6 +470,10 @@
 		F9C097681594E5D8000A0541 /* yean-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yean-rounded-corners.png"; sourceTree = "<group>"; };
 		F9D4C6AB15AE02790090EA6C /* PBMusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicItem.h; path = Piggybackv2/PBMusicItem.h; sourceTree = "<group>"; };
 		F9D4C6AC15AE02790090EA6C /* PBMusicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicItem.m; path = Piggybackv2/PBMusicItem.m; sourceTree = "<group>"; };
+		F9D4C6B115AE446D0090EA6C /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
+		F9D4C6B215AE446D0090EA6C /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
+		F9D4C6B415AE446D0090EA6C /* PBAmbassador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBAmbassador.h; path = Piggybackv2/PBAmbassador.h; sourceTree = "<group>"; };
+		F9D4C6B515AE446D0090EA6C /* PBAmbassador.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBAmbassador.m; path = Piggybackv2/PBAmbassador.m; sourceTree = "<group>"; };
 		F9FE6E5E1593D0030031EC49 /* ListenNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenNavigationController.h; sourceTree = "<group>"; };
 		F9FE6E5F1593D0030031EC49 /* ListenNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenNavigationController.m; sourceTree = "<group>"; };
 		F9FE6E611593D0110031EC49 /* WatchNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchNavigationController.h; sourceTree = "<group>"; };
@@ -682,10 +682,10 @@
 		F93C2F78159A514000FACE47 /* PB Core Data Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F9074293159C1A7400CC168E /* PBAmbassador.h */,
-				F9074294159C1A7400CC168E /* PBAmbassador.m */,
-				F9074290159C1A7300CC168E /* PBUser.h */,
-				F9074291159C1A7300CC168E /* PBUser.m */,
+				F9D4C6B415AE446D0090EA6C /* PBAmbassador.h */,
+				F9D4C6B515AE446D0090EA6C /* PBAmbassador.m */,
+				F9D4C6B115AE446D0090EA6C /* PBUser.h */,
+				F9D4C6B215AE446D0090EA6C /* PBUser.m */,
 				F91B3DCB15A6502D00D8E815 /* PBFriend.h */,
 				F91B3DCC15A6502E00D8E815 /* PBFriend.m */,
 				F9D4C6AB15AE02790090EA6C /* PBMusicItem.h */,
@@ -1130,8 +1130,6 @@
 				F9C097641594E500000A0541 /* WatchTableCell.m in Sources */,
 				F99418F11598BE0C00A4B08B /* LoginViewController.m in Sources */,
 				F93C2F77159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld in Sources */,
-				F9074292159C1A7300CC168E /* PBUser.m in Sources */,
-				F9074295159C1A7400CC168E /* PBAmbassador.m in Sources */,
 				F91B3D9B15A6340300D8E815 /* SetAmbassadorCell.m in Sources */,
 				F91B3D9E15A6365100D8E815 /* SetAmbassadorsViewController.m in Sources */,
 				F91B3DCD15A6502E00D8E815 /* PBFriend.m in Sources */,
@@ -1139,6 +1137,8 @@
 				F99F2CB415ACA3F600B5EB36 /* HomeViewController.m in Sources */,
 				F99F2CB715ACB2CF00B5EB36 /* HomeTableCell.m in Sources */,
 				F9D4C6AD15AE02790090EA6C /* PBMusicItem.m in Sources */,
+				F9D4C6B315AE446D0090EA6C /* PBUser.m in Sources */,
+				F9D4C6B615AE446E0090EA6C /* PBAmbassador.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

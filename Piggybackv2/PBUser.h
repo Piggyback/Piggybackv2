@@ -2,19 +2,14 @@
 //  PBUser.h
 //  Piggybackv2
 //
-//  Created by Kimberly Hsiao on 6/28/12.
+//  Created by Kimberly Hsiao on 7/11/12.
 //  Copyright (c) 2012 Calimucho. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "FBImageToDataTransformer.h"
 
 @class PBAmbassador;
-
-//@interface UserFBImageToDataTransformer : NSValueTransformer {
-//}
-//@end
 
 @interface PBUser : NSManagedObject
 
@@ -22,12 +17,14 @@
 @property (nonatomic, retain) NSNumber * fbId;
 @property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSNumber * foursquareId;
+@property (nonatomic, retain) NSNumber * isPiggybackUser;
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSString * spotifyUsername;
+@property (nonatomic, retain) id thumbnail;
 @property (nonatomic, retain) NSNumber * uid;
 @property (nonatomic, retain) NSString * youtubeUsername;
-@property (nonatomic, retain) NSNumber * isPiggybackUser;
-@property (nonatomic, retain) UIImage * thumbnail;
+@property (nonatomic, retain) NSDate * dateAdded;
+@property (nonatomic, retain) NSDate * dateBecamePbUser;
 @property (nonatomic, retain) NSSet *ambassadors;
 @end
 

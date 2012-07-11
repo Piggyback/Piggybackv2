@@ -27,8 +27,8 @@
 
 @implementation AppDelegate
 
-NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
-//NSString* RK_BASE_URL = @"http://localhost:5000";
+//NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
+NSString* RK_BASE_URL = @"http://localhost:5000";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
@@ -109,12 +109,12 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
     // user mapping
     userMapping.primaryKeyAttribute = @"uid";
-    [userMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",nil];
+    [userMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
     [userMapping mapRelationship:@"ambassadors" withMapping:ambassadorMapping];
     [objectManager.mappingProvider setMapping:userMapping forKeyPath:@"PBUser"];
     
     // ambassador mapping
-    [ambassadorMapping mapAttributes:@"followerUid",@"ambasadorUid",@"ambassadorType",nil];
+    [ambassadorMapping mapAttributes:@"followerUid",@"ambasadorUid",@"ambassadorType",@"dateAdded",nil];
     [ambassadorMapping mapRelationship:@"follower" withMapping:userMapping];
     [ambassadorMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerId"];
     [objectManager.mappingProvider setMapping:ambassadorMapping forKeyPath:@"ambassador"];
@@ -131,12 +131,12 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKObjectMapping *musicItemSerializationMapping = [RKObjectMapping mappingForClassWithName:@"PBMusicItem"];
 
     // user serialization
-    [userSerializationMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",nil];
+    [userSerializationMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
     [userSerializationMapping mapKeyPath:@"ambassadors" toRelationship:@"ambassadors" withMapping:ambassadorSerializationMapping];
     [objectManager.mappingProvider setSerializationMapping:userSerializationMapping forClass:[PBUser class]];
     
     // ambassador serialization
-    [ambassadorSerializationMapping mapAttributes:@"followerUid",@"ambassadorUid",@"ambassadorType",nil];
+    [ambassadorSerializationMapping mapAttributes:@"followerUid",@"ambassadorUid",@"ambassadorType",@"dateAdded",nil];
     [objectManager.mappingProvider setSerializationMapping:ambassadorSerializationMapping forClass:[PBAmbassador class]];
     
     // musicItem serialization
