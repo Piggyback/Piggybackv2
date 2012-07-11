@@ -166,6 +166,7 @@
 		F9C0976A1594E5D8000A0541 /* josh-lu-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */; };
 		F9C0976B1594E5D8000A0541 /* olstein-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */; };
 		F9C0976C1594E5D8000A0541 /* yean-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097681594E5D8000A0541 /* yean-rounded-corners.png */; };
+		F9D4C6AD15AE02790090EA6C /* PBMusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D4C6AC15AE02790090EA6C /* PBMusicItem.m */; };
 		F9FE6E601593D0030031EC49 /* ListenNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE6E5F1593D0030031EC49 /* ListenNavigationController.m */; };
 		F9FE6E631593D0110031EC49 /* WatchNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE6E621593D0110031EC49 /* WatchNavigationController.m */; };
 		F9FE6E661593D0270031EC49 /* ExploreNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE6E651593D0270031EC49 /* ExploreNavigationController.m */; };
@@ -471,6 +472,8 @@
 		F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "josh-lu-rounded-corners.png"; sourceTree = "<group>"; };
 		F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olstein-rounded-corners.png"; sourceTree = "<group>"; };
 		F9C097681594E5D8000A0541 /* yean-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yean-rounded-corners.png"; sourceTree = "<group>"; };
+		F9D4C6AB15AE02790090EA6C /* PBMusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicItem.h; path = Piggybackv2/PBMusicItem.h; sourceTree = "<group>"; };
+		F9D4C6AC15AE02790090EA6C /* PBMusicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicItem.m; path = Piggybackv2/PBMusicItem.m; sourceTree = "<group>"; };
 		F9FE6E5E1593D0030031EC49 /* ListenNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenNavigationController.h; sourceTree = "<group>"; };
 		F9FE6E5F1593D0030031EC49 /* ListenNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenNavigationController.m; sourceTree = "<group>"; };
 		F9FE6E611593D0110031EC49 /* WatchNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchNavigationController.h; sourceTree = "<group>"; };
@@ -685,6 +688,8 @@
 				F9074291159C1A7300CC168E /* PBUser.m */,
 				F91B3DCB15A6502D00D8E815 /* PBFriend.h */,
 				F91B3DCC15A6502E00D8E815 /* PBFriend.m */,
+				F9D4C6AB15AE02790090EA6C /* PBMusicItem.h */,
+				F9D4C6AC15AE02790090EA6C /* PBMusicItem.m */,
 			);
 			name = "PB Core Data Classes";
 			sourceTree = "<group>";
@@ -1133,6 +1138,7 @@
 				F92E8D5515A78226002DFCB1 /* FBImageToDataTransformer.m in Sources */,
 				F99F2CB415ACA3F600B5EB36 /* HomeViewController.m in Sources */,
 				F99F2CB715ACB2CF00B5EB36 /* HomeTableCell.m in Sources */,
+				F9D4C6AD15AE02790090EA6C /* PBMusicItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

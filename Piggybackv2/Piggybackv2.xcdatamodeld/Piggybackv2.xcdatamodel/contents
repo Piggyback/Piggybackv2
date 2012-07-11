@@ -5,7 +5,7 @@
         <attribute name="ambassadorUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="followerUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="follower" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="ambassadors" inverseEntity="PBUser" syncable="YES"/>
+        <relationship name="followers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="ambassadors" inverseEntity="PBUser" syncable="YES"/>
     </entity>
     <entity name="PBFriend" representedClassName="PBFriend" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,6 +16,14 @@
         <attribute name="spotifyUsername" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Transformable" valueTransformerName="FBImageToDataTransformer" syncable="YES"/>
         <attribute name="youtubeUsername" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="PBMusicItem" representedClassName="PBMusicItem" syncable="YES">
+        <attribute name="albumTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="albumYear" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="artistName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="musicItemId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="songTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spotifyUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="PBUser" representedClassName="PBUser" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -28,11 +36,12 @@
         <attribute name="thumbnail" optional="YES" attributeType="Transformable" valueTransformerName="FBImageToDataTransformer" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="youtubeUsername" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="ambassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBAmbassador" inverseName="follower" inverseEntity="PBAmbassador" syncable="YES"/>
+        <relationship name="ambassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBAmbassador" inverseName="followers" inverseEntity="PBAmbassador" syncable="YES"/>
     </entity>
     <elements>
         <element name="PBAmbassador" positionX="403" positionY="171" width="128" height="120"/>
-        <element name="PBFriend" positionX="286" positionY="54" width="128" height="150"/>
-        <element name="PBUser" positionX="160" positionY="192" width="128" height="210"/>
+        <element name="PBFriend" positionX="241" positionY="36" width="128" height="150"/>
+        <element name="PBUser" positionX="108" positionY="222" width="128" height="210"/>
+        <element name="PBMusicItem" positionX="-90" positionY="117" width="128" height="135"/>
     </elements>
 </model>

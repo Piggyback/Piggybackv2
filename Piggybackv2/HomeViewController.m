@@ -12,8 +12,7 @@
 #import "CocoaLibSpotify.h"
 #import "PBUser.h"
 #import "PBAmbassador.h"
-#import <RestKit/RestKit.h>
-#import <RestKit/CoreData.h>
+#import "PBMusicItem.h"
 
 @interface HomeViewController ()
 @property (nonatomic, strong) NSMutableSet* selectedFilters;
@@ -122,7 +121,17 @@
     
     if ([keyPath isEqualToString:@"topList.tracks"]) {
         NSLog(@"peter's top tracks: %@", self.topList.tracks);
-        self.items = [self.topList.tracks mutableCopy];
+//        self.items = [self.topList.tracks mutableCopy];
+        for (SPTrack* track in self.topList.tracks) {
+            PBMusicItem* newMusicItem = [PBMusicItem object];
+            newMusicItem.artistName = [[[track artists] valueForKey:@"name"] componentsJoinedByString:@","];
+            newMusicItem.songTitle = track.name;
+            newMusicItem.albumTitle = track.album.name;
+            newMusicItem.albumYear = [NSNumber numberWithUnsignedInteger:track.album.year];
+            newMusicItem.spotifyUrl = [track.spotifyURL absoluteString];
+            
+            [[RKObjectManager sharedManager] postObject:newMusicItem delegate:self];
+        }
     }
 }
 
@@ -176,6 +185,21 @@
     return elapsedTime;
 }
 
+#pragma mark - RKObjectLoaderDelegate methods
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
+    NSLog(@"objects from user insert are %@",objects);
+    
+}
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
+    NSLog(@"restkit failed with error from creating new music item");
+}
+
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
+    NSLog(@"Retrieved JSON2: %@", [response bodyAsString]);
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -193,7 +217,10 @@
     static NSString *CellIdentifier = @"homeTableCell";
     HomeTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-    cell.nameOfItem.text = [NSString stringWithFormat:@"\"%@\" - %@", [[self.items objectAtIndex:indexPath.row] name], [[[[self.items objectAtIndex:indexPath.row] artists] valueForKey:@"name"] componentsJoinedByString:@","]];
+    SPTrack* track = [self.items objectAtIndex:indexPath.row];
+    NSLog(@"track is %@",track);
+    
+    cell.nameOfItem.text = [NSString stringWithFormat:@"\"%@\" - %@", [track name], [[[track artists] valueForKey:@"name"] componentsJoinedByString:@","]];
     
     return cell;
 }

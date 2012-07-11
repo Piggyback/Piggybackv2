@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RestKit/RestKit.h>
+#import <RestKit/CoreData.h>
 
-@interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RKObjectLoaderDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *placesFilterButton;
 @property (weak, nonatomic) IBOutlet UIButton *musicFilterButton;
