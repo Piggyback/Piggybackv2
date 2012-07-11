@@ -76,7 +76,7 @@
         if (track != nil) {
             if (!self.playButton.selected) {
                 self.playButton.selected = YES;
-                [SPAsyncLoading waitUntilLoaded:track then:^(NSArray *tracks) {
+                [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
                     [self.playbackManager playTrack:track callback:^(NSError *error) {
                         if (error) {
                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Play Track"

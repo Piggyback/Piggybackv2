@@ -10,8 +10,9 @@
 #import "BZFoursquare.h"
 #import "CocoaLibSpotify.h"
 #import "FBConnect.h"
+#import <RestKit/RestKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, BZFoursquareSessionDelegate, SPSessionDelegate, FBSessionDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, BZFoursquareSessionDelegate, SPSessionDelegate, FBSessionDelegate, RKRequestDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) BZFoursquare *foursquare;
