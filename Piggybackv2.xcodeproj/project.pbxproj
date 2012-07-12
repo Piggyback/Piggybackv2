@@ -86,6 +86,7 @@
 		C4002B5715ACD3C4002F05FC /* FBConnect.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4002B4815ACD3C4002F05FC /* FBConnect.bundle */; };
 		C4002B5815ACD3C4002F05FC /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4002B4A15ACD3C4002F05FC /* FBDialog.bundle */; };
 		C4002B5915ACD3C4002F05FC /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4002B5015ACD3C4002F05FC /* libfacebook_ios_sdk.a */; };
+		C410EC9D15AE709100E0FE11 /* PBMusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C410EC9C15AE709100E0FE11 /* PBMusicItem.m */; };
 		C422340515ACE513005151A3 /* SPLoginResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C422340415ACE513005151A3 /* SPLoginResources.bundle */; };
 		C422341515ACE528005151A3 /* libCocoaLibSpotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C422341015ACE515005151A3 /* libCocoaLibSpotify.a */; };
 		F9074292159C1A7300CC168E /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F9074291159C1A7300CC168E /* PBUser.m */; };
@@ -172,6 +173,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C410ECAD15AE71EF00E0FE11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C410ECA115AE71EF00E0FE11 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D1614564E810060A5C5;
+			remoteInfo = RestKit;
+		};
+		C410ECAF15AE71EF00E0FE11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C410ECA115AE71EF00E0FE11 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D2614564E820060A5C5;
+			remoteInfo = RestKitTests;
+		};
+		C410ECB115AE71EF00E0FE11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C410ECA115AE71EF00E0FE11 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E62145651060060A5C5;
+			remoteInfo = RestKitFramework;
+		};
+		C410ECB315AE71EF00E0FE11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C410ECA115AE71EF00E0FE11 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E78145651060060A5C5;
+			remoteInfo = RestKitFrameworkTests;
+		};
+		C410ECB515AE71EF00E0FE11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C410ECA115AE71EF00E0FE11 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 259C301615128079003066A2;
+			remoteInfo = RestKitResources;
+		};
 		C422340F15ACE515005151A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C422340615ACE515005151A3 /* CocoaLibSpotify iOS Library.xcodeproj */;
@@ -192,41 +228,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 50AF49DB1439CBFE00E4A5EF;
 			remoteInfo = CocoaLibSpotify;
-		};
-		C43A953F15A8B5630008A593 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C43A953715A8B5630008A593 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 25160D1614564E810060A5C5;
-			remoteInfo = RestKit;
-		};
-		C43A954115A8B5630008A593 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C43A953715A8B5630008A593 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 25160D2614564E820060A5C5;
-			remoteInfo = RestKitTests;
-		};
-		C43A954315A8B5630008A593 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C43A953715A8B5630008A593 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 25160E62145651060060A5C5;
-			remoteInfo = RestKitFramework;
-		};
-		C43A954515A8B5630008A593 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C43A953715A8B5630008A593 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 25160E78145651060060A5C5;
-			remoteInfo = RestKitFrameworkTests;
-		};
-		C43A954715A8B5630008A593 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C43A953715A8B5630008A593 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 259C301615128079003066A2;
-			remoteInfo = RestKitResources;
 		};
 		F93C2F89159A5A6700FACE47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -377,9 +378,11 @@
 		C4002B5415ACD3C4002F05FC /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		C4002B5515ACD3C4002F05FC /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		C4002B5615ACD3C4002F05FC /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		C410EC9B15AE709100E0FE11 /* PBMusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBMusicItem.h; sourceTree = "<group>"; };
+		C410EC9C15AE709100E0FE11 /* PBMusicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBMusicItem.m; sourceTree = "<group>"; };
+		C410ECA115AE71EF00E0FE11 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		C422340415ACE513005151A3 /* SPLoginResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SPLoginResources.bundle; path = "spotify-ios-sdk/iOS Library/SPLoginResources.bundle"; sourceTree = SOURCE_ROOT; };
 		C422340615ACE515005151A3 /* CocoaLibSpotify iOS Library.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CocoaLibSpotify iOS Library.xcodeproj"; path = "spotify-ios-sdk/iOS Library/CocoaLibSpotify iOS Library.xcodeproj"; sourceTree = "<group>"; };
-		C43A953715A8B5630008A593 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		F9074290159C1A7300CC168E /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
 		F9074291159C1A7300CC168E /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
 		F9074293159C1A7400CC168E /* PBAmbassador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBAmbassador.h; path = Piggybackv2/PBAmbassador.h; sourceTree = "<group>"; };
@@ -511,8 +514,8 @@
 			isa = PBXGroup;
 			children = (
 				C422340615ACE515005151A3 /* CocoaLibSpotify iOS Library.xcodeproj */,
+				C410ECA115AE71EF00E0FE11 /* RestKit.xcodeproj */,
 				C4002B4615ACD3C4002F05FC /* facebook-ios-sdk */,
-				C43A953715A8B5630008A593 /* RestKit.xcodeproj */,
 				3E9A5D4F1593C92D00635873 /* BZFoursquare */,
 			);
 			name = Libraries;
@@ -655,23 +658,23 @@
 			path = "facebook-ios-sdk";
 			sourceTree = "<group>";
 		};
+		C410ECA215AE71EF00E0FE11 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C410ECAE15AE71EF00E0FE11 /* libRestKit.a */,
+				C410ECB015AE71EF00E0FE11 /* RestKitTests.octest */,
+				C410ECB215AE71EF00E0FE11 /* RestKit.framework */,
+				C410ECB415AE71EF00E0FE11 /* RestKitFrameworkTests.octest */,
+				C410ECB615AE71EF00E0FE11 /* RestKitResources.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C422340715ACE515005151A3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				C422341015ACE515005151A3 /* libCocoaLibSpotify.a */,
 				C422341215ACE515005151A3 /* CocoaLSTests.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		C43A953815A8B5630008A593 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C43A954015A8B5630008A593 /* libRestKit.a */,
-				C43A954215A8B5630008A593 /* RestKitTests.octest */,
-				C43A954415A8B5630008A593 /* RestKit.framework */,
-				C43A954615A8B5630008A593 /* RestKitFrameworkTests.octest */,
-				C43A954815A8B5630008A593 /* RestKitResources.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -685,6 +688,8 @@
 				F9074291159C1A7300CC168E /* PBUser.m */,
 				F91B3DCB15A6502D00D8E815 /* PBFriend.h */,
 				F91B3DCC15A6502E00D8E815 /* PBFriend.m */,
+				C410EC9B15AE709100E0FE11 /* PBMusicItem.h */,
+				C410EC9C15AE709100E0FE11 /* PBMusicItem.m */,
 			);
 			name = "PB Core Data Classes";
 			sourceTree = "<group>";
@@ -871,12 +876,12 @@
 					ProjectRef = C422340615ACE515005151A3 /* CocoaLibSpotify iOS Library.xcodeproj */;
 				},
 				{
-					ProductGroup = C43A953815A8B5630008A593 /* Products */;
-					ProjectRef = C43A953715A8B5630008A593 /* RestKit.xcodeproj */;
-				},
-				{
 					ProductGroup = F93C2F7F159A5A6600FACE47 /* Products */;
 					ProjectRef = F93C2F7E159A5A6600FACE47 /* RestKit.xcodeproj */;
+				},
+				{
+					ProductGroup = C410ECA215AE71EF00E0FE11 /* Products */;
+					ProjectRef = C410ECA115AE71EF00E0FE11 /* RestKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -887,6 +892,41 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		C410ECAE15AE71EF00E0FE11 /* libRestKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKit.a;
+			remoteRef = C410ECAD15AE71EF00E0FE11 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C410ECB015AE71EF00E0FE11 /* RestKitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitTests.octest;
+			remoteRef = C410ECAF15AE71EF00E0FE11 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C410ECB215AE71EF00E0FE11 /* RestKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RestKit.framework;
+			remoteRef = C410ECB115AE71EF00E0FE11 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C410ECB415AE71EF00E0FE11 /* RestKitFrameworkTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitFrameworkTests.octest;
+			remoteRef = C410ECB315AE71EF00E0FE11 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C410ECB615AE71EF00E0FE11 /* RestKitResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitResources.bundle;
+			remoteRef = C410ECB515AE71EF00E0FE11 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		C422341015ACE515005151A3 /* libCocoaLibSpotify.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -899,41 +939,6 @@
 			fileType = wrapper.application;
 			path = CocoaLSTests.app;
 			remoteRef = C422341115ACE515005151A3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C43A954015A8B5630008A593 /* libRestKit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRestKit.a;
-			remoteRef = C43A953F15A8B5630008A593 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C43A954215A8B5630008A593 /* RestKitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RestKitTests.octest;
-			remoteRef = C43A954115A8B5630008A593 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C43A954415A8B5630008A593 /* RestKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RestKit.framework;
-			remoteRef = C43A954315A8B5630008A593 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C43A954615A8B5630008A593 /* RestKitFrameworkTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RestKitFrameworkTests.octest;
-			remoteRef = C43A954515A8B5630008A593 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C43A954815A8B5630008A593 /* RestKitResources.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RestKitResources.bundle;
-			remoteRef = C43A954715A8B5630008A593 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F93C2F8A159A5A6700FACE47 /* libRestKit.a */ = {
@@ -1133,6 +1138,7 @@
 				F92E8D5515A78226002DFCB1 /* FBImageToDataTransformer.m in Sources */,
 				F99F2CB415ACA3F600B5EB36 /* HomeViewController.m in Sources */,
 				F99F2CB715ACB2CF00B5EB36 /* HomeTableCell.m in Sources */,
+				C410EC9D15AE709100E0FE11 /* PBMusicItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
