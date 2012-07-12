@@ -38,7 +38,7 @@
         <attribute name="actionType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="myMusicNewsId" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="follower" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" syncable="YES"/>
+        <relationship name="follower" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="myMusicNews" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="myMusicActivity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBMyMusicActivity" inverseName="myMusicNews" inverseEntity="PBMyMusicActivity" syncable="YES"/>
     </entity>
     <entity name="PBUser" representedClassName="PBUser" syncable="YES">
@@ -55,12 +55,13 @@
         <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="youtubeUsername" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="ambassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBAmbassador" inverseName="followers" inverseEntity="PBAmbassador" syncable="YES"/>
+        <relationship name="myMusicNews" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBMyMusicNews" inverseName="follower" inverseEntity="PBMyMusicNews" syncable="YES"/>
     </entity>
     <elements>
         <element name="PBAmbassador" positionX="403" positionY="171" width="128" height="120"/>
         <element name="PBFriend" positionX="286" positionY="54" width="128" height="150"/>
         <element name="PBMusicItem" positionX="-90" positionY="117" width="128" height="150"/>
-        <element name="PBUser" positionX="160" positionY="192" width="128" height="240"/>
+        <element name="PBUser" positionX="160" positionY="192" width="128" height="255"/>
         <element name="PBMyMusicActivity" positionX="160" positionY="192" width="128" height="120"/>
         <element name="PBMyMusicNews" positionX="160" positionY="192" width="128" height="120"/>
     </elements>
