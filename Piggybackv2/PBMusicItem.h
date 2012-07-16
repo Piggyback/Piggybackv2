@@ -12,11 +12,11 @@
 
 @interface PBMusicItem : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * musicItemId;
-@property (nonatomic, retain) NSString * artistName;
-@property (nonatomic, retain) NSString * songTitle;
 @property (nonatomic, retain) NSString * albumTitle;
 @property (nonatomic, retain) NSNumber * albumYear;
+@property (nonatomic, retain) NSString * artistName;
+@property (nonatomic, retain) NSNumber * musicItemId;
+@property (nonatomic, retain) NSString * songTitle;
 @property (nonatomic, retain) NSString * spotifyUrl;
 
 @end

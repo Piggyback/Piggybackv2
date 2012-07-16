@@ -11,11 +11,11 @@
 
 @implementation PBMusicItem
 
-@dynamic musicItemId;
-@dynamic artistName;
-@dynamic songTitle;
 @dynamic albumTitle;
 @dynamic albumYear;
+@dynamic artistName;
+@dynamic musicItemId;
+@dynamic songTitle;
 @dynamic spotifyUrl;
 
 @end
