@@ -2,16 +2,20 @@
 //  PBUser.m
 //  Piggybackv2
 //
-//  Created by Kimberly Hsiao on 7/11/12.
+//  Created by Kimberly Hsiao on 7/16/12.
 //  Copyright (c) 2012 Calimucho. All rights reserved.
 //
 
 #import "PBUser.h"
 #import "PBAmbassador.h"
+#import "PBMusicActivity.h"
+#import "PBMusicNews.h"
 
 
 @implementation PBUser
 
+@dynamic dateAdded;
+@dynamic dateBecamePbUser;
 @dynamic email;
 @dynamic fbId;
 @dynamic firstName;
@@ -22,8 +26,8 @@
 @dynamic thumbnail;
 @dynamic uid;
 @dynamic youtubeUsername;
-@dynamic dateAdded;
-@dynamic dateBecamePbUser;
 @dynamic ambassadors;
+@dynamic musicActivity;
+@dynamic myActions;
 
 @end

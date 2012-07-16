@@ -2,7 +2,7 @@
 //  PBAmbassador.m
 //  Piggybackv2
 //
-//  Created by Kimberly Hsiao on 7/11/12.
+//  Created by Kimberly Hsiao on 7/16/12.
 //  Copyright (c) 2012 Calimucho. All rights reserved.
 //
 
@@ -12,11 +12,10 @@
 
 @implementation PBAmbassador
 
+@dynamic ambassadorId;
 @dynamic ambassadorType;
-@dynamic ambassadorUid;
-@dynamic deleted;
+@dynamic dateBecameAmbassador;
 @dynamic followerUid;
-@dynamic dateAdded;
-@dynamic followers;
+@dynamic follower;
 
 @end

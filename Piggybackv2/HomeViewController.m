@@ -86,7 +86,7 @@
     NSPredicate *getAmbassadors = [NSPredicate predicateWithFormat:@"(followerUid = %@)",myUID];
     NSArray* myAmbassadors = [PBAmbassador objectsWithPredicate:getAmbassadors];
     for (PBAmbassador* ambassador in myAmbassadors) {
-        NSPredicate *getAmbassadorUser = [NSPredicate predicateWithFormat:@"(uid = %@)",ambassador.ambassadorUid];
+        NSPredicate *getAmbassadorUser = [NSPredicate predicateWithFormat:@"(uid = %@)",ambassador.uid];
         PBUser* ambassadorUser = [PBUser objectWithPredicate:getAmbassadorUser];
         if (ambassadorUser) {
             if ([ambassador.ambassadorType isEqualToString:@"music"]) {

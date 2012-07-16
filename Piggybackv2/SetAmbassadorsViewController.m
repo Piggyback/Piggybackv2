@@ -84,7 +84,6 @@
     if (!friendUser) {
         PBUser *newUser = [PBUser object];
         newUser.fbId = [NSNumber numberWithLongLong:[friend.fbId longLongValue]];
-        NSLog(@"new user fbid: %@", newUser.fbId);
         newUser.email = friend.email;
         newUser.firstName = friend.firstName;
         newUser.lastName = friend.lastName;
@@ -95,10 +94,9 @@
         
         // add user and add ambassador
         [[RKObjectManager sharedManager] postObject:newUser usingBlock:^(RKObjectLoader* loader) {
-            loader.onDidLoadObjects = ^(NSArray* objects) {                
+            loader.onDidLoadObjects = ^(NSArray* objects) {
                 PBAmbassador *newAmbassador = [PBAmbassador object];
-                newAmbassador.ambassadorUid = [[objects objectAtIndex:0] uid];
-                NSLog(@"new ambassador uid is %@",newAmbassador.ambassadorUid);
+                newAmbassador.uid = [[objects objectAtIndex:0] uid];
                 newAmbassador.followerUid = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];
                 newAmbassador.ambassadorType = type;
                 
@@ -117,9 +115,8 @@
         // if ambassador does not exist already, add them
         if (!addedAmbassador) {
             PBAmbassador *newAmbassador = [PBAmbassador object];
-            newAmbassador.ambassadorUid = friendUser.uid;
+            newAmbassador.uid = friendUser.uid;
 #warning - timing issue here, where sometimes the user is created just before and does not have a uid yet
-            NSLog(@"frienduser uid is %@",newAmbassador.ambassadorUid);
             newAmbassador.followerUid = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];
             newAmbassador.ambassadorType = type;
             
@@ -360,7 +357,7 @@
     NSPredicate *getAmbassadors = [NSPredicate predicateWithFormat:@"(followerUid = %@)",myUID];
     NSArray* myAmbassadors = [PBAmbassador objectsWithPredicate:getAmbassadors];
     for (PBAmbassador* ambassador in myAmbassadors) {
-        NSPredicate *getAmbassadorUser = [NSPredicate predicateWithFormat:@"(uid = %@)",ambassador.ambassadorUid];
+        NSPredicate *getAmbassadorUser = [NSPredicate predicateWithFormat:@"(uid = %@)",ambassador.uid];
         PBUser* ambassadorUser = [PBUser objectWithPredicate:getAmbassadorUser];
         if (ambassadorUser) {
             if ([ambassador.ambassadorType isEqualToString:@"music"]) {

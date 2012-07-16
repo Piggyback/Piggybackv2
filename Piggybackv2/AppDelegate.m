@@ -124,6 +124,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [objectManager.mappingProvider setMapping:userMapping forKeyPath:@"PBUser"];
     
     // ambassador mapping
+    ambassadorMapping.primaryKeyAttribute = @"ambassadorId";
     [ambassadorMapping mapAttributes:@"followerUid",@"ambasadorUid",@"ambassadorType",@"dateAdded",nil];
     [ambassadorMapping mapRelationship:@"follower" withMapping:userMapping];
     [ambassadorMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerId"];
@@ -135,10 +136,9 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [objectManager.mappingProvider setMapping:musicItemMapping forKeyPath:@"PBMusicItem"];
     
     // serialization declarations
-//    RKObjectMapping *userSerializationMapping = [RKObjectMapping mappingForClassWithName:@"PBUser"];
     RKObjectMapping *userSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *ambassadorSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-    RKObjectMapping *musicItemSerializationMapping = [RKObjectMapping mappingForClassWithName:@"PBMusicItem"];
+    RKObjectMapping *musicItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
 
     // user serialization
     [userSerializationMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
