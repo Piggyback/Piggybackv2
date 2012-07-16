@@ -160,10 +160,9 @@
 		F99F2CB715ACB2CF00B5EB36 /* HomeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99F2CB615ACB2CF00B5EB36 /* HomeTableCell.m */; };
 		F9A4289915B45C7B000D147C /* PBFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4289815B45C7B000D147C /* PBFriend.m */; };
 		F9A428BA15B46276000D147C /* PBMusicNews.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428B915B46276000D147C /* PBMusicNews.m */; };
-		F9A428BD15B46276000D147C /* PBAmbassador.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428BC15B46276000D147C /* PBAmbassador.m */; };
 		F9A428C015B46276000D147C /* PBMusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428BF15B46276000D147C /* PBMusicItem.m */; };
 		F9A428C315B46276000D147C /* PBMusicActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428C215B46276000D147C /* PBMusicActivity.m */; };
-		F9A428C615B46277000D147C /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428C515B46277000D147C /* PBUser.m */; };
+		F9A428CC15B4A2DB000D147C /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428CB15B4A2DB000D147C /* PBUser.m */; };
 		F9C097641594E500000A0541 /* WatchTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C097631594E500000A0541 /* WatchTableCell.m */; };
 		F9C097691594E5D8000A0541 /* haines-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097651594E5D8000A0541 /* haines-rounded-corners.png */; };
 		F9C0976A1594E5D8000A0541 /* josh-lu-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */; };
@@ -466,14 +465,12 @@
 		F9A4289815B45C7B000D147C /* PBFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBFriend.m; path = Piggybackv2/PBFriend.m; sourceTree = "<group>"; };
 		F9A428B815B46276000D147C /* PBMusicNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicNews.h; path = Piggybackv2/PBMusicNews.h; sourceTree = "<group>"; };
 		F9A428B915B46276000D147C /* PBMusicNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicNews.m; path = Piggybackv2/PBMusicNews.m; sourceTree = "<group>"; };
-		F9A428BB15B46276000D147C /* PBAmbassador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBAmbassador.h; path = Piggybackv2/PBAmbassador.h; sourceTree = "<group>"; };
-		F9A428BC15B46276000D147C /* PBAmbassador.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBAmbassador.m; path = Piggybackv2/PBAmbassador.m; sourceTree = "<group>"; };
 		F9A428BE15B46276000D147C /* PBMusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicItem.h; path = Piggybackv2/PBMusicItem.h; sourceTree = "<group>"; };
 		F9A428BF15B46276000D147C /* PBMusicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicItem.m; path = Piggybackv2/PBMusicItem.m; sourceTree = "<group>"; };
 		F9A428C115B46276000D147C /* PBMusicActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicActivity.h; path = Piggybackv2/PBMusicActivity.h; sourceTree = "<group>"; };
 		F9A428C215B46276000D147C /* PBMusicActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicActivity.m; path = Piggybackv2/PBMusicActivity.m; sourceTree = "<group>"; };
-		F9A428C415B46277000D147C /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
-		F9A428C515B46277000D147C /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
+		F9A428CA15B4A2DB000D147C /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
+		F9A428CB15B4A2DB000D147C /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
 		F9C097621594E500000A0541 /* WatchTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchTableCell.h; sourceTree = "<group>"; };
 		F9C097631594E500000A0541 /* WatchTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchTableCell.m; sourceTree = "<group>"; };
 		F9C097651594E5D8000A0541 /* haines-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haines-rounded-corners.png"; sourceTree = "<group>"; };
@@ -688,14 +685,12 @@
 		F93C2F78159A514000FACE47 /* PB Core Data Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F9A428C415B46277000D147C /* PBUser.h */,
-				F9A428C515B46277000D147C /* PBUser.m */,
+				F9A428CA15B4A2DB000D147C /* PBUser.h */,
+				F9A428CB15B4A2DB000D147C /* PBUser.m */,
 				F9A428C115B46276000D147C /* PBMusicActivity.h */,
 				F9A428C215B46276000D147C /* PBMusicActivity.m */,
 				F9A428BE15B46276000D147C /* PBMusicItem.h */,
 				F9A428BF15B46276000D147C /* PBMusicItem.m */,
-				F9A428BB15B46276000D147C /* PBAmbassador.h */,
-				F9A428BC15B46276000D147C /* PBAmbassador.m */,
 				F9A428B815B46276000D147C /* PBMusicNews.h */,
 				F9A428B915B46276000D147C /* PBMusicNews.m */,
 				F9A4289715B45C7B000D147C /* PBFriend.h */,
@@ -1147,10 +1142,9 @@
 				F99F2CB715ACB2CF00B5EB36 /* HomeTableCell.m in Sources */,
 				F9A4289915B45C7B000D147C /* PBFriend.m in Sources */,
 				F9A428BA15B46276000D147C /* PBMusicNews.m in Sources */,
-				F9A428BD15B46276000D147C /* PBAmbassador.m in Sources */,
 				F9A428C015B46276000D147C /* PBMusicItem.m in Sources */,
 				F9A428C315B46276000D147C /* PBMusicActivity.m in Sources */,
-				F9A428C615B46277000D147C /* PBUser.m in Sources */,
+				F9A428CC15B4A2DB000D147C /* PBUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

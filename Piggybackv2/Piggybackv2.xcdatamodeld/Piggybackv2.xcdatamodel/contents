@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="PBAmbassador" representedClassName="PBAmbassador" parentEntity="PBUser" syncable="YES">
-        <attribute name="ambassadorId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="ambassadorType" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dateBecameAmbassador" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="followerUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="follower" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="ambassadors" inverseEntity="PBUser" syncable="YES"/>
-    </entity>
     <entity name="PBFriend" representedClassName="PBFriend" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fbId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -60,16 +53,16 @@
         <attribute name="thumbnail" optional="YES" attributeType="Transformable" valueTransformerName="FBImageToDataTransformer" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="youtubeUsername" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="ambassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBAmbassador" inverseName="follower" inverseEntity="PBAmbassador" syncable="YES"/>
+        <relationship name="ambassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="followers" inverseEntity="PBUser" syncable="YES"/>
+        <relationship name="followers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="ambassadors" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="musicActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicActivity" inverseName="user" inverseEntity="PBMusicActivity" syncable="YES"/>
         <relationship name="myActions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicNews" inverseName="follower" inverseEntity="PBMusicNews" syncable="YES"/>
     </entity>
     <elements>
         <element name="PBFriend" positionX="241" positionY="-96" width="128" height="150"/>
         <element name="PBMusicItem" positionX="-171" positionY="63" width="128" height="150"/>
-        <element name="PBUser" positionX="243" positionY="171" width="128" height="270"/>
-        <element name="PBAmbassador" positionX="36" positionY="63" width="128" height="120"/>
+        <element name="PBUser" positionX="243" positionY="171" width="128" height="255"/>
         <element name="PBMusicActivity" positionX="-297" positionY="177" width="128" height="165"/>
-        <element name="PBMusicNews" positionX="-119" positionY="-90" width="128" height="150"/>
+        <element name="PBMusicNews" positionX="-38" positionY="-123" width="128" height="150"/>
     </elements>
 </model>

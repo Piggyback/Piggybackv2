@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class PBAmbassador, PBMusicActivity, PBMusicNews;
+@class PBMusicActivity, PBMusicNews, PBUser;
 
 @interface PBUser : NSManagedObject
 
@@ -28,12 +28,13 @@
 @property (nonatomic, retain) NSSet *ambassadors;
 @property (nonatomic, retain) NSSet *musicActivity;
 @property (nonatomic, retain) NSSet *myActions;
+@property (nonatomic, retain) NSSet *followers;
 @end
 
 @interface PBUser (CoreDataGeneratedAccessors)
 
-- (void)addAmbassadorsObject:(PBAmbassador *)value;
-- (void)removeAmbassadorsObject:(PBAmbassador *)value;
+- (void)addAmbassadorsObject:(PBUser *)value;
+- (void)removeAmbassadorsObject:(PBUser *)value;
 - (void)addAmbassadors:(NSSet *)values;
 - (void)removeAmbassadors:(NSSet *)values;
 
@@ -46,5 +47,10 @@
 - (void)removeMyActionsObject:(PBMusicNews *)value;
 - (void)addMyActions:(NSSet *)values;
 - (void)removeMyActions:(NSSet *)values;
+
+- (void)addFollowersObject:(PBUser *)value;
+- (void)removeFollowersObject:(PBUser *)value;
+- (void)addFollowers:(NSSet *)values;
+- (void)removeFollowers:(NSSet *)values;
 
 @end

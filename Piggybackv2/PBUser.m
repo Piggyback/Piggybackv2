@@ -7,9 +7,9 @@
 //
 
 #import "PBUser.h"
-#import "PBAmbassador.h"
 #import "PBMusicActivity.h"
 #import "PBMusicNews.h"
+#import "PBUser.h"
 
 
 @implementation PBUser
@@ -29,5 +29,6 @@
 @dynamic ambassadors;
 @dynamic musicActivity;
 @dynamic myActions;
+@dynamic followers;
 
 @end
