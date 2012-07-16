@@ -22,7 +22,7 @@
         <attribute name="albumTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="albumYear" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="artistName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="musicItemId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="musicItemId" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="songTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="spotifyUrl" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="musicActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMyMusicActivity" inverseName="musicItem" inverseEntity="PBMyMusicActivity" syncable="YES"/>
