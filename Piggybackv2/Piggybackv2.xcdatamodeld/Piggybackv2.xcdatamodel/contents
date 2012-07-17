@@ -53,16 +53,16 @@
         <attribute name="thumbnail" optional="YES" attributeType="Transformable" valueTransformerName="FBImageToDataTransformer" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="youtubeUsername" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="ambassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="followers" inverseEntity="PBUser" syncable="YES"/>
-        <relationship name="followers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="ambassadors" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="musicActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicActivity" inverseName="user" inverseEntity="PBMusicActivity" syncable="YES"/>
+        <relationship name="musicAmbassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="musicFollowers" inverseEntity="PBUser" syncable="YES"/>
+        <relationship name="musicFollowers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="musicAmbassadors" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="myActions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicNews" inverseName="follower" inverseEntity="PBMusicNews" syncable="YES"/>
     </entity>
     <elements>
         <element name="PBFriend" positionX="241" positionY="-96" width="128" height="150"/>
-        <element name="PBMusicItem" positionX="-171" positionY="63" width="128" height="150"/>
-        <element name="PBUser" positionX="243" positionY="171" width="128" height="255"/>
         <element name="PBMusicActivity" positionX="-297" positionY="177" width="128" height="165"/>
+        <element name="PBMusicItem" positionX="-171" positionY="63" width="128" height="150"/>
         <element name="PBMusicNews" positionX="-38" positionY="-123" width="128" height="150"/>
+        <element name="PBUser" positionX="243" positionY="171" width="128" height="255"/>
     </elements>
 </model>

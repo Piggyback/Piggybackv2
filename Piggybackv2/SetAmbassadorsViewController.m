@@ -86,7 +86,6 @@
     
     // if user does not exist, add user
     if (!friendUser) {
-        NSLog(@"user does not exist");
         PBUser *newUser = [PBUser object];
         newUser.fbId = [NSNumber numberWithLongLong:[friend.fbId longLongValue]];
         newUser.email = friend.email;
@@ -100,7 +99,7 @@
         // add user and add ambassador
         [[RKObjectManager sharedManager] postObject:newUser usingBlock:^(RKObjectLoader* loader) {
             loader.onDidLoadObjects = ^(NSArray* objects) {
-                [newUser addFollowersObject:me];
+                [newUser addMusicFollowersObject:me];
                 NSLog(@"me is %@",me);
                 NSLog(@"new user is %@",newUser);
 //                PBAmbassador *newAmbassador = [PBAmbassador object];
@@ -115,12 +114,10 @@
     
     // user exists already, only update ambassador table
     else {
-        NSLog(@"user already exists");
-
         
         // check if ambassador exists already
-        if (![friendUser.followers containsObject:me]) {
-            [friendUser addFollowersObject:me];
+        if (![friendUser.musicFollowers containsObject:me]) {
+            [friendUser addMusicFollowersObject:me];
             
             NSLog(@"user is %@",friendUser);
             NSLog(@"i am %@",me);
@@ -155,13 +152,13 @@
     PBUser* removedUser = [PBUser objectWithPredicate:userPredicate];
     
     if (removedUser) {
-        [me removeAmbassadorsObject:removedUser];
+        [me removeMusicAmbassadorsObject:removedUser];
             
         NSLog(@"i am %@",me);
         NSLog(@"removed user is %@",removedUser);
         
         // if removed user has no other followers and is not my follower, remove user from core data
-        if ([removedUser.followers count] == 0 && ![removedUser.ambassadors containsObject:me]) {
+        if ([removedUser.musicFollowers count] == 0 && ![removedUser.musicAmbassadors containsObject:me]) {
             RKManagedObjectStore *objectStore = [[RKObjectManager sharedManager] objectStore];
             [[objectStore managedObjectContextForCurrentThread] deleteObject:removedUser];
             [objectStore save:nil];
@@ -401,7 +398,7 @@
     
     // get my ambassadors and add to array
     if (me) {
-        for (PBUser* ambassador in me.ambassadors) {
+        for (PBUser* ambassador in me.musicAmbassadors) {
             [self.selectedMusicAmbassadorIndexes addObject:ambassador.fbId];
         }
     }

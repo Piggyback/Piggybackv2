@@ -86,7 +86,7 @@
     NSPredicate *getMe = [NSPredicate predicateWithFormat:@"(uid = %@)",myUID];
     PBUser* me = [PBUser objectWithPredicate:getMe];
     if (me) {
-        self.musicAmbassadors = [me.ambassadors mutableCopy];
+        self.musicAmbassadors = [me.musicAmbassadors mutableCopy];
     }
     
 //    NSArray* myAmbassadors = [PBAmbassador objectsWithPredicate:getAmbassadors];
