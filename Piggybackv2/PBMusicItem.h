@@ -2,7 +2,7 @@
 //  PBMusicItem.h
 //  Piggybackv2
 //
-//  Created by Kimberly Hsiao on 7/16/12.
+//  Created by Kimberly Hsiao on 7/18/12.
 //  Copyright (c) 2012 Calimucho. All rights reserved.
 //
 
@@ -13,14 +13,14 @@
 
 @interface PBMusicItem : NSManagedObject
 
+@property (nonatomic, retain) id albumCover;
 @property (nonatomic, retain) NSString * albumTitle;
 @property (nonatomic, retain) NSNumber * albumYear;
 @property (nonatomic, retain) NSString * artistName;
 @property (nonatomic, retain) NSNumber * musicItemId;
+@property (nonatomic, retain) NSNumber * songDuration;
 @property (nonatomic, retain) NSString * songTitle;
 @property (nonatomic, retain) NSString * spotifyUrl;
-@property (nonatomic, retain) id albumCover;
-@property (nonatomic, retain) NSNumber * songDuration;
 @property (nonatomic, retain) NSSet *musicActivity;
 @end
 

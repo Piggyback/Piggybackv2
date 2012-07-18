@@ -99,15 +99,20 @@
         // add user and add ambassador
         [[RKObjectManager sharedManager] postObject:newUser usingBlock:^(RKObjectLoader* loader) {
             loader.onDidLoadObjects = ^(NSArray* objects) {
-                [newUser addMusicFollowersObject:me];
+                if ([type isEqualToString:@"music"]) {
+                    [newUser addMusicFollowersObject:me];
+                    
+                    // add ambassador to db
+                    // [[RKObjectManager sharedManager] postObject:newAmbassador delegate:self];
+                    
+                } else if ([type isEqualToString:@"places"]) {
+                    
+                } else if ([type isEqualToString:@"videos"]) {
+                    
+                }
+                
                 NSLog(@"me is %@",me);
                 NSLog(@"new user is %@",newUser);
-//                PBAmbassador *newAmbassador = [PBAmbassador object];
-//                newAmbassador.uid = [[objects objectAtIndex:0] uid];
-//                newAmbassador.followerUid = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];
-//                newAmbassador.ambassadorType = type;
-                
-//                [[RKObjectManager sharedManager] postObject:newAmbassador delegate:self];
             };
         }];
     } 
@@ -115,29 +120,21 @@
     // user exists already, only update ambassador table
     else {
         
-        // check if ambassador exists already
-        if (![friendUser.musicFollowers containsObject:me]) {
-            [friendUser addMusicFollowersObject:me];
+        // if ambassador does not exist yet, add ambassador
+        if ([type isEqualToString:@"music"]) {
+            if (![friendUser.musicFollowers containsObject:me]) {
+                [friendUser addMusicFollowersObject:me];
+                
+                // add ambassador to db
+            }
+        } else if ([type isEqualToString:@"places"]) {
             
-            NSLog(@"user is %@",friendUser);
-            NSLog(@"i am %@",me);
-//            [[RKObjectManager sharedManager] postObject:newAmbassador delegate:self];
+        } else if ([type isEqualToString:@"videos"]) {
+            
         }
-        
-//        NSNumber *myUID = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];
-//        NSPredicate* ambassadorPredicate = [NSPredicate predicateWithFormat:@"(followerUid = %@) AND (ambassadorUid = %@) AND (ambassadorType = %@)", myUID, friendUser.uid, type];
-//        PBUser *addedAmbassador = [PBUser objectWithPredicate:ambassadorPredicate];
-//        
-//        // if ambassador does not exist already, add them
-//        if (!addedAmbassador) {
-//            PBAmbassador *newAmbassador = [PBAmbassador object];
-//            newAmbassador.uid = friendUser.uid;
-//#warning - timing issue here, where sometimes the user is created just before and does not have a uid yet
-//            newAmbassador.followerUid = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];
-//            newAmbassador.ambassadorType = type;
-//            
-//            [[RKObjectManager sharedManager] postObject:newAmbassador delegate:self];
-//        }
+            
+        NSLog(@"user is %@",friendUser);
+        NSLog(@"i am %@",me);
     }
 }
 
@@ -152,42 +149,28 @@
     PBUser* removedUser = [PBUser objectWithPredicate:userPredicate];
     
     if (removedUser) {
-        [me removeMusicAmbassadorsObject:removedUser];
+        if ([type isEqualToString:@"music"]) {
+            
+            // remove ambassador linkage from core data
+            [me removeMusicAmbassadorsObject:removedUser];
+            
+            // if removed user has no other followers and is not my follower, remove user from core data
+            if ([removedUser.musicFollowers count] == 0 && ![removedUser.musicAmbassadors containsObject:me]) {
+                RKManagedObjectStore *objectStore = [[RKObjectManager sharedManager] objectStore];
+                [[objectStore managedObjectContextForCurrentThread] deleteObject:removedUser];
+                [objectStore save:nil];
+            }
+            
+            // remove ambassador from database
+        } else if ([type isEqualToString:@"places"]) {
+            
+        } else if ([type isEqualToString:@"videos"]) {
+            
+        }
             
         NSLog(@"i am %@",me);
         NSLog(@"removed user is %@",removedUser);
-        
-        // if removed user has no other followers and is not my follower, remove user from core data
-        if ([removedUser.musicFollowers count] == 0 && ![removedUser.musicAmbassadors containsObject:me]) {
-            RKManagedObjectStore *objectStore = [[RKObjectManager sharedManager] objectStore];
-            [[objectStore managedObjectContextForCurrentThread] deleteObject:removedUser];
-            [objectStore save:nil];
-
-        }
-        
-        // remove ambassador from database
     }
-    
-//    NSNumber *myUID = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];
-//
-//    // fetch user from friend
-//    NSPredicate* userPredicate = [NSPredicate predicateWithFormat:@"fbId = %@",friend.fbId];
-//    PBUser* removedUser = [PBUser objectWithPredicate:userPredicate];
-//    
-//    //fetch ambassador from user
-//    NSPredicate* ambassadorPredicate = [NSPredicate predicateWithFormat:@"(followerUid = %@) AND (ambassadorUid = %@) AND (ambassadorType = %@)", myUID, removedUser.uid, type];
-//    PBAmbassador *removedAmbassador = [PBAmbassador objectWithPredicate:ambassadorPredicate];
-//    if (removedAmbassador) {
-//        [[RKObjectManager sharedManager] putObject:removedAmbassador usingBlock:^(RKObjectLoader* loader) {
-//            loader.onDidLoadObjects = ^(NSArray* objects) {
-//                // delete ambassador row from core data
-//                RKManagedObjectStore *objectStore = [[RKObjectManager sharedManager] objectStore];
-//                [[objectStore managedObjectContextForCurrentThread] deleteObject:removedAmbassador];
-//                [objectStore save:nil];
-//                NSLog(@"removed ambassador!");  
-//            };
-//        }];
-//    }
 }
 
 - (void)clickFollow:(PBFriend*)friend forType:(NSString*)type {
@@ -402,23 +385,6 @@
             [self.selectedMusicAmbassadorIndexes addObject:ambassador.fbId];
         }
     }
-    
-//    // get existing ambassadors and add to array
-//    NSPredicate *getAmbassadors = [NSPredicate predicateWithFormat:@"(followerUid = %@)",myUID];
-//    NSArray* myAmbassadors = [PBAmbassador objectsWithPredicate:getAmbassadors];
-//    for (PBAmbassador* ambassador in myAmbassadors) {
-//        NSPredicate *getAmbassadorUser = [NSPredicate predicateWithFormat:@"(uid = %@)",ambassador.uid];
-//        PBUser* ambassadorUser = [PBUser objectWithPredicate:getAmbassadorUser];
-//        if (ambassadorUser) {
-//            if ([ambassador.ambassadorType isEqualToString:@"music"]) {
-//                [self.selectedMusicAmbassadorIndexes addObject:ambassadorUser.fbId];
-//            } else if ([ambassador.ambassadorType isEqualToString:@"places"]) {
-//                [self.selectedPlacesAmbassadorIndexes addObject:ambassadorUser.fbId];
-//            } else if ([ambassador.ambassadorType isEqualToString:@"videos"]) {
-//                [self.selectedVideosAmbassadorIndexes addObject:ambassadorUser.fbId];
-//            }
-//        }
-//    }
     
     // replace keyboard 'Search' button with 'Done'
     for (UIView *searchBarSubview in [self.searchBar subviews]) {
