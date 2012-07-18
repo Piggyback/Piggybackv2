@@ -25,18 +25,23 @@
 @property (nonatomic, retain) id thumbnail;
 @property (nonatomic, retain) NSNumber * uid;
 @property (nonatomic, retain) NSString * youtubeUsername;
-@property (nonatomic, retain) NSSet *ambassadors;
+@property (nonatomic, retain) NSSet *musicAmbassadors;
+@property (nonatomic, retain) NSSet *musicFollowers;
 @property (nonatomic, retain) NSSet *musicActivity;
 @property (nonatomic, retain) NSSet *myActions;
-@property (nonatomic, retain) NSSet *followers;
 @end
 
 @interface PBUser (CoreDataGeneratedAccessors)
 
-- (void)addAmbassadorsObject:(PBUser *)value;
-- (void)removeAmbassadorsObject:(PBUser *)value;
-- (void)addAmbassadors:(NSSet *)values;
-- (void)removeAmbassadors:(NSSet *)values;
+- (void)addMusicAmbassadorsObject:(PBUser *)value;
+- (void)removeMusicAmbassadorsObject:(PBUser *)value;
+- (void)addMusicAmbassadors:(NSSet *)values;
+- (void)removeMusicAmbassadors:(NSSet *)values;
+
+- (void)addMusicFollowersObject:(PBUser *)value;
+- (void)removeMusicFollowersObject:(PBUser *)value;
+- (void)addMusicFollowers:(NSSet *)values;
+- (void)removeMusicFollowers:(NSSet *)values;
 
 - (void)addMusicActivityObject:(PBMusicActivity *)value;
 - (void)removeMusicActivityObject:(PBMusicActivity *)value;
@@ -47,10 +52,5 @@
 - (void)removeMyActionsObject:(PBMusicNews *)value;
 - (void)addMyActions:(NSSet *)values;
 - (void)removeMyActions:(NSSet *)values;
-
-- (void)addFollowersObject:(PBUser *)value;
-- (void)removeFollowersObject:(PBUser *)value;
-- (void)addFollowers:(NSSet *)values;
-- (void)removeFollowers:(NSSet *)values;
 
 @end

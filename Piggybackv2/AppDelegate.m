@@ -119,7 +119,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // user mapping
     userMapping.primaryKeyAttribute = @"uid";
     [userMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
-    [userMapping mapRelationship:@"ambassadors" withMapping:userMapping];
+//    [userMapping mapKeyPath:@"ambassadors" toRelationship:@"musicAmbassadors" withMapping:userMapping];
+    [userMapping mapRelationship:@"musicAmbassadors" withMapping:userMapping];
     [objectManager.mappingProvider setMapping:userMapping forKeyPath:@"PBUser"];
     
 //    // ambassador mapping
@@ -131,7 +132,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 //    
     // musicItem mapping
     musicItemMapping.primaryKeyAttribute = @"musicItemId";
-    [musicItemMapping mapAttributes:@"musicItemId",@"artistName",@"songTitle",@"albumTitle",@"albumYear",@"spotifyUrl",nil];
+    [musicItemMapping mapAttributes:@"musicItemId",@"artistName",@"songTitle",@"albumTitle",@"albumYear",@"spotifyUrl",@"songDuration",nil];
     [objectManager.mappingProvider setMapping:musicItemMapping forKeyPath:@"PBMusicItem"];
     
     // serialization declarations
@@ -141,7 +142,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
     // user serialization
     [userSerializationMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
-    [userSerializationMapping mapRelationship:@"ambassadors" withMapping:userSerializationMapping];
+//    [userSerializationMapping mapKeyPath:@"ambassadors" toRelationship:@"musicAmbassadors" withMapping:userSerializationMapping];
+    [userSerializationMapping mapRelationship:@"musicAmbassadors" withMapping:userSerializationMapping];
     [objectManager.mappingProvider setSerializationMapping:userSerializationMapping forClass:[PBUser class]];
     
 //    // ambassador serialization
@@ -149,7 +151,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 //    [objectManager.mappingProvider setSerializationMapping:ambassadorSerializationMapping forClass:[PBAmbassador class]];
 //    
     // musicItem serialization
-    [musicItemSerializationMapping mapAttributes:@"musicItemId",@"artistName",@"songTitle",@"albumTitle",@"albumYear",@"spotifyUrl",nil];
+    [musicItemSerializationMapping mapAttributes:@"musicItemId",@"artistName",@"songTitle",@"albumTitle",@"albumYear",@"spotifyUrl",@"songDuration",nil];
     [objectManager.mappingProvider setSerializationMapping:musicItemSerializationMapping forClass:[PBMusicItem class]];
     
 }

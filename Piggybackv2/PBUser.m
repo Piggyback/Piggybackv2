@@ -26,9 +26,9 @@
 @dynamic thumbnail;
 @dynamic uid;
 @dynamic youtubeUsername;
-@dynamic ambassadors;
+@dynamic musicAmbassadors;
+@dynamic musicFollowers;
 @dynamic musicActivity;
 @dynamic myActions;
-@dynamic followers;
 
 @end

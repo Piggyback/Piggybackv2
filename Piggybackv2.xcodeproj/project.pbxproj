@@ -112,6 +112,7 @@
 		F92E8D5515A78226002DFCB1 /* FBImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = F92E8D5415A78226002DFCB1 /* FBImageToDataTransformer.m */; };
 		F930520F1593C7B100E9DA06 /* YouTubeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */; };
 		F93052121593C7FA00E9DA06 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F93052111593C7FA00E9DA06 /* Constants.m */; };
+		F934802015B4E5F300B19D27 /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F934801F15B4E5F300B19D27 /* PBUser.m */; };
 		F93C2F77159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F93C2F75159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld */; };
 		F93C2F7D159A585500FACE47 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F7C159A585500FACE47 /* CoreData.framework */; };
 		F93C2F95159A5B7900FACE47 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F8A159A5A6700FACE47 /* libRestKit.a */; };
@@ -119,6 +120,7 @@
 		F93C2F99159A5BA000FACE47 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F98159A5BA000FACE47 /* QuartzCore.framework */; };
 		F93C2F9B159A5BA900FACE47 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F9A159A5BA900FACE47 /* libxml2.dylib */; };
 		F9736E8715943BC3009DEB07 /* ExploreTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9736E8615943BC3009DEB07 /* ExploreTableCell.m */; };
+		F9774C8415B722CD00FC6FBC /* PBMusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F9774C8315B722CD00FC6FBC /* PBMusicItem.m */; };
 		F99418F11598BE0C00A4B08B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99418F01598BE0C00A4B08B /* LoginViewController.m */; };
 		F99418F81598BEDA00A4B08B /* LoginWithFacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = F99418F61598BEDA00A4B08B /* LoginWithFacebookNormal.png */; };
 		F99418F91598BEDA00A4B08B /* LoginWithFacebookNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F99418F71598BEDA00A4B08B /* LoginWithFacebookNormal@2x.png */; };
@@ -160,9 +162,7 @@
 		F99F2CB715ACB2CF00B5EB36 /* HomeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99F2CB615ACB2CF00B5EB36 /* HomeTableCell.m */; };
 		F9A4289915B45C7B000D147C /* PBFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4289815B45C7B000D147C /* PBFriend.m */; };
 		F9A428BA15B46276000D147C /* PBMusicNews.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428B915B46276000D147C /* PBMusicNews.m */; };
-		F9A428C015B46276000D147C /* PBMusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428BF15B46276000D147C /* PBMusicItem.m */; };
 		F9A428C315B46276000D147C /* PBMusicActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428C215B46276000D147C /* PBMusicActivity.m */; };
-		F9A428CC15B4A2DB000D147C /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428CB15B4A2DB000D147C /* PBUser.m */; };
 		F9C097641594E500000A0541 /* WatchTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C097631594E500000A0541 /* WatchTableCell.m */; };
 		F9C097691594E5D8000A0541 /* haines-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097651594E5D8000A0541 /* haines-rounded-corners.png */; };
 		F9C0976A1594E5D8000A0541 /* josh-lu-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */; };
@@ -411,6 +411,8 @@
 		F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeTableViewController.m; sourceTree = "<group>"; };
 		F93052101593C7FA00E9DA06 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		F93052111593C7FA00E9DA06 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		F934801E15B4E5F300B19D27 /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
+		F934801F15B4E5F300B19D27 /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
 		F93C2F76159A4E4E00FACE47 /* Piggybackv2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Piggybackv2.xcdatamodel; sourceTree = "<group>"; };
 		F93C2F7C159A585500FACE47 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F93C2F7E159A5A6600FACE47 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
@@ -419,6 +421,8 @@
 		F93C2F9A159A5BA900FACE47 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		F9736E8515943BC3009DEB07 /* ExploreTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreTableCell.h; sourceTree = "<group>"; };
 		F9736E8615943BC3009DEB07 /* ExploreTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreTableCell.m; sourceTree = "<group>"; };
+		F9774C8215B722CD00FC6FBC /* PBMusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicItem.h; path = Piggybackv2/PBMusicItem.h; sourceTree = "<group>"; };
+		F9774C8315B722CD00FC6FBC /* PBMusicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicItem.m; path = Piggybackv2/PBMusicItem.m; sourceTree = "<group>"; };
 		F99418EF1598BE0C00A4B08B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F99418F01598BE0C00A4B08B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		F99418F61598BEDA00A4B08B /* LoginWithFacebookNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginWithFacebookNormal.png; sourceTree = "<group>"; };
@@ -465,12 +469,8 @@
 		F9A4289815B45C7B000D147C /* PBFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBFriend.m; path = Piggybackv2/PBFriend.m; sourceTree = "<group>"; };
 		F9A428B815B46276000D147C /* PBMusicNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicNews.h; path = Piggybackv2/PBMusicNews.h; sourceTree = "<group>"; };
 		F9A428B915B46276000D147C /* PBMusicNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicNews.m; path = Piggybackv2/PBMusicNews.m; sourceTree = "<group>"; };
-		F9A428BE15B46276000D147C /* PBMusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicItem.h; path = Piggybackv2/PBMusicItem.h; sourceTree = "<group>"; };
-		F9A428BF15B46276000D147C /* PBMusicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicItem.m; path = Piggybackv2/PBMusicItem.m; sourceTree = "<group>"; };
 		F9A428C115B46276000D147C /* PBMusicActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicActivity.h; path = Piggybackv2/PBMusicActivity.h; sourceTree = "<group>"; };
 		F9A428C215B46276000D147C /* PBMusicActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicActivity.m; path = Piggybackv2/PBMusicActivity.m; sourceTree = "<group>"; };
-		F9A428CA15B4A2DB000D147C /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
-		F9A428CB15B4A2DB000D147C /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
 		F9C097621594E500000A0541 /* WatchTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchTableCell.h; sourceTree = "<group>"; };
 		F9C097631594E500000A0541 /* WatchTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchTableCell.m; sourceTree = "<group>"; };
 		F9C097651594E5D8000A0541 /* haines-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haines-rounded-corners.png"; sourceTree = "<group>"; };
@@ -685,12 +685,12 @@
 		F93C2F78159A514000FACE47 /* PB Core Data Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F9A428CA15B4A2DB000D147C /* PBUser.h */,
-				F9A428CB15B4A2DB000D147C /* PBUser.m */,
+				F934801E15B4E5F300B19D27 /* PBUser.h */,
+				F934801F15B4E5F300B19D27 /* PBUser.m */,
+				F9774C8215B722CD00FC6FBC /* PBMusicItem.h */,
+				F9774C8315B722CD00FC6FBC /* PBMusicItem.m */,
 				F9A428C115B46276000D147C /* PBMusicActivity.h */,
 				F9A428C215B46276000D147C /* PBMusicActivity.m */,
-				F9A428BE15B46276000D147C /* PBMusicItem.h */,
-				F9A428BF15B46276000D147C /* PBMusicItem.m */,
 				F9A428B815B46276000D147C /* PBMusicNews.h */,
 				F9A428B915B46276000D147C /* PBMusicNews.m */,
 				F9A4289715B45C7B000D147C /* PBFriend.h */,
@@ -1142,9 +1142,9 @@
 				F99F2CB715ACB2CF00B5EB36 /* HomeTableCell.m in Sources */,
 				F9A4289915B45C7B000D147C /* PBFriend.m in Sources */,
 				F9A428BA15B46276000D147C /* PBMusicNews.m in Sources */,
-				F9A428C015B46276000D147C /* PBMusicItem.m in Sources */,
 				F9A428C315B46276000D147C /* PBMusicActivity.m in Sources */,
-				F9A428CC15B4A2DB000D147C /* PBUser.m in Sources */,
+				F934802015B4E5F300B19D27 /* PBUser.m in Sources */,
+				F9774C8415B722CD00FC6FBC /* PBMusicItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
