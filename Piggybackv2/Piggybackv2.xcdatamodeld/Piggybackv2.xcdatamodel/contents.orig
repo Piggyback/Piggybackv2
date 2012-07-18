@@ -25,8 +25,12 @@
         <attribute name="albumTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="albumYear" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="artistName" optional="YES" attributeType="String" syncable="YES"/>
+<<<<<<< HEAD
+        <attribute name="musicItemId" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+=======
         <attribute name="musicItemId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="songDuration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+>>>>>>> 8cf7ac698201e926d2686257ed20c443074c16e3
         <attribute name="songTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="spotifyUrl" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="musicActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicActivity" inverseName="musicItem" inverseEntity="PBMusicActivity" syncable="YES"/>

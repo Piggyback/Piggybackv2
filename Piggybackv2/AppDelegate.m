@@ -16,7 +16,7 @@
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData.h>
 #import "PBUser.h"
-#import "PBAmbassador.h"
+//#import "PBAmbassador.h"
 #import "SetAmbassadorsViewController.h"
 #import "HomeViewController.h"
 #import "PBMusicItem.h"
@@ -29,7 +29,7 @@
 @implementation AppDelegate
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
-NSString* RK_BASE_URL = @"http://10.0.4.187:5000";
+NSString* RK_BASE_URL = @"http://localhost:5000";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
@@ -103,8 +103,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKObjectRouter *router = [RKObjectManager sharedManager].router;
     [router routeClass:[PBUser class] toResourcePath:@"/addUser" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBUser class] toResourcePath:@"/updateUser" forMethod:RKRequestMethodPUT];
-    [router routeClass:[PBAmbassador class] toResourcePath:@"/addAmbassador" forMethod:RKRequestMethodPOST];
-    [router routeClass:[PBAmbassador class] toResourcePath:@"/removeAmbassador" forMethod:RKRequestMethodPUT];
+//    [router routeClass:[PBAmbassador class] toResourcePath:@"/addAmbassador" forMethod:RKRequestMethodPOST];
+//    [router routeClass:[PBAmbassador class] toResourcePath:@"/removeAmbassador" forMethod:RKRequestMethodPUT];
     [router routeClass:[PBMusicItem class] toResourcePath:@"/addMusicItem" forMethod:RKRequestMethodPOST];
 }
 
@@ -113,41 +113,41 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // mapping declarations
     RKObjectManager *objectManager = [RKObjectManager sharedManager];
     RKManagedObjectMapping* userMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBUser" inManagedObjectStore:objectManager.objectStore];
-    RKManagedObjectMapping* ambassadorMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBAmbassador" inManagedObjectStore:objectManager.objectStore];
+//    RKManagedObjectMapping* ambassadorMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBAmbassador" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* musicItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicItem" inManagedObjectStore:objectManager.objectStore];
 
     // user mapping
     userMapping.primaryKeyAttribute = @"uid";
     [userMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
-    [userMapping mapRelationship:@"ambassadors" withMapping:ambassadorMapping];
+    [userMapping mapRelationship:@"ambassadors" withMapping:userMapping];
     [objectManager.mappingProvider setMapping:userMapping forKeyPath:@"PBUser"];
     
-    // ambassador mapping
-    [ambassadorMapping mapAttributes:@"followerUid",@"ambasadorUid",@"ambassadorType",@"dateAdded",nil];
-    [ambassadorMapping mapRelationship:@"follower" withMapping:userMapping];
-    [ambassadorMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerId"];
-    [objectManager.mappingProvider setMapping:ambassadorMapping forKeyPath:@"ambassador"];
-    
+//    // ambassador mapping
+//    ambassadorMapping.primaryKeyAttribute = @"ambassadorId";
+//    [ambassadorMapping mapAttributes:@"followerUid",@"ambasadorUid",@"ambassadorType",@"dateAdded",nil];
+//    [ambassadorMapping mapRelationship:@"follower" withMapping:userMapping];
+//    [ambassadorMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerId"];
+//    [objectManager.mappingProvider setMapping:ambassadorMapping forKeyPath:@"ambassador"];
+//    
     // musicItem mapping
     musicItemMapping.primaryKeyAttribute = @"musicItemId";
     [musicItemMapping mapAttributes:@"musicItemId",@"artistName",@"songTitle",@"albumTitle",@"albumYear",@"spotifyUrl",nil];
     [objectManager.mappingProvider setMapping:musicItemMapping forKeyPath:@"PBMusicItem"];
     
     // serialization declarations
-//    RKObjectMapping *userSerializationMapping = [RKObjectMapping mappingForClassWithName:@"PBUser"];
     RKObjectMapping *userSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-    RKObjectMapping *ambassadorSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-    RKObjectMapping *musicItemSerializationMapping = [RKObjectMapping mappingForClassWithName:@"PBMusicItem"];
+//    RKObjectMapping *ambassadorSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    RKObjectMapping *musicItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
 
     // user serialization
     [userSerializationMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
-    [userSerializationMapping mapKeyPath:@"ambassadors" toRelationship:@"ambassadors" withMapping:ambassadorSerializationMapping];
+    [userSerializationMapping mapRelationship:@"ambassadors" withMapping:userSerializationMapping];
     [objectManager.mappingProvider setSerializationMapping:userSerializationMapping forClass:[PBUser class]];
     
-    // ambassador serialization
-    [ambassadorSerializationMapping mapAttributes:@"followerUid",@"ambassadorUid",@"ambassadorType",@"dateAdded",nil];
-    [objectManager.mappingProvider setSerializationMapping:ambassadorSerializationMapping forClass:[PBAmbassador class]];
-    
+//    // ambassador serialization
+//    [ambassadorSerializationMapping mapAttributes:@"followerUid",@"ambassadorUid",@"ambassadorType",@"dateAdded",nil];
+//    [objectManager.mappingProvider setSerializationMapping:ambassadorSerializationMapping forClass:[PBAmbassador class]];
+//    
     // musicItem serialization
     [musicItemSerializationMapping mapAttributes:@"musicItemId",@"artistName",@"songTitle",@"albumTitle",@"albumYear",@"spotifyUrl",nil];
     [objectManager.mappingProvider setSerializationMapping:musicItemSerializationMapping forClass:[PBMusicItem class]];

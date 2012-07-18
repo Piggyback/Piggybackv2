@@ -11,7 +11,7 @@
 #import "HomeTableCell.h"
 #import "CocoaLibSpotify.h"
 #import "PBUser.h"
-#import "PBAmbassador.h"
+//#import "PBAmbassador.h"
 #import "PBMusicItem.h"
 
 @interface HomeViewController ()
@@ -83,25 +83,30 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *myUID = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];    
     
-    NSPredicate *getAmbassadors = [NSPredicate predicateWithFormat:@"(followerUid = %@)",myUID];
-    NSArray* myAmbassadors = [PBAmbassador objectsWithPredicate:getAmbassadors];
-    for (PBAmbassador* ambassador in myAmbassadors) {
-        NSPredicate *getAmbassadorUser = [NSPredicate predicateWithFormat:@"(uid = %@)",ambassador.ambassadorUid];
-        PBUser* ambassadorUser = [PBUser objectWithPredicate:getAmbassadorUser];
-        if (ambassadorUser) {
-            if ([ambassador.ambassadorType isEqualToString:@"music"]) {
-                [self.musicAmbassadors addObject:ambassadorUser];
-            } else if ([ambassador.ambassadorType isEqualToString:@"places"]) {
-                [self.placesAmbassadors addObject:ambassadorUser];
-            } else if ([ambassador.ambassadorType isEqualToString:@"videos"]) {
-                [self.videosAmbassadors addObject:ambassadorUser];
-            }
-        }
+    NSPredicate *getMe = [NSPredicate predicateWithFormat:@"(uid = %@)",myUID];
+    PBUser* me = [PBUser objectWithPredicate:getMe];
+    if (me) {
+        self.musicAmbassadors = [me.ambassadors mutableCopy];
     }
     
-    NSLog(@"music ambassadors %@",self.musicAmbassadors);
-    NSLog(@"places ambassadors %@",self.placesAmbassadors);
-    NSLog(@"videos ambassadors %@",self.videosAmbassadors);
+//    NSArray* myAmbassadors = [PBAmbassador objectsWithPredicate:getAmbassadors];
+//    for (PBAmbassador* ambassador in myAmbassadors) {
+//        NSPredicate *getAmbassadorUser = [NSPredicate predicateWithFormat:@"(uid = %@)",ambassador.uid];
+//        PBUser* ambassadorUser = [PBUser objectWithPredicate:getAmbassadorUser];
+//        if (ambassadorUser) {
+//            if ([ambassador.ambassadorType isEqualToString:@"music"]) {
+//                [self.musicAmbassadors addObject:ambassadorUser];
+//            } else if ([ambassador.ambassadorType isEqualToString:@"places"]) {
+//                [self.placesAmbassadors addObject:ambassadorUser];
+//            } else if ([ambassador.ambassadorType isEqualToString:@"videos"]) {
+//                [self.videosAmbassadors addObject:ambassadorUser];
+//            }
+//        }
+//    }
+//    
+//    NSLog(@"music ambassadors %@",self.musicAmbassadors);
+//    NSLog(@"places ambassadors %@",self.placesAmbassadors);
+//    NSLog(@"videos ambassadors %@",self.videosAmbassadors);
 }
 
 #warning - fetching top tracks is static right now, even though we have the music ambassadors in self.musicAmbassadors
