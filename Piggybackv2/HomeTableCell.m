@@ -17,6 +17,7 @@
 @synthesize heart = _heart;
 @synthesize todo = _todo;
 @synthesize mediaType = _mediaType;
+@synthesize icon = _icon;
 
 - (IBAction)heart:(id)sender {
     [self.heart setImage:[UIImage imageNamed:@"heart-pressed-button"] forState:UIControlStateNormal];

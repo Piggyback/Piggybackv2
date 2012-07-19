@@ -102,7 +102,7 @@
     ListenCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
-    cell.trackDetails.text = [NSString stringWithFormat:@"\"%@\" - %@", [[self.topTracks objectAtIndex:indexPath.row] name], [[[[self.topTracks objectAtIndex:indexPath.row] artists] valueForKey:@"name"] componentsJoinedByString:@","]];
+//    cell.trackDetails.text = [NSString stringWithFormat:@"\"%@\" - %@", [[self.topTracks objectAtIndex:indexPath.row] name], [[[[self.topTracks objectAtIndex:indexPath.row] artists] valueForKey:@"name"] componentsJoinedByString:@","]];
     
     return cell;
 }

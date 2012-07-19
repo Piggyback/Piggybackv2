@@ -17,6 +17,7 @@
 @interface HomeViewController ()
 @property (nonatomic, strong) NSMutableSet* selectedFilters;
 @property (nonatomic, strong) SPToplist *topList;
+@property (nonatomic, strong) NSMutableDictionary *topLists;
 @property (nonatomic, strong) NSMutableArray* items;
 
 @property (nonatomic, strong) NSMutableSet* musicAmbassadors;
@@ -34,6 +35,7 @@
 @synthesize selectedFilters = _selectedFilters;
 @synthesize items = _items;
 @synthesize topList = _topList;
+@synthesize topLists = _topLists;
 
 @synthesize musicAmbassadors = _musicAmbassadors;
 @synthesize placesAmbassadors = _placesAmbassadors;
@@ -76,6 +78,13 @@
     return _videosAmbassadors;
 }
 
+- (NSMutableDictionary*)topLists {
+    if (!_topLists) {
+        _topLists = [[NSMutableDictionary alloc] init];
+    }
+    return _topLists;
+}
+
 #pragma mark - public helper methods
 
 - (void)getAmbassadors {
@@ -92,22 +101,26 @@
     NSLog(@"music ambassadors are %@",self.musicAmbassadors);
 }
 
-#warning - fetching top tracks is static right now, even though we have the music ambassadors in self.musicAmbassadors
-#warning - make a table to store favorite songs
-
 -(void)getFriendsTopTracks {
-//    for (PBUser* musicAmbassador in self.musicAmbassadors) {
-        self.topList = [SPToplist toplistForUserWithName:@"ptpells" inSession:[SPSession sharedSession]];
-    self.topList = [SPToplist toplistForUserWithName:@"lemikegao" inSession:[SPSession sharedSession]];
 
-//    }
+    for (PBUser* ambassador in self.musicAmbassadors) {
+        NSString* spotifyUsername = @"";
+        if ([ambassador.lastName isEqualToString:@"Gao"]) {
+            spotifyUsername = @"lemikegao";
+        } else if ([ambassador.lastName isEqualToString:@"Jiang"]) {
+            spotifyUsername = @"kimikul";
+        }
+        
+        SPToplist* topList = [SPToplist toplistForUserWithName:spotifyUsername inSession:[SPSession sharedSession]];
+        [topList addObserver:self forKeyPath:@"tracks" options:0 context:nil];
+        [self.topLists setObject:topList forKey:ambassador.uid];
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"object that changed is %@",object);
-    if ([keyPath isEqualToString:@"topList.tracks"]) {
-        NSLog(@"peter's top tracks: %@", self.topList.tracks);
-        for (SPTrack* track in self.topList.tracks) {
+    if ([keyPath isEqualToString:@"tracks"]) {
+        NSString* ambassadorUid = [[self.topLists allKeysForObject:object] lastObject];
+        for (SPTrack* track in [[self.topLists objectForKey:ambassadorUid] tracks]) {
             PBMusicItem* newMusicItem = [PBMusicItem object];
             newMusicItem.artistName = [[[track artists] valueForKey:@"name"] componentsJoinedByString:@","];
             newMusicItem.songTitle = track.name;
@@ -120,6 +133,16 @@
             [[RKObjectManager sharedManager] postObject:newMusicItem usingBlock:^(RKObjectLoader* loader) {
                 loader.onDidLoadObject = ^(id object) {
                     PBMusicActivity* newMusicActivity = [PBMusicActivity object];
+                    newMusicActivity.uid = [NSNumber numberWithInteger:[ambassadorUid intValue]];
+                    newMusicActivity.musicItemId = newMusicItem.musicItemId;
+                    newMusicActivity.musicActivityType = @"top track";
+                    
+                    [[RKObjectManager sharedManager] postObject:newMusicActivity usingBlock:^(RKObjectLoader* loader) {
+                        loader.onDidLoadObject = ^(id object) {
+                            [self.items addObject:newMusicActivity];
+                            [self.tableView reloadData];
+                        };
+                    }];
                 };
             }];
         }
@@ -208,11 +231,14 @@
     static NSString *CellIdentifier = @"homeTableCell";
     HomeTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-    if ([[self.items objectAtIndex:indexPath.row] isKindOfClass:[PBMusicItem class]]) {
-        PBMusicItem* track = [self.items objectAtIndex:indexPath.row];
-        NSLog(@"track is %@",track);
+    if ([[self.items objectAtIndex:indexPath.row] isKindOfClass:[PBMusicActivity class]]) {
+        PBMusicActivity* musicActivity = [self.items objectAtIndex:indexPath.row];
+        PBMusicItem* musicItem = musicActivity.musicItem;
+        PBUser* user = musicActivity.user;
         
-        cell.nameOfItem.text = [NSString stringWithFormat:@"%@ - %@",track.artistName, track.songTitle]; 
+        cell.nameOfItem.text = [NSString stringWithFormat:@"%@ - %@",musicItem.artistName, musicItem.songTitle]; 
+        cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ added a new top track",user.firstName, user.lastName];
+        cell.icon.image = [UIImage imageNamed:@"music-icon-badge.png"];
     }
     
     return cell;
@@ -249,17 +275,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"view did load");
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"view will appear");
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     
+    NSLog(@"view did appear");
     // get ambassadors
     [self getAmbassadors];
     
     // get top tracks from ambassadors
     [self getFriendsTopTracks];
-    [self addObserver:self forKeyPath:@"topList.tracks" options:0 context:nil];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    
 }
 
 - (void)viewDidUnload
