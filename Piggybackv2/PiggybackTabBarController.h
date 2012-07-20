@@ -10,9 +10,11 @@
 #import "FBConnect.h"
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData.h>
+#import "SetAmbassadorsViewController.h"
 
 @interface PiggybackTabBarController : UITabBarController <FBRequestDelegate, RKObjectLoaderDelegate, RKRequestDelegate>
 
 @property int currentFbAPICall;
+@property (nonatomic, strong) SetAmbassadorsViewController* setAmbassadorsViewController;
 
 @end

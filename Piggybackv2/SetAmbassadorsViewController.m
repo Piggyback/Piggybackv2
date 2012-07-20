@@ -106,9 +106,21 @@
                     // [[RKObjectManager sharedManager] postObject:newAmbassador delegate:self];
                     
                 } else if ([type isEqualToString:@"places"]) {
+                    [newUser addPlacesFollowersObject:me];
                     
+                    // add ambassador to db
+                    // [[RKObjectManager sharedManager] postObject:newAmbassador delegate:self];
                 } else if ([type isEqualToString:@"videos"]) {
                     
+                }
+                
+                if (!friend.thumbnail) {
+                    NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",newUser.fbId];
+                    newUser.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
+                    [[RKObjectManager sharedManager].objectStore save:nil];
+                } else {
+                    newUser.thumbnail = friend.thumbnail;
+                    [[RKObjectManager sharedManager].objectStore save:nil];
                 }
                 
                 NSLog(@"me is %@",me);
@@ -128,7 +140,11 @@
                 // add ambassador to db
             }
         } else if ([type isEqualToString:@"places"]) {
-            
+            if (![friendUser.placesFollowers containsObject:me]) {
+                [friendUser addPlacesFollowersObject:me];
+                
+                // add ambassador to db
+            }
         } else if ([type isEqualToString:@"videos"]) {
             
         }
@@ -150,24 +166,27 @@
     
     if (removedUser) {
         if ([type isEqualToString:@"music"]) {
-            
             // remove ambassador linkage from core data
             [me removeMusicAmbassadorsObject:removedUser];
             
-            // if removed user has no other followers and is not my follower, remove user from core data
-            if ([removedUser.musicFollowers count] == 0 && ![removedUser.musicAmbassadors containsObject:me]) {
-                RKManagedObjectStore *objectStore = [[RKObjectManager sharedManager] objectStore];
-                [[objectStore managedObjectContextForCurrentThread] deleteObject:removedUser];
-                [objectStore save:nil];
-            }
-            
             // remove ambassador from database
         } else if ([type isEqualToString:@"places"]) {
+            // remove ambassador linkage from core data
+            [me removePlacesAmbassadorsObject:removedUser];
             
+            // remove ambassador from database
         } else if ([type isEqualToString:@"videos"]) {
             
         }
-            
+    
+        // if removed user has no other followers and is not my follower, remove user from core data
+        int count = [removedUser.musicFollowers count] + [removedUser.placesFollowers count];
+        if (count == 0 && ![removedUser.placesAmbassadors containsObject:me] && ![removedUser.musicAmbassadors containsObject:me]) {
+            RKManagedObjectStore *objectStore = [[RKObjectManager sharedManager] objectStore];
+            [[objectStore managedObjectContextForCurrentThread] deleteObject:removedUser];
+            [objectStore save:nil];
+        }
+    
         NSLog(@"i am %@",me);
         NSLog(@"removed user is %@",removedUser);
     }
@@ -400,14 +419,18 @@
             }
         }
     }
+    
+    [self reloadFriendsList];
+}
 
+- (void)reloadFriendsList {
     NSSortDescriptor *sortDescriptorFirstName = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
     NSSortDescriptor *sortDescriptorLastName = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptorFirstName,sortDescriptorLastName,nil];
     self.friends = [[PBFriend allObjects] sortedArrayUsingDescriptors:sortDescriptors];
     self.displayFriends = self.friends;
+    [self.tableView reloadData];
 }
-
 - (void)viewDidUnload
 {
     [self setTableView:nil];

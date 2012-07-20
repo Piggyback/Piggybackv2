@@ -2,7 +2,7 @@
 //  PBUser.m
 //  Piggybackv2
 //
-//  Created by Kimberly Hsiao on 7/16/12.
+//  Created by Kimberly Hsiao on 7/20/12.
 //  Copyright (c) 2012 Calimucho. All rights reserved.
 //
 
@@ -26,9 +26,11 @@
 @dynamic thumbnail;
 @dynamic uid;
 @dynamic youtubeUsername;
+@dynamic musicActivity;
 @dynamic musicAmbassadors;
 @dynamic musicFollowers;
-@dynamic musicActivity;
 @dynamic myActions;
+@dynamic placesAmbassadors;
+@dynamic placesFollowers;
 
 @end

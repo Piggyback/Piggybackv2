@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData.h>
+#import "FoursquareDelegate.h"
 
 @interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RKObjectLoaderDelegate>
 
@@ -16,7 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *musicFilterButton;
 @property (weak, nonatomic) IBOutlet UIButton *videosFilterButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) FoursquareDelegate* foursquareDelegate;
 
-- (void)getFriendsTopTracks;
+- (void)getAmbassadorsTopTracks;
 
 @end

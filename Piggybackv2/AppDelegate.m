@@ -39,6 +39,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 @synthesize foursquare = _foursquare;
 @synthesize playbackManager = _playbackManager;
 @synthesize facebook = _facebook;
+@synthesize foursquareDelegate = _foursquareDelegate;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {    
@@ -120,6 +121,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     userMapping.primaryKeyAttribute = @"uid";
     [userMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
     [userMapping mapRelationship:@"musicAmbassadors" withMapping:userMapping];
+    [userMapping mapRelationship:@"placesAmbassadors" withMapping:userMapping];
     [objectManager.mappingProvider setMapping:userMapping forKeyPath:@"PBUser"];
     
     // musicItem mapping
@@ -144,6 +146,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // user serialization
     [userSerializationMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
     [userSerializationMapping mapRelationship:@"musicAmbassadors" withMapping:userSerializationMapping];
+    [userSerializationMapping mapRelationship:@"placesAmbassadors" withMapping:userSerializationMapping];
     [objectManager.mappingProvider setSerializationMapping:userSerializationMapping forClass:[PBUser class]];
     
     // musicItem serialization
@@ -179,14 +182,10 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 #pragma mark - BZFoursquareSessionDelegate protocol methods
 - (void)foursquareDidAuthorize:(BZFoursquare *)foursquare {
     NSLog(@"foursquare did authorize");
-    
-//    [(ExploreTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:1] topViewController] getFoursquareSelf];
-    
-    // first time you log in, get foursquare friends and store usernames into friends core data db
-//    [(ExploreTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:1] topViewController] getFoursquareFriends];
-    
-    // get foursquare friend checkins
-//    [(ExploreTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:1] topViewController] getRecentFriendCheckins];
+    self.foursquareDelegate = [[FoursquareDelegate alloc] init];
+    [self.foursquareDelegate getFoursquareSelf];
+    [self.foursquareDelegate getFoursquareFriends];
+    [self.foursquareDelegate getRecentFriendCheckins];
 }
 
 - (void)foursquareDidNotAuthorize:(BZFoursquare *)foursquare error:(NSDictionary *)errorInfo {
@@ -203,17 +202,11 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 }
 
 -(void)sessionDidLoginSuccessfully:(SPSession *)aSession; {
-	// Invoked by SPSession after a successful login.
     NSLog(@"logged into spotify");
-    
     self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
-    
-    // get top tracks from friends
-//    [(HomeViewController*)[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] getFriendsTopTracks];
 }
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error; {
-	// Invoked by SPSession after a failed login.
     NSLog(@"failed to log into spotify");
 }
 

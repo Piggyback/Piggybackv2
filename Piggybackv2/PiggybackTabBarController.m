@@ -9,7 +9,6 @@
 #import "PiggybackTabBarController.h"
 #import "YouTubeTableViewController.h"
 #import "AppDelegate.h"
-#import "AccountLinkViewController.h"
 #import "Constants.h"
 #import "PBUser.h"
 #import "PBFriend.h"
@@ -22,6 +21,7 @@
 
 @implementation PiggybackTabBarController
 @synthesize currentFbAPICall = _currentFbAPICall;
+@synthesize setAmbassadorsViewController = _setAmbassadorsViewController;
 
 #pragma mark - private helper methods
 
@@ -87,6 +87,7 @@
             }
         }  
        [[RKObjectManager sharedManager].objectStore save:nil];
+//        [self.setAmbassadorsViewController reloadFriendsList];
     });
 }
 
@@ -177,7 +178,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.setAmbassadorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
+
     // get videos from youtube ambassadors
 //    NSMutableSet *youtubeAmbassadors = [NSMutableSet setWithObjects:@"nerdsinnewyork",@"mlgao",nil];
 //    YouTubeTableViewController* youtubeVC = (YouTubeTableViewController*)[[self.viewControllers objectAtIndex:2] topViewController];

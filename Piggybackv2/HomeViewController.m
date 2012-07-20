@@ -13,11 +13,12 @@
 #import "PBUser.h"
 #import "PBMusicActivity.h"
 #import "PBMusicItem.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface HomeViewController ()
 @property (nonatomic, strong) NSMutableSet* selectedFilters;
-@property (nonatomic, strong) SPToplist *topList;
 @property (nonatomic, strong) NSMutableDictionary *topLists;
+@property (nonatomic, strong) NSMutableArray *topPlaces;
 @property (nonatomic, strong) NSMutableArray* items;
 
 @property (nonatomic, strong) NSMutableSet* musicAmbassadors;
@@ -34,12 +35,14 @@
 @synthesize placesFilterButton = _placesFilterButton;
 @synthesize selectedFilters = _selectedFilters;
 @synthesize items = _items;
-@synthesize topList = _topList;
 @synthesize topLists = _topLists;
+@synthesize topPlaces = _topPlaces;
 
 @synthesize musicAmbassadors = _musicAmbassadors;
 @synthesize placesAmbassadors = _placesAmbassadors;
 @synthesize videosAmbassadors = _videosAmbassadors;
+
+@synthesize foursquareDelegate = _foursquareDelegate;
 
 #pragma mark - setters and getters 
 
@@ -96,12 +99,14 @@
     PBUser* me = [PBUser objectWithPredicate:getMe];
     if (me) {
         self.musicAmbassadors = [me.musicAmbassadors mutableCopy];
+        self.placesAmbassadors = [me.placesAmbassadors mutableCopy];
     }
     
     NSLog(@"music ambassadors are %@",self.musicAmbassadors);
+    NSLog(@"places ambassadors are %@",self.placesAmbassadors);
 }
 
--(void)getFriendsTopTracks {
+-(void)getAmbassadorsTopTracks {
 
     for (PBUser* ambassador in self.musicAmbassadors) {
         NSString* spotifyUsername = @"";
@@ -115,6 +120,10 @@
         [topList addObserver:self forKeyPath:@"tracks" options:0 context:nil];
         [self.topLists setObject:topList forKey:ambassador.uid];
     }
+}
+
+-(void)getAmbassadorsTopPlaces {
+//    self.topPlaces = self.foursquareDelegate.checkins;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -203,7 +212,6 @@
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
     NSLog(@"objects from user insert are %@",objects);
-    
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
@@ -230,7 +238,9 @@
 {
     static NSString *CellIdentifier = @"homeTableCell";
     HomeTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
+    cell.profilePic.layer.cornerRadius = 5;
+    cell.profilePic.layer.masksToBounds = YES;
+    
     if ([[self.items objectAtIndex:indexPath.row] isKindOfClass:[PBMusicActivity class]]) {
         PBMusicActivity* musicActivity = [self.items objectAtIndex:indexPath.row];
         PBMusicItem* musicItem = musicActivity.musicItem;
@@ -239,6 +249,7 @@
         cell.nameOfItem.text = [NSString stringWithFormat:@"%@ - %@",musicItem.artistName, musicItem.songTitle]; 
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ added a new top track",user.firstName, user.lastName];
         cell.icon.image = [UIImage imageNamed:@"music-icon-badge.png"];
+        cell.profilePic.image = user.thumbnail;
     }
     
     return cell;
@@ -286,12 +297,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     
-    NSLog(@"view did appear");
     // get ambassadors
     [self getAmbassadors];
     
     // get top tracks from ambassadors
-    [self getFriendsTopTracks];
+    [self getAmbassadorsTopTracks];
+    [self getAmbassadorsTopPlaces];
 }
 
 - (void)viewDidUnload

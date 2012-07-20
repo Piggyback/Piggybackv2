@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 - (IBAction)readyButton:(id)sender;
+- (void)reloadFriendsList;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
