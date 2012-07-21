@@ -164,6 +164,9 @@
 		F9A428C315B46276000D147C /* PBMusicActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428C215B46276000D147C /* PBMusicActivity.m */; };
 		F9AE7CC915B9E42A001008C7 /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AE7CC815B9E429001008C7 /* PBUser.m */; };
 		F9AE7CCC15B9E9DE001008C7 /* FoursquareDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AE7CCB15B9E9DE001008C7 /* FoursquareDelegate.m */; };
+		F9AE7CD215BA71FF001008C7 /* PBPlacesActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AE7CD115BA71FF001008C7 /* PBPlacesActivity.m */; };
+		F9AE7CD515BA7200001008C7 /* PBPlacesNews.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AE7CD415BA7200001008C7 /* PBPlacesNews.m */; };
+		F9AE7CDB15BA7202001008C7 /* PBPlacesItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AE7CDA15BA7202001008C7 /* PBPlacesItem.m */; };
 		F9C097641594E500000A0541 /* WatchTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C097631594E500000A0541 /* WatchTableCell.m */; };
 		F9C097691594E5D8000A0541 /* haines-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097651594E5D8000A0541 /* haines-rounded-corners.png */; };
 		F9C0976A1594E5D8000A0541 /* josh-lu-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */; };
@@ -474,6 +477,12 @@
 		F9AE7CC815B9E429001008C7 /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
 		F9AE7CCA15B9E9DE001008C7 /* FoursquareDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareDelegate.h; sourceTree = "<group>"; };
 		F9AE7CCB15B9E9DE001008C7 /* FoursquareDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoursquareDelegate.m; sourceTree = "<group>"; };
+		F9AE7CD015BA71FE001008C7 /* PBPlacesActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesActivity.h; path = Piggybackv2/PBPlacesActivity.h; sourceTree = "<group>"; };
+		F9AE7CD115BA71FF001008C7 /* PBPlacesActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesActivity.m; path = Piggybackv2/PBPlacesActivity.m; sourceTree = "<group>"; };
+		F9AE7CD315BA71FF001008C7 /* PBPlacesNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesNews.h; path = Piggybackv2/PBPlacesNews.h; sourceTree = "<group>"; };
+		F9AE7CD415BA7200001008C7 /* PBPlacesNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesNews.m; path = Piggybackv2/PBPlacesNews.m; sourceTree = "<group>"; };
+		F9AE7CD915BA7201001008C7 /* PBPlacesItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesItem.h; path = Piggybackv2/PBPlacesItem.h; sourceTree = "<group>"; };
+		F9AE7CDA15BA7202001008C7 /* PBPlacesItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesItem.m; path = Piggybackv2/PBPlacesItem.m; sourceTree = "<group>"; };
 		F9C097621594E500000A0541 /* WatchTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchTableCell.h; sourceTree = "<group>"; };
 		F9C097631594E500000A0541 /* WatchTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchTableCell.m; sourceTree = "<group>"; };
 		F9C097651594E5D8000A0541 /* haines-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haines-rounded-corners.png"; sourceTree = "<group>"; };
@@ -692,6 +701,12 @@
 			children = (
 				F9AE7CC715B9E429001008C7 /* PBUser.h */,
 				F9AE7CC815B9E429001008C7 /* PBUser.m */,
+				F9AE7CD915BA7201001008C7 /* PBPlacesItem.h */,
+				F9AE7CDA15BA7202001008C7 /* PBPlacesItem.m */,
+				F9AE7CD315BA71FF001008C7 /* PBPlacesNews.h */,
+				F9AE7CD415BA7200001008C7 /* PBPlacesNews.m */,
+				F9AE7CD015BA71FE001008C7 /* PBPlacesActivity.h */,
+				F9AE7CD115BA71FF001008C7 /* PBPlacesActivity.m */,
 				F9774C8215B722CD00FC6FBC /* PBMusicItem.h */,
 				F9774C8315B722CD00FC6FBC /* PBMusicItem.m */,
 				F9A428C115B46276000D147C /* PBMusicActivity.h */,
@@ -1151,6 +1166,9 @@
 				F9774C8415B722CD00FC6FBC /* PBMusicItem.m in Sources */,
 				F9AE7CC915B9E42A001008C7 /* PBUser.m in Sources */,
 				F9AE7CCC15B9E9DE001008C7 /* FoursquareDelegate.m in Sources */,
+				F9AE7CD215BA71FF001008C7 /* PBPlacesActivity.m in Sources */,
+				F9AE7CD515BA7200001008C7 /* PBPlacesNews.m in Sources */,
+				F9AE7CDB15BA7202001008C7 /* PBPlacesItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

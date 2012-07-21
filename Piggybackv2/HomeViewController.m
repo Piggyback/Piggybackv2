@@ -14,6 +14,7 @@
 #import "PBMusicActivity.h"
 #import "PBMusicItem.h"
 #import <QuartzCore/QuartzCore.h>
+#import "PBPlacesActivity.h"
 
 @interface HomeViewController ()
 @property (nonatomic, strong) NSMutableSet* selectedFilters;
@@ -123,9 +124,12 @@
 }
 
 -(void)getAmbassadorsTopPlaces {
-//    self.topPlaces = self.foursquareDelegate.checkins;
+    self.foursquareDelegate = [[FoursquareDelegate alloc] init];
+    self.foursquareDelegate.delegate = self;
+    [self.foursquareDelegate getRecentFriendCheckins];
 }
 
+// this method is called when a spotify user's top list is fetched
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"tracks"]) {
         NSString* ambassadorUid = [[self.topLists allKeysForObject:object] lastObject];
@@ -156,6 +160,15 @@
             }];
         }
     }
+}
+
+#warning - start here - update to just get ambassadors checkins instead of all friends checkins (look at foursquaredelegate checkin method)
+#warning - save checkins into PBPlacesItem and PBPlacesActivity - look above for example
+
+// this method is called when your ambassadors checkin's are fetched
+-(void)updateCheckins:(NSArray*)checkins {
+    [self.items addObjectsFromArray:checkins];
+    NSLog(@"items are %@",self.items);
 }
 
 #pragma mark - private helper methods
@@ -250,6 +263,8 @@
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ added a new top track",user.firstName, user.lastName];
         cell.icon.image = [UIImage imageNamed:@"music-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
+    } else if ([[self.items objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
+        
     }
     
     return cell;

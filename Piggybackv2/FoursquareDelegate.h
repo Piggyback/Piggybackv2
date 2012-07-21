@@ -11,10 +11,16 @@
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData.h>
 
+@protocol FoursquareCheckinDelegate
+-(void)updateCheckins:(NSArray*)checkins;
+@end
+
 @interface FoursquareDelegate : NSObject <BZFoursquareRequestDelegate, RKObjectLoaderDelegate>
 
 - (void)getFoursquareSelf;
 - (void)getFoursquareFriends;
 - (void)getRecentFriendCheckins;
+
+@property (nonatomic, strong) id <FoursquareCheckinDelegate> delegate;
 
 @end

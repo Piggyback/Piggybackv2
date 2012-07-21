@@ -20,6 +20,8 @@
 #import "HomeViewController.h"
 #import "PBMusicItem.h"
 #import "PBMusicActivity.h"
+#import "PBPlacesItem.h"
+#import "PBPlacesActivity.h"
 #import <RestKit/RKRequestSerialization.h>
 
 @interface AppDelegate ()
@@ -116,6 +118,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKManagedObjectMapping* userMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBUser" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* musicItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicItem" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* musicActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicActivity" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping* placesItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesItem" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping* placesActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesActivity" inManagedObjectStore:objectManager.objectStore];
     
     // user mapping
     userMapping.primaryKeyAttribute = @"uid";
@@ -138,10 +142,26 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [musicActivityMapping connectRelationship:@"user" withObjectForPrimaryKeyAttribute:@"uid"];
     [objectManager.mappingProvider setMapping:musicActivityMapping forKeyPath:@"PBMusicActivity"];
     
+    // placesItem mapping
+    placesItemMapping.primaryKeyAttribute = @"placesItemId";
+    [placesItemMapping mapAttributes:@"placesItemId",@"addr",@"addrCity",@"addrCountry",@"addrState",@"addrCountry",@"addrZip",@"foursquareReferenceId",@"lat",@"lng",@"name",@"phone",@"website",nil];
+    [objectManager.mappingProvider setMapping:placesItemMapping forKeyPath:@"PBPlacesItem"];
+    
+    // placesActivity mapping
+    placesActivityMapping.primaryKeyAttribute = @"placesActivityId";
+    [placesActivityMapping mapAttributes:@"placesActivityId",@"uid",@"placesItemId",@"placesActivityType",@"dateAdded",nil];
+    [placesActivityMapping mapRelationship:@"placesItem" withMapping:placesItemMapping];
+    [placesActivityMapping mapRelationship:@"user" withMapping:userMapping];
+    [placesActivityMapping connectRelationship:@"placesItem" withObjectForPrimaryKeyAttribute:@"placesItemId"];
+    [placesActivityMapping connectRelationship:@"user" withObjectForPrimaryKeyAttribute:@"uid"];
+    [objectManager.mappingProvider setMapping:placesActivityMapping forKeyPath:@"PBPlacesActivity"];
+    
     // serialization declarations
     RKObjectMapping *userSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *musicItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *musicActivitySerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    RKObjectMapping *placesItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    RKObjectMapping *placesActivitySerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
 
     // user serialization
     [userSerializationMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
@@ -156,6 +176,14 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // musicActivity serialization
     [musicActivitySerializationMapping mapAttributes:@"musicActivityId",@"uid",@"musicItemId",@"musicActivityType",@"dateAdded",nil];
     [objectManager.mappingProvider setSerializationMapping:musicActivitySerializationMapping forClass:[PBMusicActivity class]];
+    
+    // placesItem serialization
+    [placesItemSerializationMapping mapAttributes:@"placesItemId",@"addr",@"addrCity",@"addrCountry",@"addrState",@"addrCountry",@"addrZip",@"foursquareReferenceId",@"lat",@"lng",@"name",@"phone",@"website",nil];
+    [objectManager.mappingProvider setSerializationMapping:placesItemSerializationMapping forClass:[PBPlacesItem class]];
+    
+    // placesActivity serialization
+    [placesActivitySerializationMapping mapAttributes:@"placesActivityId",@"uid",@"placesItemId",@"placesActivityType",@"dateAdded",nil];
+    [objectManager.mappingProvider setSerializationMapping:placesActivitySerializationMapping forClass:[PBPlacesActivity class]];
     
 }
 
@@ -185,7 +213,6 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     self.foursquareDelegate = [[FoursquareDelegate alloc] init];
     [self.foursquareDelegate getFoursquareSelf];
     [self.foursquareDelegate getFoursquareFriends];
-    [self.foursquareDelegate getRecentFriendCheckins];
 }
 
 - (void)foursquareDidNotAuthorize:(BZFoursquare *)foursquare error:(NSDictionary *)errorInfo {

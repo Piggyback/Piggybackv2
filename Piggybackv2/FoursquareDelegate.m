@@ -22,6 +22,7 @@
 
 @synthesize requestDict = _requestDict;
 @synthesize checkins = _checkins;
+@synthesize delegate = _delegate;
 
 #pragma mark - Getters & Setters
 -(NSArray*)checkins {
@@ -89,6 +90,7 @@
             // get friends checkins
             else if ([[self.requestDict objectForKey:currentRequest] isEqualToString:@"getFriendCheckins"]) {
                 self.checkins = [request.response objectForKey:@"recent"];
+                [self.delegate updateCheckins:self.checkins];
                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             }
             

@@ -11,7 +11,7 @@
 #import <RestKit/CoreData.h>
 #import "FoursquareDelegate.h"
 
-@interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RKObjectLoaderDelegate>
+@interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RKObjectLoaderDelegate, FoursquareCheckinDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *placesFilterButton;
 @property (weak, nonatomic) IBOutlet UIButton *musicFilterButton;
