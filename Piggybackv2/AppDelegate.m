@@ -108,7 +108,9 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [router routeClass:[PBUser class] toResourcePath:@"/addUser" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBUser class] toResourcePath:@"/updateUser" forMethod:RKRequestMethodPUT];
     [router routeClass:[PBMusicItem class] toResourcePath:@"/addMusicItem" forMethod:RKRequestMethodPOST];
-    [router routeClass:[PBMusicActivity class] toResourcePath:@"addMusicActivity" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBMusicActivity class] toResourcePath:@"/addMusicActivity" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBPlacesItem class] toResourcePath:@"/addPlacesItem" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBPlacesActivity class] toResourcePath:@"/addPlacesActivity" forMethod:RKRequestMethodPOST];
 }
 
 - (void)setupRestkitMapping {
@@ -144,7 +146,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     
     // placesItem mapping
     placesItemMapping.primaryKeyAttribute = @"placesItemId";
-    [placesItemMapping mapAttributes:@"placesItemId",@"addr",@"addrCity",@"addrCountry",@"addrState",@"addrCountry",@"addrZip",@"foursquareReferenceId",@"lat",@"lng",@"name",@"phone",@"website",nil];
+    [placesItemMapping mapAttributes:@"placesItemId",@"addr",@"addrCity",@"addrCountry",@"addrState",@"addrCountry",@"addrZip",@"foursquareReferenceId",@"lat",@"lng",@"name",@"phone",nil];
     [objectManager.mappingProvider setMapping:placesItemMapping forKeyPath:@"PBPlacesItem"];
     
     // placesActivity mapping
@@ -178,7 +180,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [objectManager.mappingProvider setSerializationMapping:musicActivitySerializationMapping forClass:[PBMusicActivity class]];
     
     // placesItem serialization
-    [placesItemSerializationMapping mapAttributes:@"placesItemId",@"addr",@"addrCity",@"addrCountry",@"addrState",@"addrCountry",@"addrZip",@"foursquareReferenceId",@"lat",@"lng",@"name",@"phone",@"website",nil];
+    [placesItemSerializationMapping mapAttributes:@"placesItemId",@"addr",@"addrCity",@"addrCountry",@"addrState",@"addrCountry",@"addrZip",@"foursquareReferenceId",@"lat",@"lng",@"name",@"phone",nil];
     [objectManager.mappingProvider setSerializationMapping:placesItemSerializationMapping forClass:[PBPlacesItem class]];
     
     // placesActivity serialization

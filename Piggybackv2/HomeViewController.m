@@ -15,6 +15,7 @@
 #import "PBMusicItem.h"
 #import <QuartzCore/QuartzCore.h>
 #import "PBPlacesActivity.h"
+#import "PBPlacesItem.h"
 
 @interface HomeViewController ()
 @property (nonatomic, strong) NSMutableSet* selectedFilters;
@@ -162,13 +163,44 @@
     }
 }
 
-#warning - start here - update to just get ambassadors checkins instead of all friends checkins (look at foursquaredelegate checkin method)
-#warning - save checkins into PBPlacesItem and PBPlacesActivity - look above for example
-
 // this method is called when your ambassadors checkin's are fetched
 -(void)updateCheckins:(NSArray*)checkins {
-    [self.items addObjectsFromArray:checkins];
-    NSLog(@"items are %@",self.items);
+    for (NSDictionary* checkin in checkins) {
+        for (PBUser* placesAmbasador in self.placesAmbassadors) {
+            if ([placesAmbasador.foursquareId isEqualToNumber:[NSNumber numberWithInt:[[[checkin objectForKey:@"user"] objectForKey:@"id"] intValue]]]) {
+                PBPlacesItem* newPlacesItem = [PBPlacesItem object];
+                newPlacesItem.addr = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"address"];
+                newPlacesItem.addrCity = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"city"];
+                newPlacesItem.addrCountry = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"country"];
+                newPlacesItem.addrState = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"state"];
+                newPlacesItem.addrZip = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"postalCode"];
+                newPlacesItem.foursquareReferenceId = [[checkin objectForKey:@"venue"] objectForKey:@"id"];
+                newPlacesItem.lat = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lat"];
+                newPlacesItem.lng = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lng"];
+                newPlacesItem.name = [[checkin objectForKey:@"venue"] objectForKey:@"name"];
+                newPlacesItem.phone = [[[checkin objectForKey:@"venue"] objectForKey:@"contact"] objectForKey:@"formattedPhone"];
+                
+                [[RKObjectManager sharedManager] postObject:newPlacesItem usingBlock:^(RKObjectLoader* loader) {
+                    loader.onDidLoadObject = ^(id object) {
+                        PBPlacesActivity* newPlacesActivity = [PBPlacesActivity object];
+                        newPlacesActivity.uid = placesAmbasador.uid;
+                        newPlacesActivity.placesItemId = newPlacesItem.placesItemId;
+                        newPlacesActivity.placesActivityType = @"checkin";
+                        
+                        [[RKObjectManager sharedManager] postObject:newPlacesActivity usingBlock:^(RKObjectLoader* loader) {
+                            loader.onDidLoadObject = ^(id object) {
+                                [self.items addObject:newPlacesActivity];
+                                [self.tableView reloadData];
+                            };
+                        }];
+                    };
+                }];
+            }
+        }
+    }
+    
+//    [self.items addObjectsFromArray:checkins];
+//    NSLog(@"items are %@",self.items);
 }
 
 #pragma mark - private helper methods
@@ -264,7 +296,14 @@
         cell.icon.image = [UIImage imageNamed:@"music-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
     } else if ([[self.items objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
+        PBPlacesActivity* placesActivity = [self.items objectAtIndex:indexPath.row];
+        PBPlacesItem* placesItem = placesActivity.placesItem;
+        PBUser* user = placesActivity.user;
         
+        cell.nameOfItem.text = placesItem.name;
+        cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ checked in",user.firstName, user.lastName];
+        cell.icon.image = [UIImage imageNamed:@"places-icon-badge.png"];
+        cell.profilePic.image = user.thumbnail;
     }
     
     return cell;

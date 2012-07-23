@@ -24,7 +24,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSString * website;
-@property (nonatomic, retain) NSNumber * foursquareReferenceId;
+@property (nonatomic, retain) NSString * foursquareReferenceId;
 @property (nonatomic, retain) NSSet *placesActivity;
 @end
 

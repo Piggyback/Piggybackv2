@@ -96,6 +96,9 @@
         newUser.foursquareId = friend.foursquareId;
         newUser.isPiggybackUser = [NSNumber numberWithBool:NO];
         
+        NSLog(@"HELLO! friend foursquare id is %@",friend.foursquareId);
+        NSLog(@"HELLO AGAIN! new user foursquare is %@",newUser.foursquareId);
+        
         // add user and add ambassador
         [[RKObjectManager sharedManager] postObject:newUser usingBlock:^(RKObjectLoader* loader) {
             loader.onDidLoadObjects = ^(NSArray* objects) {

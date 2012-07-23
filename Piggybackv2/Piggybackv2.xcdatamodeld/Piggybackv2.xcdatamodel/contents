@@ -56,13 +56,12 @@
         <attribute name="addrCountry" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="addrState" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="addrZip" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="foursquareReferenceId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="foursquareReferenceId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lat" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="lng" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="placesItemId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="placesActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBPlacesActivity" inverseName="placesItem" inverseEntity="PBPlacesActivity" syncable="YES"/>
     </entity>
     <entity name="PBPlacesNews" representedClassName="PBPlacesNews" syncable="YES">
@@ -101,9 +100,9 @@
         <element name="PBMusicActivity" positionX="-297" positionY="177" width="128" height="165"/>
         <element name="PBMusicItem" positionX="-171" positionY="63" width="128" height="150"/>
         <element name="PBMusicNews" positionX="-38" positionY="-123" width="128" height="150"/>
-        <element name="PBUser" positionX="243" positionY="171" width="128" height="255"/>
-        <element name="PBPlacesItem" positionX="160" positionY="192" width="128" height="240"/>
         <element name="PBPlacesActivity" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="PBPlacesItem" positionX="160" positionY="192" width="128" height="225"/>
         <element name="PBPlacesNews" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="PBUser" positionX="243" positionY="171" width="128" height="255"/>
     </elements>
 </model>
