@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSMutableDictionary *topLists;
 @property (nonatomic, strong) NSMutableArray *topPlaces;
 @property (nonatomic, strong) NSMutableArray* items;
+@property (nonatomic, strong) NSMutableArray *displayItems;
+
 
 @property (nonatomic, strong) NSMutableSet* musicAmbassadors;
 @property (nonatomic, strong) NSMutableSet* placesAmbassadors;
@@ -37,6 +39,7 @@
 @synthesize placesFilterButton = _placesFilterButton;
 @synthesize selectedFilters = _selectedFilters;
 @synthesize items = _items;
+@synthesize displayItems = _displayItems;
 @synthesize topLists = _topLists;
 @synthesize topPlaces = _topPlaces;
 
@@ -60,6 +63,13 @@
         _items = [[NSMutableArray alloc] init];
     }
     return _items;
+}
+
+- (NSMutableArray*)displayItems {
+    if (!_displayItems) {
+        _displayItems = [[NSMutableArray alloc] init];
+    }
+    return _displayItems;
 }
 
 - (NSMutableSet*)musicAmbassadors {
@@ -154,6 +164,7 @@
                     [[RKObjectManager sharedManager] postObject:newMusicActivity usingBlock:^(RKObjectLoader* loader) {
                         loader.onDidLoadObject = ^(id object) {
                             [self.items addObject:newMusicActivity];
+                            [self.displayItems addObject:newMusicActivity];
                             [self.tableView reloadData];
                         };
                     }];
@@ -190,6 +201,7 @@
                         [[RKObjectManager sharedManager] postObject:newPlacesActivity usingBlock:^(RKObjectLoader* loader) {
                             loader.onDidLoadObject = ^(id object) {
                                 [self.items addObject:newPlacesActivity];
+                                [self.displayItems addObject:newPlacesActivity];
                                 [self.tableView reloadData];
                             };
                         }];
@@ -198,9 +210,6 @@
             }
         }
     }
-    
-//    [self.items addObjectsFromArray:checkins];
-//    NSLog(@"items are %@",self.items);
 }
 
 #pragma mark - private helper methods
@@ -276,7 +285,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.items count];
+    return [self.displayItems count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -286,8 +295,8 @@
     cell.profilePic.layer.cornerRadius = 5;
     cell.profilePic.layer.masksToBounds = YES;
     
-    if ([[self.items objectAtIndex:indexPath.row] isKindOfClass:[PBMusicActivity class]]) {
-        PBMusicActivity* musicActivity = [self.items objectAtIndex:indexPath.row];
+    if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBMusicActivity class]]) {
+        PBMusicActivity* musicActivity = [self.displayItems objectAtIndex:indexPath.row];
         PBMusicItem* musicItem = musicActivity.musicItem;
         PBUser* user = musicActivity.user;
         
@@ -295,8 +304,8 @@
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ added a new top track",user.firstName, user.lastName];
         cell.icon.image = [UIImage imageNamed:@"music-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
-    } else if ([[self.items objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
-        PBPlacesActivity* placesActivity = [self.items objectAtIndex:indexPath.row];
+    } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
+        PBPlacesActivity* placesActivity = [self.displayItems objectAtIndex:indexPath.row];
         PBPlacesItem* placesItem = placesActivity.placesItem;
         PBUser* user = placesActivity.user;
         
@@ -376,13 +385,44 @@
 
 #pragma mark - ib action methods
 
+- (void)updateDisplayedItems {
+    if ([self.selectedFilters count] == 0) {
+        self.displayItems = self.items;
+    } else {
+        NSMutableArray* selectedItems = [[NSMutableArray alloc] init];
+        for (id item in self.items) {
+            for (NSString* type in self.selectedFilters) {
+                if ([type isEqualToString:@"music"]) {
+                    if ([item isKindOfClass:[PBMusicActivity class]]) {
+                        [selectedItems addObject:item];
+                    }
+                } else if ([type isEqualToString:@"places"]) {
+                    if ([item isKindOfClass:[PBPlacesActivity class]]) {
+                        [selectedItems addObject:item];
+                    }
+                } else if ([type isEqualToString:@"videos"]) {
+//                    if ([item isKindOfClass:[PBVideosActivity class]]) {
+//                        [selectedItems addObject:item];
+//                    }
+                }
+            }
+            self.displayItems = selectedItems;
+        }
+    }
+    NSLog(@"display items is %@",self.displayItems);
+    NSLog(@"set of filters is %@",self.selectedFilters);
+    [self.tableView reloadData];
+}
+
 - (IBAction)clickPlacesButton:(id)sender {
     if ([self.selectedFilters containsObject:@"places"]) {
         [self.placesFilterButton setImage:[UIImage imageNamed:@"media-filter-places-button-normal"] forState:UIControlStateNormal];
         [self.selectedFilters removeObject:@"places"];
+        [self updateDisplayedItems];
     } else {
         [self.placesFilterButton setImage:[UIImage imageNamed:@"media-filter-places-button-active"] forState:UIControlStateNormal];
         [self.selectedFilters addObject:@"places"];
+        [self updateDisplayedItems];
     }
 }
 
@@ -390,9 +430,11 @@
     if ([self.selectedFilters containsObject:@"music"]) {
         [self.musicFilterButton setImage:[UIImage imageNamed:@"media-filter-music-button-normal"] forState:UIControlStateNormal];
         [self.selectedFilters removeObject:@"music"];
+        [self updateDisplayedItems];
     } else {
         [self.musicFilterButton setImage:[UIImage imageNamed:@"media-filter-music-button-active"] forState:UIControlStateNormal];
         [self.selectedFilters addObject:@"music"];
+        [self updateDisplayedItems];
     }
 }
 
@@ -400,9 +442,11 @@
     if ([self.selectedFilters containsObject:@"videos"]) {
         [self.videosFilterButton setImage:[UIImage imageNamed:@"media-filter-videos-button-normal"] forState:UIControlStateNormal];
         [self.selectedFilters removeObject:@"videos"];
+        [self updateDisplayedItems];
     } else {
         [self.videosFilterButton setImage:[UIImage imageNamed:@"media-filter-videos-button-active"] forState:UIControlStateNormal];
         [self.selectedFilters addObject:@"videos"];
+        [self updateDisplayedItems];
     }
 }
 
