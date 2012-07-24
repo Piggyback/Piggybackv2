@@ -22,7 +22,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 - (void)viewDidUnload
@@ -83,12 +82,11 @@
     }
 }
 
-- (IBAction)continueButton:(id)sender {
-//    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    
+- (IBAction)continueButton:(id)sender {    
     // display set ambassadors view
-    SetAmbassadorsViewController* setAmbassadorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
-    [self presentViewController:setAmbassadorsViewController animated:YES completion:nil];
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    PiggybackTabBarController* rootViewController = (PiggybackTabBarController*)appDelegate.window.rootViewController;
+    [self presentViewController:rootViewController.setAmbassadorsViewController animated:YES completion:nil];
 }
 
 #pragma mark - youtube alert delegate

@@ -16,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet UILabel* date;
 @property (nonatomic, weak) IBOutlet UIButton* heart;
 @property (nonatomic, weak) IBOutlet UIButton* todo;
+@property (nonatomic, weak) IBOutlet UIImageView* icon;
 @property (nonatomic, strong) NSString* mediaType;
 
 - (IBAction)heart:(id)sender;

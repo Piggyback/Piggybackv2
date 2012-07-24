@@ -10,8 +10,10 @@
 
 @interface ListenCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UILabel *trackDetails;
-
+@property (weak, nonatomic) IBOutlet UILabel *activity;
+@property (nonatomic, weak) IBOutlet UILabel *action;
+@property (nonatomic, weak) IBOutlet UIImageView *profilePic;
+@property (nonatomic, weak) IBOutlet UIImageView *icon;
 @property (nonatomic, weak) IBOutlet UIButton* heart;
 @property (nonatomic, weak) IBOutlet UIButton* todo;
 

@@ -495,7 +495,11 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
+                                    <outlet property="action" destination="Lzv-LB-EaA" id="J7n-Ri-Nxi"/>
+                                    <outlet property="activity" destination="1w4-ye-pGR" id="bce-pU-5f9"/>
                                     <outlet property="heart" destination="QX2-v5-kQ2" id="BqJ-dO-b3a"/>
+                                    <outlet property="icon" destination="fbu-eH-hel" id="jjq-0X-X47"/>
+                                    <outlet property="profilePic" destination="P30-3I-PBD" id="Rnn-1s-ay3"/>
                                     <outlet property="todo" destination="gjt-ud-6ye" id="tPi-Dl-Nut"/>
                                     <outlet property="trackDetails" destination="1w4-ye-pGR" id="unV-YF-ig8"/>
                                     <segue destination="2C0-6h-HDa" kind="push" identifier="musicToSong" id="NMI-sb-6f9"/>
@@ -706,32 +710,32 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeTableCell" rowHeight="70" id="pwO-DP-5RU" customClass="HomeTableCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="70"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeTableCell" rowHeight="65" id="pwO-DP-5RU" customClass="HomeTableCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="o3H-Zd-FBd">
-                                                    <rect key="frame" x="5" y="4" width="61" height="61"/>
+                                                    <rect key="frame" x="5" y="7" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="places-icon-badge.png" id="r79-E0-HdA">
-                                                    <rect key="frame" x="53" y="41" width="25" height="25"/>
+                                                    <rect key="frame" x="44" y="37" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Wei checked in to" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="D2s-gw-Fnz">
-                                                    <rect key="frame" x="70" y="0.0" width="210" height="21"/>
+                                                    <rect key="frame" x="59" y="1" width="223" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hot Pocket HQ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="Z1R-hK-nIg">
-                                                    <rect key="frame" x="70" y="20" width="210" height="21"/>
+                                                    <rect key="frame" x="59" y="18" width="223" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
@@ -743,7 +747,7 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2na-Md-KWC">
-                                                    <rect key="frame" x="259" y="42" width="28" height="25"/>
+                                                    <rect key="frame" x="259" y="38" width="28" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" image="heart-button.png">
@@ -760,7 +764,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="b5f-Qn-OIf">
-                                                    <rect key="frame" x="284" y="33" width="40" height="40"/>
+                                                    <rect key="frame" x="284" y="29" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" image="todo-button.png">
@@ -783,6 +787,7 @@
                                             <outlet property="date" destination="pSE-jO-tGS" id="lzI-sY-plJ"/>
                                             <outlet property="favoritedBy" destination="D2s-gw-Fnz" id="b6P-cj-35l"/>
                                             <outlet property="heart" destination="2na-Md-KWC" id="uJZ-uL-T9h"/>
+                                            <outlet property="icon" destination="r79-E0-HdA" id="u0T-Fe-QQg"/>
                                             <outlet property="nameOfItem" destination="Z1R-hK-nIg" id="27d-NO-Zh9"/>
                                             <outlet property="profilePic" destination="o3H-Zd-FBd" id="agF-b6-ezO"/>
                                             <outlet property="todo" destination="b5f-Qn-OIf" id="IfG-qq-hAl"/>
@@ -1123,6 +1128,7 @@
                 <relationship kind="outlet" name="date" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="icon" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="nameOfItem" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
@@ -1142,9 +1148,12 @@
             <relationships>
                 <relationship kind="action" name="heart:"/>
                 <relationship kind="action" name="todo:"/>
+                <relationship kind="outlet" name="action" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="activity" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="icon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="trackDetails" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="ListenNavigationController" superclassName="UINavigationController">
@@ -1157,12 +1166,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
             <relationships>
                 <relationship kind="action" name="loginWithFacebook:"/>
-            </relationships>
-        </class>
-        <class className="NewsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="PiggybackTabBarController" superclassName="UITabBarController">

@@ -10,9 +10,12 @@
 
 @implementation ListenCell
 
-@synthesize trackDetails = _trackDetails;
+@synthesize activity = _activity;
 @synthesize heart = _heart;
 @synthesize todo = _todo;
+@synthesize action = _action;
+@synthesize profilePic = _profilePic;
+@synthesize icon = _icon;
 
 - (IBAction)heart:(id)sender {
     [self.heart setImage:[UIImage imageNamed:@"heart-pressed-button"] forState:UIControlStateNormal];

@@ -1169,12 +1169,15 @@
 				F9A428BA15B46276000D147C /* PBMusicNews.m in Sources */,
 				F9A428C315B46276000D147C /* PBMusicActivity.m in Sources */,
 				F9774C8415B722CD00FC6FBC /* PBMusicItem.m in Sources */,
+<<<<<<< HEAD
 				C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */,
+=======
 				F9AE7CC915B9E42A001008C7 /* PBUser.m in Sources */,
 				F9AE7CCC15B9E9DE001008C7 /* FoursquareDelegate.m in Sources */,
 				F9AE7CD515BA7200001008C7 /* PBPlacesNews.m in Sources */,
 				F9AE7CDB15BA7202001008C7 /* PBPlacesItem.m in Sources */,
 				F9A89D5015BDCCE1007AC27D /* PBPlacesActivity.m in Sources */,
+>>>>>>> da59f49729b97b9980772853dd4d93ec874ed281
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

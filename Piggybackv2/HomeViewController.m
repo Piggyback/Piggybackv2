@@ -13,11 +13,17 @@
 #import "PBUser.h"
 #import "PBMusicActivity.h"
 #import "PBMusicItem.h"
+#import <QuartzCore/QuartzCore.h>
+#import "PBPlacesActivity.h"
+#import "PBPlacesItem.h"
 
 @interface HomeViewController ()
 @property (nonatomic, strong) NSMutableSet* selectedFilters;
-@property (nonatomic, strong) SPToplist *topList;
+@property (nonatomic, strong) NSMutableDictionary *topLists;
+@property (nonatomic, strong) NSMutableArray *topPlaces;
 @property (nonatomic, strong) NSMutableArray* items;
+@property (nonatomic, strong) NSMutableArray *displayItems;
+
 
 @property (nonatomic, strong) NSMutableSet* musicAmbassadors;
 @property (nonatomic, strong) NSMutableSet* placesAmbassadors;
@@ -33,11 +39,15 @@
 @synthesize placesFilterButton = _placesFilterButton;
 @synthesize selectedFilters = _selectedFilters;
 @synthesize items = _items;
-@synthesize topList = _topList;
+@synthesize displayItems = _displayItems;
+@synthesize topLists = _topLists;
+@synthesize topPlaces = _topPlaces;
 
 @synthesize musicAmbassadors = _musicAmbassadors;
 @synthesize placesAmbassadors = _placesAmbassadors;
 @synthesize videosAmbassadors = _videosAmbassadors;
+
+@synthesize foursquareDelegate = _foursquareDelegate;
 
 #pragma mark - setters and getters 
 
@@ -53,6 +63,13 @@
         _items = [[NSMutableArray alloc] init];
     }
     return _items;
+}
+
+- (NSMutableArray*)displayItems {
+    if (!_displayItems) {
+        _displayItems = [[NSMutableArray alloc] init];
+    }
+    return _displayItems;
 }
 
 - (NSMutableSet*)musicAmbassadors {
@@ -76,6 +93,13 @@
     return _videosAmbassadors;
 }
 
+- (NSMutableDictionary*)topLists {
+    if (!_topLists) {
+        _topLists = [[NSMutableDictionary alloc] init];
+    }
+    return _topLists;
+}
+
 #pragma mark - public helper methods
 
 - (void)getAmbassadors {
@@ -87,27 +111,40 @@
     PBUser* me = [PBUser objectWithPredicate:getMe];
     if (me) {
         self.musicAmbassadors = [me.musicAmbassadors mutableCopy];
+        self.placesAmbassadors = [me.placesAmbassadors mutableCopy];
     }
     
     NSLog(@"music ambassadors are %@",self.musicAmbassadors);
+    NSLog(@"places ambassadors are %@",self.placesAmbassadors);
 }
 
-#warning - fetching top tracks is static right now, even though we have the music ambassadors in self.musicAmbassadors
-#warning - make a table to store favorite songs
+-(void)getAmbassadorsTopTracks {
 
--(void)getFriendsTopTracks {
-//    for (PBUser* musicAmbassador in self.musicAmbassadors) {
-        self.topList = [SPToplist toplistForUserWithName:@"ptpells" inSession:[SPSession sharedSession]];
-    self.topList = [SPToplist toplistForUserWithName:@"lemikegao" inSession:[SPSession sharedSession]];
-
-//    }
+    for (PBUser* ambassador in self.musicAmbassadors) {
+        NSString* spotifyUsername = @"";
+        if ([ambassador.lastName isEqualToString:@"Gao"]) {
+            spotifyUsername = @"lemikegao";
+        } else if ([ambassador.lastName isEqualToString:@"Jiang"]) {
+            spotifyUsername = @"kimikul";
+        }
+        
+        SPToplist* topList = [SPToplist toplistForUserWithName:spotifyUsername inSession:[SPSession sharedSession]];
+        [topList addObserver:self forKeyPath:@"tracks" options:0 context:nil];
+        [self.topLists setObject:topList forKey:ambassador.uid];
+    }
 }
 
+-(void)getAmbassadorsTopPlaces {
+    self.foursquareDelegate = [[FoursquareDelegate alloc] init];
+    self.foursquareDelegate.delegate = self;
+    [self.foursquareDelegate getRecentFriendCheckins];
+}
+
+// this method is called when a spotify user's top list is fetched
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"object that changed is %@",object);
-    if ([keyPath isEqualToString:@"topList.tracks"]) {
-        NSLog(@"peter's top tracks: %@", self.topList.tracks);
-        for (SPTrack* track in self.topList.tracks) {
+    if ([keyPath isEqualToString:@"tracks"]) {
+        NSString* ambassadorUid = [[self.topLists allKeysForObject:object] lastObject];
+        for (SPTrack* track in [[self.topLists objectForKey:ambassadorUid] tracks]) {
             PBMusicItem* newMusicItem = [PBMusicItem object];
             newMusicItem.artistName = [[[track artists] valueForKey:@"name"] componentsJoinedByString:@","];
             newMusicItem.songTitle = track.name;
@@ -120,8 +157,57 @@
             [[RKObjectManager sharedManager] postObject:newMusicItem usingBlock:^(RKObjectLoader* loader) {
                 loader.onDidLoadObject = ^(id object) {
                     PBMusicActivity* newMusicActivity = [PBMusicActivity object];
+                    newMusicActivity.uid = [NSNumber numberWithInteger:[ambassadorUid intValue]];
+                    newMusicActivity.musicItemId = newMusicItem.musicItemId;
+                    newMusicActivity.musicActivityType = @"top track";
+                    
+                    [[RKObjectManager sharedManager] postObject:newMusicActivity usingBlock:^(RKObjectLoader* loader) {
+                        loader.onDidLoadObject = ^(id object) {
+                            [self.items addObject:newMusicActivity];
+                            [self.displayItems addObject:newMusicActivity];
+                            [self.tableView reloadData];
+                        };
+                    }];
                 };
             }];
+        }
+    }
+}
+
+// this method is called when your ambassadors checkin's are fetched
+-(void)updateCheckins:(NSArray*)checkins {
+    for (NSDictionary* checkin in checkins) {
+        for (PBUser* placesAmbasador in self.placesAmbassadors) {
+            if ([placesAmbasador.foursquareId isEqualToNumber:[NSNumber numberWithInt:[[[checkin objectForKey:@"user"] objectForKey:@"id"] intValue]]]) {
+                PBPlacesItem* newPlacesItem = [PBPlacesItem object];
+                newPlacesItem.addr = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"address"];
+                newPlacesItem.addrCity = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"city"];
+                newPlacesItem.addrCountry = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"country"];
+                newPlacesItem.addrState = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"state"];
+                newPlacesItem.addrZip = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"postalCode"];
+                newPlacesItem.foursquareReferenceId = [[checkin objectForKey:@"venue"] objectForKey:@"id"];
+                newPlacesItem.lat = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lat"];
+                newPlacesItem.lng = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lng"];
+                newPlacesItem.name = [[checkin objectForKey:@"venue"] objectForKey:@"name"];
+                newPlacesItem.phone = [[[checkin objectForKey:@"venue"] objectForKey:@"contact"] objectForKey:@"formattedPhone"];
+                
+                [[RKObjectManager sharedManager] postObject:newPlacesItem usingBlock:^(RKObjectLoader* loader) {
+                    loader.onDidLoadObject = ^(id object) {
+                        PBPlacesActivity* newPlacesActivity = [PBPlacesActivity object];
+                        newPlacesActivity.uid = placesAmbasador.uid;
+                        newPlacesActivity.placesItemId = newPlacesItem.placesItemId;
+                        newPlacesActivity.placesActivityType = @"checkin";
+                        
+                        [[RKObjectManager sharedManager] postObject:newPlacesActivity usingBlock:^(RKObjectLoader* loader) {
+                            loader.onDidLoadObject = ^(id object) {
+                                [self.items addObject:newPlacesActivity];
+                                [self.displayItems addObject:newPlacesActivity];
+                                [self.tableView reloadData];
+                            };
+                        }];
+                    };
+                }];
+            }
         }
     }
 }
@@ -180,7 +266,6 @@
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
     NSLog(@"objects from user insert are %@",objects);
-    
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
@@ -200,19 +285,34 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.items count];
+    return [self.displayItems count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"homeTableCell";
     HomeTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-    if ([[self.items objectAtIndex:indexPath.row] isKindOfClass:[PBMusicItem class]]) {
-        PBMusicItem* track = [self.items objectAtIndex:indexPath.row];
-        NSLog(@"track is %@",track);
+    cell.profilePic.layer.cornerRadius = 5;
+    cell.profilePic.layer.masksToBounds = YES;
+    
+    if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBMusicActivity class]]) {
+        PBMusicActivity* musicActivity = [self.displayItems objectAtIndex:indexPath.row];
+        PBMusicItem* musicItem = musicActivity.musicItem;
+        PBUser* user = musicActivity.user;
         
-        cell.nameOfItem.text = [NSString stringWithFormat:@"%@ - %@",track.artistName, track.songTitle]; 
+        cell.nameOfItem.text = [NSString stringWithFormat:@"%@ - %@",musicItem.artistName, musicItem.songTitle]; 
+        cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ added a new top track",user.firstName, user.lastName];
+        cell.icon.image = [UIImage imageNamed:@"music-icon-badge.png"];
+        cell.profilePic.image = user.thumbnail;
+    } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
+        PBPlacesActivity* placesActivity = [self.displayItems objectAtIndex:indexPath.row];
+        PBPlacesItem* placesItem = placesActivity.placesItem;
+        PBUser* user = placesActivity.user;
+        
+        cell.nameOfItem.text = placesItem.name;
+        cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ checked in",user.firstName, user.lastName];
+        cell.icon.image = [UIImage imageNamed:@"places-icon-badge.png"];
+        cell.profilePic.image = user.thumbnail;
     }
     
     return cell;
@@ -249,17 +349,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"view did load");
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"view will appear");
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     
     // get ambassadors
     [self getAmbassadors];
     
     // get top tracks from ambassadors
-    [self getFriendsTopTracks];
-    [self addObserver:self forKeyPath:@"topList.tracks" options:0 context:nil];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    
+    [self getAmbassadorsTopTracks];
+    [self getAmbassadorsTopPlaces];
 }
 
 - (void)viewDidUnload
@@ -279,13 +385,44 @@
 
 #pragma mark - ib action methods
 
+- (void)updateDisplayedItems {
+    if ([self.selectedFilters count] == 0) {
+        self.displayItems = self.items;
+    } else {
+        NSMutableArray* selectedItems = [[NSMutableArray alloc] init];
+        for (id item in self.items) {
+            for (NSString* type in self.selectedFilters) {
+                if ([type isEqualToString:@"music"]) {
+                    if ([item isKindOfClass:[PBMusicActivity class]]) {
+                        [selectedItems addObject:item];
+                    }
+                } else if ([type isEqualToString:@"places"]) {
+                    if ([item isKindOfClass:[PBPlacesActivity class]]) {
+                        [selectedItems addObject:item];
+                    }
+                } else if ([type isEqualToString:@"videos"]) {
+//                    if ([item isKindOfClass:[PBVideosActivity class]]) {
+//                        [selectedItems addObject:item];
+//                    }
+                }
+            }
+            self.displayItems = selectedItems;
+        }
+    }
+    NSLog(@"display items is %@",self.displayItems);
+    NSLog(@"set of filters is %@",self.selectedFilters);
+    [self.tableView reloadData];
+}
+
 - (IBAction)clickPlacesButton:(id)sender {
     if ([self.selectedFilters containsObject:@"places"]) {
         [self.placesFilterButton setImage:[UIImage imageNamed:@"media-filter-places-button-normal"] forState:UIControlStateNormal];
         [self.selectedFilters removeObject:@"places"];
+        [self updateDisplayedItems];
     } else {
         [self.placesFilterButton setImage:[UIImage imageNamed:@"media-filter-places-button-active"] forState:UIControlStateNormal];
         [self.selectedFilters addObject:@"places"];
+        [self updateDisplayedItems];
     }
 }
 
@@ -293,9 +430,11 @@
     if ([self.selectedFilters containsObject:@"music"]) {
         [self.musicFilterButton setImage:[UIImage imageNamed:@"media-filter-music-button-normal"] forState:UIControlStateNormal];
         [self.selectedFilters removeObject:@"music"];
+        [self updateDisplayedItems];
     } else {
         [self.musicFilterButton setImage:[UIImage imageNamed:@"media-filter-music-button-active"] forState:UIControlStateNormal];
         [self.selectedFilters addObject:@"music"];
+        [self updateDisplayedItems];
     }
 }
 
@@ -303,9 +442,11 @@
     if ([self.selectedFilters containsObject:@"videos"]) {
         [self.videosFilterButton setImage:[UIImage imageNamed:@"media-filter-videos-button-normal"] forState:UIControlStateNormal];
         [self.selectedFilters removeObject:@"videos"];
+        [self updateDisplayedItems];
     } else {
         [self.videosFilterButton setImage:[UIImage imageNamed:@"media-filter-videos-button-active"] forState:UIControlStateNormal];
         [self.selectedFilters addObject:@"videos"];
+        [self updateDisplayedItems];
     }
 }
 
