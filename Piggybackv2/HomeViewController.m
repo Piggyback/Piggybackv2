@@ -350,7 +350,6 @@
 {
     [super viewDidLoad];
     NSLog(@"view did load");
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
