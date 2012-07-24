@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "Constants.h"
 #import "HomeTableCell.h"
+#import "HomeSquareTableCell.h"
 #import "CocoaLibSpotify.h"
 #import "PBUser.h"
 #import "PBMusicActivity.h"
@@ -21,8 +22,6 @@
 @property (nonatomic, strong) NSMutableSet* selectedFilters;
 @property (nonatomic, strong) NSMutableDictionary *topLists;
 @property (nonatomic, strong) NSMutableArray *topPlaces;
-@property (nonatomic, strong) NSMutableArray* items;
-@property (nonatomic, strong) NSMutableArray *displayItems;
 
 
 @property (nonatomic, strong) NSMutableSet* musicAmbassadors;
@@ -33,10 +32,7 @@
 
 @implementation HomeViewController
 
-@synthesize musicFilterButton = _musicFilterButton;
-@synthesize videosFilterButton = _videosFilterButton;
 @synthesize tableView = _tableView;
-@synthesize placesFilterButton = _placesFilterButton;
 @synthesize selectedFilters = _selectedFilters;
 @synthesize items = _items;
 @synthesize displayItems = _displayItems;
@@ -102,42 +98,16 @@
 
 #pragma mark - public helper methods
 
-- (void)getAmbassadors {
-    // fetch existing ambassadors from core data
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *myUID = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];    
+- (void)loadAmbassadorData {
     
-    NSPredicate *getMe = [NSPredicate predicateWithFormat:@"(uid = %@)",myUID];
-    PBUser* me = [PBUser objectWithPredicate:getMe];
-    if (me) {
-        self.musicAmbassadors = [me.musicAmbassadors mutableCopy];
-        self.placesAmbassadors = [me.placesAmbassadors mutableCopy];
-    }
+    // get ambassadors
+    [self getAmbassadors];
     
-    NSLog(@"music ambassadors are %@",self.musicAmbassadors);
-    NSLog(@"places ambassadors are %@",self.placesAmbassadors);
-}
-
--(void)getAmbassadorsTopTracks {
-
-    for (PBUser* ambassador in self.musicAmbassadors) {
-        NSString* spotifyUsername = @"";
-        if ([ambassador.lastName isEqualToString:@"Gao"]) {
-            spotifyUsername = @"lemikegao";
-        } else if ([ambassador.lastName isEqualToString:@"Jiang"]) {
-            spotifyUsername = @"kimikul";
-        }
-        
-        SPToplist* topList = [SPToplist toplistForUserWithName:spotifyUsername inSession:[SPSession sharedSession]];
-        [topList addObserver:self forKeyPath:@"tracks" options:0 context:nil];
-        [self.topLists setObject:topList forKey:ambassador.uid];
-    }
-}
-
--(void)getAmbassadorsTopPlaces {
-    self.foursquareDelegate = [[FoursquareDelegate alloc] init];
-    self.foursquareDelegate.delegate = self;
-    [self.foursquareDelegate getRecentFriendCheckins];
+    // get top tracks from ambassadors
+    [self getAmbassadorsTopTracks];
+    [self getAmbassadorsTopPlaces];
+    
+    NSLog(@"items are %@",self.items);
 }
 
 // this method is called when a spotify user's top list is fetched
@@ -191,13 +161,19 @@
                 newPlacesItem.name = [[checkin objectForKey:@"venue"] objectForKey:@"name"];
                 newPlacesItem.phone = [[[checkin objectForKey:@"venue"] objectForKey:@"contact"] objectForKey:@"formattedPhone"];
                 
+                // get photo for place item
+                [self.foursquareDelegate getVenuePhoto:newPlacesItem.foursquareReferenceId];
+                
+                // save places item
                 [[RKObjectManager sharedManager] postObject:newPlacesItem usingBlock:^(RKObjectLoader* loader) {
                     loader.onDidLoadObject = ^(id object) {
+                        
+                        // create places activity
                         PBPlacesActivity* newPlacesActivity = [PBPlacesActivity object];
                         newPlacesActivity.uid = placesAmbasador.uid;
                         newPlacesActivity.placesItemId = newPlacesItem.placesItemId;
                         newPlacesActivity.placesActivityType = @"checkin";
-                        
+                                                
                         [[RKObjectManager sharedManager] postObject:newPlacesActivity usingBlock:^(RKObjectLoader* loader) {
                             loader.onDidLoadObject = ^(id object) {
                                 [self.items addObject:newPlacesActivity];
@@ -213,6 +189,45 @@
 }
 
 #pragma mark - private helper methods
+
+
+- (void)getAmbassadors {
+    // fetch existing ambassadors from core data
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *myUID = [NSNumber numberWithInt:[[defaults objectForKey:@"UID"] intValue]];    
+    
+    NSPredicate *getMe = [NSPredicate predicateWithFormat:@"(uid = %@)",myUID];
+    PBUser* me = [PBUser objectWithPredicate:getMe];
+    if (me) {
+        self.musicAmbassadors = [me.musicAmbassadors mutableCopy];
+        self.placesAmbassadors = [me.placesAmbassadors mutableCopy];
+    }
+    
+    NSLog(@"music ambassadors are %@",self.musicAmbassadors);
+    NSLog(@"places ambassadors are %@",self.placesAmbassadors);
+}
+
+-(void)getAmbassadorsTopTracks {
+    
+    for (PBUser* ambassador in self.musicAmbassadors) {
+        NSString* spotifyUsername = @"";
+        if ([ambassador.lastName isEqualToString:@"Gao"]) {
+            spotifyUsername = @"lemikegao";
+        } else if ([ambassador.lastName isEqualToString:@"Jiang"]) {
+            spotifyUsername = @"kimikul";
+        }
+        
+        SPToplist* topList = [SPToplist toplistForUserWithName:spotifyUsername inSession:[SPSession sharedSession]];
+        [topList addObserver:self forKeyPath:@"tracks" options:0 context:nil];
+        [self.topLists setObject:topList forKey:ambassador.uid];
+    }
+}
+
+-(void)getAmbassadorsTopPlaces {
+    self.foursquareDelegate = [[FoursquareDelegate alloc] init];
+    self.foursquareDelegate.delegate = self;
+    [self.foursquareDelegate getRecentFriendCheckins];
+}
 
 // get string for time elapsed e.g., "2 days ago"
 - (NSString*)timeElapsed:(NSDate*)date {
@@ -262,6 +277,35 @@
     return elapsedTime;
 }
 
+//- (void)updateDisplayedItems {
+//    if ([self.selectedFilters count] == 0) {
+//        self.displayItems = self.items;
+//    } else {
+//        NSMutableArray* selectedItems = [[NSMutableArray alloc] init];
+//        for (id item in self.items) {
+//            for (NSString* type in self.selectedFilters) {
+//                if ([type isEqualToString:@"music"]) {
+//                    if ([item isKindOfClass:[PBMusicActivity class]]) {
+//                        [selectedItems addObject:item];
+//                    }
+//                } else if ([type isEqualToString:@"places"]) {
+//                    if ([item isKindOfClass:[PBPlacesActivity class]]) {
+//                        [selectedItems addObject:item];
+//                    }
+//                } else if ([type isEqualToString:@"videos"]) {
+//                    //                    if ([item isKindOfClass:[PBVideosActivity class]]) {
+//                    //                        [selectedItems addObject:item];
+//                    //                    }
+//                }
+//            }
+//            self.displayItems = selectedItems;
+//        }
+//    }
+//    NSLog(@"display items is %@",self.displayItems);
+//    NSLog(@"set of filters is %@",self.selectedFilters);
+//    [self.tableView reloadData];
+//}
+
 #pragma mark - RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
@@ -274,6 +318,43 @@
 
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
     NSLog(@"Retrieved JSON2: %@", [response bodyAsString]);
+}
+
+#pragma mark - change segment control delegate method
+
+-(void)changeSegment:(id)sender {
+    
+    NSMutableArray* selectedItems = [[NSMutableArray alloc] init];
+
+    // all
+    if ([sender selectedSegmentIndex] == 0) {
+        selectedItems = self.items;
+    }
+    
+    // music
+    else if ([sender selectedSegmentIndex] == 1) {
+        for (id item in self.items) {
+            if ([item isKindOfClass:[PBMusicActivity class]]) {
+                [selectedItems addObject:item];
+            }
+        }
+    }
+    
+    // places
+    else if ([sender selectedSegmentIndex] == 2) {
+        for (id item in self.items) {
+            if ([item isKindOfClass:[PBPlacesActivity class]]) {
+                [selectedItems addObject:item];
+            }
+        }
+    }
+    
+    else if ([sender selectedSegmentIndex] == 3) {
+        // fill in later after create video classes
+    }
+    
+    self.displayItems = selectedItems;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -290,8 +371,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"homeTableCell";
-    HomeTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"homeSquareTableCell";
+    HomeSquareTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     cell.profilePic.layer.cornerRadius = 5;
     cell.profilePic.layer.masksToBounds = YES;
     
@@ -304,6 +385,11 @@
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ added a new top track",user.firstName, user.lastName];
         cell.icon.image = [UIImage imageNamed:@"music-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
+        
+        // set picture
+        [SPTrack trackForTrackURL:[NSURL URLWithString:musicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
+            cell.mainPic.image = track.album.cover.image;
+        }];
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
         PBPlacesActivity* placesActivity = [self.displayItems objectAtIndex:indexPath.row];
         PBPlacesItem* placesItem = placesActivity.placesItem;
@@ -320,7 +406,8 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath 
 {
-    return HOMETABLEROWHEIGHT;
+//    return HOMETABLEROWHEIGHT;
+    return HOMESQUARETABLEROWHEIGHT;
 }
 
 #pragma mark - Table view delegate
@@ -349,6 +436,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // create segmented control to select type of media to view
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:
+                                            [NSArray arrayWithObjects:
+                                             [UIImage imageNamed:@"navbar-todo-icon"],
+                                             [UIImage imageNamed:@"navbar-popular-icon"],
+                                             [UIImage imageNamed:@"navbar-you-icon"],
+                                             [UIImage imageNamed:@"navbar-home-icon"],
+                                             nil]];
+    
+    segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+    segmentedControl.tintColor = [UIColor blueColor];
+    [segmentedControl setSelectedSegmentIndex:0];
+    [segmentedControl addTarget:self action:@selector(changeSegment:) forControlEvents:UIControlEventValueChanged];
+    [segmentedControl setFrame:CGRectMake(self.navigationController.toolbar.frame.origin.x, self.navigationController.toolbar.frame.origin.y, 130, 34)];
+
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
+    self.navigationController.navigationBar.topItem.rightBarButtonItem = barButtonItem;
+    
     NSLog(@"view did load");
 }
 
@@ -358,20 +464,11 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    
-    // get ambassadors
-    [self getAmbassadors];
-    
-    // get top tracks from ambassadors
-    [self getAmbassadorsTopTracks];
-    [self getAmbassadorsTopPlaces];
+
 }
 
 - (void)viewDidUnload
 {
-    [self setPlacesFilterButton:nil];
-    [self setMusicFilterButton:nil];
-    [self setVideosFilterButton:nil];
     [self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -382,71 +479,40 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - ib action methods
-
-- (void)updateDisplayedItems {
-    if ([self.selectedFilters count] == 0) {
-        self.displayItems = self.items;
-    } else {
-        NSMutableArray* selectedItems = [[NSMutableArray alloc] init];
-        for (id item in self.items) {
-            for (NSString* type in self.selectedFilters) {
-                if ([type isEqualToString:@"music"]) {
-                    if ([item isKindOfClass:[PBMusicActivity class]]) {
-                        [selectedItems addObject:item];
-                    }
-                } else if ([type isEqualToString:@"places"]) {
-                    if ([item isKindOfClass:[PBPlacesActivity class]]) {
-                        [selectedItems addObject:item];
-                    }
-                } else if ([type isEqualToString:@"videos"]) {
-//                    if ([item isKindOfClass:[PBVideosActivity class]]) {
-//                        [selectedItems addObject:item];
-//                    }
-                }
-            }
-            self.displayItems = selectedItems;
-        }
-    }
-    NSLog(@"display items is %@",self.displayItems);
-    NSLog(@"set of filters is %@",self.selectedFilters);
-    [self.tableView reloadData];
-}
-
-- (IBAction)clickPlacesButton:(id)sender {
-    if ([self.selectedFilters containsObject:@"places"]) {
-        [self.placesFilterButton setImage:[UIImage imageNamed:@"media-filter-places-button-normal"] forState:UIControlStateNormal];
-        [self.selectedFilters removeObject:@"places"];
-        [self updateDisplayedItems];
-    } else {
-        [self.placesFilterButton setImage:[UIImage imageNamed:@"media-filter-places-button-active"] forState:UIControlStateNormal];
-        [self.selectedFilters addObject:@"places"];
-        [self updateDisplayedItems];
-    }
-}
-
-- (IBAction)clickMusicButton:(id)sender {
-    if ([self.selectedFilters containsObject:@"music"]) {
-        [self.musicFilterButton setImage:[UIImage imageNamed:@"media-filter-music-button-normal"] forState:UIControlStateNormal];
-        [self.selectedFilters removeObject:@"music"];
-        [self updateDisplayedItems];
-    } else {
-        [self.musicFilterButton setImage:[UIImage imageNamed:@"media-filter-music-button-active"] forState:UIControlStateNormal];
-        [self.selectedFilters addObject:@"music"];
-        [self updateDisplayedItems];
-    }
-}
-
-- (IBAction)clickVideosButton:(id)sender {
-    if ([self.selectedFilters containsObject:@"videos"]) {
-        [self.videosFilterButton setImage:[UIImage imageNamed:@"media-filter-videos-button-normal"] forState:UIControlStateNormal];
-        [self.selectedFilters removeObject:@"videos"];
-        [self updateDisplayedItems];
-    } else {
-        [self.videosFilterButton setImage:[UIImage imageNamed:@"media-filter-videos-button-active"] forState:UIControlStateNormal];
-        [self.selectedFilters addObject:@"videos"];
-        [self updateDisplayedItems];
-    }
-}
+//- (IBAction)clickPlacesButton:(id)sender {
+//    if ([self.selectedFilters containsObject:@"places"]) {
+//        [self.placesFilterButton setImage:[UIImage imageNamed:@"media-filter-places-button-normal"] forState:UIControlStateNormal];
+//        [self.selectedFilters removeObject:@"places"];
+//        [self updateDisplayedItems];
+//    } else {
+//        [self.placesFilterButton setImage:[UIImage imageNamed:@"media-filter-places-button-active"] forState:UIControlStateNormal];
+//        [self.selectedFilters addObject:@"places"];
+//        [self updateDisplayedItems];
+//    }
+//}
+//
+//- (IBAction)clickMusicButton:(id)sender {
+//    if ([self.selectedFilters containsObject:@"music"]) {
+//        [self.musicFilterButton setImage:[UIImage imageNamed:@"media-filter-music-button-normal"] forState:UIControlStateNormal];
+//        [self.selectedFilters removeObject:@"music"];
+//        [self updateDisplayedItems];
+//    } else {
+//        [self.musicFilterButton setImage:[UIImage imageNamed:@"media-filter-music-button-active"] forState:UIControlStateNormal];
+//        [self.selectedFilters addObject:@"music"];
+//        [self updateDisplayedItems];
+//    }
+//}
+//
+//- (IBAction)clickVideosButton:(id)sender {
+//    if ([self.selectedFilters containsObject:@"videos"]) {
+//        [self.videosFilterButton setImage:[UIImage imageNamed:@"media-filter-videos-button-normal"] forState:UIControlStateNormal];
+//        [self.selectedFilters removeObject:@"videos"];
+//        [self updateDisplayedItems];
+//    } else {
+//        [self.videosFilterButton setImage:[UIImage imageNamed:@"media-filter-videos-button-active"] forState:UIControlStateNormal];
+//        [self.selectedFilters addObject:@"videos"];
+//        [self updateDisplayedItems];
+//    }
+//}
 
 @end

@@ -10,20 +10,22 @@
 
 @implementation HomeSquareTableCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+@synthesize nameOfItem = _nameOfItem;
+@synthesize favoritedBy = _favoritedBy;
+@synthesize profilePic = _profilePic;
+@synthesize date = _date;
+@synthesize heart = _heart;
+@synthesize todo = _todo;
+@synthesize mediaType = _mediaType;
+@synthesize icon = _icon;
+@synthesize mainPic = _mainPic;
+
+- (IBAction)heart:(id)sender {
+    [self.heart setImage:[UIImage imageNamed:@"heart-pressed-button"] forState:UIControlStateNormal];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (IBAction)todo:(id)sender {
+    [self.todo setImage:[UIImage imageNamed:@"todo-added-button"] forState:UIControlStateNormal];
 }
 
 @end

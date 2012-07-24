@@ -25,7 +25,6 @@
 
 - (IBAction)todo:(id)sender {
     [self.todo setImage:[UIImage imageNamed:@"todo-added-button"] forState:UIControlStateNormal];
-    
 }
 
 @end

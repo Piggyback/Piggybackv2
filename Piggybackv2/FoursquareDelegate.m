@@ -62,6 +62,13 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
+- (void)getVenuePhoto:(NSString*)vid {
+    BZFoursquareRequest* request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:[NSString stringWithFormat:@"venues/%@",vid] HTTPMethod:@"GET" parameters:nil delegate:self];
+    [self.requestDict setObject:@"getVenuePhoto" forKey:request.description];
+    [request start];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
 #pragma mark -
 #pragma mark BZFoursquareRequestDelegate
 
@@ -92,6 +99,16 @@
                 self.checkins = [request.response objectForKey:@"recent"];
                 [self.delegate updateCheckins:self.checkins];
                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            }
+            
+            // get venue photo
+            else if ([[self.requestDict objectForKey:currentRequest] isEqualToString:@"getVenuePhoto"]) {
+                NSArray* photoGroups = [[[request.response objectForKey:@"venue"] objectForKey:@"photos"] objectForKey:@"groups"]; 
+                for (NSDictionary* photoGroup in photoGroups) {
+                    if ([[photoGroup objectForKey:@"name"] isEqualToString:@"Venue photos"]) {
+                        NSLog(@"photo group is %@",photoGroup);
+                    }
+                }
             }
             
             // get friends

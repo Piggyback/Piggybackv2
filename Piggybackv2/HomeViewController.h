@@ -13,12 +13,11 @@
 
 @interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RKObjectLoaderDelegate, FoursquareCheckinDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *placesFilterButton;
-@property (weak, nonatomic) IBOutlet UIButton *musicFilterButton;
-@property (weak, nonatomic) IBOutlet UIButton *videosFilterButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) FoursquareDelegate* foursquareDelegate;
+@property (nonatomic, strong) NSMutableArray* items;
+@property (nonatomic, strong) NSMutableArray *displayItems;
 
-- (void)getAmbassadorsTopTracks;
+- (void)loadAmbassadorData;
 
 @end
