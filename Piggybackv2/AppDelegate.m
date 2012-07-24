@@ -31,7 +31,8 @@
 @implementation AppDelegate
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
-//NSString* RK_BASE_URL = @"http://10.0.4.187:5000";
+//NSString* RK_BASE_URL = @"http://10.0.4.187:5000"; // mike
+//NSString* RK_BASE_URL = @"http://10.0.4.53:5000"; // kim
 NSString* RK_BASE_URL = @"http://localhost:5000";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
@@ -274,8 +275,6 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [rootViewController dismissViewControllerAnimated:NO completion:nil]; // dismisses loginViewController
     
     // show account link page when you log in for the first time
-//    SetAmbassadorsViewController* setAmbassadorsViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
-//    [rootViewController presentViewController:setAmbassadorsViewController animated:NO completion:nil];
     AccountLinkViewController *accountLinkViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
     [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];  
     
@@ -396,7 +395,15 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 //    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
 //    [(ListenTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] topViewController] getFriendsTopTracks];
     
+//    NSArray* musicActivity = [PBMusicActivity allObjects];
+//    NSArray* placesActivity = [PBPlacesActivity allObjects];
+//    HomeViewController* homeViewController = [[(PiggybackTabBarController*)self.window.rootViewController viewControllers] objectAtIndex:0];
+//    [homeViewController.items addObjectsFromArray:musicActivity];
+//    [homeViewController.items addObjectsFromArray:placesActivity];
+//    [homeViewController.tableView reloadData];
+    
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

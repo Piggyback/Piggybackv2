@@ -10,4 +10,17 @@
 
 @interface HomeSquareTableCell : UITableViewCell
 
+@property (nonatomic, weak) IBOutlet UILabel* nameOfItem;
+@property (nonatomic, weak) IBOutlet UILabel* favoritedBy;
+@property (nonatomic, weak) IBOutlet UIImageView* profilePic;
+@property (nonatomic, weak) IBOutlet UILabel* date;
+@property (nonatomic, weak) IBOutlet UIButton* heart;
+@property (nonatomic, weak) IBOutlet UIButton* todo;
+@property (nonatomic, weak) IBOutlet UIImageView* icon;
+@property (nonatomic, weak) IBOutlet UIImageView* mainPic;
+@property (nonatomic, strong) NSString* mediaType;
+
+- (IBAction)heart:(id)sender;
+- (IBAction)todo:(id)sender;
+
 @end

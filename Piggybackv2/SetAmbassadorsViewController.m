@@ -11,7 +11,9 @@
 #import "PBFriend.h"
 #import <QuartzCore/QuartzCore.h>
 #import "PBUser.h"
-//#import "PBAmbassador.h"
+#import "PiggybackTabBarController.h"
+#import "AppDelegate.h"
+#import "HomeViewController.h"
 
 @interface SetAmbassadorsViewController ()
 @property (nonatomic, strong) NSArray* friends;
@@ -95,9 +97,6 @@
         newUser.youtubeUsername = friend.youtubeUsername;
         newUser.foursquareId = friend.foursquareId;
         newUser.isPiggybackUser = [NSNumber numberWithBool:NO];
-        
-        NSLog(@"HELLO! friend foursquare id is %@",friend.foursquareId);
-        NSLog(@"HELLO AGAIN! new user foursquare is %@",newUser.foursquareId);
         
         // add user and add ambassador
         [[RKObjectManager sharedManager] postObject:newUser usingBlock:^(RKObjectLoader* loader) {
@@ -450,6 +449,9 @@
 
 - (IBAction)readyButton:(id)sender {
     [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    AppDelegate* appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    HomeViewController* homeViewController = (HomeViewController*)[[[(PiggybackTabBarController*)appDelegate.window.rootViewController viewControllers] objectAtIndex:0] topViewController];
+    [homeViewController loadAmbassadorData];
 }
 
 @end
