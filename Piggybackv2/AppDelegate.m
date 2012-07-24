@@ -120,7 +120,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKObjectManager *objectManager = [RKObjectManager sharedManager];
     RKManagedObjectMapping* userMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBUser" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* musicItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicItem" inManagedObjectStore:objectManager.objectStore];
-    RKManagedObjectMapping* musicActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicActivity" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping *musicActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicActivity" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping *musicNewsMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicNews" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* placesItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesItem" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* placesActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesActivity" inManagedObjectStore:objectManager.objectStore];
     
@@ -144,6 +145,14 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [musicActivityMapping connectRelationship:@"musicItem" withObjectForPrimaryKeyAttribute:@"musicItemId"];
     [musicActivityMapping connectRelationship:@"user" withObjectForPrimaryKeyAttribute:@"uid"];
     [objectManager.mappingProvider setMapping:musicActivityMapping forKeyPath:@"PBMusicActivity"];
+    
+    // musicNews mapping
+    musicNewsMapping.primaryKeyAttribute = @"newsId";
+    [musicNewsMapping mapAttributes:@"newsId", @"newsActionType", @"dateAdded", @"followerUid", @"musicActivityId", nil];
+    [musicNewsMapping mapRelationship:@"follower" withMapping:userMapping];
+    [musicNewsMapping mapRelationship:@"musicActivity" withMapping:musicActivityMapping];
+    [musicNewsMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerUid"];
+    [musicNewsMapping connectRelationship:@"musicActivity" withObjectForPrimaryKeyAttribute:@"musicActivityId"];
     
     // placesItem mapping
     placesItemMapping.primaryKeyAttribute = @"placesItemId";
