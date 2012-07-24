@@ -88,6 +88,7 @@
 		C4002B5915ACD3C4002F05FC /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4002B5015ACD3C4002F05FC /* libfacebook_ios_sdk.a */; };
 		C422340515ACE513005151A3 /* SPLoginResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C422340415ACE513005151A3 /* SPLoginResources.bundle */; };
 		C422341515ACE528005151A3 /* libCocoaLibSpotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C422341015ACE515005151A3 /* libCocoaLibSpotify.a */; };
+		C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4739E7815B88A6600F714A7 /* NewsViewController.m */; };
 		F91B3D9B15A6340300D8E815 /* SetAmbassadorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F91B3D9A15A6340300D8E815 /* SetAmbassadorCell.m */; };
 		F91B3D9E15A6365100D8E815 /* SetAmbassadorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F91B3D9D15A6365100D8E815 /* SetAmbassadorsViewController.m */; };
 		F91B3DAF15A636FD00D8E815 /* follow-header.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3D9F15A636FD00D8E815 /* follow-header.png */; };
@@ -382,6 +383,8 @@
 		C410ECA115AE71EF00E0FE11 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		C422340415ACE513005151A3 /* SPLoginResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SPLoginResources.bundle; path = "spotify-ios-sdk/iOS Library/SPLoginResources.bundle"; sourceTree = SOURCE_ROOT; };
 		C422340615ACE515005151A3 /* CocoaLibSpotify iOS Library.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CocoaLibSpotify iOS Library.xcodeproj"; path = "spotify-ios-sdk/iOS Library/CocoaLibSpotify iOS Library.xcodeproj"; sourceTree = "<group>"; };
+		C4739E7715B88A6600F714A7 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
+		C4739E7815B88A6600F714A7 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
 		F91B3D9915A6340300D8E815 /* SetAmbassadorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorCell.h; sourceTree = "<group>"; };
 		F91B3D9A15A6340300D8E815 /* SetAmbassadorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAmbassadorCell.m; sourceTree = "<group>"; };
 		F91B3D9C15A6365100D8E815 /* SetAmbassadorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorsViewController.h; sourceTree = "<group>"; };
@@ -588,6 +591,8 @@
 				F99418F01598BE0C00A4B08B /* LoginViewController.m */,
 				F99F2CB215ACA3F600B5EB36 /* HomeViewController.h */,
 				F99F2CB315ACA3F600B5EB36 /* HomeViewController.m */,
+				C4739E7715B88A6600F714A7 /* NewsViewController.h */,
+				C4739E7815B88A6600F714A7 /* NewsViewController.m */,
 				3E2FAA2C15943BC000142705 /* ListenTableViewController.h */,
 				3E2FAA2D15943BC000142705 /* ListenTableViewController.m */,
 				3E9F8F3715944B37006526B4 /* SongViewController.h */,
@@ -1145,6 +1150,7 @@
 				F9A428C315B46276000D147C /* PBMusicActivity.m in Sources */,
 				F934802015B4E5F300B19D27 /* PBUser.m in Sources */,
 				F9774C8415B722CD00FC6FBC /* PBMusicItem.m in Sources */,
+				C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

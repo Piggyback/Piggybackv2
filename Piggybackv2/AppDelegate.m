@@ -115,7 +115,9 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKManagedObjectMapping* userMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBUser" inManagedObjectStore:objectManager.objectStore];
 //    RKManagedObjectMapping* ambassadorMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBAmbassador" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* musicItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicItem" inManagedObjectStore:objectManager.objectStore];
-
+    RKManagedObjectMapping *musicActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicActivity" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping *musicNewsMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicNews" inManagedObjectStore:objectManager.objectStore];
+    
     // user mapping
     userMapping.primaryKeyAttribute = @"uid";
     [userMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
@@ -135,6 +137,22 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [musicItemMapping mapAttributes:@"musicItemId",@"artistName",@"songTitle",@"albumTitle",@"albumYear",@"spotifyUrl",@"songDuration",nil];
     [objectManager.mappingProvider setMapping:musicItemMapping forKeyPath:@"PBMusicItem"];
     
+    // musicActivity mapping
+    musicActivityMapping.primaryKeyAttribute = @"musicActivityId";
+    [musicActivityMapping mapAttributes:@"musicActivityId",@"musicActivityType", @"dateAdded", @"uid", @"musicItemId", nil];
+    [musicActivityMapping mapRelationship:@"musicItem" withMapping:musicItemMapping];
+    [musicActivityMapping mapRelationship:@"user" withMapping:userMapping];
+    [musicActivityMapping connectRelationship:@"musicItem" withObjectForPrimaryKeyAttribute:@"musicItemId"];
+    [musicActivityMapping connectRelationship:@"user" withObjectForPrimaryKeyAttribute:@"uid"];
+    
+    // musicNews mapping
+    musicNewsMapping.primaryKeyAttribute = @"newsId";
+    [musicNewsMapping mapAttributes:@"newsId", @"newsActionType", @"dateAdded", @"followerUid", @"musicActivityId", nil];
+    [musicNewsMapping mapRelationship:@"follower" withMapping:userMapping];
+    [musicNewsMapping mapRelationship:@"musicActivity" withMapping:musicActivityMapping];
+    [musicNewsMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerUid"];
+    [musicNewsMapping connectRelationship:@"musicActivity" withObjectForPrimaryKeyAttribute:@"musicActivityId"];
+    
     // serialization declarations
     RKObjectMapping *userSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
 //    RKObjectMapping *ambassadorSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
@@ -153,6 +171,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // musicItem serialization
     [musicItemSerializationMapping mapAttributes:@"musicItemId",@"artistName",@"songTitle",@"albumTitle",@"albumYear",@"spotifyUrl",@"songDuration",nil];
     [objectManager.mappingProvider setSerializationMapping:musicItemSerializationMapping forClass:[PBMusicItem class]];
+    
+    
     
 }
 
