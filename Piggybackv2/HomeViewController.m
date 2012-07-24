@@ -133,9 +133,10 @@
                     
                     [[RKObjectManager sharedManager] postObject:newMusicActivity usingBlock:^(RKObjectLoader* loader) {
                         loader.onDidLoadObject = ^(id object) {
-                            [self.items addObject:newMusicActivity];
-                            [self.displayItems addObject:newMusicActivity];
-                            [self.tableView reloadData];
+                            [self fetchAmbassadorFavsFromCoreData];
+//                            [self.items addObject:newMusicActivity];
+//                            [self.displayItems addObject:newMusicActivity];
+//                            [self.tableView reloadData];
                         };
                     }];
                 };
@@ -176,9 +177,10 @@
                                                 
                         [[RKObjectManager sharedManager] postObject:newPlacesActivity usingBlock:^(RKObjectLoader* loader) {
                             loader.onDidLoadObject = ^(id object) {
-                                [self.items addObject:newPlacesActivity];
-                                [self.displayItems addObject:newPlacesActivity];
-                                [self.tableView reloadData];
+                                [self fetchAmbassadorFavsFromCoreData];
+//                                [self.items addObject:newPlacesActivity];
+//                                [self.displayItems addObject:newPlacesActivity];
+//                                [self.tableView reloadData];
                             };
                         }];
                     };
@@ -188,8 +190,17 @@
     }
 }
 
-#pragma mark - private helper methods
+- (void)updateVenuePhoto:(NSString*)photoURL forVendor:(NSString*)vid {
+    NSPredicate *placesItemPredicate = [NSPredicate predicateWithFormat:@"(foursquareReferenceId = %@)",vid];
+    PBPlacesItem *placesItem = [PBPlacesItem objectWithPredicate:placesItemPredicate];
+    placesItem.photoURL = photoURL;
+    
+    [[RKObjectManager sharedManager].objectStore save:nil];
 
+    // call restkit to update photoURL in database
+}
+
+#pragma mark - private helper methods
 
 - (void)getAmbassadors {
     // fetch existing ambassadors from core data
@@ -227,6 +238,13 @@
     self.foursquareDelegate = [[FoursquareDelegate alloc] init];
     self.foursquareDelegate.delegate = self;
     [self.foursquareDelegate getRecentFriendCheckins];
+}
+
+-(void)fetchAmbassadorFavsFromCoreData {
+    self.items = [NSMutableArray arrayWithArray:[PBMusicActivity allObjects]];
+    [self.items addObjectsFromArray:[PBPlacesActivity allObjects]];
+    self.displayItems = self.items;
+    [self.tableView reloadData];
 }
 
 // get string for time elapsed e.g., "2 days ago"
@@ -276,35 +294,6 @@
     
     return elapsedTime;
 }
-
-//- (void)updateDisplayedItems {
-//    if ([self.selectedFilters count] == 0) {
-//        self.displayItems = self.items;
-//    } else {
-//        NSMutableArray* selectedItems = [[NSMutableArray alloc] init];
-//        for (id item in self.items) {
-//            for (NSString* type in self.selectedFilters) {
-//                if ([type isEqualToString:@"music"]) {
-//                    if ([item isKindOfClass:[PBMusicActivity class]]) {
-//                        [selectedItems addObject:item];
-//                    }
-//                } else if ([type isEqualToString:@"places"]) {
-//                    if ([item isKindOfClass:[PBPlacesActivity class]]) {
-//                        [selectedItems addObject:item];
-//                    }
-//                } else if ([type isEqualToString:@"videos"]) {
-//                    //                    if ([item isKindOfClass:[PBVideosActivity class]]) {
-//                    //                        [selectedItems addObject:item];
-//                    //                    }
-//                }
-//            }
-//            self.displayItems = selectedItems;
-//        }
-//    }
-//    NSLog(@"display items is %@",self.displayItems);
-//    NSLog(@"set of filters is %@",self.selectedFilters);
-//    [self.tableView reloadData];
-//}
 
 #pragma mark - RKObjectLoaderDelegate methods
 
@@ -399,6 +388,7 @@
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ checked in",user.firstName, user.lastName];
         cell.icon.image = [UIImage imageNamed:@"places-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
+        cell.mainPic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
     }
     
     return cell;
@@ -437,6 +427,8 @@
 {
     [super viewDidLoad];
     
+    [self fetchAmbassadorFavsFromCoreData];
+
     // create segmented control to select type of media to view
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:
                                             [NSArray arrayWithObjects:
@@ -478,41 +470,5 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
-//- (IBAction)clickPlacesButton:(id)sender {
-//    if ([self.selectedFilters containsObject:@"places"]) {
-//        [self.placesFilterButton setImage:[UIImage imageNamed:@"media-filter-places-button-normal"] forState:UIControlStateNormal];
-//        [self.selectedFilters removeObject:@"places"];
-//        [self updateDisplayedItems];
-//    } else {
-//        [self.placesFilterButton setImage:[UIImage imageNamed:@"media-filter-places-button-active"] forState:UIControlStateNormal];
-//        [self.selectedFilters addObject:@"places"];
-//        [self updateDisplayedItems];
-//    }
-//}
-//
-//- (IBAction)clickMusicButton:(id)sender {
-//    if ([self.selectedFilters containsObject:@"music"]) {
-//        [self.musicFilterButton setImage:[UIImage imageNamed:@"media-filter-music-button-normal"] forState:UIControlStateNormal];
-//        [self.selectedFilters removeObject:@"music"];
-//        [self updateDisplayedItems];
-//    } else {
-//        [self.musicFilterButton setImage:[UIImage imageNamed:@"media-filter-music-button-active"] forState:UIControlStateNormal];
-//        [self.selectedFilters addObject:@"music"];
-//        [self updateDisplayedItems];
-//    }
-//}
-//
-//- (IBAction)clickVideosButton:(id)sender {
-//    if ([self.selectedFilters containsObject:@"videos"]) {
-//        [self.videosFilterButton setImage:[UIImage imageNamed:@"media-filter-videos-button-normal"] forState:UIControlStateNormal];
-//        [self.selectedFilters removeObject:@"videos"];
-//        [self updateDisplayedItems];
-//    } else {
-//        [self.videosFilterButton setImage:[UIImage imageNamed:@"media-filter-videos-button-active"] forState:UIControlStateNormal];
-//        [self.selectedFilters addObject:@"videos"];
-//        [self updateDisplayedItems];
-//    }
-//}
 
 @end

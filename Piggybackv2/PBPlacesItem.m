@@ -22,7 +22,7 @@
 @dynamic lng;
 @dynamic name;
 @dynamic phone;
-@dynamic website;
+@dynamic photoURL;
 @dynamic foursquareReferenceId;
 @dynamic placesActivity;
 
