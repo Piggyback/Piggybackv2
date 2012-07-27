@@ -19,6 +19,7 @@
 #import "PBVideosItem.h"
 #import "PBVideosActivity.h"
 #import "HomeVideosCell.h"
+#import "YouTubeView.h"
 
 @interface HomeViewController ()
 @property (nonatomic, strong) NSMutableDictionary *topLists;
@@ -28,6 +29,7 @@
 @property (nonatomic, strong) NSMutableSet* videosAmbassadors;
 
 @property (nonatomic, strong) NSMutableDictionary* cachedPlacesPhotos;
+@property (nonatomic, strong) NSMutableDictionary* cachedYoutubeWebViews;
 @end
 
 @implementation HomeViewController
@@ -45,6 +47,7 @@
 @synthesize youtubeDelegate = _youtubeDelegate;
 
 @synthesize cachedPlacesPhotos = _cachedPlacesPhotos;
+@synthesize cachedYoutubeWebViews = _cachedYoutubeWebViews;
 
 #pragma mark - setters and getters 
 
@@ -95,6 +98,13 @@
         _cachedPlacesPhotos = [[NSMutableDictionary alloc] init];
     }
     return _cachedPlacesPhotos;
+}
+
+- (NSMutableDictionary*)cachedYoutubeWebViews {
+    if (!_cachedYoutubeWebViews) {
+        _cachedYoutubeWebViews = [[NSMutableDictionary alloc] init];
+    }
+    return _cachedYoutubeWebViews;
 }
 
 #pragma mark - public helper methods
@@ -196,6 +206,10 @@
     PBVideosItem* newVideosItem = [PBVideosItem object];
     newVideosItem.name = [video objectForKey:@"name"];
     newVideosItem.videoURL = [video objectForKey:@"url"];
+    
+    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:newVideosItem.videoURL frame:CGRectMake(9,38,302,240)];
+    [self.cachedYoutubeWebViews setObject:videoWebView forKey:newVideosItem.videoURL];
+    NSLog(@"cached youtube views are %@",self.cachedYoutubeWebViews);
     
     [[RKObjectManager sharedManager] postObject:newVideosItem usingBlock:^(RKObjectLoader* loader) {
         loader.onDidLoadObject = ^(id object) {
@@ -437,51 +451,54 @@
         cell.icon.image = [UIImage imageNamed:@"places-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
         
-        // set main image
-        if ([self.cachedPlacesPhotos objectForKey:placesItem.name]) {
-            cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.name];
-        } else {
-            UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
-            cell.mainPic.image = placesImage;
-            [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.name];
+        // if photo exists, display
+        if (placesItem.photoURL) {
+            // get places image from cache if it was loaded previously
+            if ([self.cachedPlacesPhotos objectForKey:placesItem.photoURL]) {
+                cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.photoURL];
+            }
+            
+            // otherwise, load image for first time and store in cache
+            else {
+                UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
+                cell.mainPic.image = placesImage;
+                [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.photoURL];
+            }
+        }
+        
+        // no photo - display default photo
+        else {
+            // no photo image
         }
         
         return cell;
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBVideosActivity class]]) {
+        PBVideosActivity* videosActivity = [self.displayItems objectAtIndex:indexPath.row];
+        PBVideosItem* videosItem = videosActivity.videosItem;
+        PBUser* user = videosActivity.user;
+        
+        // otherwise, load cell for first time and store in cache
         static NSString *CellIdentifier = @"homeVideosCell";
         HomeVideosCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.profilePic.layer.cornerRadius = 5;
         cell.profilePic.layer.masksToBounds = YES;
         
-        PBVideosActivity* videosActivity = [self.displayItems objectAtIndex:indexPath.row];
-        PBVideosItem* videosItem = videosActivity.videosItem;
-        PBUser* user = videosActivity.user;
-        
         cell.nameOfItem.text = videosItem.name;
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ %@ a new video",user.firstName,user.lastName,videosActivity.videosActivityType];
-        cell.icon.image = [UIImage imageNamed:@"movie-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
-        NSString *htmlString = [NSString stringWithFormat:@"<html><head>"
-                            "<meta name = \"viewport\" content = \"initial-scale = 1.0, user-scalable = no, width = 302\"/></head>"
-                            "<body style=\"background:#F00;margin-top:0px;margin-left:0px\">"
-                            "<div><object width=\"302\" height=\"240\">"
-                            "<param name=\"movie\" value=\"%@\"></param>"
-                            "<param name=\"wmode\" value=\"transparent\"></param>"
-                            "<embed src=\"%@\""
-                            "type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"302\" height=\"240\"></embed>"
-                            "</object></div></body></html>",videosItem.videoURL,videosItem.videoURL];
 
-        cell.videoWebView.scrollView.scrollEnabled = NO;
-        cell.videoWebView.scrollView.bounces = NO;
-        [cell.videoWebView loadHTMLString:htmlString baseURL:[NSURL URLWithString:@"http://www.your-url.com"]];
+        YouTubeView* videoWebView = [self.cachedYoutubeWebViews objectForKey:videosItem.videoURL];
+        [cell.contentView addSubview:videoWebView];
         
+        cell.icon.image = [UIImage imageNamed:@"movie-icon-badge.png"];
+        [cell.contentView bringSubviewToFront:cell.icon];
+
         return cell;
     }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath 
 {
-//    return HOMETABLEROWHEIGHT;
     return HOMESQUARETABLEROWHEIGHT;
 }
 
