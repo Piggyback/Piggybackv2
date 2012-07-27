@@ -103,10 +103,20 @@
             
             // get venue photo
             else if ([[self.requestDict objectForKey:currentRequest] isEqualToString:@"getVenuePhoto"]) {
-                NSArray* photoGroups = [[[request.response objectForKey:@"venue"] objectForKey:@"photos"] objectForKey:@"groups"]; 
+                NSString* vid = [[request.response objectForKey:@"venue"] objectForKey:@"id"];
+                NSString* photoURL = [[NSString alloc] init];
+                NSArray* photoGroups = [[[request.response objectForKey:@"venue"] objectForKey:@"photos"] objectForKey:@"groups"];
                 for (NSDictionary* photoGroup in photoGroups) {
                     if ([[photoGroup objectForKey:@"name"] isEqualToString:@"Venue photos"]) {
-                        NSLog(@"photo group is %@",photoGroup);
+                        for (NSDictionary* photo in [photoGroup objectForKey:@"items"]) {
+                            for (NSDictionary* difSizePhoto in [[photo objectForKey:@"sizes"] objectForKey:@"items"]) {
+                                if ([[difSizePhoto objectForKey:@"height"] isEqualToNumber:[NSNumber numberWithInt:300]]) {
+                                    photoURL = [difSizePhoto objectForKey:@"url"];
+                                    NSLog(@"photoURL is %@",photoURL);
+                                    [self.delegate updateVenuePhoto:photoURL forVendor:vid];
+                                }
+                            }
+                        }
                     }
                 }
             }

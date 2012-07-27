@@ -13,6 +13,7 @@
 
 @protocol FoursquareCheckinDelegate
 -(void)updateCheckins:(NSArray*)checkins;
+- (void)updateVenuePhoto:(NSString*)photoURL forVendor:(NSString*)vid;
 @end
 
 @interface FoursquareDelegate : NSObject <BZFoursquareRequestDelegate, RKObjectLoaderDelegate>
