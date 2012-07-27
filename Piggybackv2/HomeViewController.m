@@ -209,7 +209,6 @@
     
     YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:newVideosItem.videoURL frame:CGRectMake(9,38,302,240)];
     [self.cachedYoutubeWebViews setObject:videoWebView forKey:newVideosItem.videoURL];
-    NSLog(@"cached youtube views are %@",self.cachedYoutubeWebViews);
     
     [[RKObjectManager sharedManager] postObject:newVideosItem usingBlock:^(RKObjectLoader* loader) {
         loader.onDidLoadObject = ^(id object) {
@@ -235,6 +234,9 @@
     NSPredicate *placesItemPredicate = [NSPredicate predicateWithFormat:@"(foursquareReferenceId = %@)",vid];
     PBPlacesItem *placesItem = [PBPlacesItem objectWithPredicate:placesItemPredicate];
     placesItem.photoURL = photoURL;
+    
+    UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
+    [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.photoURL];
     
     [[RKObjectManager sharedManager].objectStore save:nil];
     [self fetchAmbassadorFavsFromCoreData];
@@ -453,22 +455,7 @@
         
         // if photo exists, display
         if (placesItem.photoURL) {
-            // get places image from cache if it was loaded previously
-            if ([self.cachedPlacesPhotos objectForKey:placesItem.photoURL]) {
-                cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.photoURL];
-            }
-            
-            // otherwise, load image for first time and store in cache
-            else {
-                UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
-                cell.mainPic.image = placesImage;
-                [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.photoURL];
-            }
-        }
-        
-        // no photo - display default photo
-        else {
-            // no photo image
+            cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.photoURL];
         }
         
         return cell;

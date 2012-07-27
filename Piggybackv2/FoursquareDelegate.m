@@ -114,7 +114,7 @@
                                     photoURL = [difSizePhoto objectForKey:@"url"];
                                     NSLog(@"photoURL is %@",photoURL);
                                     [self.delegate updateVenuePhoto:photoURL forVendor:vid];
-                                    break;
+                                    return;
                                 }
                             }
                         }
