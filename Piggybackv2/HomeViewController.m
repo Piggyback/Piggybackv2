@@ -8,7 +8,6 @@
 
 #import "HomeViewController.h"
 #import "Constants.h"
-#import "HomeTableCell.h"
 #import "HomeSquareTableCell.h"
 #import "CocoaLibSpotify.h"
 #import "PBUser.h"
@@ -17,6 +16,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "PBPlacesActivity.h"
 #import "PBPlacesItem.h"
+#import "PBVideosItem.h"
+#import "PBVideosActivity.h"
+#import "HomeVideosCell.h"
 
 @interface HomeViewController ()
 @property (nonatomic, strong) NSMutableSet* selectedFilters;
@@ -44,6 +46,7 @@
 @synthesize videosAmbassadors = _videosAmbassadors;
 
 @synthesize foursquareDelegate = _foursquareDelegate;
+@synthesize youtubeDelegate = _youtubeDelegate;
 
 #pragma mark - setters and getters 
 
@@ -106,6 +109,7 @@
     // get top tracks from ambassadors
     [self getAmbassadorsTopTracks];
     [self getAmbassadorsTopPlaces];
+    [self getAmbassadorsTopVideos];
     
     NSLog(@"items are %@",self.items);
 }
@@ -177,7 +181,6 @@
                                                 
                         [[RKObjectManager sharedManager] postObject:newPlacesActivity usingBlock:^(RKObjectLoader* loader) {
                             loader.onDidLoadObject = ^(id object) {
-                                [self fetchAmbassadorFavsFromCoreData];
 //                                [self.items addObject:newPlacesActivity];
 //                                [self.displayItems addObject:newPlacesActivity];
 //                                [self.tableView reloadData];
@@ -190,12 +193,39 @@
     }
 }
 
+// this method is called when a youtube users top videos are fetched
+-(void)updateFavoriteVideos:(NSMutableDictionary*)video {
+    PBVideosItem* newVideosItem = [PBVideosItem object];
+    newVideosItem.name = [video objectForKey:@"name"];
+    newVideosItem.videoURL = [video objectForKey:@"url"];
+    
+    [[RKObjectManager sharedManager] postObject:newVideosItem usingBlock:^(RKObjectLoader* loader) {
+        loader.onDidLoadObject = ^(id object) {
+            for (PBUser* videosAmbassador in self.videosAmbassadors) {
+                if ([videosAmbassador.youtubeUsername isEqualToString:[video objectForKey:@"youtubeUsername"]]) {
+                    PBVideosActivity* newVideosActivity = [PBVideosActivity object];
+                    newVideosActivity.uid = videosAmbassador.uid;
+                    newVideosActivity.videosItemId = newVideosItem.videosItemId;
+                    newVideosActivity.videosActivityType = [video objectForKey:@"activity"];
+                    
+                    [[RKObjectManager sharedManager] postObject:newVideosActivity usingBlock:^(RKObjectLoader* loader) {
+                        loader.onDidLoadObject = ^(id object) {
+                            [self fetchAmbassadorFavsFromCoreData];
+                        };
+                    }];
+                }
+            }
+        };
+    }];
+}
+
 - (void)updateVenuePhoto:(NSString*)photoURL forVendor:(NSString*)vid {
     NSPredicate *placesItemPredicate = [NSPredicate predicateWithFormat:@"(foursquareReferenceId = %@)",vid];
     PBPlacesItem *placesItem = [PBPlacesItem objectWithPredicate:placesItemPredicate];
     placesItem.photoURL = photoURL;
     
     [[RKObjectManager sharedManager].objectStore save:nil];
+    [self fetchAmbassadorFavsFromCoreData];
 
     // call restkit to update photoURL in database
 }
@@ -212,10 +242,12 @@
     if (me) {
         self.musicAmbassadors = [me.musicAmbassadors mutableCopy];
         self.placesAmbassadors = [me.placesAmbassadors mutableCopy];
+        self.videosAmbassadors = [me.videosAmbassadors mutableCopy];
     }
     
     NSLog(@"music ambassadors are %@",self.musicAmbassadors);
     NSLog(@"places ambassadors are %@",self.placesAmbassadors);
+    NSLog(@"videos ambassadors are %@",self.videosAmbassadors);
 }
 
 -(void)getAmbassadorsTopTracks {
@@ -240,9 +272,16 @@
     [self.foursquareDelegate getRecentFriendCheckins];
 }
 
+-(void)getAmbassadorsTopVideos {
+    self.youtubeDelegate = [[YoutubeDelegate alloc] init];
+    self.youtubeDelegate.delegate = self;
+    [self.youtubeDelegate getAmbassadorsFavoriteVideos:self.videosAmbassadors];
+}
+
 -(void)fetchAmbassadorFavsFromCoreData {
     self.items = [NSMutableArray arrayWithArray:[PBMusicActivity allObjects]];
     [self.items addObjectsFromArray:[PBPlacesActivity allObjects]];
+    [self.items addObjectsFromArray:[PBVideosActivity allObjects]];
     self.displayItems = self.items;
     [self.tableView reloadData];
 }
@@ -360,12 +399,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"homeSquareTableCell";
-    HomeSquareTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.profilePic.layer.cornerRadius = 5;
-    cell.profilePic.layer.masksToBounds = YES;
-    
     if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBMusicActivity class]]) {
+        static NSString *CellIdentifier = @"homeSquareTableCell";
+        HomeSquareTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        cell.profilePic.layer.cornerRadius = 5;
+        cell.profilePic.layer.masksToBounds = YES;
+        
         PBMusicActivity* musicActivity = [self.displayItems objectAtIndex:indexPath.row];
         PBMusicItem* musicItem = musicActivity.musicItem;
         PBUser* user = musicActivity.user;
@@ -379,7 +418,14 @@
         [SPTrack trackForTrackURL:[NSURL URLWithString:musicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
             cell.mainPic.image = track.album.cover.image;
         }];
+        
+        return cell;
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
+        static NSString *CellIdentifier = @"homeSquareTableCell";
+        HomeSquareTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        cell.profilePic.layer.cornerRadius = 5;
+        cell.profilePic.layer.masksToBounds = YES;
+        
         PBPlacesActivity* placesActivity = [self.displayItems objectAtIndex:indexPath.row];
         PBPlacesItem* placesItem = placesActivity.placesItem;
         PBUser* user = placesActivity.user;
@@ -389,9 +435,36 @@
         cell.icon.image = [UIImage imageNamed:@"places-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
         cell.mainPic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
+        
+        return cell;
+    } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBVideosActivity class]]) {
+        static NSString *CellIdentifier = @"homeVideosCell";
+        HomeVideosCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        cell.profilePic.layer.cornerRadius = 5;
+        cell.profilePic.layer.masksToBounds = YES;
+        
+        PBVideosActivity* videosActivity = [self.displayItems objectAtIndex:indexPath.row];
+        PBVideosItem* videosItem = videosActivity.videosItem;
+        PBUser* user = videosActivity.user;
+        
+        cell.nameOfItem.text = videosItem.name;
+        cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ %@ a new video",user.firstName,user.lastName,videosActivity.videosActivityType];
+        cell.icon.image = [UIImage imageNamed:@"videos-icon-badge.png"];
+        cell.profilePic.image = user.thumbnail;
+        NSString *htmlString = [NSString stringWithFormat:@"<html><head>"
+                            "<meta name = \"viewport\" content = \"initial-scale = 1.0, user-scalable = no, width = 90\"/></head>"
+                            "<body style=\"background:#F00;margin-top:0px;margin-left:0px\">"
+                            "<div><object width=\"90\" height=\"60\">"
+                            "<param name=\"movie\" value=\"%@\"></param>"
+                            "<param name=\"wmode\" value=\"transparent\"></param>"
+                            "<embed src=\"%@\""
+                            "type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"90\" height=\"60\"></embed>"
+                            "</object></div></body></html>",videosItem.videoURL,videosItem.videoURL];
+
+        [cell.videoWebView loadHTMLString:htmlString baseURL:[NSURL URLWithString:@"http://www.your-url.com"]];
+        
+        return cell;
     }
-    
-    return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath 

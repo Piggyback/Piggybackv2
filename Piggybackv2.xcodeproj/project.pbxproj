@@ -114,11 +114,17 @@
 		F930520F1593C7B100E9DA06 /* YouTubeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F930520E1593C7B100E9DA06 /* YouTubeTableViewController.m */; };
 		F93052121593C7FA00E9DA06 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F93052111593C7FA00E9DA06 /* Constants.m */; };
 		F93C2F77159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F93C2F75159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld */; };
-		F93C2F7D159A585500FACE47 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F7C159A585500FACE47 /* CoreData.framework */; };
 		F93C2F95159A5B7900FACE47 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F8A159A5A6700FACE47 /* libRestKit.a */; };
 		F93C2F97159A5B9400FACE47 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F96159A5B9400FACE47 /* Security.framework */; };
 		F93C2F99159A5BA000FACE47 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F98159A5BA000FACE47 /* QuartzCore.framework */; };
 		F93C2F9B159A5BA900FACE47 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F9A159A5BA900FACE47 /* libxml2.dylib */; };
+		F944281C15C303DE00930EFD /* HomeVideosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F944281B15C303DE00930EFD /* HomeVideosCell.m */; };
+		F957A74615C0A4D20033CF00 /* PBVideosItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F957A74515C0A4D20033CF00 /* PBVideosItem.m */; };
+		F957A74915C0A4D20033CF00 /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F957A74815C0A4D20033CF00 /* PBUser.m */; };
+		F957A74F15C0A4D20033CF00 /* PBVideosNews.m in Sources */ = {isa = PBXBuildFile; fileRef = F957A74E15C0A4D20033CF00 /* PBVideosNews.m */; };
+		F957A75015C0A5EF0033CF00 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93C2F7C159A585500FACE47 /* CoreData.framework */; };
+		F957A75315C0A6BD0033CF00 /* PBVideosActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F957A75215C0A6BD0033CF00 /* PBVideosActivity.m */; };
+		F957A75615C0AFE80033CF00 /* YoutubeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F957A75515C0AFE80033CF00 /* YoutubeDelegate.m */; };
 		F9736E8715943BC3009DEB07 /* ExploreTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9736E8615943BC3009DEB07 /* ExploreTableCell.m */; };
 		F9774C8415B722CD00FC6FBC /* PBMusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F9774C8315B722CD00FC6FBC /* PBMusicItem.m */; };
 		F99418F11598BE0C00A4B08B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99418F01598BE0C00A4B08B /* LoginViewController.m */; };
@@ -159,13 +165,11 @@
 		F99F2CB015AC9E3700B5EB36 /* header-you.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2CA615AC9E3700B5EB36 /* header-you.png */; };
 		F99F2CB115AC9E3700B5EB36 /* header-you@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2CA715AC9E3700B5EB36 /* header-you@2x.png */; };
 		F99F2CB415ACA3F600B5EB36 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99F2CB315ACA3F600B5EB36 /* HomeViewController.m */; };
-		F99F2CB715ACB2CF00B5EB36 /* HomeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99F2CB615ACB2CF00B5EB36 /* HomeTableCell.m */; };
 		F9A097D015BF0F8C0086C2CB /* HomeSquareTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A097CF15BF0F8C0086C2CB /* HomeSquareTableCell.m */; };
 		F9A4289915B45C7B000D147C /* PBFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4289815B45C7B000D147C /* PBFriend.m */; };
 		F9A428BA15B46276000D147C /* PBMusicNews.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428B915B46276000D147C /* PBMusicNews.m */; };
 		F9A428C315B46276000D147C /* PBMusicActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428C215B46276000D147C /* PBMusicActivity.m */; };
 		F9A89D5015BDCCE1007AC27D /* PBPlacesActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A89D4F15BDCCE1007AC27D /* PBPlacesActivity.m */; };
-		F9AE7CC915B9E42A001008C7 /* PBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AE7CC815B9E429001008C7 /* PBUser.m */; };
 		F9AE7CCC15B9E9DE001008C7 /* FoursquareDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AE7CCB15B9E9DE001008C7 /* FoursquareDelegate.m */; };
 		F9AE7CD515BA7200001008C7 /* PBPlacesNews.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AE7CD415BA7200001008C7 /* PBPlacesNews.m */; };
 		F9AE7CDB15BA7202001008C7 /* PBPlacesItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AE7CDA15BA7202001008C7 /* PBPlacesItem.m */; };
@@ -425,6 +429,18 @@
 		F93C2F96159A5B9400FACE47 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F93C2F98159A5BA000FACE47 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F93C2F9A159A5BA900FACE47 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		F944281A15C303DE00930EFD /* HomeVideosCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVideosCell.h; sourceTree = "<group>"; };
+		F944281B15C303DE00930EFD /* HomeVideosCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVideosCell.m; sourceTree = "<group>"; };
+		F957A74415C0A4D20033CF00 /* PBVideosItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBVideosItem.h; path = Piggybackv2/PBVideosItem.h; sourceTree = "<group>"; };
+		F957A74515C0A4D20033CF00 /* PBVideosItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBVideosItem.m; path = Piggybackv2/PBVideosItem.m; sourceTree = "<group>"; };
+		F957A74715C0A4D20033CF00 /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
+		F957A74815C0A4D20033CF00 /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
+		F957A74D15C0A4D20033CF00 /* PBVideosNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBVideosNews.h; path = Piggybackv2/PBVideosNews.h; sourceTree = "<group>"; };
+		F957A74E15C0A4D20033CF00 /* PBVideosNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBVideosNews.m; path = Piggybackv2/PBVideosNews.m; sourceTree = "<group>"; };
+		F957A75115C0A6BD0033CF00 /* PBVideosActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBVideosActivity.h; path = Piggybackv2/PBVideosActivity.h; sourceTree = "<group>"; };
+		F957A75215C0A6BD0033CF00 /* PBVideosActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBVideosActivity.m; path = Piggybackv2/PBVideosActivity.m; sourceTree = "<group>"; };
+		F957A75415C0AFE80033CF00 /* YoutubeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YoutubeDelegate.h; sourceTree = "<group>"; };
+		F957A75515C0AFE80033CF00 /* YoutubeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YoutubeDelegate.m; sourceTree = "<group>"; };
 		F9736E8515943BC3009DEB07 /* ExploreTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreTableCell.h; sourceTree = "<group>"; };
 		F9736E8615943BC3009DEB07 /* ExploreTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreTableCell.m; sourceTree = "<group>"; };
 		F9774C8215B722CD00FC6FBC /* PBMusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicItem.h; path = Piggybackv2/PBMusicItem.h; sourceTree = "<group>"; };
@@ -469,8 +485,6 @@
 		F99F2CA715AC9E3700B5EB36 /* header-you@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-you@2x.png"; sourceTree = "<group>"; };
 		F99F2CB215ACA3F600B5EB36 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		F99F2CB315ACA3F600B5EB36 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		F99F2CB515ACB2CF00B5EB36 /* HomeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableCell.h; sourceTree = "<group>"; };
-		F99F2CB615ACB2CF00B5EB36 /* HomeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableCell.m; sourceTree = "<group>"; };
 		F9A097CE15BF0F8C0086C2CB /* HomeSquareTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSquareTableCell.h; sourceTree = "<group>"; };
 		F9A097CF15BF0F8C0086C2CB /* HomeSquareTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSquareTableCell.m; sourceTree = "<group>"; };
 		F9A4289715B45C7B000D147C /* PBFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBFriend.h; path = Piggybackv2/PBFriend.h; sourceTree = "<group>"; };
@@ -481,8 +495,6 @@
 		F9A428C215B46276000D147C /* PBMusicActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicActivity.m; path = Piggybackv2/PBMusicActivity.m; sourceTree = "<group>"; };
 		F9A89D4E15BDCCE1007AC27D /* PBPlacesActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesActivity.h; path = Piggybackv2/PBPlacesActivity.h; sourceTree = "<group>"; };
 		F9A89D4F15BDCCE1007AC27D /* PBPlacesActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesActivity.m; path = Piggybackv2/PBPlacesActivity.m; sourceTree = "<group>"; };
-		F9AE7CC715B9E429001008C7 /* PBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBUser.h; path = Piggybackv2/PBUser.h; sourceTree = "<group>"; };
-		F9AE7CC815B9E429001008C7 /* PBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBUser.m; path = Piggybackv2/PBUser.m; sourceTree = "<group>"; };
 		F9AE7CCA15B9E9DE001008C7 /* FoursquareDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareDelegate.h; sourceTree = "<group>"; };
 		F9AE7CCB15B9E9DE001008C7 /* FoursquareDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoursquareDelegate.m; sourceTree = "<group>"; };
 		F9AE7CD315BA71FF001008C7 /* PBPlacesNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesNews.h; path = Piggybackv2/PBPlacesNews.h; sourceTree = "<group>"; };
@@ -508,6 +520,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F957A75015C0A5EF0033CF00 /* CoreData.framework in Frameworks */,
 				C422341515ACE528005151A3 /* libCocoaLibSpotify.a in Frameworks */,
 				F93C2F9B159A5BA900FACE47 /* libxml2.dylib in Frameworks */,
 				F93C2F99159A5BA000FACE47 /* QuartzCore.framework in Frameworks */,
@@ -516,7 +529,6 @@
 				3E9A5D571593C96E00635873 /* MobileCoreServices.framework in Frameworks */,
 				3E3165351593D51C00344F36 /* CFNetwork.framework in Frameworks */,
 				F93C2F95159A5B7900FACE47 /* libRestKit.a in Frameworks */,
-				F93C2F7D159A585500FACE47 /* CoreData.framework in Frameworks */,
 				3E31653D1593D52D00344F36 /* AVFoundation.framework in Frameworks */,
 				3E31653B1593D52900344F36 /* AudioToolbox.framework in Frameworks */,
 				3E3165391593D52400344F36 /* CoreAudio.framework in Frameworks */,
@@ -604,6 +616,8 @@
 				3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */,
 				F9AE7CCA15B9E9DE001008C7 /* FoursquareDelegate.h */,
 				F9AE7CCB15B9E9DE001008C7 /* FoursquareDelegate.m */,
+				F957A75415C0AFE80033CF00 /* YoutubeDelegate.h */,
+				F957A75515C0AFE80033CF00 /* YoutubeDelegate.m */,
 				F99418EF1598BE0C00A4B08B /* LoginViewController.h */,
 				F99418F01598BE0C00A4B08B /* LoginViewController.m */,
 				F99F2CB215ACA3F600B5EB36 /* HomeViewController.h */,
@@ -638,12 +652,12 @@
 		3EE8DB141593BF9A009DCCA3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F944281A15C303DE00930EFD /* HomeVideosCell.h */,
+				F944281B15C303DE00930EFD /* HomeVideosCell.m */,
 				F9C097621594E500000A0541 /* WatchTableCell.h */,
 				F9C097631594E500000A0541 /* WatchTableCell.m */,
 				F91B3D9915A6340300D8E815 /* SetAmbassadorCell.h */,
 				F91B3D9A15A6340300D8E815 /* SetAmbassadorCell.m */,
-				F99F2CB515ACB2CF00B5EB36 /* HomeTableCell.h */,
-				F99F2CB615ACB2CF00B5EB36 /* HomeTableCell.m */,
 				F9A097CE15BF0F8C0086C2CB /* HomeSquareTableCell.h */,
 				F9A097CF15BF0F8C0086C2CB /* HomeSquareTableCell.m */,
 				F93052101593C7FA00E9DA06 /* Constants.h */,
@@ -709,8 +723,14 @@
 		F93C2F78159A514000FACE47 /* PB Core Data Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F9AE7CC715B9E429001008C7 /* PBUser.h */,
-				F9AE7CC815B9E429001008C7 /* PBUser.m */,
+				F957A74D15C0A4D20033CF00 /* PBVideosNews.h */,
+				F957A74E15C0A4D20033CF00 /* PBVideosNews.m */,
+				F957A74715C0A4D20033CF00 /* PBUser.h */,
+				F957A74815C0A4D20033CF00 /* PBUser.m */,
+				F957A74415C0A4D20033CF00 /* PBVideosItem.h */,
+				F957A74515C0A4D20033CF00 /* PBVideosItem.m */,
+				F957A75115C0A6BD0033CF00 /* PBVideosActivity.h */,
+				F957A75215C0A6BD0033CF00 /* PBVideosActivity.m */,
 				F9AE7CD915BA7201001008C7 /* PBPlacesItem.h */,
 				F9AE7CDA15BA7202001008C7 /* PBPlacesItem.m */,
 				F9A89D4E15BDCCE1007AC27D /* PBPlacesActivity.h */,
@@ -1169,18 +1189,22 @@
 				F91B3D9E15A6365100D8E815 /* SetAmbassadorsViewController.m in Sources */,
 				F92E8D5515A78226002DFCB1 /* FBImageToDataTransformer.m in Sources */,
 				F99F2CB415ACA3F600B5EB36 /* HomeViewController.m in Sources */,
-				F99F2CB715ACB2CF00B5EB36 /* HomeTableCell.m in Sources */,
 				F9A4289915B45C7B000D147C /* PBFriend.m in Sources */,
 				F9A428BA15B46276000D147C /* PBMusicNews.m in Sources */,
 				F9A428C315B46276000D147C /* PBMusicActivity.m in Sources */,
 				F9774C8415B722CD00FC6FBC /* PBMusicItem.m in Sources */,
 				C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */,
-				F9AE7CC915B9E42A001008C7 /* PBUser.m in Sources */,
 				F9AE7CCC15B9E9DE001008C7 /* FoursquareDelegate.m in Sources */,
 				F9AE7CD515BA7200001008C7 /* PBPlacesNews.m in Sources */,
 				F9AE7CDB15BA7202001008C7 /* PBPlacesItem.m in Sources */,
 				F9A89D5015BDCCE1007AC27D /* PBPlacesActivity.m in Sources */,
 				F9A097D015BF0F8C0086C2CB /* HomeSquareTableCell.m in Sources */,
+				F957A74615C0A4D20033CF00 /* PBVideosItem.m in Sources */,
+				F957A74915C0A4D20033CF00 /* PBUser.m in Sources */,
+				F957A74F15C0A4D20033CF00 /* PBVideosNews.m in Sources */,
+				F957A75315C0A6BD0033CF00 /* PBVideosActivity.m in Sources */,
+				F957A75615C0AFE80033CF00 /* YoutubeDelegate.m in Sources */,
+				F944281C15C303DE00930EFD /* HomeVideosCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

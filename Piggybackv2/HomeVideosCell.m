@@ -1,14 +1,14 @@
 //
-//  HomeTableCell.m
+//  HomeVideosCell.m
 //  Piggybackv2
 //
-//  Created by Kimberly Hsiao on 7/10/12.
+//  Created by Kimberly Hsiao on 7/27/12.
 //  Copyright (c) 2012 Calimucho. All rights reserved.
 //
 
-#import "HomeTableCell.h"
+#import "HomeVideosCell.h"
 
-@implementation HomeTableCell
+@implementation HomeVideosCell
 
 @synthesize nameOfItem = _nameOfItem;
 @synthesize favoritedBy = _favoritedBy;
@@ -18,6 +18,7 @@
 @synthesize todo = _todo;
 @synthesize mediaType = _mediaType;
 @synthesize icon = _icon;
+@synthesize videoWebView = _viewWebView;
 
 - (IBAction)heart:(id)sender {
     [self.heart setImage:[UIImage imageNamed:@"heart-pressed-button"] forState:UIControlStateNormal];

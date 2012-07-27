@@ -2,14 +2,14 @@
 //  PBUser.h
 //  Piggybackv2
 //
-//  Created by Kimberly Hsiao on 7/21/12.
+//  Created by Kimberly Hsiao on 7/25/12.
 //  Copyright (c) 2012 Calimucho. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class PBMusicActivity, PBMusicNews, PBPlacesActivity, PBPlacesNews, PBUser;
+@class PBMusicActivity, PBMusicNews, PBPlacesActivity, PBPlacesNews, PBUser, PBVideosActivity, PBVideosNews;
 
 @interface PBUser : NSManagedObject
 
@@ -29,10 +29,14 @@
 @property (nonatomic, retain) NSSet *musicAmbassadors;
 @property (nonatomic, retain) NSSet *musicFollowers;
 @property (nonatomic, retain) NSSet *myMusicActions;
-@property (nonatomic, retain) NSSet *placesAmbassadors;
-@property (nonatomic, retain) NSSet *placesFollowers;
 @property (nonatomic, retain) NSSet *myPlacesActions;
 @property (nonatomic, retain) NSSet *placesActivity;
+@property (nonatomic, retain) NSSet *placesAmbassadors;
+@property (nonatomic, retain) NSSet *placesFollowers;
+@property (nonatomic, retain) NSSet *videosActivity;
+@property (nonatomic, retain) NSSet *videosAmbassadors;
+@property (nonatomic, retain) NSSet *videosFollowers;
+@property (nonatomic, retain) NSSet *myVideosActions;
 @end
 
 @interface PBUser (CoreDataGeneratedAccessors)
@@ -57,6 +61,16 @@
 - (void)addMyMusicActions:(NSSet *)values;
 - (void)removeMyMusicActions:(NSSet *)values;
 
+- (void)addMyPlacesActionsObject:(PBPlacesNews *)value;
+- (void)removeMyPlacesActionsObject:(PBPlacesNews *)value;
+- (void)addMyPlacesActions:(NSSet *)values;
+- (void)removeMyPlacesActions:(NSSet *)values;
+
+- (void)addPlacesActivityObject:(PBPlacesActivity *)value;
+- (void)removePlacesActivityObject:(PBPlacesActivity *)value;
+- (void)addPlacesActivity:(NSSet *)values;
+- (void)removePlacesActivity:(NSSet *)values;
+
 - (void)addPlacesAmbassadorsObject:(PBUser *)value;
 - (void)removePlacesAmbassadorsObject:(PBUser *)value;
 - (void)addPlacesAmbassadors:(NSSet *)values;
@@ -67,14 +81,24 @@
 - (void)addPlacesFollowers:(NSSet *)values;
 - (void)removePlacesFollowers:(NSSet *)values;
 
-- (void)addMyPlacesActionsObject:(PBPlacesNews *)value;
-- (void)removeMyPlacesActionsObject:(PBPlacesNews *)value;
-- (void)addMyPlacesActions:(NSSet *)values;
-- (void)removeMyPlacesActions:(NSSet *)values;
+- (void)addVideosActivityObject:(PBVideosActivity *)value;
+- (void)removeVideosActivityObject:(PBVideosActivity *)value;
+- (void)addVideosActivity:(NSSet *)values;
+- (void)removeVideosActivity:(NSSet *)values;
 
-- (void)addPlacesActivityObject:(PBPlacesActivity *)value;
-- (void)removePlacesActivityObject:(PBPlacesActivity *)value;
-- (void)addPlacesActivity:(NSSet *)values;
-- (void)removePlacesActivity:(NSSet *)values;
+- (void)addVideosAmbassadorsObject:(PBUser *)value;
+- (void)removeVideosAmbassadorsObject:(PBUser *)value;
+- (void)addVideosAmbassadors:(NSSet *)values;
+- (void)removeVideosAmbassadors:(NSSet *)values;
+
+- (void)addVideosFollowersObject:(PBUser *)value;
+- (void)removeVideosFollowersObject:(PBUser *)value;
+- (void)addVideosFollowers:(NSSet *)values;
+- (void)removeVideosFollowers:(NSSet *)values;
+
+- (void)addMyVideosActionsObject:(PBVideosNews *)value;
+- (void)removeMyVideosActionsObject:(PBVideosNews *)value;
+- (void)addMyVideosActions:(NSSet *)values;
+- (void)removeMyVideosActions:(NSSet *)values;
 
 @end

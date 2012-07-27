@@ -2,7 +2,7 @@
 //  PBUser.m
 //  Piggybackv2
 //
-//  Created by Kimberly Hsiao on 7/21/12.
+//  Created by Kimberly Hsiao on 7/25/12.
 //  Copyright (c) 2012 Calimucho. All rights reserved.
 //
 
@@ -12,6 +12,8 @@
 #import "PBPlacesActivity.h"
 #import "PBPlacesNews.h"
 #import "PBUser.h"
+#import "PBVideosActivity.h"
+#import "PBVideosNews.h"
 
 
 @implementation PBUser
@@ -32,9 +34,13 @@
 @dynamic musicAmbassadors;
 @dynamic musicFollowers;
 @dynamic myMusicActions;
-@dynamic placesAmbassadors;
-@dynamic placesFollowers;
 @dynamic myPlacesActions;
 @dynamic placesActivity;
+@dynamic placesAmbassadors;
+@dynamic placesFollowers;
+@dynamic videosActivity;
+@dynamic videosAmbassadors;
+@dynamic videosFollowers;
+@dynamic myVideosActions;
 
 @end
