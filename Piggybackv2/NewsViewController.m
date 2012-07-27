@@ -7,6 +7,10 @@
 //
 
 #import "NewsViewController.h"
+#import "PBMusicNews.h"
+#import "PBUser.h"
+#import "PBMusicActivity.h"
+#import "PBMusicItem.h"
 
 @interface NewsViewController ()
 
@@ -28,15 +32,30 @@
 }
 
 #pragma mark - Private helper methods
+- (void)loadObjectsFromDataStore {
+    NSFetchRequest* request = [PBMusicNews fetchRequest];
+//    NSSortDescriptor* descriptor = [NSSortDescriptor sortDescriptorWithKey:@"referralDate" ascending:NO];
+//    [request setSortDescriptors:[NSArray arrayWithObject:descriptor]];
+    self.newsToDisplay = [PBMusicNews objectsWithFetchRequest:request];
+}
+
 - (void)loadData {
     // load the object model via RestKit
-//    NSString *newsPath = [[RKObjectManager sharedManager] get
+    RKObjectManager* objManager = [RKObjectManager sharedManager];
+    RKObjectMapping *responseMapping = (RKObjectMapping*)[objManager.mappingProvider mappingForKeyPath:@"PBMusicActivity"];
+    
+    [objManager loadObjectsAtResourcePath:@"/news" usingBlock:^(RKObjectLoader *loader) {
+        loader.delegate = self;
+        responseMapping.rootKeyPath = @"PBMusicActivity";
+        loader.objectMapping = responseMapping;
+    }];
 }
 
 #pragma mark - RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
     NSLog(@"objects from news feed are %@",objects);
+    [self loadObjectsFromDataStore];
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
@@ -56,16 +75,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
-//    return [self.items count];
+    return [self.newsToDisplay count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"newsTableCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PBMusicNews *newsItem = [self.newsToDisplay objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = @"test";
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@ - %@", newsItem.follower.firstName, newsItem.newsActionType, newsItem.musicActivity.musicItem.songTitle];
     
     return cell;
 }
@@ -86,8 +105,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self loadData];
 }
 
 - (void)viewDidUnload

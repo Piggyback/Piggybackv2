@@ -22,6 +22,7 @@
 #import "PBMusicActivity.h"
 #import "PBPlacesItem.h"
 #import "PBPlacesActivity.h"
+#import "PBMusicNews.h"
 #import <RestKit/RKRequestSerialization.h>
 
 @interface AppDelegate ()
@@ -31,9 +32,7 @@
 @implementation AppDelegate
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
-//NSString* RK_BASE_URL = @"http://10.0.4.187:5000"; // mike
-//NSString* RK_BASE_URL = @"http://10.0.4.53:5000"; // kim
-NSString* RK_BASE_URL = @"http://localhost:5000";
+NSString* RK_BASE_URL = @"http://10.0.4.176:5000";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
@@ -142,6 +141,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [musicActivityMapping mapAttributes:@"musicActivityId",@"uid",@"musicItemId",@"musicActivityType",@"dateAdded",nil];
     [musicActivityMapping mapRelationship:@"musicItem" withMapping:musicItemMapping];
     [musicActivityMapping mapRelationship:@"user" withMapping:userMapping];
+    [musicActivityMapping mapRelationship:@"news" withMapping:musicNewsMapping];
     [musicActivityMapping connectRelationship:@"musicItem" withObjectForPrimaryKeyAttribute:@"musicItemId"];
     [musicActivityMapping connectRelationship:@"user" withObjectForPrimaryKeyAttribute:@"uid"];
     [objectManager.mappingProvider setMapping:musicActivityMapping forKeyPath:@"PBMusicActivity"];
@@ -153,6 +153,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [musicNewsMapping mapRelationship:@"musicActivity" withMapping:musicActivityMapping];
     [musicNewsMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerUid"];
     [musicNewsMapping connectRelationship:@"musicActivity" withObjectForPrimaryKeyAttribute:@"musicActivityId"];
+    [objectManager.mappingProvider setMapping:musicNewsMapping forKeyPath:@"PBMusicNews"];
     
     // placesItem mapping
     placesItemMapping.primaryKeyAttribute = @"placesItemId";
