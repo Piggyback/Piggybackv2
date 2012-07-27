@@ -1,5 +1,5 @@
 //
-//  HomeVideosCell.h
+//  HomePlacesCell.h
 //  Piggybackv2
 //
 //  Created by Kimberly Hsiao on 7/27/12.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeVideosCell : UITableViewCell
+@interface HomePlacesCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel* nameOfItem;
 @property (nonatomic, weak) IBOutlet UILabel* favoritedBy;
@@ -17,9 +17,9 @@
 @property (nonatomic, weak) IBOutlet UIButton* heart;
 @property (nonatomic, weak) IBOutlet UIButton* todo;
 @property (nonatomic, weak) IBOutlet UIImageView* icon;
+@property (nonatomic, weak) IBOutlet UIImageView* mainPic;
 
 - (IBAction)heart:(id)sender;
 - (IBAction)todo:(id)sender;
-
 
 @end

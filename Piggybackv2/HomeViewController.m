@@ -19,6 +19,7 @@
 #import "PBVideosItem.h"
 #import "PBVideosActivity.h"
 #import "HomeVideosCell.h"
+#import "HomePlacesCell.h"
 #import "YouTubeView.h"
 
 @interface HomeViewController ()
@@ -238,6 +239,7 @@
     if(placesItem.photoURL) {
         UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
         [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.photoURL];
+        NSLog(@"places photos are %@",self.cachedPlacesPhotos);
     }
     
     [[RKObjectManager sharedManager].objectStore save:nil];
@@ -441,8 +443,8 @@
         
         return cell;
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
-        static NSString *CellIdentifier = @"homeSquareTableCell";
-        HomeSquareTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        static NSString *CellIdentifier = @"homePlacesCell";
+        HomePlacesCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.profilePic.layer.cornerRadius = 5;
         cell.profilePic.layer.masksToBounds = YES;
         
@@ -458,7 +460,6 @@
         // if photo exists, display
         if (placesItem.photoURL) {
             cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.photoURL];
-            [cell.mainPic setNeedsLayout];
         }
         
         return cell;

@@ -124,6 +124,7 @@
 		F957A75315C0A6BD0033CF00 /* PBVideosActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F957A75215C0A6BD0033CF00 /* PBVideosActivity.m */; };
 		F957A75615C0AFE80033CF00 /* YoutubeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F957A75515C0AFE80033CF00 /* YoutubeDelegate.m */; };
 		F964302F15C32E74006D1715 /* YouTubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F964302E15C32E73006D1715 /* YouTubeView.m */; };
+		F964303215C348DA006D1715 /* HomePlacesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F964303115C348DA006D1715 /* HomePlacesCell.m */; };
 		F9774C8415B722CD00FC6FBC /* PBMusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F9774C8315B722CD00FC6FBC /* PBMusicItem.m */; };
 		F99418F11598BE0C00A4B08B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99418F01598BE0C00A4B08B /* LoginViewController.m */; };
 		F99418F81598BEDA00A4B08B /* LoginWithFacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = F99418F61598BEDA00A4B08B /* LoginWithFacebookNormal.png */; };
@@ -433,6 +434,8 @@
 		F957A75515C0AFE80033CF00 /* YoutubeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YoutubeDelegate.m; sourceTree = "<group>"; };
 		F964302D15C32E73006D1715 /* YouTubeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeView.h; sourceTree = "<group>"; };
 		F964302E15C32E73006D1715 /* YouTubeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeView.m; sourceTree = "<group>"; };
+		F964303015C348D9006D1715 /* HomePlacesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePlacesCell.h; sourceTree = "<group>"; };
+		F964303115C348DA006D1715 /* HomePlacesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePlacesCell.m; sourceTree = "<group>"; };
 		F9774C8215B722CD00FC6FBC /* PBMusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicItem.h; path = Piggybackv2/PBMusicItem.h; sourceTree = "<group>"; };
 		F9774C8315B722CD00FC6FBC /* PBMusicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicItem.m; path = Piggybackv2/PBMusicItem.m; sourceTree = "<group>"; };
 		F99418EF1598BE0C00A4B08B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -626,6 +629,8 @@
 			children = (
 				F9A097CE15BF0F8C0086C2CB /* HomeSquareTableCell.h */,
 				F9A097CF15BF0F8C0086C2CB /* HomeSquareTableCell.m */,
+				F964303015C348D9006D1715 /* HomePlacesCell.h */,
+				F964303115C348DA006D1715 /* HomePlacesCell.m */,
 				F944281A15C303DE00930EFD /* HomeVideosCell.h */,
 				F944281B15C303DE00930EFD /* HomeVideosCell.m */,
 				F964302D15C32E73006D1715 /* YouTubeView.h */,
@@ -1169,6 +1174,7 @@
 				F957A75615C0AFE80033CF00 /* YoutubeDelegate.m in Sources */,
 				F944281C15C303DE00930EFD /* HomeVideosCell.m in Sources */,
 				F964302F15C32E74006D1715 /* YouTubeView.m in Sources */,
+				F964303215C348DA006D1715 /* HomePlacesCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
