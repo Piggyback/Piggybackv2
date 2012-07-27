@@ -112,7 +112,6 @@
                             for (NSDictionary* difSizePhoto in [[photo objectForKey:@"sizes"] objectForKey:@"items"]) {
                                 if ([[difSizePhoto objectForKey:@"height"] isEqualToNumber:[NSNumber numberWithInt:300]]) {
                                     photoURL = [difSizePhoto objectForKey:@"url"];
-                                    NSLog(@"photoURL is %@",photoURL);
                                     [self.delegate updateVenuePhoto:photoURL forVendor:vid];
                                     return;
                                 }

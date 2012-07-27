@@ -11,14 +11,12 @@
 
 @interface YoutubeDelegate ()
 @property (nonatomic, strong) NSMutableDictionary* currentConnections;
-//@property (nonatomic, strong) NSMutableArray *videoList;
 @end
 
 @implementation YoutubeDelegate
 
 @synthesize delegate = _delegate;
 @synthesize currentConnections = _currentConnections;
-//@synthesize videoList = _videoList;
 
 #pragma mark - getters and setters
 
@@ -28,13 +26,6 @@
     }
     return _currentConnections;
 }
-
-//- (NSMutableArray*)videoList {
-//    if (!_videoList) {
-//        _videoList = [[NSMutableArray alloc] init];
-//    }
-//    return _videoList;
-//}
 
 #pragma mark - public methods
 
