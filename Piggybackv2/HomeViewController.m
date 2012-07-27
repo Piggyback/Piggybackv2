@@ -21,25 +21,21 @@
 #import "HomeVideosCell.h"
 
 @interface HomeViewController ()
-@property (nonatomic, strong) NSMutableSet* selectedFilters;
 @property (nonatomic, strong) NSMutableDictionary *topLists;
-@property (nonatomic, strong) NSMutableArray *topPlaces;
-
 
 @property (nonatomic, strong) NSMutableSet* musicAmbassadors;
 @property (nonatomic, strong) NSMutableSet* placesAmbassadors;
 @property (nonatomic, strong) NSMutableSet* videosAmbassadors;
 
+@property (nonatomic, strong) NSMutableDictionary* cachedPlacesPhotos;
 @end
 
 @implementation HomeViewController
 
 @synthesize tableView = _tableView;
-@synthesize selectedFilters = _selectedFilters;
 @synthesize items = _items;
 @synthesize displayItems = _displayItems;
 @synthesize topLists = _topLists;
-@synthesize topPlaces = _topPlaces;
 
 @synthesize musicAmbassadors = _musicAmbassadors;
 @synthesize placesAmbassadors = _placesAmbassadors;
@@ -48,14 +44,9 @@
 @synthesize foursquareDelegate = _foursquareDelegate;
 @synthesize youtubeDelegate = _youtubeDelegate;
 
-#pragma mark - setters and getters 
+@synthesize cachedPlacesPhotos = _cachedPlacesPhotos;
 
-- (NSMutableSet*)selectedFilters {
-    if (!_selectedFilters) {
-        _selectedFilters = [[NSMutableSet alloc] init];
-    }
-    return _selectedFilters;
-}
+#pragma mark - setters and getters 
 
 - (NSMutableArray*)items {
     if (!_items) {
@@ -97,6 +88,13 @@
         _topLists = [[NSMutableDictionary alloc] init];
     }
     return _topLists;
+}
+
+- (NSMutableDictionary*)cachedPlacesPhotos {
+    if (!_cachedPlacesPhotos) {
+        _cachedPlacesPhotos = [[NSMutableDictionary alloc] init];
+    }
+    return _cachedPlacesPhotos;
 }
 
 #pragma mark - public helper methods
@@ -378,7 +376,11 @@
     }
     
     else if ([sender selectedSegmentIndex] == 3) {
-        // fill in later after create video classes
+        for (id item in self.items) {
+            if ([item isKindOfClass:[PBVideosActivity class]]) {
+                [selectedItems addObject:item];
+            }
+        }
     }
     
     self.displayItems = selectedItems;
@@ -434,7 +436,15 @@
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ checked in",user.firstName, user.lastName];
         cell.icon.image = [UIImage imageNamed:@"places-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
-        cell.mainPic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
+        
+        // set main image
+        if ([self.cachedPlacesPhotos objectForKey:placesItem.name]) {
+            cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.name];
+        } else {
+            UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
+            cell.mainPic.image = placesImage;
+            [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.name];
+        }
         
         return cell;
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBVideosActivity class]]) {
@@ -449,18 +459,20 @@
         
         cell.nameOfItem.text = videosItem.name;
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ %@ a new video",user.firstName,user.lastName,videosActivity.videosActivityType];
-        cell.icon.image = [UIImage imageNamed:@"videos-icon-badge.png"];
+        cell.icon.image = [UIImage imageNamed:@"movie-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
         NSString *htmlString = [NSString stringWithFormat:@"<html><head>"
-                            "<meta name = \"viewport\" content = \"initial-scale = 1.0, user-scalable = no, width = 90\"/></head>"
+                            "<meta name = \"viewport\" content = \"initial-scale = 1.0, user-scalable = no, width = 302\"/></head>"
                             "<body style=\"background:#F00;margin-top:0px;margin-left:0px\">"
-                            "<div><object width=\"90\" height=\"60\">"
+                            "<div><object width=\"302\" height=\"240\">"
                             "<param name=\"movie\" value=\"%@\"></param>"
                             "<param name=\"wmode\" value=\"transparent\"></param>"
                             "<embed src=\"%@\""
-                            "type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"90\" height=\"60\"></embed>"
+                            "type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"302\" height=\"240\"></embed>"
                             "</object></div></body></html>",videosItem.videoURL,videosItem.videoURL];
 
+        cell.videoWebView.scrollView.scrollEnabled = NO;
+        cell.videoWebView.scrollView.bounces = NO;
         [cell.videoWebView loadHTMLString:htmlString baseURL:[NSURL URLWithString:@"http://www.your-url.com"]];
         
         return cell;
