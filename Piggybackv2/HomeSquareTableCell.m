@@ -26,6 +26,10 @@
 
 - (IBAction)todo:(id)sender {
     [self.todo setImage:[UIImage imageNamed:@"todo-added-button"] forState:UIControlStateNormal];
+//    NSLog(@"adding todo from andy's phone");
+//    [[RKClient sharedClient] post:@"/addTodo" usingBlock:^(RKRequest *request) {
+//        
+//    }];
 }
 
 @end

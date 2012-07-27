@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="12A269" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="PBFriend" representedClassName="PBFriend" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fbId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -18,6 +18,7 @@
         <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="musicItem" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBMusicItem" inverseName="musicActivity" inverseEntity="PBMusicItem" syncable="YES"/>
         <relationship name="news" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicNews" inverseName="musicActivity" inverseEntity="PBMusicNews" syncable="YES"/>
+        <relationship name="todos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicTodo" inverseName="musicActivity" inverseEntity="PBMusicTodo" syncable="YES"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="musicActivity" inverseEntity="PBUser" syncable="YES"/>
     </entity>
     <entity name="PBMusicItem" representedClassName="PBMusicItem" syncable="YES">
@@ -35,10 +36,16 @@
         <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="followerUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="musicActivityId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="musicNewsId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="newsActionType" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="newsId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="follower" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="myMusicActions" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="musicActivity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBMusicActivity" inverseName="news" inverseEntity="PBMusicActivity" syncable="YES"/>
+    </entity>
+    <entity name="PBMusicTodo" representedClassName="PBMusicTodo" syncable="YES">
+        <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="musicActivityId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="musicTodoId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="musicActivity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBMusicActivity" inverseName="todos" inverseEntity="PBMusicActivity" syncable="YES"/>
     </entity>
     <entity name="PBPlacesActivity" representedClassName="PBPlacesActivity" syncable="YES">
         <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
@@ -105,5 +112,6 @@
         <element name="PBPlacesItem" positionX="160" positionY="192" width="128" height="225"/>
         <element name="PBPlacesNews" positionX="160" positionY="192" width="128" height="150"/>
         <element name="PBUser" positionX="243" positionY="171" width="128" height="255"/>
+        <element name="PBMusicTodo" positionX="160" positionY="192" width="128" height="105"/>
     </elements>
 </model>
