@@ -235,8 +235,10 @@
     PBPlacesItem *placesItem = [PBPlacesItem objectWithPredicate:placesItemPredicate];
     placesItem.photoURL = photoURL;
     
-    UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
-    [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.photoURL];
+    if(placesItem.photoURL) {
+        UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
+        [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.photoURL];
+    }
     
     [[RKObjectManager sharedManager].objectStore save:nil];
     [self fetchAmbassadorFavsFromCoreData];
@@ -456,6 +458,7 @@
         // if photo exists, display
         if (placesItem.photoURL) {
             cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.photoURL];
+            [cell.mainPic setNeedsLayout];
         }
         
         return cell;
