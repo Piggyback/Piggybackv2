@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeSquareTableCell : UITableViewCell
+@interface HomeMusicCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel* nameOfItem;
 @property (nonatomic, weak) IBOutlet UILabel* favoritedBy;
@@ -18,7 +18,8 @@
 @property (nonatomic, weak) IBOutlet UIButton* todo;
 @property (nonatomic, weak) IBOutlet UIImageView* icon;
 @property (nonatomic, weak) IBOutlet UIImageView* mainPic;
-@property (nonatomic, strong) NSString* mediaType;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (nonatomic, strong) NSString* spotifyURL;
 
 - (IBAction)heart:(id)sender;
 - (IBAction)todo:(id)sender;

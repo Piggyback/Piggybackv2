@@ -164,7 +164,7 @@
 		F99F2CB015AC9E3700B5EB36 /* header-you.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2CA615AC9E3700B5EB36 /* header-you.png */; };
 		F99F2CB115AC9E3700B5EB36 /* header-you@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2CA715AC9E3700B5EB36 /* header-you@2x.png */; };
 		F99F2CB415ACA3F600B5EB36 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99F2CB315ACA3F600B5EB36 /* HomeViewController.m */; };
-		F9A097D015BF0F8C0086C2CB /* HomeSquareTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A097CF15BF0F8C0086C2CB /* HomeSquareTableCell.m */; };
+		F9A097D015BF0F8C0086C2CB /* HomeMusicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A097CF15BF0F8C0086C2CB /* HomeMusicCell.m */; };
 		F9A4289915B45C7B000D147C /* PBFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4289815B45C7B000D147C /* PBFriend.m */; };
 		F9A428BA15B46276000D147C /* PBMusicNews.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428B915B46276000D147C /* PBMusicNews.m */; };
 		F9A428C315B46276000D147C /* PBMusicActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428C215B46276000D147C /* PBMusicActivity.m */; };
@@ -478,8 +478,8 @@
 		F99F2CA715AC9E3700B5EB36 /* header-you@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-you@2x.png"; sourceTree = "<group>"; };
 		F99F2CB215ACA3F600B5EB36 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		F99F2CB315ACA3F600B5EB36 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		F9A097CE15BF0F8C0086C2CB /* HomeSquareTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSquareTableCell.h; sourceTree = "<group>"; };
-		F9A097CF15BF0F8C0086C2CB /* HomeSquareTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSquareTableCell.m; sourceTree = "<group>"; };
+		F9A097CE15BF0F8C0086C2CB /* HomeMusicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMusicCell.h; sourceTree = "<group>"; };
+		F9A097CF15BF0F8C0086C2CB /* HomeMusicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMusicCell.m; sourceTree = "<group>"; };
 		F9A4289715B45C7B000D147C /* PBFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBFriend.h; path = Piggybackv2/PBFriend.h; sourceTree = "<group>"; };
 		F9A4289815B45C7B000D147C /* PBFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBFriend.m; path = Piggybackv2/PBFriend.m; sourceTree = "<group>"; };
 		F9A428B815B46276000D147C /* PBMusicNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicNews.h; path = Piggybackv2/PBMusicNews.h; sourceTree = "<group>"; };
@@ -627,8 +627,8 @@
 		3EE8DB141593BF9A009DCCA3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F9A097CE15BF0F8C0086C2CB /* HomeSquareTableCell.h */,
-				F9A097CF15BF0F8C0086C2CB /* HomeSquareTableCell.m */,
+				F9A097CE15BF0F8C0086C2CB /* HomeMusicCell.h */,
+				F9A097CF15BF0F8C0086C2CB /* HomeMusicCell.m */,
 				F964303015C348D9006D1715 /* HomePlacesCell.h */,
 				F964303115C348DA006D1715 /* HomePlacesCell.m */,
 				F944281A15C303DE00930EFD /* HomeVideosCell.h */,
@@ -1166,7 +1166,7 @@
 				F9AE7CD515BA7200001008C7 /* PBPlacesNews.m in Sources */,
 				F9AE7CDB15BA7202001008C7 /* PBPlacesItem.m in Sources */,
 				F9A89D5015BDCCE1007AC27D /* PBPlacesActivity.m in Sources */,
-				F9A097D015BF0F8C0086C2CB /* HomeSquareTableCell.m in Sources */,
+				F9A097D015BF0F8C0086C2CB /* HomeMusicCell.m in Sources */,
 				F957A74615C0A4D20033CF00 /* PBVideosItem.m in Sources */,
 				F957A74915C0A4D20033CF00 /* PBUser.m in Sources */,
 				F957A74F15C0A4D20033CF00 /* PBVideosNews.m in Sources */,

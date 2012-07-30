@@ -8,7 +8,7 @@
 
 #import "HomeViewController.h"
 #import "Constants.h"
-#import "HomeSquareTableCell.h"
+#import "HomeMusicCell.h"
 #import "CocoaLibSpotify.h"
 #import "PBUser.h"
 #import "PBMusicActivity.h"
@@ -31,6 +31,11 @@
 
 @property (nonatomic, strong) NSMutableDictionary* cachedPlacesPhotos;
 @property (nonatomic, strong) NSMutableDictionary* cachedYoutubeWebViews;
+@property (nonatomic, strong) NSMutableDictionary* cachedAlbumCovers;
+
+@property (nonatomic, strong) NSString* currentlyPlayingSpotifyURL;
+@property BOOL isPlaying;
+
 @end
 
 @implementation HomeViewController
@@ -46,9 +51,14 @@
 
 @synthesize foursquareDelegate = _foursquareDelegate;
 @synthesize youtubeDelegate = _youtubeDelegate;
+@synthesize playbackManager = _playbackManager;
 
 @synthesize cachedPlacesPhotos = _cachedPlacesPhotos;
 @synthesize cachedYoutubeWebViews = _cachedYoutubeWebViews;
+@synthesize cachedAlbumCovers = _cachedAlbumCovers;
+
+@synthesize currentlyPlayingSpotifyURL = _currentlyPlayingSpotifyURL;
+@synthesize isPlaying = _isPlaying;
 
 #pragma mark - setters and getters 
 
@@ -108,6 +118,13 @@
     return _cachedYoutubeWebViews;
 }
 
+- (NSMutableDictionary*)cachedAlbumCovers {
+    if (!_cachedAlbumCovers) {
+        _cachedAlbumCovers = [[NSMutableDictionary alloc] init];
+    }
+    return _cachedAlbumCovers;
+}
+
 #pragma mark - public helper methods
 
 - (void)loadAmbassadorData {
@@ -136,6 +153,16 @@
             newMusicItem.spotifyUrl = [track.spotifyURL absoluteString];
             newMusicItem.songDuration = [NSNumber numberWithFloat:track.duration];
             
+            [SPTrack trackForTrackURL:[NSURL URLWithString:newMusicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
+                [self.cachedAlbumCovers setObject:track.album.cover forKey:newMusicItem.spotifyUrl];
+                [track.album.cover startLoading];
+                NSLog(@"cached album covers are %@",self.cachedAlbumCovers);
+            }];
+//            
+//            [SPTrack trackForTrackURL:[NSURL URLWithString:musicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
+//                cell.mainPic.image = track.album.cover.image;
+//            }];
+            
             // add music item
             [[RKObjectManager sharedManager] postObject:newMusicItem usingBlock:^(RKObjectLoader* loader) {
                 loader.onDidLoadObject = ^(id object) {
@@ -147,9 +174,6 @@
                     [[RKObjectManager sharedManager] postObject:newMusicActivity usingBlock:^(RKObjectLoader* loader) {
                         loader.onDidLoadObject = ^(id object) {
                             [self fetchAmbassadorFavsFromCoreData];
-//                            [self.items addObject:newMusicActivity];
-//                            [self.displayItems addObject:newMusicActivity];
-//                            [self.tableView reloadData];
                         };
                     }];
                 };
@@ -190,9 +214,6 @@
                                                 
                         [[RKObjectManager sharedManager] postObject:newPlacesActivity usingBlock:^(RKObjectLoader* loader) {
                             loader.onDidLoadObject = ^(id object) {
-//                                [self.items addObject:newPlacesActivity];
-//                                [self.displayItems addObject:newPlacesActivity];
-//                                [self.tableView reloadData];
                             };
                         }];
                     };
@@ -407,6 +428,60 @@
     [self.tableView reloadData];
 }
 
+#pragma mark - play song notification callback 
+
+-(void)playTrack:(NSNotification*)notification {
+    NSURL* trackURL = [NSURL URLWithString:[[notification userInfo] objectForKey:@"spotifyURL"]];
+    [[SPSession sharedSession] trackForURL:trackURL callback:^(SPTrack *track) {
+        if (track != nil) {
+            if (![self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]]) {
+                // start song again after pause
+                if (!self.isPlaying) {
+                    self.currentlyPlayingSpotifyURL = [[notification userInfo] objectForKey:@"spotifyURL"];
+                    [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
+                        [self.playbackManager playTrack:track callback:^(NSError *error) {
+                            if (error) {
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Play Track"
+                                                                                message:[error localizedDescription]
+                                                                               delegate:nil
+                                                                      cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil];
+                                [alert show];
+                            } else {
+                                self.playbackManager.isPlaying = YES;
+                            }
+                        }];
+                    }];
+                }
+                
+                // pause current song
+                else {
+                    self.playbackManager.isPlaying = NO;
+                }
+            }
+            
+            // start new song
+            else {
+                self.currentlyPlayingSpotifyURL = [[notification userInfo] objectForKey:@"spotifyURL"];
+                [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
+                    [self.playbackManager playTrack:track callback:^(NSError *error) {
+                        if (error) {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Play Track"
+                                                                            message:[error localizedDescription]
+                                                                           delegate:nil
+                                                                  cancelButtonTitle:@"OK"
+                                                                  otherButtonTitles:nil];
+                            [alert show];
+                        } else {
+                            self.playbackManager.isPlaying = YES;
+                        }
+                    }];
+                }];
+            }
+        }
+    }];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -422,8 +497,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBMusicActivity class]]) {
-        static NSString *CellIdentifier = @"homeSquareTableCell";
-        HomeSquareTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        static NSString *CellIdentifier = @"homeMusicCell";
+        HomeMusicCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.profilePic.layer.cornerRadius = 5;
         cell.profilePic.layer.masksToBounds = YES;
         
@@ -431,15 +506,12 @@
         PBMusicItem* musicItem = musicActivity.musicItem;
         PBUser* user = musicActivity.user;
         
+        cell.spotifyURL = musicItem.spotifyUrl;
         cell.nameOfItem.text = [NSString stringWithFormat:@"%@ - %@",musicItem.artistName, musicItem.songTitle]; 
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ added a new top track",user.firstName, user.lastName];
         cell.icon.image = [UIImage imageNamed:@"music-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
-        
-        // set picture
-        [SPTrack trackForTrackURL:[NSURL URLWithString:musicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
-            cell.mainPic.image = track.album.cover.image;
-        }];
+        cell.mainPic.image = [(SPImage*)[self.cachedAlbumCovers objectForKey:musicItem.spotifyUrl] image];
         
         return cell;
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
@@ -468,7 +540,6 @@
         PBVideosItem* videosItem = videosActivity.videosItem;
         PBUser* user = videosActivity.user;
         
-        // otherwise, load cell for first time and store in cache
         static NSString *CellIdentifier = @"homeVideosCell";
         HomeVideosCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.profilePic.layer.cornerRadius = 5;
@@ -520,8 +591,15 @@
 {
     [super viewDidLoad];
     
+    // fetch home feed info
     [self fetchAmbassadorFavsFromCoreData];
 
+    // set up playback manager
+    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
+    
+    // register for notifications from music cell play button
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playTrack:) name:@"clickPlayMusic" object:nil];
+    
     // create segmented control to select type of media to view
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:
                                             [NSArray arrayWithObjects:
@@ -535,10 +613,9 @@
     segmentedControl.tintColor = [UIColor blueColor];
     [segmentedControl setSelectedSegmentIndex:0];
     [segmentedControl addTarget:self action:@selector(changeSegment:) forControlEvents:UIControlEventValueChanged];
-    [segmentedControl setFrame:CGRectMake(self.navigationController.toolbar.frame.origin.x, self.navigationController.toolbar.frame.origin.y, 130, 34)];
+    [segmentedControl setFrame:CGRectMake(self.navigationController.toolbar.frame.origin.x, self.navigationController.toolbar.frame.origin.y, 150, 34)];
 
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
-    self.navigationController.navigationBar.topItem.rightBarButtonItem = barButtonItem;
+    self.navigationController.navigationBar.topItem.titleView = segmentedControl;
     
     NSLog(@"view did load");
 }

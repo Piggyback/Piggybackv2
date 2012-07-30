@@ -733,11 +733,11 @@
                                             <outlet property="todo" destination="b5f-Qn-OIf" id="IfG-qq-hAl"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeSquareTableCell" rowHeight="15" id="aIQ-Uy-Gjn" customClass="HomeSquareTableCell">
-                                        <rect key="frame" x="0.0" y="37" width="320" height="15"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeMusicCell" rowHeight="250" id="aIQ-Uy-Gjn" customClass="HomeMusicCell">
+                                        <rect key="frame" x="0.0" y="37" width="320" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="14"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="249"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="yTd-Xc-bUL">
@@ -805,6 +805,33 @@
                                                     <rect key="frame" x="291" y="28" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dOn-YJ-tjM">
+                                                    <rect key="frame" x="124" y="106" width="70" height="70"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="PLAY">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="o8q-hI-eah">
+                                                    <rect key="frame" x="125" y="106" width="70" height="70"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="PLAY">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="clickPlay:" destination="aIQ-Uy-Gjn" eventType="touchUpInside" id="KSm-Xu-3Tb"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -815,12 +842,13 @@
                                             <outlet property="icon" destination="XiD-Sd-IrB" id="8kH-Qd-0g8"/>
                                             <outlet property="mainPic" destination="Ze9-76-Ttt" id="9xI-Gp-Zqd"/>
                                             <outlet property="nameOfItem" destination="yE4-94-9tv" id="RXC-Nr-6iK"/>
+                                            <outlet property="playButton" destination="o8q-hI-eah" id="jNX-Kv-agy"/>
                                             <outlet property="profilePic" destination="yTd-Xc-bUL" id="h2F-3y-PiB"/>
                                             <outlet property="todo" destination="x8S-qY-frT" id="FIc-wp-x2P"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeVideosCell" rowHeight="20" id="3lN-dZ-GuB" customClass="HomeVideosCell">
-                                        <rect key="frame" x="0.0" y="52" width="320" height="20"/>
+                                        <rect key="frame" x="0.0" y="287" width="320" height="20"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="19"/>
@@ -901,7 +929,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homePlacesCell" rowHeight="272" id="jEU-Ez-Ecp" customClass="HomePlacesCell">
-                                        <rect key="frame" x="0.0" y="72" width="320" height="272"/>
+                                        <rect key="frame" x="0.0" y="307" width="320" height="272"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="271"/>
@@ -1186,133 +1214,6 @@
         <image name="videos-section-divider.png" width="320" height="26"/>
         <image name="youtube-icon.png" width="50" height="50"/>
     </resources>
-    <classes>
-        <class className="AccountLinkViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AccountLinkViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="continueButton:"/>
-                <relationship kind="action" name="foursquareConnect:"/>
-                <relationship kind="action" name="spotifyConnect:"/>
-                <relationship kind="action" name="youtubeConnect:"/>
-                <relationship kind="outlet" name="youtubeToggle" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-        <class className="HomePlacesCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomePlacesCell.h"/>
-            <relationships>
-                <relationship kind="action" name="heart:"/>
-                <relationship kind="action" name="todo:"/>
-                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="icon" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="mainPic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="nameOfItem" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="HomeSquareTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeSquareTableCell.h"/>
-            <relationships>
-                <relationship kind="action" name="heart:"/>
-                <relationship kind="action" name="todo:"/>
-                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="icon" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="mainPic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="nameOfItem" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="HomeVideosCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeVideosCell.h"/>
-            <relationships>
-                <relationship kind="action" name="heart:"/>
-                <relationship kind="action" name="todo:"/>
-                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="icon" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="nameOfItem" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="HomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="ListenCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListenCell.h"/>
-            <relationships>
-                <relationship kind="action" name="heart:"/>
-                <relationship kind="action" name="todo:"/>
-                <relationship kind="outlet" name="action" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="activity" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="icon" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="ListenTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListenTableViewController.h"/>
-        </class>
-        <class className="LoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="loginWithFacebook:"/>
-            </relationships>
-        </class>
-        <class className="NewsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="PiggybackTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PiggybackTabBarController.h"/>
-        </class>
-        <class className="SetAmbassadorCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetAmbassadorCell.h"/>
-            <relationships>
-                <relationship kind="action" name="clickFollowMusic"/>
-                <relationship kind="action" name="clickFollowPlaces"/>
-                <relationship kind="action" name="clickFollowVideos"/>
-                <relationship kind="outlet" name="followMusic" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="followPlaces" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="followVideos" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="SetAmbassadorsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetAmbassadorsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="readyButton:"/>
-                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SongViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SongViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="playTrack:"/>
-                <relationship kind="action" name="setTrackPosition:"/>
-                <relationship kind="outlet" name="albumInfo" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="playButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="positionSlider" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="trackArtist" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="trackCover" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="trackTitle" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
