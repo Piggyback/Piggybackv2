@@ -21,7 +21,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView* mainPic;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (nonatomic, strong) NSString* spotifyURL;
-//@property BOOL isPlaying;
 
 - (IBAction)heart:(id)sender;
 - (IBAction)todo:(id)sender;

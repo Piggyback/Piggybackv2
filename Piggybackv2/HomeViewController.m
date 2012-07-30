@@ -144,41 +144,41 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"tracks"]) {
         NSString* ambassadorUid = [[self.topLists allKeysForObject:object] lastObject];
-        for (SPTrack* track in [[self.topLists objectForKey:ambassadorUid] tracks]) {
-            PBMusicItem* newMusicItem = [PBMusicItem object];
-            newMusicItem.artistName = [[[track artists] valueForKey:@"name"] componentsJoinedByString:@","];
-            newMusicItem.songTitle = track.name;
-            newMusicItem.albumTitle = track.album.name;
-            newMusicItem.albumYear = [NSNumber numberWithUnsignedInteger:track.album.year];
-            newMusicItem.spotifyUrl = [track.spotifyURL absoluteString];
-            newMusicItem.songDuration = [NSNumber numberWithFloat:track.duration];
-            
-            [SPTrack trackForTrackURL:[NSURL URLWithString:newMusicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
-                [self.cachedAlbumCovers setObject:track.album.cover forKey:newMusicItem.spotifyUrl];
-                [track.album.cover startLoading];
-                NSLog(@"cached album covers are %@",self.cachedAlbumCovers);
-            }];
-//            
-//            [SPTrack trackForTrackURL:[NSURL URLWithString:musicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
-//                cell.mainPic.image = track.album.cover.image;
-//            }];
-            
-            // add music item
-            [[RKObjectManager sharedManager] postObject:newMusicItem usingBlock:^(RKObjectLoader* loader) {
-                loader.onDidLoadObject = ^(id object) {
-                    PBMusicActivity* newMusicActivity = [PBMusicActivity object];
-                    newMusicActivity.uid = [NSNumber numberWithInteger:[ambassadorUid intValue]];
-                    newMusicActivity.musicItemId = newMusicItem.musicItemId;
-                    newMusicActivity.musicActivityType = @"top track";
-                    
-                    [[RKObjectManager sharedManager] postObject:newMusicActivity usingBlock:^(RKObjectLoader* loader) {
-                        loader.onDidLoadObject = ^(id object) {
-                            [self fetchAmbassadorFavsFromCoreData];
-                        };
+            for (SPTrack* track in [[self.topLists objectForKey:ambassadorUid] tracks]) {
+                PBMusicItem* newMusicItem = [PBMusicItem object];
+                newMusicItem.artistName = [[[track artists] valueForKey:@"name"] componentsJoinedByString:@","];
+                newMusicItem.songTitle = track.name;
+                newMusicItem.albumTitle = track.album.name;
+                newMusicItem.albumYear = [NSNumber numberWithUnsignedInteger:track.album.year];
+                newMusicItem.spotifyUrl = [track.spotifyURL absoluteString];
+                newMusicItem.songDuration = [NSNumber numberWithFloat:track.duration];
+                
+                // save album covers in cache
+                dispatch_queue_t getTopTracksQueue = dispatch_queue_create("getTopTracksQueue",NULL);
+                dispatch_async(getTopTracksQueue, ^{
+                    [SPTrack trackForTrackURL:[NSURL URLWithString:newMusicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
+                        [self.cachedAlbumCovers setObject:track.album.cover forKey:newMusicItem.spotifyUrl];
+                        [track.album.cover startLoading];
+                        NSLog(@"cached album covers are %@",self.cachedAlbumCovers);
                     }];
-                };
-            }];
-        }
+                });
+
+                // add music item
+                [[RKObjectManager sharedManager] postObject:newMusicItem usingBlock:^(RKObjectLoader* loader) {
+                    loader.onDidLoadObject = ^(id object) {
+                        PBMusicActivity* newMusicActivity = [PBMusicActivity object];
+                        newMusicActivity.uid = [NSNumber numberWithInteger:[ambassadorUid intValue]];
+                        newMusicActivity.musicItemId = newMusicItem.musicItemId;
+                        newMusicActivity.musicActivityType = @"top track";
+                        
+                        [[RKObjectManager sharedManager] postObject:newMusicActivity usingBlock:^(RKObjectLoader* loader) {
+                            loader.onDidLoadObject = ^(id object) {
+                                [self fetchAmbassadorFavsFromCoreData];
+                            };
+                        }];
+                    };
+                }];
+            }
     }
 }
 
@@ -186,6 +186,7 @@
 -(void)updateCheckins:(NSArray*)checkins {
     for (NSDictionary* checkin in checkins) {
         for (PBUser* placesAmbasador in self.placesAmbassadors) {
+
             if ([placesAmbasador.foursquareId isEqualToNumber:[NSNumber numberWithInt:[[[checkin objectForKey:@"user"] objectForKey:@"id"] intValue]]]) {
                 PBPlacesItem* newPlacesItem = [PBPlacesItem object];
                 newPlacesItem.addr = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"address"];
@@ -253,17 +254,22 @@
 }
 
 - (void)updateVenuePhoto:(NSString*)photoURL forVendor:(NSString*)vid {
-    NSPredicate *placesItemPredicate = [NSPredicate predicateWithFormat:@"(foursquareReferenceId = %@)",vid];
-    PBPlacesItem *placesItem = [PBPlacesItem objectWithPredicate:placesItemPredicate];
-    placesItem.photoURL = photoURL;
+    dispatch_queue_t updateVendorPhotosQueue = dispatch_queue_create("updateVendorPhotosQueue",NULL);
+    dispatch_async(updateVendorPhotosQueue, ^{
+        
+        NSPredicate *placesItemPredicate = [NSPredicate predicateWithFormat:@"(foursquareReferenceId = %@)",vid];
+        PBPlacesItem *placesItem = [PBPlacesItem objectWithPredicate:placesItemPredicate];
+        placesItem.photoURL = photoURL;
+        
+        if(placesItem.photoURL) {
+            UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
+            [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.photoURL];
+            NSLog(@"places photos are %@",self.cachedPlacesPhotos);
+        }
+        
+        [[RKObjectManager sharedManager].objectStore save:nil];
+    });
     
-    if(placesItem.photoURL) {
-        UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
-        [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.photoURL];
-        NSLog(@"places photos are %@",self.cachedPlacesPhotos);
-    }
-    
-    [[RKObjectManager sharedManager].objectStore save:nil];
     [self fetchAmbassadorFavsFromCoreData];
 
     // call restkit to update photoURL in database
@@ -439,7 +445,6 @@
             // start new song
             if (![self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]]) {
                 NSLog(@"start new song");
-                self.currentlyPlayingSpotifyURL = [[notification userInfo] objectForKey:@"spotifyURL"];
                 [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
                     [self.playbackManager playTrack:track callback:^(NSError *error) {
                         if (error) {
@@ -450,8 +455,10 @@
                                                                   otherButtonTitles:nil];
                             [alert show];
                         } else {
+                            self.currentlyPlayingSpotifyURL = [[notification userInfo] objectForKey:@"spotifyURL"];
                             self.playbackManager.isPlaying = YES;
                             self.isPlaying = YES;
+                            [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                         }
                     }];
                 }];
@@ -462,24 +469,15 @@
                 NSLog(@"pause current song");
                 self.isPlaying = NO;
                 self.playbackManager.isPlaying = NO;
+                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
             }
             
             // resume current song
             else if ([self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]] && !self.isPlaying) {
                 NSLog(@"resume current song");
-                [self.playbackManager playTrack:self.playbackManager.currentTrack callback:^(NSError *error) {
-                    if (error) {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Play Track"
-                                                                        message:[error localizedDescription]
-                                                                       delegate:nil
-                                                              cancelButtonTitle:@"OK"
-                                                              otherButtonTitles:nil];
-                        [alert show];
-                    } else {
-                        self.playbackManager.isPlaying = YES;
-                        self.isPlaying = YES;
-                    }
-                }];
+                self.playbackManager.isPlaying = YES;
+                self.isPlaying = YES;
+                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
             }
         }
     }];
@@ -516,7 +514,7 @@
         cell.profilePic.image = user.thumbnail;
         cell.mainPic.image = [(SPImage*)[self.cachedAlbumCovers objectForKey:musicItem.spotifyUrl] image];
         
-        if ([cell.spotifyURL isEqualToString:self.currentlyPlayingSpotifyURL]) {
+        if ([cell.spotifyURL isEqualToString:self.currentlyPlayingSpotifyURL] && self.isPlaying) {
             cell.playButton.imageView.image = [UIImage imageNamed:@"pause-button"];
         } else {
             cell.playButton.imageView.image = [UIImage imageNamed:@"play-button"];
@@ -540,6 +538,7 @@
         
         // if photo exists, display
         if (placesItem.photoURL) {
+            NSLog(@"hihihi");
             cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.photoURL];
         }
         
