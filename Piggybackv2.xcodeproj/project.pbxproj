@@ -181,6 +181,12 @@
 		F9C0976A1594E5D8000A0541 /* josh-lu-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */; };
 		F9C0976B1594E5D8000A0541 /* olstein-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */; };
 		F9C0976C1594E5D8000A0541 /* yean-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097681594E5D8000A0541 /* yean-rounded-corners.png */; };
+		F9FD692415C71E2400D86522 /* filter-music.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD691E15C71E2400D86522 /* filter-music.png */; };
+		F9FD692515C71E2400D86522 /* filter-music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD691F15C71E2400D86522 /* filter-music@2x.png */; };
+		F9FD692615C71E2400D86522 /* filter-places.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD692015C71E2400D86522 /* filter-places.png */; };
+		F9FD692715C71E2400D86522 /* filter-places@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD692115C71E2400D86522 /* filter-places@2x.png */; };
+		F9FD692815C71E2400D86522 /* filter-videos.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD692215C71E2400D86522 /* filter-videos.png */; };
+		F9FD692915C71E2400D86522 /* filter-videos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD692315C71E2400D86522 /* filter-videos@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -509,6 +515,12 @@
 		F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "josh-lu-rounded-corners.png"; sourceTree = "<group>"; };
 		F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olstein-rounded-corners.png"; sourceTree = "<group>"; };
 		F9C097681594E5D8000A0541 /* yean-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yean-rounded-corners.png"; sourceTree = "<group>"; };
+		F9FD691E15C71E2400D86522 /* filter-music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-music.png"; sourceTree = "<group>"; };
+		F9FD691F15C71E2400D86522 /* filter-music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-music@2x.png"; sourceTree = "<group>"; };
+		F9FD692015C71E2400D86522 /* filter-places.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-places.png"; sourceTree = "<group>"; };
+		F9FD692115C71E2400D86522 /* filter-places@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-places@2x.png"; sourceTree = "<group>"; };
+		F9FD692215C71E2400D86522 /* filter-videos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-videos.png"; sourceTree = "<group>"; };
+		F9FD692315C71E2400D86522 /* filter-videos@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-videos@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -843,6 +855,12 @@
 				3E51D6CB1593E04F00EEBD36 /* movie-icon-badge@2x.png */,
 				3E51D6CC1593E04F00EEBD36 /* movie-icon.png */,
 				3E51D6CD1593E04F00EEBD36 /* movie-icon@2x.png */,
+				F9FD691E15C71E2400D86522 /* filter-music.png */,
+				F9FD691F15C71E2400D86522 /* filter-music@2x.png */,
+				F9FD692015C71E2400D86522 /* filter-places.png */,
+				F9FD692115C71E2400D86522 /* filter-places@2x.png */,
+				F9FD692215C71E2400D86522 /* filter-videos.png */,
+				F9FD692315C71E2400D86522 /* filter-videos@2x.png */,
 				3E51D6CE1593E04F00EEBD36 /* music-icon-badge.png */,
 				3E51D6CF1593E04F00EEBD36 /* music-icon-badge@2x.png */,
 				3E51D6D01593E04F00EEBD36 /* music-icon.png */,
@@ -1152,6 +1170,12 @@
 				F90780CD15C6ED8400B36C82 /* pause-button@2x.png in Resources */,
 				F90780CE15C6ED8400B36C82 /* play-button.png in Resources */,
 				F90780CF15C6ED8400B36C82 /* play-button@2x.png in Resources */,
+				F9FD692415C71E2400D86522 /* filter-music.png in Resources */,
+				F9FD692515C71E2400D86522 /* filter-music@2x.png in Resources */,
+				F9FD692615C71E2400D86522 /* filter-places.png in Resources */,
+				F9FD692715C71E2400D86522 /* filter-places@2x.png in Resources */,
+				F9FD692815C71E2400D86522 /* filter-videos.png in Resources */,
+				F9FD692915C71E2400D86522 /* filter-videos@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

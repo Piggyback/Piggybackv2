@@ -268,6 +268,15 @@
         }
         
         [[RKObjectManager sharedManager].objectStore save:nil];
+        [[RKObjectManager sharedManager] putObject:placesItem usingBlock:^(RKObjectLoader* loader) {
+            loader.onDidLoadObject = ^(id object) {
+                NSLog(@"photoURL object is %@",object);
+                if ([object objectForKey:@"statusCode"]) {
+                    
+                }
+            };
+        }];
+
     });
     
     [self fetchAmbassadorFavsFromCoreData];
@@ -612,9 +621,9 @@
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:
                                             [NSArray arrayWithObjects:
                                              [UIImage imageNamed:@"navbar-todo-icon"],
-                                             [UIImage imageNamed:@"navbar-popular-icon"],
-                                             [UIImage imageNamed:@"navbar-you-icon"],
-                                             [UIImage imageNamed:@"navbar-home-icon"],
+                                             [UIImage imageNamed:@"filter-music"],
+                                             [UIImage imageNamed:@"filter-places"],
+                                             [UIImage imageNamed:@"filter-videos"],
                                              nil]];
     
     segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
