@@ -436,34 +436,9 @@
     NSURL* trackURL = [NSURL URLWithString:[[notification userInfo] objectForKey:@"spotifyURL"]];
     [[SPSession sharedSession] trackForURL:trackURL callback:^(SPTrack *track) {
         if (track != nil) {
-            if (![self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]]) {
-                // start song again after pause
-                if (!self.isPlaying) {
-                    self.currentlyPlayingSpotifyURL = [[notification userInfo] objectForKey:@"spotifyURL"];
-                    [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
-                        [self.playbackManager playTrack:track callback:^(NSError *error) {
-                            if (error) {
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Play Track"
-                                                                                message:[error localizedDescription]
-                                                                               delegate:nil
-                                                                      cancelButtonTitle:@"OK"
-                                                                      otherButtonTitles:nil];
-                                [alert show];
-                            } else {
-                                self.playbackManager.isPlaying = YES;
-                            }
-                        }];
-                    }];
-                }
-                
-                // pause current song
-                else {
-                    self.playbackManager.isPlaying = NO;
-                }
-            }
-            
             // start new song
-            else {
+            if (![self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]]) {
+                NSLog(@"start new song");
                 self.currentlyPlayingSpotifyURL = [[notification userInfo] objectForKey:@"spotifyURL"];
                 [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
                     [self.playbackManager playTrack:track callback:^(NSError *error) {
@@ -476,8 +451,34 @@
                             [alert show];
                         } else {
                             self.playbackManager.isPlaying = YES;
+                            self.isPlaying = YES;
                         }
                     }];
+                }];
+            }
+            
+            // pause current song
+            else if ([self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]] && self.isPlaying) {
+                NSLog(@"pause current song");
+                self.isPlaying = NO;
+                self.playbackManager.isPlaying = NO;
+            }
+            
+            // resume current song
+            else if ([self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]] && !self.isPlaying) {
+                NSLog(@"resume current song");
+                [self.playbackManager playTrack:self.playbackManager.currentTrack callback:^(NSError *error) {
+                    if (error) {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Play Track"
+                                                                        message:[error localizedDescription]
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                    } else {
+                        self.playbackManager.isPlaying = YES;
+                        self.isPlaying = YES;
+                    }
                 }];
             }
         }
@@ -514,6 +515,12 @@
         cell.icon.image = [UIImage imageNamed:@"music-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
         cell.mainPic.image = [(SPImage*)[self.cachedAlbumCovers objectForKey:musicItem.spotifyUrl] image];
+        
+        if ([cell.spotifyURL isEqualToString:self.currentlyPlayingSpotifyURL]) {
+            cell.playButton.imageView.image = [UIImage imageNamed:@"pause-button"];
+        } else {
+            cell.playButton.imageView.image = [UIImage imageNamed:@"play-button"];
+        }
         
         return cell;
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
