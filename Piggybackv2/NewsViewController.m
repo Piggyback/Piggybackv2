@@ -43,8 +43,10 @@
     // load the object model via RestKit
     RKObjectManager* objManager = [RKObjectManager sharedManager];
     RKObjectMapping *responseMapping = (RKObjectMapping*)[objManager.mappingProvider mappingForKeyPath:@"PBMusicActivity"];
+    NSDictionary *newsParam = [NSDictionary dictionaryWithKeysAndObjects:@"uid", [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]], nil];
     
-    [objManager loadObjectsAtResourcePath:@"/news" usingBlock:^(RKObjectLoader *loader) {
+    [objManager loadObjectsAtResourcePath:[@"/news" stringByAppendingQueryParameters:newsParam] usingBlock:^(RKObjectLoader *loader) {
+        loader.serializationMIMEType = RKMIMETypeJSON;
         loader.delegate = self;
         responseMapping.rootKeyPath = @"PBMusicActivity";
         loader.objectMapping = responseMapping;

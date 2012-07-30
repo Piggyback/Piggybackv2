@@ -88,6 +88,11 @@
 		C422340515ACE513005151A3 /* SPLoginResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C422340415ACE513005151A3 /* SPLoginResources.bundle */; };
 		C422341515ACE528005151A3 /* libCocoaLibSpotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C422341015ACE515005151A3 /* libCocoaLibSpotify.a */; };
 		C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4739E7815B88A6600F714A7 /* NewsViewController.m */; };
+		C4B24A6D15C332DD00796C57 /* PBMusicTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */; };
+		F90780CC15C6ED8400B36C82 /* pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C815C6ED8400B36C82 /* pause-button.png */; };
+		F90780CD15C6ED8400B36C82 /* pause-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C915C6ED8400B36C82 /* pause-button@2x.png */; };
+		F90780CE15C6ED8400B36C82 /* play-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780CA15C6ED8400B36C82 /* play-button.png */; };
+		F90780CF15C6ED8400B36C82 /* play-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780CB15C6ED8400B36C82 /* play-button@2x.png */; };
 		F91B3D9B15A6340300D8E815 /* SetAmbassadorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F91B3D9A15A6340300D8E815 /* SetAmbassadorCell.m */; };
 		F91B3D9E15A6365100D8E815 /* SetAmbassadorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F91B3D9D15A6365100D8E815 /* SetAmbassadorsViewController.m */; };
 		F91B3DAF15A636FD00D8E815 /* follow-header.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3D9F15A636FD00D8E815 /* follow-header.png */; };
@@ -387,6 +392,12 @@
 		C422340615ACE515005151A3 /* CocoaLibSpotify iOS Library.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CocoaLibSpotify iOS Library.xcodeproj"; path = "spotify-ios-sdk/iOS Library/CocoaLibSpotify iOS Library.xcodeproj"; sourceTree = "<group>"; };
 		C4739E7715B88A6600F714A7 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
 		C4739E7815B88A6600F714A7 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		C4B24A6B15C332DD00796C57 /* PBMusicTodo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicTodo.h; path = Piggybackv2/PBMusicTodo.h; sourceTree = "<group>"; };
+		C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicTodo.m; path = Piggybackv2/PBMusicTodo.m; sourceTree = "<group>"; };
+		F90780C815C6ED8400B36C82 /* pause-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-button.png"; sourceTree = "<group>"; };
+		F90780C915C6ED8400B36C82 /* pause-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-button@2x.png"; sourceTree = "<group>"; };
+		F90780CA15C6ED8400B36C82 /* play-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button.png"; sourceTree = "<group>"; };
+		F90780CB15C6ED8400B36C82 /* play-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button@2x.png"; sourceTree = "<group>"; };
 		F91B3D9915A6340300D8E815 /* SetAmbassadorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorCell.h; sourceTree = "<group>"; };
 		F91B3D9A15A6340300D8E815 /* SetAmbassadorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAmbassadorCell.m; sourceTree = "<group>"; };
 		F91B3D9C15A6365100D8E815 /* SetAmbassadorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorsViewController.h; sourceTree = "<group>"; };
@@ -720,6 +731,8 @@
 				F9A428B915B46276000D147C /* PBMusicNews.m */,
 				F9A4289715B45C7B000D147C /* PBFriend.h */,
 				F9A4289815B45C7B000D147C /* PBFriend.m */,
+				C4B24A6B15C332DD00796C57 /* PBMusicTodo.h */,
+				C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */,
 			);
 			name = "PB Core Data Classes";
 			sourceTree = "<group>";
@@ -739,6 +752,10 @@
 		F9B478711593C16F00C20A53 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F90780C815C6ED8400B36C82 /* pause-button.png */,
+				F90780C915C6ED8400B36C82 /* pause-button@2x.png */,
+				F90780CA15C6ED8400B36C82 /* play-button.png */,
+				F90780CB15C6ED8400B36C82 /* play-button@2x.png */,
 				F99F2C9E15AC9E3700B5EB36 /* header-news.png */,
 				F99F2C9F15AC9E3700B5EB36 /* header-news@2x.png */,
 				F99F2CA015AC9E3700B5EB36 /* header-piggyback.png */,
@@ -1131,6 +1148,10 @@
 				C4002B5715ACD3C4002F05FC /* FBConnect.bundle in Resources */,
 				C4002B5815ACD3C4002F05FC /* FBDialog.bundle in Resources */,
 				C422340515ACE513005151A3 /* SPLoginResources.bundle in Resources */,
+				F90780CC15C6ED8400B36C82 /* pause-button.png in Resources */,
+				F90780CD15C6ED8400B36C82 /* pause-button@2x.png in Resources */,
+				F90780CE15C6ED8400B36C82 /* play-button.png in Resources */,
+				F90780CF15C6ED8400B36C82 /* play-button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1175,6 +1196,7 @@
 				F944281C15C303DE00930EFD /* HomeVideosCell.m in Sources */,
 				F964302F15C32E74006D1715 /* YouTubeView.m in Sources */,
 				F964303215C348DA006D1715 /* HomePlacesCell.m in Sources */,
+				C4B24A6D15C332DD00796C57 /* PBMusicTodo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

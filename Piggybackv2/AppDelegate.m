@@ -25,6 +25,7 @@
 #import "PBVideosItem.h"
 #import "PBVideosActivity.h"
 #import "PBMusicNews.h"
+#import "PBMusicTodo.h"
 #import <RestKit/RKRequestSerialization.h>
 
 @interface AppDelegate ()
@@ -35,7 +36,7 @@
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
 NSString* RK_BASE_URL = @"http://10.0.4.152:5000"; // kim
-//NSString* RK_BASE_URL = @"http://localhost:5000";
+//NSString *RK_BASE_URL = @"http://localhost:5000";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
@@ -112,6 +113,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [router routeClass:[PBUser class] toResourcePath:@"/updateUser" forMethod:RKRequestMethodPUT];
     [router routeClass:[PBMusicItem class] toResourcePath:@"/addMusicItem" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBMusicActivity class] toResourcePath:@"/addMusicActivity" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBMusicTodo class] toResourcePath:@"/addMusicTodo" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBPlacesItem class] toResourcePath:@"/addPlacesItem" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBPlacesActivity class] toResourcePath:@"/addPlacesActivity" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBVideosItem class] toResourcePath:@"/addVideosItem" forMethod:RKRequestMethodPOST];
@@ -126,6 +128,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKManagedObjectMapping* musicItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicItem" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping *musicActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicActivity" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping *musicNewsMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicNews" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping *musicTodoMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicTodo" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* placesItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesItem" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* placesActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesActivity" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* videosItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosItem" inManagedObjectStore:objectManager.objectStore];
@@ -155,13 +158,20 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [objectManager.mappingProvider setMapping:musicActivityMapping forKeyPath:@"PBMusicActivity"];
     
     // musicNews mapping
-    musicNewsMapping.primaryKeyAttribute = @"newsId";
-    [musicNewsMapping mapAttributes:@"newsId", @"newsActionType", @"dateAdded", @"followerUid", @"musicActivityId", nil];
+    musicNewsMapping.primaryKeyAttribute = @"musicNewsId";
+    [musicNewsMapping mapAttributes:@"musicNewsId", @"newsActionType", @"dateAdded", @"followerUid", @"musicActivityId", nil];
     [musicNewsMapping mapRelationship:@"follower" withMapping:userMapping];
     [musicNewsMapping mapRelationship:@"musicActivity" withMapping:musicActivityMapping];
     [musicNewsMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerUid"];
     [musicNewsMapping connectRelationship:@"musicActivity" withObjectForPrimaryKeyAttribute:@"musicActivityId"];
     [objectManager.mappingProvider setMapping:musicNewsMapping forKeyPath:@"PBMusicNews"];
+    
+    // musicTodo mapping
+    musicTodoMapping.primaryKeyAttribute = @"musicTodoId";
+    [musicTodoMapping mapAttributes:@"musicTodoId", @"dateAdded", @"musicActivityId", nil];
+    [musicTodoMapping mapRelationship:@"musicActivity" withMapping:musicActivityMapping];
+    [musicTodoMapping connectRelationship:@"musicActivity" withObjectForPrimaryKeyAttribute:@"musicActivityId"];
+    [objectManager.mappingProvider setMapping:musicTodoMapping forKeyPath:@"PBMusicTodo"];
     
     // placesItem mapping
     placesItemMapping.primaryKeyAttribute = @"placesItemId";
@@ -195,6 +205,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKObjectMapping *userSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *musicItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *musicActivitySerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    RKObjectMapping *musicTodoSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *placesItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *placesActivitySerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *videosItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
@@ -213,6 +224,11 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // musicActivity serialization
     [musicActivitySerializationMapping mapAttributes:@"musicActivityId",@"uid",@"musicItemId",@"musicActivityType",@"dateAdded",nil];
     [objectManager.mappingProvider setSerializationMapping:musicActivitySerializationMapping forClass:[PBMusicActivity class]];
+    
+    // musicTodo serialization
+    [musicTodoSerializationMapping mapAttributes:@"musicTodoId", @"dateAdded", @"musicActivityId", nil];
+    [objectManager.mappingProvider setSerializationMapping:musicTodoSerializationMapping forClass:[PBMusicTodo class]];
+    
     
     // placesItem serialization
     [placesItemSerializationMapping mapAttributes:@"placesItemId",@"addr",@"addrCity",@"addrCountry",@"addrState",@"addrCountry",@"addrZip",@"foursquareReferenceId",@"lat",@"lng",@"name",@"phone",@"photoURL",nil];

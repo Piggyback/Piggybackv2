@@ -297,6 +297,8 @@
             spotifyUsername = @"lemikegao";
         } else if ([ambassador.lastName isEqualToString:@"Jiang"]) {
             spotifyUsername = @"kimikul";
+        } else if ([ambassador.lastName isEqualToString:@"Pelberg"]) {
+            spotifyUsername = @"ptpells";
         }
         
         SPToplist* topList = [SPToplist toplistForUserWithName:spotifyUsername inSession:[SPSession sharedSession]];
