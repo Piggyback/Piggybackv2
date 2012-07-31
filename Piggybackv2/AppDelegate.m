@@ -35,7 +35,7 @@
 @implementation AppDelegate
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
-NSString* RK_BASE_URL = @"http://10.0.4.65:5000"; // kim
+NSString* RK_BASE_URL = @"http://10.0.4.98:5000"; // kim
 //NSString *RK_BASE_URL = @"http://localhost:5000";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
@@ -452,14 +452,11 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
-//    [(ListenTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] topViewController] getFriendsTopTracks];
-    
-//    NSArray* musicActivity = [PBMusicActivity allObjects];
-//    NSArray* placesActivity = [PBPlacesActivity allObjects];
-//    HomeViewController* homeViewController = [[(PiggybackTabBarController*)self.window.rootViewController viewControllers] objectAtIndex:0];
-//    [homeViewController.items addObjectsFromArray:musicActivity];
-//    [homeViewController.items addObjectsFromArray:placesActivity];
-//    [homeViewController.tableView reloadData];
+    NSLog(@"became active");
+    PiggybackTabBarController* tabBarController = (PiggybackTabBarController*)self.window.rootViewController;
+    UINavigationController* navigationController = [tabBarController.viewControllers objectAtIndex:0];
+    HomeViewController* homeViewController = (HomeViewController*)navigationController.topViewController;
+    [homeViewController fetchAmbassadorFavsFromCoreData];
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
@@ -468,6 +465,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    NSLog(@"app will terminate");
 }
 
 @end

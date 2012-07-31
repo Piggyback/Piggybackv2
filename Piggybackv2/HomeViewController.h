@@ -23,5 +23,6 @@
 @property (nonatomic, strong) NSMutableArray *displayItems;
 
 - (void)loadAmbassadorData;
+- (void)fetchAmbassadorFavsFromCoreData;
 
 @end

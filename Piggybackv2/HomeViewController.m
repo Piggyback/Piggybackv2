@@ -136,8 +136,6 @@
     [self getAmbassadorsTopTracks];
     [self getAmbassadorsTopPlaces];
     [self getAmbassadorsTopVideos];
-    
-    NSLog(@"items are %@",self.items);
 }
 
 // this method is called when a spotify user's top list is fetched
@@ -267,14 +265,7 @@
             NSLog(@"places photos are %@",self.cachedPlacesPhotos);
         }
         
-        [[RKObjectManager sharedManager].objectStore save:nil];
         [[RKObjectManager sharedManager] putObject:placesItem usingBlock:^(RKObjectLoader* loader) {
-            loader.onDidLoadObject = ^(id object) {
-                NSLog(@"photoURL object is %@",object);
-                if ([object objectForKey:@"statusCode"]) {
-                    
-                }
-            };
         }];
 
     });
@@ -340,6 +331,11 @@
     [self.items addObjectsFromArray:[PBVideosActivity allObjects]];
     self.displayItems = self.items;
     [self.tableView reloadData];
+    
+    NSLog(@"items are %@",self.items);
+    NSLog(@"cached covers are %@",self.cachedAlbumCovers);
+    NSLog(@"cached vendor images are %@",self.cachedPlacesPhotos);
+    NSLog(@"cached videos are %@",self.cachedYoutubeWebViews);
 }
 
 // get string for time elapsed e.g., "2 days ago"
