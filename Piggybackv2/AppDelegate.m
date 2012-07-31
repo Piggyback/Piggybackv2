@@ -206,7 +206,6 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [musicTodoSerializationMapping mapAttributes:@"musicTodoId", @"dateAdded", @"musicActivityId", nil];
     [objectManager.mappingProvider setSerializationMapping:musicTodoSerializationMapping forClass:[PBMusicTodo class]];
     
-    
     // placesItem serialization
     [placesItemSerializationMapping mapAttributes:@"placesItemId",@"addr",@"addrCity",@"addrCountry",@"addrState",@"addrCountry",@"addrZip",@"foursquareReferenceId",@"lat",@"lng",@"name",@"phone",@"photoURL",nil];
     [objectManager.mappingProvider setSerializationMapping:placesItemSerializationMapping forClass:[PBPlacesItem class]];
