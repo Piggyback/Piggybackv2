@@ -35,7 +35,7 @@
 @implementation AppDelegate
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
-NSString* RK_BASE_URL = @"http://10.0.4.137:5000"; // kim
+NSString* RK_BASE_URL = @"http://10.0.4.165:5000"; // kim
 //NSString *RK_BASE_URL = @"http://localhost:5000";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
@@ -81,8 +81,14 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 										   loadingPolicy:SPAsyncLoadingManual
 												   error:nil];
     [[SPSession sharedSession] setDelegate:self];
-    NSLog(@"shared session is %@",[SPSession sharedSession]);
     
+    // if re-logging in after being disconected
+    if ([SPSession sharedSession].connectionState == 3) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [[SPSession sharedSession] attemptLoginWithUserName:[defaults objectForKey:@"spotifyUsername"] existingCredential:[defaults objectForKey:@"spotifyCredentials"] rememberCredentials:YES];
+    }
+
+
     // setting up facebook
     self.facebook = [[Facebook alloc] initWithAppId:FB_APP_ID andDelegate:self];
     
@@ -288,6 +294,12 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     AccountLinkViewController *accountLinkViewController = [storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
 	return accountLinkViewController;
+}
+
+-(void)session:(SPSession *)aSession didGenerateLoginCredentials:(NSString *)credential forUserName:(NSString *)userName {
+    [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"spotifyUsername"];
+    [[NSUserDefaults standardUserDefaults] setObject:credential forKey:@"spotifyCredentials"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(void)sessionDidLoginSuccessfully:(SPSession *)aSession; {

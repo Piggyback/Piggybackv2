@@ -179,10 +179,6 @@
             }];
         }
     }
-    
-    else if ([keyPath isEqualToString:@"album"]) {
-        NSLog(@"HI I AM HERE WHATUP");
-    }
 }
 
 // this method is called when your ambassadors checkin's are fetched
@@ -362,20 +358,16 @@
             // spotify album covers
             else if ([activity isKindOfClass:[PBMusicActivity class]]) {
                 PBMusicActivity *musicActivity = activity;
-                NSLog(@"shared session in cache is %@",[SPSession sharedSession]);
-                [SPTrack trackForTrackURL:[NSURL URLWithString:musicActivity.musicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
-//                    SPToplist* topList = [SPToplist toplistForUserWithName:spotifyUsername inSession:[SPSession sharedSession]];
-                    [track addObserver:self forKeyPath:@"album" options:0 context:nil];
-//                    NSLog(@"track is %@",track.name);
-//                    NSLog(@"track album is %@",track.album);
-//                    NSLog(@"track album cover is %@",track.album.cover);
-//                    [self.cachedAlbumCovers setObject:track.album.cover forKey:musicActivity.musicItem.spotifyUrl];
-//                    [track.album.cover startLoading];
+                [[SPSession sharedSession] trackForURL:[NSURL URLWithString:musicActivity.musicItem.spotifyUrl] callback:^(SPTrack *track) {
+                    if (track != nil) {
+                        [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
+                            [self.cachedAlbumCovers setObject:track.album.cover forKey:musicActivity.musicItem.spotifyUrl];
+                            [track.album.cover startLoading];
+                        }];
+                    }
                 }];
             }
-        }
-//    });
-    
+        }    
 }
 
 // get string for time elapsed e.g., "2 days ago"
@@ -650,6 +642,7 @@
     // fetch home feed info
     [self fetchAmbassadorFavsFromCoreData];
     [self cacheImages];
+    [self getAmbassadorsTopTracks];
     
     // register for notifications from music cell play button
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playTrack:) name:@"clickPlayMusic" object:nil];
