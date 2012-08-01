@@ -43,8 +43,8 @@
     </entity>
     <entity name="PBMusicTodo" representedClassName="PBMusicTodo" syncable="YES">
         <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="musicActivityId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="musicTodoId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="followerUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="musicActivityId" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
         <relationship name="musicActivity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBMusicActivity" inverseName="todos" inverseEntity="PBMusicActivity" syncable="YES"/>
     </entity>
     <entity name="PBPlacesActivity" representedClassName="PBPlacesActivity" syncable="YES">
@@ -99,19 +99,51 @@
         <relationship name="musicFollowers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="musicAmbassadors" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="myMusicActions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicNews" inverseName="follower" inverseEntity="PBMusicNews" syncable="YES"/>
         <relationship name="myPlacesActions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBPlacesNews" inverseName="follower" inverseEntity="PBPlacesNews" syncable="YES"/>
+        <relationship name="myVideosActions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBVideosNews" inverseName="follower" inverseEntity="PBVideosNews" syncable="YES"/>
         <relationship name="placesActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBPlacesActivity" inverseName="user" inverseEntity="PBPlacesActivity" syncable="YES"/>
         <relationship name="placesAmbassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="placesFollowers" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="placesFollowers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="placesAmbassadors" inverseEntity="PBUser" syncable="YES"/>
+        <relationship name="videosActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBVideosActivity" inverseName="user" inverseEntity="PBVideosActivity" syncable="YES"/>
+        <relationship name="videosAmbassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="videosFollowers" inverseEntity="PBUser" syncable="YES"/>
+        <relationship name="videosFollowers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="videosAmbassadors" inverseEntity="PBUser" syncable="YES"/>
+    </entity>
+    <entity name="PBVideosActivity" representedClassName="PBVideosActivity" syncable="YES">
+        <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="videosActivityId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="videosActivityType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videosItemId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="news" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBVideosNews" inverseName="videosActivity" inverseEntity="PBVideosNews" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="videosActivity" inverseEntity="PBUser" syncable="YES"/>
+        <relationship name="videosItem" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBVideosItem" inverseName="videosActivity" inverseEntity="PBVideosItem" syncable="YES"/>
+    </entity>
+    <entity name="PBVideosItem" representedClassName="PBVideosItem" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videosItemId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="videoURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="videosActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBVideosActivity" inverseName="videosItem" inverseEntity="PBVideosActivity" syncable="YES"/>
+    </entity>
+    <entity name="PBVideosNews" representedClassName="PBVideosNews" syncable="YES">
+        <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="followerUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="newsActionType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="newsId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="videosItemId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="follower" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="myVideosActions" inverseEntity="PBUser" syncable="YES"/>
+        <relationship name="videosActivity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBVideosActivity" inverseName="news" inverseEntity="PBVideosActivity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PBFriend" positionX="241" positionY="-96" width="128" height="150"/>
-        <element name="PBMusicActivity" positionX="-297" positionY="177" width="128" height="165"/>
-        <element name="PBMusicItem" positionX="-171" positionY="63" width="128" height="150"/>
-        <element name="PBMusicNews" positionX="-38" positionY="-123" width="128" height="150"/>
-        <element name="PBPlacesActivity" positionX="160" positionY="192" width="128" height="165"/>
-        <element name="PBPlacesItem" positionX="160" positionY="192" width="128" height="225"/>
-        <element name="PBPlacesNews" positionX="160" positionY="192" width="128" height="150"/>
-        <element name="PBUser" positionX="243" positionY="171" width="128" height="255"/>
+        <element name="PBFriend" positionX="0" positionY="0" width="128" height="165"/>
+        <element name="PBMusicActivity" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="PBMusicItem" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="PBMusicNews" positionX="0" positionY="0" width="128" height="150"/>
         <element name="PBMusicTodo" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="PBPlacesActivity" positionX="0" positionY="0" width="128" height="165"/>
+        <element name="PBPlacesItem" positionX="0" positionY="0" width="128" height="240"/>
+        <element name="PBPlacesNews" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="PBUser" positionX="0" positionY="0" width="128" height="405"/>
+        <element name="PBVideosActivity" positionX="0" positionY="0" width="128" height="165"/>
+        <element name="PBVideosItem" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="PBVideosNews" positionX="0" positionY="0" width="128" height="150"/>
     </elements>
 </model>

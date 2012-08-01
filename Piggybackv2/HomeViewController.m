@@ -8,51 +8,60 @@
 
 #import "HomeViewController.h"
 #import "Constants.h"
-#import "HomeTableCell.h"
-#import "HomeSquareTableCell.h"
+#import "HomeMusicCell.h"
 #import "CocoaLibSpotify.h"
 #import "PBUser.h"
-#import "PBMusicActivity.h"
 #import "PBMusicItem.h"
+#import "PBMusicActivity.h"
 #import <QuartzCore/QuartzCore.h>
 #import "PBPlacesActivity.h"
 #import "PBPlacesItem.h"
+#import "PBVideosItem.h"
+#import "PBVideosActivity.h"
+#import "HomeVideosCell.h"
+#import "HomePlacesCell.h"
+#import "YouTubeView.h"
+#import "PBMusicTodo.h"
 
 @interface HomeViewController ()
-@property (nonatomic, strong) NSMutableSet* selectedFilters;
 @property (nonatomic, strong) NSMutableDictionary *topLists;
-@property (nonatomic, strong) NSMutableArray *topPlaces;
-
 
 @property (nonatomic, strong) NSMutableSet* musicAmbassadors;
 @property (nonatomic, strong) NSMutableSet* placesAmbassadors;
 @property (nonatomic, strong) NSMutableSet* videosAmbassadors;
+
+@property (nonatomic, strong) NSMutableDictionary* cachedPlacesPhotos;
+@property (nonatomic, strong) NSMutableDictionary* cachedYoutubeWebViews;
+@property (nonatomic, strong) NSMutableDictionary* cachedAlbumCovers;
+
+@property (nonatomic, strong) NSString* currentlyPlayingSpotifyURL;
+@property BOOL isPlaying;
 
 @end
 
 @implementation HomeViewController
 
 @synthesize tableView = _tableView;
-@synthesize selectedFilters = _selectedFilters;
 @synthesize items = _items;
 @synthesize displayItems = _displayItems;
 @synthesize topLists = _topLists;
-@synthesize topPlaces = _topPlaces;
 
 @synthesize musicAmbassadors = _musicAmbassadors;
 @synthesize placesAmbassadors = _placesAmbassadors;
 @synthesize videosAmbassadors = _videosAmbassadors;
 
 @synthesize foursquareDelegate = _foursquareDelegate;
+@synthesize youtubeDelegate = _youtubeDelegate;
+@synthesize playbackManager = _playbackManager;
+
+@synthesize cachedPlacesPhotos = _cachedPlacesPhotos;
+@synthesize cachedYoutubeWebViews = _cachedYoutubeWebViews;
+@synthesize cachedAlbumCovers = _cachedAlbumCovers;
+
+@synthesize currentlyPlayingSpotifyURL = _currentlyPlayingSpotifyURL;
+@synthesize isPlaying = _isPlaying;
 
 #pragma mark - setters and getters 
-
-- (NSMutableSet*)selectedFilters {
-    if (!_selectedFilters) {
-        _selectedFilters = [[NSMutableSet alloc] init];
-    }
-    return _selectedFilters;
-}
 
 - (NSMutableArray*)items {
     if (!_items) {
@@ -96,6 +105,27 @@
     return _topLists;
 }
 
+- (NSMutableDictionary*)cachedPlacesPhotos {
+    if (!_cachedPlacesPhotos) {
+        _cachedPlacesPhotos = [[NSMutableDictionary alloc] init];
+    }
+    return _cachedPlacesPhotos;
+}
+
+- (NSMutableDictionary*)cachedYoutubeWebViews {
+    if (!_cachedYoutubeWebViews) {
+        _cachedYoutubeWebViews = [[NSMutableDictionary alloc] init];
+    }
+    return _cachedYoutubeWebViews;
+}
+
+- (NSMutableDictionary*)cachedAlbumCovers {
+    if (!_cachedAlbumCovers) {
+        _cachedAlbumCovers = [[NSMutableDictionary alloc] init];
+    }
+    return _cachedAlbumCovers;
+}
+
 #pragma mark - public helper methods
 
 - (void)loadAmbassadorData {
@@ -106,42 +136,48 @@
     // get top tracks from ambassadors
     [self getAmbassadorsTopTracks];
     [self getAmbassadorsTopPlaces];
-    
-    NSLog(@"items are %@",self.items);
+    [self getAmbassadorsTopVideos];
 }
 
 // this method is called when a spotify user's top list is fetched
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"tracks"]) {
         NSString* ambassadorUid = [[self.topLists allKeysForObject:object] lastObject];
-        for (SPTrack* track in [[self.topLists objectForKey:ambassadorUid] tracks]) {
-            PBMusicItem* newMusicItem = [PBMusicItem object];
-            newMusicItem.artistName = [[[track artists] valueForKey:@"name"] componentsJoinedByString:@","];
-            newMusicItem.songTitle = track.name;
-            newMusicItem.albumTitle = track.album.name;
-            newMusicItem.albumYear = [NSNumber numberWithUnsignedInteger:track.album.year];
-            newMusicItem.spotifyUrl = [track.spotifyURL absoluteString];
-            newMusicItem.songDuration = [NSNumber numberWithFloat:track.duration];
-            
-            // add music item
-            [[RKObjectManager sharedManager] postObject:newMusicItem usingBlock:^(RKObjectLoader* loader) {
-                loader.onDidLoadObject = ^(id object) {
-                    PBMusicActivity* newMusicActivity = [PBMusicActivity object];
-                    newMusicActivity.uid = [NSNumber numberWithInteger:[ambassadorUid intValue]];
-                    newMusicActivity.musicItemId = newMusicItem.musicItemId;
-                    newMusicActivity.musicActivityType = @"top track";
-                    
-                    [[RKObjectManager sharedManager] postObject:newMusicActivity usingBlock:^(RKObjectLoader* loader) {
-                        loader.onDidLoadObject = ^(id object) {
-                            [self fetchAmbassadorFavsFromCoreData];
-//                            [self.items addObject:newMusicActivity];
-//                            [self.displayItems addObject:newMusicActivity];
-//                            [self.tableView reloadData];
-                        };
+            for (SPTrack* track in [[self.topLists objectForKey:ambassadorUid] tracks]) {
+                PBMusicItem* newMusicItem = [PBMusicItem object];
+                newMusicItem.artistName = [[[track artists] valueForKey:@"name"] componentsJoinedByString:@","];
+                newMusicItem.songTitle = track.name;
+                newMusicItem.albumTitle = track.album.name;
+                newMusicItem.albumYear = [NSNumber numberWithUnsignedInteger:track.album.year];
+                newMusicItem.spotifyUrl = [track.spotifyURL absoluteString];
+                newMusicItem.songDuration = [NSNumber numberWithFloat:track.duration];
+                
+                // save album covers in cache
+                dispatch_queue_t getTopTracksQueue = dispatch_queue_create("getTopTracksQueue",NULL);
+                dispatch_async(getTopTracksQueue, ^{
+                    [SPTrack trackForTrackURL:[NSURL URLWithString:newMusicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
+                        [self.cachedAlbumCovers setObject:track.album.cover forKey:newMusicItem.spotifyUrl];
+                        [track.album.cover startLoading];
+                        NSLog(@"cached album covers are %@",self.cachedAlbumCovers);
                     }];
-                };
-            }];
-        }
+                });
+
+                // add music item
+                [[RKObjectManager sharedManager] postObject:newMusicItem usingBlock:^(RKObjectLoader* loader) {
+                    loader.onDidLoadObject = ^(id object) {
+                        PBMusicActivity* newMusicActivity = [PBMusicActivity object];
+                        newMusicActivity.uid = [NSNumber numberWithInteger:[ambassadorUid intValue]];
+                        newMusicActivity.musicItemId = newMusicItem.musicItemId;
+                        newMusicActivity.musicActivityType = @"top track";
+                        
+                        [[RKObjectManager sharedManager] postObject:newMusicActivity usingBlock:^(RKObjectLoader* loader) {
+                            loader.onDidLoadObject = ^(id object) {
+                                [self fetchAmbassadorFavsFromCoreData];
+                            };
+                        }];
+                    };
+                }];
+            }
     }
 }
 
@@ -149,6 +185,7 @@
 -(void)updateCheckins:(NSArray*)checkins {
     for (NSDictionary* checkin in checkins) {
         for (PBUser* placesAmbasador in self.placesAmbassadors) {
+
             if ([placesAmbasador.foursquareId isEqualToNumber:[NSNumber numberWithInt:[[[checkin objectForKey:@"user"] objectForKey:@"id"] intValue]]]) {
                 PBPlacesItem* newPlacesItem = [PBPlacesItem object];
                 newPlacesItem.addr = [[[checkin objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"address"];
@@ -177,10 +214,6 @@
                                                 
                         [[RKObjectManager sharedManager] postObject:newPlacesActivity usingBlock:^(RKObjectLoader* loader) {
                             loader.onDidLoadObject = ^(id object) {
-                                [self fetchAmbassadorFavsFromCoreData];
-//                                [self.items addObject:newPlacesActivity];
-//                                [self.displayItems addObject:newPlacesActivity];
-//                                [self.tableView reloadData];
                             };
                         }];
                     };
@@ -190,12 +223,55 @@
     }
 }
 
-- (void)updateVenuePhoto:(NSString*)photoURL forVendor:(NSString*)vid {
-    NSPredicate *placesItemPredicate = [NSPredicate predicateWithFormat:@"(foursquareReferenceId = %@)",vid];
-    PBPlacesItem *placesItem = [PBPlacesItem objectWithPredicate:placesItemPredicate];
-    placesItem.photoURL = photoURL;
+// this method is called when a youtube users top videos are fetched
+-(void)updateFavoriteVideos:(NSMutableDictionary*)video {
+    PBVideosItem* newVideosItem = [PBVideosItem object];
+    newVideosItem.name = [video objectForKey:@"name"];
+    newVideosItem.videoURL = [video objectForKey:@"url"];
     
-    [[RKObjectManager sharedManager].objectStore save:nil];
+    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:newVideosItem.videoURL frame:CGRectMake(9,38,302,240)];
+    [self.cachedYoutubeWebViews setObject:videoWebView forKey:newVideosItem.videoURL];
+    
+    [[RKObjectManager sharedManager] postObject:newVideosItem usingBlock:^(RKObjectLoader* loader) {
+        loader.onDidLoadObject = ^(id object) {
+            for (PBUser* videosAmbassador in self.videosAmbassadors) {
+                if ([videosAmbassador.youtubeUsername isEqualToString:[video objectForKey:@"youtubeUsername"]]) {
+                    PBVideosActivity* newVideosActivity = [PBVideosActivity object];
+                    newVideosActivity.uid = videosAmbassador.uid;
+                    newVideosActivity.videosItemId = newVideosItem.videosItemId;
+                    newVideosActivity.videosActivityType = [video objectForKey:@"activity"];
+                    
+                    [[RKObjectManager sharedManager] postObject:newVideosActivity usingBlock:^(RKObjectLoader* loader) {
+                        loader.onDidLoadObject = ^(id object) {
+                            [self fetchAmbassadorFavsFromCoreData];
+                        };
+                    }];
+                }
+            }
+        };
+    }];
+}
+
+- (void)updateVenuePhoto:(NSString*)photoURL forVendor:(NSString*)vid {
+    dispatch_queue_t updateVendorPhotosQueue = dispatch_queue_create("updateVendorPhotosQueue",NULL);
+    dispatch_async(updateVendorPhotosQueue, ^{
+        
+        NSPredicate *placesItemPredicate = [NSPredicate predicateWithFormat:@"(foursquareReferenceId = %@)",vid];
+        PBPlacesItem *placesItem = [PBPlacesItem objectWithPredicate:placesItemPredicate];
+        placesItem.photoURL = photoURL;
+        
+        if(placesItem.photoURL) {
+            UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
+            [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.photoURL];
+            NSLog(@"places photos are %@",self.cachedPlacesPhotos);
+        }
+        
+        [[RKObjectManager sharedManager] putObject:placesItem usingBlock:^(RKObjectLoader* loader) {
+        }];
+
+    });
+    
+    [self fetchAmbassadorFavsFromCoreData];
 
     // call restkit to update photoURL in database
 }
@@ -212,10 +288,12 @@
     if (me) {
         self.musicAmbassadors = [me.musicAmbassadors mutableCopy];
         self.placesAmbassadors = [me.placesAmbassadors mutableCopy];
+        self.videosAmbassadors = [me.videosAmbassadors mutableCopy];
     }
     
     NSLog(@"music ambassadors are %@",self.musicAmbassadors);
     NSLog(@"places ambassadors are %@",self.placesAmbassadors);
+    NSLog(@"videos ambassadors are %@",self.videosAmbassadors);
 }
 
 -(void)getAmbassadorsTopTracks {
@@ -242,11 +320,23 @@
     [self.foursquareDelegate getRecentFriendCheckins];
 }
 
+-(void)getAmbassadorsTopVideos {
+    self.youtubeDelegate = [[YoutubeDelegate alloc] init];
+    self.youtubeDelegate.delegate = self;
+    [self.youtubeDelegate getAmbassadorsFavoriteVideos:self.videosAmbassadors];
+}
+
 -(void)fetchAmbassadorFavsFromCoreData {
     self.items = [NSMutableArray arrayWithArray:[PBMusicActivity allObjects]];
     [self.items addObjectsFromArray:[PBPlacesActivity allObjects]];
+    [self.items addObjectsFromArray:[PBVideosActivity allObjects]];
     self.displayItems = self.items;
     [self.tableView reloadData];
+    
+    NSLog(@"items are %@",self.items);
+    NSLog(@"cached covers are %@",self.cachedAlbumCovers);
+    NSLog(@"cached vendor images are %@",self.cachedPlacesPhotos);
+    NSLog(@"cached videos are %@",self.cachedYoutubeWebViews);
 }
 
 // get string for time elapsed e.g., "2 days ago"
@@ -297,6 +387,18 @@
     return elapsedTime;
 }
 
+#pragma mark - home music cell delegate methods
+- (void)addMusicTodo:(PBMusicActivity*)musicActivity {
+    // in add music todo
+    NSLog(@"in add music to do");
+    PBMusicTodo *musicTodo = [PBMusicTodo object];
+    musicTodo.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
+    musicTodo.musicActivityId = musicActivity.musicActivityId;
+    musicTodo.musicActivity = musicActivity;
+
+    [[RKObjectManager sharedManager] postObject:musicTodo delegate:self];
+}
+
 #pragma mark - RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
@@ -341,11 +443,62 @@
     }
     
     else if ([sender selectedSegmentIndex] == 3) {
-        // fill in later after create video classes
+        for (id item in self.items) {
+            if ([item isKindOfClass:[PBVideosActivity class]]) {
+                [selectedItems addObject:item];
+            }
+        }
     }
     
     self.displayItems = selectedItems;
     [self.tableView reloadData];
+}
+
+#pragma mark - play song notification callback 
+
+-(void)playTrack:(NSNotification*)notification {
+    NSURL* trackURL = [NSURL URLWithString:[[notification userInfo] objectForKey:@"spotifyURL"]];
+    [[SPSession sharedSession] trackForURL:trackURL callback:^(SPTrack *track) {
+        if (track != nil) {
+            // start new song
+            if (![self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]]) {
+                NSLog(@"start new song");
+                [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
+                    [self.playbackManager playTrack:track callback:^(NSError *error) {
+                        if (error) {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Play Track"
+                                                                            message:[error localizedDescription]
+                                                                           delegate:nil
+                                                                  cancelButtonTitle:@"OK"
+                                                                  otherButtonTitles:nil];
+                            [alert show];
+                        } else {
+                            self.currentlyPlayingSpotifyURL = [[notification userInfo] objectForKey:@"spotifyURL"];
+                            self.playbackManager.isPlaying = YES;
+                            self.isPlaying = YES;
+                            [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                        }
+                    }];
+                }];
+            }
+            
+            // pause current song
+            else if ([self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]] && self.isPlaying) {
+                NSLog(@"pause current song");
+                self.isPlaying = NO;
+                self.playbackManager.isPlaying = NO;
+                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+            }
+            
+            // resume current song
+            else if ([self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]] && !self.isPlaying) {
+                NSLog(@"resume current song");
+                self.playbackManager.isPlaying = YES;
+                self.isPlaying = YES;
+                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }
+    }];
 }
 
 #pragma mark - Table view data source
@@ -362,26 +515,39 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"homeSquareTableCell";
-    HomeSquareTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.profilePic.layer.cornerRadius = 5;
-    cell.profilePic.layer.masksToBounds = YES;
-    
     if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBMusicActivity class]]) {
+        static NSString *CellIdentifier = @"homeMusicCell";
+        HomeMusicCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        cell.profilePic.layer.cornerRadius = 5;
+        cell.profilePic.layer.masksToBounds = YES;
+        cell.delegate = self;
+        
         PBMusicActivity* musicActivity = [self.displayItems objectAtIndex:indexPath.row];
         PBMusicItem* musicItem = musicActivity.musicItem;
         PBUser* user = musicActivity.user;
         
+        cell.musicActivity = musicActivity;
+        
+        cell.spotifyURL = musicItem.spotifyUrl;
         cell.nameOfItem.text = [NSString stringWithFormat:@"%@ - %@",musicItem.artistName, musicItem.songTitle]; 
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ added a new top track",user.firstName, user.lastName];
         cell.icon.image = [UIImage imageNamed:@"music-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
+        cell.mainPic.image = [(SPImage*)[self.cachedAlbumCovers objectForKey:musicItem.spotifyUrl] image];
         
-        // set picture
-        [SPTrack trackForTrackURL:[NSURL URLWithString:musicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
-            cell.mainPic.image = track.album.cover.image;
-        }];
+        if ([cell.spotifyURL isEqualToString:self.currentlyPlayingSpotifyURL] && self.isPlaying) {
+            cell.playButton.imageView.image = [UIImage imageNamed:@"pause-button"];
+        } else {
+            cell.playButton.imageView.image = [UIImage imageNamed:@"play-button"];
+        }
+        
+        return cell;
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
+        static NSString *CellIdentifier = @"homePlacesCell";
+        HomePlacesCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        cell.profilePic.layer.cornerRadius = 5;
+        cell.profilePic.layer.masksToBounds = YES;
+        
         PBPlacesActivity* placesActivity = [self.displayItems objectAtIndex:indexPath.row];
         PBPlacesItem* placesItem = placesActivity.placesItem;
         PBUser* user = placesActivity.user;
@@ -390,15 +556,40 @@
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ checked in",user.firstName, user.lastName];
         cell.icon.image = [UIImage imageNamed:@"places-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
-        cell.mainPic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
+        
+        // if photo exists, display
+        if (placesItem.photoURL) {
+            NSLog(@"hihihi");
+            cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.photoURL];
+        }
+        
+        return cell;
+    } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBVideosActivity class]]) {
+        PBVideosActivity* videosActivity = [self.displayItems objectAtIndex:indexPath.row];
+        PBVideosItem* videosItem = videosActivity.videosItem;
+        PBUser* user = videosActivity.user;
+        
+        static NSString *CellIdentifier = @"homeVideosCell";
+        HomeVideosCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        cell.profilePic.layer.cornerRadius = 5;
+        cell.profilePic.layer.masksToBounds = YES;
+        
+        cell.nameOfItem.text = videosItem.name;
+        cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ %@ a new video",user.firstName,user.lastName,videosActivity.videosActivityType];
+        cell.profilePic.image = user.thumbnail;
+
+        YouTubeView* videoWebView = [self.cachedYoutubeWebViews objectForKey:videosItem.videoURL];
+        [cell.contentView addSubview:videoWebView];
+        
+        cell.icon.image = [UIImage imageNamed:@"movie-icon-badge.png"];
+        [cell.contentView bringSubviewToFront:cell.icon];
+
+        return cell;
     }
-    
-    return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath 
 {
-//    return HOMETABLEROWHEIGHT;
     return HOMESQUARETABLEROWHEIGHT;
 }
 
@@ -429,25 +620,31 @@
 {
     [super viewDidLoad];
     
+    // fetch home feed info
     [self fetchAmbassadorFavsFromCoreData];
 
+    // set up playback manager
+    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
+    
+    // register for notifications from music cell play button
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playTrack:) name:@"clickPlayMusic" object:nil];
+    
     // create segmented control to select type of media to view
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:
                                             [NSArray arrayWithObjects:
                                              [UIImage imageNamed:@"navbar-todo-icon"],
-                                             [UIImage imageNamed:@"navbar-popular-icon"],
-                                             [UIImage imageNamed:@"navbar-you-icon"],
-                                             [UIImage imageNamed:@"navbar-home-icon"],
+                                             [UIImage imageNamed:@"filter-music"],
+                                             [UIImage imageNamed:@"filter-places"],
+                                             [UIImage imageNamed:@"filter-videos"],
                                              nil]];
     
     segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
     segmentedControl.tintColor = [UIColor blueColor];
     [segmentedControl setSelectedSegmentIndex:0];
     [segmentedControl addTarget:self action:@selector(changeSegment:) forControlEvents:UIControlEventValueChanged];
-    [segmentedControl setFrame:CGRectMake(self.navigationController.toolbar.frame.origin.x, self.navigationController.toolbar.frame.origin.y, 130, 34)];
+    [segmentedControl setFrame:CGRectMake(self.navigationController.toolbar.frame.origin.x, self.navigationController.toolbar.frame.origin.y, 150, 34)];
 
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
-    self.navigationController.navigationBar.topItem.rightBarButtonItem = barButtonItem;
+    self.navigationController.navigationBar.topItem.titleView = segmentedControl;
     
     NSLog(@"view did load");
 }

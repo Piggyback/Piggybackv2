@@ -98,6 +98,12 @@
         newUser.foursquareId = friend.foursquareId;
         newUser.isPiggybackUser = [NSNumber numberWithBool:NO];
         
+        if ([newUser.firstName isEqualToString:@"Haines"]) {
+            newUser.youtubeUsername = @"NerdsInNewYork";
+        } else if ([newUser.firstName isEqualToString:@"Lianna"]) {
+            newUser.youtubeUsername = @"mlgao";
+        }
+        
         // add user and add ambassador
         [[RKObjectManager sharedManager] postObject:newUser usingBlock:^(RKObjectLoader* loader) {
             loader.onDidLoadObjects = ^(NSArray* objects) {
@@ -113,7 +119,10 @@
                     // add ambassador to db
                     // [[RKObjectManager sharedManager] postObject:newAmbassador delegate:self];
                 } else if ([type isEqualToString:@"videos"]) {
+                    [newUser addVideosFollowersObject:me];
                     
+                    // add ambassador to db
+                    // [[RKObjectManager sharedManager] postObject:newAmbassador delegate:self];
                 }
                 
                 if (!friend.thumbnail) {
@@ -148,7 +157,11 @@
                 // add ambassador to db
             }
         } else if ([type isEqualToString:@"videos"]) {
-            
+            if (![friendUser.videosFollowers containsObject:me]) {
+                [friendUser addVideosFollowersObject:me];
+                
+                // add ambassador to db
+            }
         }
             
         NSLog(@"user is %@",friendUser);
