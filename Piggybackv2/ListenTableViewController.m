@@ -163,7 +163,7 @@
 {
     if ([segue.identifier isEqualToString:@"musicToSong"]) {
         [segue.destinationViewController setTrack:[self.topTracks objectAtIndex:[self.tableView indexPathForCell:sender].row]];
-        [segue.destinationViewController setPlaybackManager:[(AppDelegate *)[[UIApplication sharedApplication] delegate] playbackManager]];
+//        [segue.destinationViewController setPlaybackManager:[(AppDelegate *)[[UIApplication sharedApplication] delegate] playbackManager]];
     }
 }
 

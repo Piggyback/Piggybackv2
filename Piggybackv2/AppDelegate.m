@@ -35,7 +35,7 @@
 @implementation AppDelegate
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
-NSString* RK_BASE_URL = @"http://10.0.4.98:5000"; // kim
+NSString* RK_BASE_URL = @"http://10.0.4.137:5000"; // kim
 //NSString *RK_BASE_URL = @"http://localhost:5000";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
@@ -43,7 +43,6 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 @synthesize window = _window;
 @synthesize foursquare = _foursquare;
-@synthesize playbackManager = _playbackManager;
 @synthesize facebook = _facebook;
 @synthesize foursquareDelegate = _foursquareDelegate;
 
@@ -82,6 +81,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 										   loadingPolicy:SPAsyncLoadingManual
 												   error:nil];
     [[SPSession sharedSession] setDelegate:self];
+    NSLog(@"shared session is %@",[SPSession sharedSession]);
     
     // setting up facebook
     self.facebook = [[Facebook alloc] initWithAppId:FB_APP_ID andDelegate:self];
@@ -292,7 +292,6 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 -(void)sessionDidLoginSuccessfully:(SPSession *)aSession; {
     NSLog(@"logged into spotify");
-    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
 }
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error; {
@@ -451,12 +450,11 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
-    NSLog(@"became active");
-    PiggybackTabBarController* tabBarController = (PiggybackTabBarController*)self.window.rootViewController;
-    UINavigationController* navigationController = [tabBarController.viewControllers objectAtIndex:0];
-    HomeViewController* homeViewController = (HomeViewController*)navigationController.topViewController;
-    [homeViewController fetchAmbassadorFavsFromCoreData];
+//    NSLog(@"became active");
+//    PiggybackTabBarController* tabBarController = (PiggybackTabBarController*)self.window.rootViewController;
+//    UINavigationController* navigationController = [tabBarController.viewControllers objectAtIndex:0];
+//    HomeViewController* homeViewController = (HomeViewController*)navigationController.topViewController;
+//    [homeViewController fetchAmbassadorFavsFromCoreData];
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
