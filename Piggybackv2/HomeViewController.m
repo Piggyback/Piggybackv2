@@ -22,6 +22,7 @@
 #import "HomePlacesCell.h"
 #import "YouTubeView.h"
 #import "PBMusicTodo.h"
+#import <RestKit/RKRequestSerialization.h>
 
 @interface HomeViewController ()
 @property (nonatomic, strong) NSMutableDictionary *topLists;
@@ -397,6 +398,27 @@
     musicTodo.musicActivity = musicActivity;
 
     [[RKObjectManager sharedManager] postObject:musicTodo delegate:self];
+}
+
+- (void)removeMusicTodo:(PBMusicActivity *)musicActivity {
+    NSLog(@"in remove music to do");
+    // remove todo from core data
+    PBMusicTodo *musicTodo = [PBMusicTodo objectWithPredicate:[NSPredicate predicateWithFormat:@"musicActivityId == %@", musicActivity.musicActivityId]];
+    
+    NSManagedObjectContext *context = [[[RKObjectManager sharedManager] objectStore] managedObjectContextForCurrentThread];
+    [context deleteObject:musicTodo];
+    [context save:nil];
+    
+    // set status flag to 'deleted' in DB
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:musicActivity.musicActivityId, @"musicActivityId", [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]], @"followerUid", nil];
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    NSError *error = nil;
+    NSString *json = [parser stringFromObject:params error:&error];
+    
+    if (!error) {
+        [[RKClient sharedClient] put:@"/removeMusicTodo" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
+    }
+        
 }
 
 #pragma mark - RKObjectLoaderDelegate methods

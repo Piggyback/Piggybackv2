@@ -13,6 +13,7 @@
 @protocol HomeMusicCellDelegate
 
 - (void)addMusicTodo:(PBMusicActivity*)musicActivity;
+- (void)removeMusicTodo:(PBMusicActivity*)musicActivity;
 
 @end
 
