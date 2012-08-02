@@ -8,14 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
-#import "PBMusicActivity.h"
-
-@protocol HomeMusicCellDelegate
-
-- (void)addMusicTodo:(PBMusicActivity*)musicActivity;
-- (void)removeMusicTodo:(PBMusicActivity*)musicActivity;
-
-@end
 
 @interface HomeMusicCell : UITableViewCell
 
@@ -29,8 +21,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView* mainPic;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (nonatomic, strong) NSString* spotifyURL;
-@property (nonatomic, strong) PBMusicActivity *musicActivity;
-@property (nonatomic, weak) id<HomeMusicCellDelegate> delegate;
 
 - (IBAction)heart:(id)sender;
 - (IBAction)todo:(id)sender;

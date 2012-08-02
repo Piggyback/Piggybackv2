@@ -8,16 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
-#import "PBMusicActivity.h"
 
-@protocol HomeMusicCellDelegate
-
-- (void)addMusicTodo:(PBMusicActivity*)musicActivity;
-- (void)removeMusicTodo:(PBMusicActivity*)musicActivity;
-
-@end
-
-@interface HomeMusicCell : UITableViewCell
+@interface HomeSquareTableCell : UITableViewCell <RKRequestDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel* nameOfItem;
 @property (nonatomic, weak) IBOutlet UILabel* favoritedBy;
@@ -27,13 +19,9 @@
 @property (nonatomic, weak) IBOutlet UIButton* todo;
 @property (nonatomic, weak) IBOutlet UIImageView* icon;
 @property (nonatomic, weak) IBOutlet UIImageView* mainPic;
-@property (weak, nonatomic) IBOutlet UIButton *playButton;
-@property (nonatomic, strong) NSString* spotifyURL;
-@property (nonatomic, strong) PBMusicActivity *musicActivity;
-@property (nonatomic, weak) id<HomeMusicCellDelegate> delegate;
+@property (nonatomic, strong) NSString* mediaType;
 
 - (IBAction)heart:(id)sender;
 - (IBAction)todo:(id)sender;
-- (IBAction)clickPlay:(id)sender;
 
 @end

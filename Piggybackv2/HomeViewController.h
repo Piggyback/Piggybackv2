@@ -12,8 +12,9 @@
 #import "FoursquareDelegate.h"
 #import "YoutubeDelegate.h"
 #import "CocoaLibSpotify.h"
+#import "HomeMusicCell.h"
 
-@interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RKObjectLoaderDelegate, FoursquareCheckinDelegate, YoutubeDelegate>
+@interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RKObjectLoaderDelegate, FoursquareCheckinDelegate, YoutubeDelegate, HomeMusicCellDelegate, RKRequestDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) FoursquareDelegate* foursquareDelegate;

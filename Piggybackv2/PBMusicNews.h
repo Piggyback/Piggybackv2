@@ -13,7 +13,7 @@
 
 @interface PBMusicNews : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * newsId;
+@property (nonatomic, retain) NSNumber * musicNewsId;
 @property (nonatomic, retain) NSString * newsActionType;
 @property (nonatomic, retain) NSDate * dateAdded;
 @property (nonatomic, retain) NSNumber * musicActivityId;

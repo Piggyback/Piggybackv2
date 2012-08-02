@@ -13,7 +13,10 @@
 @implementation PBMusicTodo
 
 @dynamic musicTodoId;
+@dynamic followerUid;
+@dynamic follower;
 @dynamic dateAdded;
+@dynamic musicActivityId;
 @dynamic musicActivity;
 
 @end

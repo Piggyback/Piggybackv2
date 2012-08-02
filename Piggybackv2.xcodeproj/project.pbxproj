@@ -85,6 +85,7 @@
 		C4002B5915ACD3C4002F05FC /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4002B5015ACD3C4002F05FC /* libfacebook_ios_sdk.a */; };
 		C422340515ACE513005151A3 /* SPLoginResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C422340415ACE513005151A3 /* SPLoginResources.bundle */; };
 		C422341515ACE528005151A3 /* libCocoaLibSpotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C422341015ACE515005151A3 /* libCocoaLibSpotify.a */; };
+		C448FB3815C8A4D4003A804D /* TodoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C448FB3715C8A4D4003A804D /* TodoViewController.m */; };
 		C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4739E7815B88A6600F714A7 /* NewsViewController.m */; };
 		C4B24A6D15C332DD00796C57 /* PBMusicTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */; };
 		F90780CC15C6ED8400B36C82 /* pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C815C6ED8400B36C82 /* pause-button.png */; };
@@ -391,6 +392,8 @@
 		C410ECA115AE71EF00E0FE11 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		C422340415ACE513005151A3 /* SPLoginResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SPLoginResources.bundle; path = "spotify-ios-sdk/iOS Library/SPLoginResources.bundle"; sourceTree = SOURCE_ROOT; };
 		C422340615ACE515005151A3 /* CocoaLibSpotify iOS Library.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CocoaLibSpotify iOS Library.xcodeproj"; path = "spotify-ios-sdk/iOS Library/CocoaLibSpotify iOS Library.xcodeproj"; sourceTree = "<group>"; };
+		C448FB3615C8A4D4003A804D /* TodoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoViewController.h; sourceTree = "<group>"; };
+		C448FB3715C8A4D4003A804D /* TodoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoViewController.m; sourceTree = "<group>"; };
 		C4739E7715B88A6600F714A7 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
 		C4739E7815B88A6600F714A7 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
 		C4B24A6B15C332DD00796C57 /* PBMusicTodo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicTodo.h; path = Piggybackv2/PBMusicTodo.h; sourceTree = "<group>"; };
@@ -631,6 +634,8 @@
 				F99F2CB315ACA3F600B5EB36 /* HomeViewController.m */,
 				C4739E7715B88A6600F714A7 /* NewsViewController.h */,
 				C4739E7815B88A6600F714A7 /* NewsViewController.m */,
+				C448FB3615C8A4D4003A804D /* TodoViewController.h */,
+				C448FB3715C8A4D4003A804D /* TodoViewController.m */,
 				3E9A5D4B1593C66000635873 /* PiggybackTabBarController.h */,
 				3E9A5D4C1593C66000635873 /* PiggybackTabBarController.m */,
 				F9ED08ED15C9D8D400525624 /* SetAmbassadorsViewController.h */,
@@ -1215,6 +1220,7 @@
 				C4B24A6D15C332DD00796C57 /* PBMusicTodo.m in Sources */,
 				F9ED08EF15C9D8D400525624 /* SetAmbassadorsViewController.m in Sources */,
 				F9ED08F215CB0A4000525624 /* HomeFeedNavigationController.m in Sources */,
+				C448FB3815C8A4D4003A804D /* TodoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

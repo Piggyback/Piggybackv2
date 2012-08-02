@@ -20,15 +20,28 @@
 @synthesize mainPic = _mainPic;
 @synthesize playButton = _playButton;
 @synthesize spotifyURL = _spotifyURL;
+@synthesize musicActivity = _musicActivity;
+@synthesize delegate = _delegate;
 
 #pragma mark - ib actions
 
 - (IBAction)heart:(id)sender {
-    [self.heart setImage:[UIImage imageNamed:@"heart-pressed-button"] forState:UIControlStateNormal];
+    if (self.heart.selected == NO) {
+        self.heart.selected = YES;
+    } else {
+        self.heart.selected = NO;
+    }
 }
 
 - (IBAction)todo:(id)sender {
-    [self.todo setImage:[UIImage imageNamed:@"todo-added-button"] forState:UIControlStateNormal];
+    if (self.todo.selected == NO) {
+        self.todo.selected = YES;
+        [self.delegate addMusicTodo:self.musicActivity];
+    } else {
+        self.todo.selected = NO;
+        // remove todo from core data
+        [self.delegate removeMusicTodo:self.musicActivity];
+    }
 }
 
 - (IBAction)clickPlay:(id)sender {

@@ -8,16 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
-#import "PBMusicActivity.h"
 
-@protocol HomeMusicCellDelegate
+<<<<<<< HEAD:Piggybackv2/HomeSquareTableCell.h
+@protocol HomeTableCellDelegate
 
-- (void)addMusicTodo:(PBMusicActivity*)musicActivity;
-- (void)removeMusicTodo:(PBMusicActivity*)musicActivity;
+//- (void)clickFollow:(PBFriend*)friend forType:(NSString*)type;
+#warning - continue here
 
 @end
 
+@interface HomeSquareTableCell : UITableViewCell <RKRequestDelegate>
+=======
 @interface HomeMusicCell : UITableViewCell
+>>>>>>> cbbc9fdfed2ec8377a35304a6e8defd4f4017cf6:Piggybackv2/HomeMusicCell.h
 
 @property (nonatomic, weak) IBOutlet UILabel* nameOfItem;
 @property (nonatomic, weak) IBOutlet UILabel* favoritedBy;
@@ -27,10 +30,13 @@
 @property (nonatomic, weak) IBOutlet UIButton* todo;
 @property (nonatomic, weak) IBOutlet UIImageView* icon;
 @property (nonatomic, weak) IBOutlet UIImageView* mainPic;
+<<<<<<< HEAD:Piggybackv2/HomeSquareTableCell.h
+@property (nonatomic, strong) NSString* mediaType;
+@property (nonatomic, weak) id<HomeTableCellDelegate> homeTableCellDelegate;
+=======
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (nonatomic, strong) NSString* spotifyURL;
-@property (nonatomic, strong) PBMusicActivity *musicActivity;
-@property (nonatomic, weak) id<HomeMusicCellDelegate> delegate;
+>>>>>>> cbbc9fdfed2ec8377a35304a6e8defd4f4017cf6:Piggybackv2/HomeMusicCell.h
 
 - (IBAction)heart:(id)sender;
 - (IBAction)todo:(id)sender;

@@ -11,8 +11,8 @@
 #import "HomeMusicCell.h"
 #import "CocoaLibSpotify.h"
 #import "PBUser.h"
-#import "PBMusicActivity.h"
 #import "PBMusicItem.h"
+#import "PBMusicActivity.h"
 #import <QuartzCore/QuartzCore.h>
 #import "PBPlacesActivity.h"
 #import "PBPlacesItem.h"
@@ -21,6 +21,8 @@
 #import "HomeVideosCell.h"
 #import "HomePlacesCell.h"
 #import "YouTubeView.h"
+#import "PBMusicTodo.h"
+#import <RestKit/RKRequestSerialization.h>
 
 @interface HomeViewController ()
 @property (nonatomic, strong) NSMutableDictionary *topLists;
@@ -310,6 +312,8 @@
             spotifyUsername = @"kimikul";
         } else if ([ambassador.lastName isEqualToString:@"Pelberg"]) {
             spotifyUsername = @"ptpells";
+        } else if ([ambassador.lastName isEqualToString:@"Hsiao"]) {
+            spotifyUsername = @"kimikul";
         }
         
         SPToplist* topList = [SPToplist toplistForUserWithName:spotifyUsername inSession:[SPSession sharedSession]];
@@ -422,6 +426,40 @@
     }
     
     return elapsedTime;
+}
+
+#pragma mark - home music cell delegate methods
+- (void)addMusicTodo:(PBMusicActivity*)musicActivity {
+    // in add music todo
+    NSLog(@"in add music to do");
+    PBMusicTodo *musicTodo = [PBMusicTodo object];
+    musicTodo.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
+    musicTodo.follower = [PBUser findByPrimaryKey:musicTodo.followerUid];
+    musicTodo.musicActivityId = musicActivity.musicActivityId;
+    musicTodo.musicActivity = musicActivity;
+
+    [[RKObjectManager sharedManager] postObject:musicTodo delegate:self];
+}
+
+- (void)removeMusicTodo:(PBMusicActivity *)musicActivity {
+    NSLog(@"in remove music to do");
+    // remove todo from core data
+    PBMusicTodo *musicTodo = [PBMusicTodo objectWithPredicate:[NSPredicate predicateWithFormat:@"musicActivityId == %@", musicActivity.musicActivityId]];
+    
+    NSManagedObjectContext *context = [[[RKObjectManager sharedManager] objectStore] managedObjectContextForCurrentThread];
+    [context deleteObject:musicTodo];
+    [context save:nil];
+    
+    // set status flag to 'deleted' in DB
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:musicActivity.musicActivityId, @"musicActivityId", [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]], @"followerUid", nil];
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    NSError *error = nil;
+    NSString *json = [parser stringFromObject:params error:&error];
+    
+    if (!error) {
+        [[RKClient sharedClient] put:@"/removeMusicTodo" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
+    }
+        
 }
 
 #pragma mark - RKObjectLoaderDelegate methods
@@ -545,10 +583,13 @@
         HomeMusicCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.profilePic.layer.cornerRadius = 5;
         cell.profilePic.layer.masksToBounds = YES;
+        cell.delegate = self;
         
         PBMusicActivity* musicActivity = [self.displayItems objectAtIndex:indexPath.row];
         PBMusicItem* musicItem = musicActivity.musicItem;
         PBUser* user = musicActivity.user;
+        
+        cell.musicActivity = musicActivity;
         
         cell.spotifyURL = musicItem.spotifyUrl;
         cell.nameOfItem.text = [NSString stringWithFormat:@"%@ - %@",musicItem.artistName, musicItem.songTitle]; 
