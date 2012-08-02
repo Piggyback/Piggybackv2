@@ -13,7 +13,7 @@
 
 @implementation PBMusicNews
 
-@dynamic newsId;
+@dynamic musicNewsId;
 @dynamic newsActionType;
 @dynamic dateAdded;
 @dynamic musicActivityId;

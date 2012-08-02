@@ -30,13 +30,15 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, strong) UILabel *newsNotificationLabel;
+
 @end
 
 @implementation AppDelegate
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
 //NSString* RK_BASE_URL = @"http://10.0.4.98:5000"; // kim
-NSString *RK_BASE_URL = @"http://localhost:5000";
+NSString *RK_BASE_URL = @"http://10.0.4.178:5000";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
@@ -46,6 +48,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 @synthesize playbackManager = _playbackManager;
 @synthesize facebook = _facebook;
 @synthesize foursquareDelegate = _foursquareDelegate;
+@synthesize newsNotificationLabel = _newsNotificationLabel;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {    
@@ -93,13 +96,19 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
         self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     }
     
+    [self.window makeKeyAndVisible];
     if (![self.facebook isSessionValid]) {
         LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-        [self.window makeKeyAndVisible];
         [rootViewController presentViewController:loginViewController animated:NO completion:nil];
     } else {
         // do nothing (default behavior is to show tab bar controller)
     }
+    
+    // add news notification label
+    self.newsNotificationLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 420, 20, 20)];
+    self.newsNotificationLabel.text = @"+1";
+    self.newsNotificationLabel.alpha = 0.0;
+    [self.window addSubview:self.newsNotificationLabel];
     
     return YES;
 }
@@ -169,7 +178,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     
     // musicTodo mapping
     musicTodoMapping.primaryKeyAttribute = @"musicTodoId";
-    [musicTodoMapping mapAttributes:@"dateAdded", @"musicActivityId", nil];
+    [musicTodoMapping mapAttributes:@"musicTodoId", @"dateAdded", @"musicActivityId", nil];
     [musicTodoMapping mapRelationship:@"musicActivity" withMapping:musicActivityMapping];
     [musicTodoMapping connectRelationship:@"musicActivity" withObjectForPrimaryKeyAttribute:@"musicActivityId"];
     [objectManager.mappingProvider setMapping:musicTodoMapping forKeyPath:@"PBMusicTodo"];
@@ -224,10 +233,13 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     
     // musicActivity serialization
     [musicActivitySerializationMapping mapAttributes:@"musicActivityId",@"uid",@"musicItemId",@"musicActivityType",@"dateAdded",nil];
+    [musicActivitySerializationMapping mapRelationship:@"musicItem" withMapping:musicItemSerializationMapping];
     [objectManager.mappingProvider setSerializationMapping:musicActivitySerializationMapping forClass:[PBMusicActivity class]];
     
     // musicTodo serialization
     [musicTodoSerializationMapping mapAttributes:@"musicActivityId", @"followerUid", nil];
+    [musicTodoSerializationMapping mapRelationship:@"musicActivity" withMapping:musicActivitySerializationMapping];
+    [musicTodoSerializationMapping mapRelationship:@"follower" withMapping:userSerializationMapping];
     [objectManager.mappingProvider setSerializationMapping:musicTodoSerializationMapping forClass:[PBMusicTodo class]];
     
     // placesItem serialization
@@ -429,6 +441,17 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 #pragma mark -
 #pragma mark - AppDelegate methods
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    if (application.applicationState == UIApplicationStateActive) {
+        NSLog(@"received push notification");
+        self.newsNotificationLabel.alpha = 1.0;
+        [UIView animateWithDuration:5.0 animations:^{
+            self.newsNotificationLabel.alpha = 0.0;
+        }];
+    }
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

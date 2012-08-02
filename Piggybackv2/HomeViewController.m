@@ -307,6 +307,8 @@
             spotifyUsername = @"kimikul";
         } else if ([ambassador.lastName isEqualToString:@"Pelberg"]) {
             spotifyUsername = @"ptpells";
+        } else if ([ambassador.lastName isEqualToString:@"Hsiao"]) {
+            spotifyUsername = @"kimikul";
         }
         
         SPToplist* topList = [SPToplist toplistForUserWithName:spotifyUsername inSession:[SPSession sharedSession]];
@@ -394,6 +396,7 @@
     NSLog(@"in add music to do");
     PBMusicTodo *musicTodo = [PBMusicTodo object];
     musicTodo.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
+    musicTodo.follower = [PBUser findByPrimaryKey:musicTodo.followerUid];
     musicTodo.musicActivityId = musicActivity.musicActivityId;
     musicTodo.musicActivity = musicActivity;
 

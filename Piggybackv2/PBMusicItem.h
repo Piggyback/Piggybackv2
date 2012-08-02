@@ -31,4 +31,4 @@
 - (void)addMusicActivity:(NSSet *)values;
 - (void)removeMusicActivity:(NSSet *)values;
 
-@end
+@end    
