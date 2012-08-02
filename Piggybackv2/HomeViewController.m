@@ -663,7 +663,7 @@
                                              nil]];
     
     segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-    segmentedControl.tintColor = [UIColor grayColor];
+    segmentedControl.tintColor = [UIColor colorWithRed:0.6f green:0.6f blue:0.6f alpha:0];
     [segmentedControl setSelectedSegmentIndex:0];
     [segmentedControl addTarget:self action:@selector(changeSegment:) forControlEvents:UIControlEventValueChanged];
     [segmentedControl setFrame:CGRectMake(self.navigationController.toolbar.frame.origin.x, self.navigationController.toolbar.frame.origin.y, 150, 34)];
