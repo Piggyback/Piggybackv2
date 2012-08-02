@@ -309,7 +309,6 @@
         [cell.followVideos setImage:[UIImage imageNamed:@"follow-video-button-normal"] forState:UIControlStateNormal];
     }
     
-//    cell.profilePic.image = [self.cachedProfilePics objectForKey:[friend.fbId stringValue]];
     // if thumbnail already stored in local friend array, then display thumbnail
     if (friend.thumbnail) {
         cell.profilePic.image = friend.thumbnail;
