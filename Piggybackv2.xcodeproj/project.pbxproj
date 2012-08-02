@@ -179,6 +179,7 @@
 		F9C0976B1594E5D8000A0541 /* olstein-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */; };
 		F9C0976C1594E5D8000A0541 /* yean-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097681594E5D8000A0541 /* yean-rounded-corners.png */; };
 		F9ED08EF15C9D8D400525624 /* SetAmbassadorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9ED08EE15C9D8D400525624 /* SetAmbassadorsViewController.m */; };
+		F9ED08F215CB0A4000525624 /* HomeFeedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9ED08F115CB0A3F00525624 /* HomeFeedNavigationController.m */; };
 		F9FD692415C71E2400D86522 /* filter-music.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD691E15C71E2400D86522 /* filter-music.png */; };
 		F9FD692515C71E2400D86522 /* filter-music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD691F15C71E2400D86522 /* filter-music@2x.png */; };
 		F9FD692615C71E2400D86522 /* filter-places.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD692015C71E2400D86522 /* filter-places.png */; };
@@ -509,6 +510,8 @@
 		F9C097681594E5D8000A0541 /* yean-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yean-rounded-corners.png"; sourceTree = "<group>"; };
 		F9ED08ED15C9D8D400525624 /* SetAmbassadorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorsViewController.h; sourceTree = "<group>"; };
 		F9ED08EE15C9D8D400525624 /* SetAmbassadorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAmbassadorsViewController.m; sourceTree = "<group>"; };
+		F9ED08F015CB0A3F00525624 /* HomeFeedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFeedNavigationController.h; sourceTree = "<group>"; };
+		F9ED08F115CB0A3F00525624 /* HomeFeedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFeedNavigationController.m; sourceTree = "<group>"; };
 		F9FD691E15C71E2400D86522 /* filter-music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-music.png"; sourceTree = "<group>"; };
 		F9FD691F15C71E2400D86522 /* filter-music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-music@2x.png"; sourceTree = "<group>"; };
 		F9FD692015C71E2400D86522 /* filter-places.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-places.png"; sourceTree = "<group>"; };
@@ -616,6 +619,8 @@
 				F93C2F75159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld */,
 				3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */,
 				3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */,
+				F9ED08F015CB0A3F00525624 /* HomeFeedNavigationController.h */,
+				F9ED08F115CB0A3F00525624 /* HomeFeedNavigationController.m */,
 				F9AE7CCA15B9E9DE001008C7 /* FoursquareDelegate.h */,
 				F9AE7CCB15B9E9DE001008C7 /* FoursquareDelegate.m */,
 				F957A75415C0AFE80033CF00 /* YoutubeDelegate.h */,
@@ -1209,6 +1214,7 @@
 				F964303215C348DA006D1715 /* HomePlacesCell.m in Sources */,
 				C4B24A6D15C332DD00796C57 /* PBMusicTodo.m in Sources */,
 				F9ED08EF15C9D8D400525624 /* SetAmbassadorsViewController.m in Sources */,
+				F9ED08F215CB0A4000525624 /* HomeFeedNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

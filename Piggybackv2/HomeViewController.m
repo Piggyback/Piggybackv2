@@ -141,6 +141,11 @@
 // this method is called when a spotify user's top list is fetched
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"tracks"]) {
+        
+        // remove observer
+        [object removeObserver:self forKeyPath:@"tracks"];
+        
+        // create new music item and store in core data / db
         NSString* ambassadorUid = [[self.topLists allKeysForObject:object] lastObject];
         for (SPTrack* track in [[self.topLists objectForKey:ambassadorUid] tracks]) {
             PBMusicItem* newMusicItem = [PBMusicItem object];
@@ -162,7 +167,7 @@
                 }];
             });
 
-            // add music item
+            // create new music activity and store in core data / db
             [[RKObjectManager sharedManager] postObject:newMusicItem usingBlock:^(RKObjectLoader* loader) {
                 loader.onDidLoadObject = ^(id object) {
                     PBMusicActivity* newMusicActivity = [PBMusicActivity object];
@@ -682,6 +687,10 @@
     [self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

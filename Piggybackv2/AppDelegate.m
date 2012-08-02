@@ -35,7 +35,7 @@
 @implementation AppDelegate
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
-NSString* RK_BASE_URL = @"http://10.0.4.165:5000"; // kim
+NSString* RK_BASE_URL = @"http://10.0.4.145:5000"; // kim
 //NSString *RK_BASE_URL = @"http://localhost:5000";
 //NSString *RK_BASE_URL = @"http://10.0.4.173:5000";
 

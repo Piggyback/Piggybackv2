@@ -39,4 +39,10 @@
     [self.setAmbassadorDelegate clickFollow:self.friend forType:@"videos"];
 }
 
+#pragma mark - tablecell delegate methods
+
+-(void)prepareForReuse {
+    self.profilePic.image = nil;
+}
+
 @end

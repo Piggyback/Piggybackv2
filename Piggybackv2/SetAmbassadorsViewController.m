@@ -235,6 +235,7 @@
             }
         }
     } else {
+        NSLog(@"click follow ambassador fbid is %@",friend.fbId);
         [ambassadors addObject:friend.fbId];
         [self setAmbassador:friend ForType:type];
         for (NSIndexPath* indexPath in [self.tableView indexPathsForVisibleRows]) {
@@ -422,6 +423,7 @@
     // get my ambassadors and add to array
     if (me) {
         for (PBUser* ambassador in me.musicAmbassadors) {
+            NSLog(@"ambassador fbid in view did load is %@",ambassador.fbId);
             [self.selectedMusicAmbassadorIndexes addObject:ambassador.fbId];
         }
     }
