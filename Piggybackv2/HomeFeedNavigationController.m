@@ -14,30 +14,20 @@
 
 @implementation HomeFeedNavigationController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+- (void)customizeNavigationBar {
+    [self.navigationBar setTintColor:[UIColor colorWithRed:1.0f green:0.91f blue:0.50f alpha:0]];
 }
 
-- (void)viewDidLoad
+- (id)initWithRootViewController:(UIViewController *)rootViewController
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [self customizeNavigationBar];
+    return [super initWithRootViewController:rootViewController];
 }
 
-- (void)viewDidUnload
+- (void) awakeFromNib
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    [super awakeFromNib];
+    [self customizeNavigationBar];
 }
 
 @end
