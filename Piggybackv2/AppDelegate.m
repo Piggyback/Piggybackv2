@@ -45,7 +45,6 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 @synthesize window = _window;
 @synthesize foursquare = _foursquare;
-@synthesize playbackManager = _playbackManager;
 @synthesize facebook = _facebook;
 @synthesize foursquareDelegate = _foursquareDelegate;
 @synthesize newsNotificationLabel = _newsNotificationLabel;
@@ -78,6 +77,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // setting up foursquare
     self.foursquare = [[BZFoursquare alloc] initWithClientID:FSQ_CLIENT_ID callbackURL:FSQ_CALLBACK_URL];
     self.foursquare.sessionDelegate = self;
+    self.foursquareDelegate = [[FoursquareDelegate alloc] init];
+    [(PiggybackTabBarController*)self.window.rootViewController setFoursquareDelegate:self.foursquareDelegate];
     
     // setting up spotify
     [SPSession initializeSharedSessionWithApplicationKey:[NSData dataWithBytes:&g_appkey length:g_appkey_size] 
@@ -86,6 +87,13 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 												   error:nil];
     [[SPSession sharedSession] setDelegate:self];
     
+    // if re-logging in to spotify after being disconected
+    if ([SPSession sharedSession].connectionState == 3) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [[SPSession sharedSession] attemptLoginWithUserName:[defaults objectForKey:@"spotifyUsername"] existingCredential:[defaults objectForKey:@"spotifyCredentials"] rememberCredentials:YES];
+    }
+
+
     // setting up facebook
     self.facebook = [[Facebook alloc] initWithAppId:FB_APP_ID andDelegate:self];
     
@@ -283,9 +291,13 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 #pragma mark - BZFoursquareSessionDelegate protocol methods
 - (void)foursquareDidAuthorize:(BZFoursquare *)foursquare {
     NSLog(@"foursquare did authorize");
-    self.foursquareDelegate = [[FoursquareDelegate alloc] init];
-    [self.foursquareDelegate getFoursquareSelf];
-    [self.foursquareDelegate getFoursquareFriends];
+    NSLog(@"foursquare in app delegate is %@",self.foursquare);
+    self.foursquareDelegate.didLoginToFoursquare = YES;
+    if (self.foursquareDelegate.didFacebookFriendsLoad && self.foursquareDelegate.didLoginToFoursquare && !self.foursquareDelegate.didLoadFoursquareFriends) {
+        [self.foursquareDelegate getFoursquareSelf];
+        [self.foursquareDelegate getFoursquareFriends];
+        NSLog(@"loading foursquare friends after authorization");
+    }
 }
 
 - (void)foursquareDidNotAuthorize:(BZFoursquare *)foursquare error:(NSDictionary *)errorInfo {
@@ -301,9 +313,14 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 	return accountLinkViewController;
 }
 
+-(void)session:(SPSession *)aSession didGenerateLoginCredentials:(NSString *)credential forUserName:(NSString *)userName {
+    [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"spotifyUsername"];
+    [[NSUserDefaults standardUserDefaults] setObject:credential forKey:@"spotifyCredentials"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 -(void)sessionDidLoginSuccessfully:(SPSession *)aSession; {
     NSLog(@"logged into spotify");
-    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
 }
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error; {
@@ -473,12 +490,11 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
-    NSLog(@"became active");
-    PiggybackTabBarController* tabBarController = (PiggybackTabBarController*)self.window.rootViewController;
-    UINavigationController* navigationController = [tabBarController.viewControllers objectAtIndex:0];
-    HomeViewController* homeViewController = (HomeViewController*)navigationController.topViewController;
-    [homeViewController fetchAmbassadorFavsFromCoreData];
+//    NSLog(@"became active");
+//    PiggybackTabBarController* tabBarController = (PiggybackTabBarController*)self.window.rootViewController;
+//    UINavigationController* navigationController = [tabBarController.viewControllers objectAtIndex:0];
+//    HomeViewController* homeViewController = (HomeViewController*)navigationController.topViewController;
+//    [homeViewController fetchAmbassadorFavsFromCoreData];
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     

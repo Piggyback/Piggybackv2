@@ -14,9 +14,9 @@
 @interface SetAmbassadorsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, SetAmbassadorDelegate, RKObjectLoaderDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 - (IBAction)readyButton:(id)sender;
 - (void)reloadFriendsList;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end

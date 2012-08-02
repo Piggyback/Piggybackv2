@@ -131,7 +131,7 @@
 	
 	[self.session attemptLoginWithUserName:self.usernameField.text
 								  password:self.passwordField.text
-					   rememberCredentials:NO];
+					   rememberCredentials:YES];
 	
 	[self switchViewToLoggingInState:YES];
 	

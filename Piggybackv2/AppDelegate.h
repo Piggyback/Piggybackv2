@@ -17,7 +17,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) BZFoursquare *foursquare;
-@property (strong, nonatomic) SPPlaybackManager *playbackManager;
 @property (strong, nonatomic) Facebook *facebook;
 @property (strong, nonatomic) FoursquareDelegate *foursquareDelegate;
 

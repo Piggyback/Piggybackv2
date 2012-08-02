@@ -264,6 +264,7 @@
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" red="0.97448979589999996" green="0.86527448630000003" blue="0.057572788729999998" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="Z5T-GS-gC6" kind="relationship" relationship="viewControllers" id="fQD-En-jVh"/>
@@ -1090,10 +1091,10 @@
             </objects>
             <point key="canvasLocation" x="818" y="-104"/>
         </scene>
-        <!--Navigation Controller - Home-->
+        <!--Home Feed Navigation Controller - Home-->
         <scene sceneID="R6U-bx-5PA">
             <objects>
-                <navigationController id="Z5T-GS-gC6" sceneMemberID="viewController">
+                <navigationController id="Z5T-GS-gC6" customClass="HomeFeedNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="navbar-home-icon.png" id="SGw-qj-Kbj"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="X6J-0A-wFa">
@@ -1153,6 +1154,9 @@
                 <relationship kind="action" name="youtubeConnect:"/>
                 <relationship kind="outlet" name="youtubeToggle" candidateClass="UISwitch"/>
             </relationships>
+        </class>
+        <class className="HomeFeedNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeFeedNavigationController.h"/>
         </class>
         <class className="HomeMusicCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeMusicCell.h"/>
@@ -1219,9 +1223,6 @@
                 <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
             </relationships>
         </class>
-        <class className="ListenTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListenTableViewController.h"/>
-        </class>
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
             <relationships>
@@ -1255,25 +1256,6 @@
             <relationships>
                 <relationship kind="action" name="readyButton:"/>
                 <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SongViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SongViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="playTrack:"/>
-                <relationship kind="action" name="setTrackPosition:"/>
-                <relationship kind="outlet" name="albumInfo" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="playButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="positionSlider" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="trackArtist" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="trackCover" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="trackTitle" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="TodoViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TodoViewController.h"/>
-            <relationships>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>

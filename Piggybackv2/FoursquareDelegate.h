@@ -22,7 +22,9 @@
 - (void)getFoursquareFriends;
 - (void)getRecentFriendCheckins;
 - (void)getVenuePhoto:(NSString*)vid;
-
-@property (nonatomic, strong) id <FoursquareCheckinDelegate> delegate;
+@property BOOL didFacebookFriendsLoad;
+@property BOOL didLoginToFoursquare;
+@property BOOL didLoadFoursquareFriends;
+@property (nonatomic, weak) id <FoursquareCheckinDelegate> delegate;
 
 @end

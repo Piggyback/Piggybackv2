@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSMutableSet *selectedMusicAmbassadorIndexes;
 @property (nonatomic, strong) NSMutableSet *selectedPlacesAmbassadorIndexes;
 @property (nonatomic, strong) NSMutableSet *selectedVideosAmbassadorIndexes;
+@property (nonatomic, strong) NSMutableDictionary *cachedProfilePics;
 @end
 
 @implementation SetAmbassadorsViewController
@@ -31,6 +32,7 @@
 @synthesize selectedMusicAmbassadorIndexes = _selectedMusicAmbassadorIndexes;
 @synthesize selectedPlacesAmbassadorIndexes = _selectedPlacesAmbassadorIndexes;
 @synthesize selectedVideosAmbassadorIndexes = _selectedVideosAmbassadorIndexes;
+@synthesize cachedProfilePics = _cachedProfilePics;
 
 #pragma mark - setters and getters
 
@@ -65,6 +67,13 @@
         _selectedVideosAmbassadorIndexes = [[NSMutableSet alloc] init];
     }
     return _selectedVideosAmbassadorIndexes;
+}
+
+- (NSMutableDictionary*)cachedProfilePics {
+    if (!_cachedProfilePics) {
+        _cachedProfilePics = [[NSMutableDictionary alloc] init];
+    }
+    return _cachedProfilePics;
 }
 
 #pragma mark - private methods
@@ -226,6 +235,7 @@
             }
         }
     } else {
+        NSLog(@"click follow ambassador fbid is %@",friend.fbId);
         [ambassadors addObject:friend.fbId];
         [self setAmbassador:friend ForType:type];
         for (NSIndexPath* indexPath in [self.tableView indexPathsForVisibleRows]) {
@@ -240,7 +250,6 @@
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
     NSLog(@"objects from user insert are %@",objects);
-    
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
@@ -274,7 +283,6 @@
     cell.profilePic.layer.masksToBounds = YES;
     
     // get current friend and set cell
-    NSLog(@"indexrow is %i",indexPath.row);
     PBFriend* friend = [self.displayFriends objectAtIndex:indexPath.row];
     cell.friend = friend;
     cell.name.text = [NSString stringWithFormat:@"%@ %@",friend.firstName, friend.lastName];
@@ -301,6 +309,7 @@
         [cell.followVideos setImage:[UIImage imageNamed:@"follow-video-button-normal"] forState:UIControlStateNormal];
     }
     
+//    cell.profilePic.image = [self.cachedProfilePics objectForKey:[friend.fbId stringValue]];
     // if thumbnail already stored in local friend array, then display thumbnail
     if (friend.thumbnail) {
         cell.profilePic.image = friend.thumbnail;
@@ -332,8 +341,6 @@
             }
         });
     }
-        
-//    cell.profilePic.image = friend.thumbnail;
 
     return cell;
 }
@@ -416,6 +423,7 @@
     // get my ambassadors and add to array
     if (me) {
         for (PBUser* ambassador in me.musicAmbassadors) {
+            NSLog(@"ambassador fbid in view did load is %@",ambassador.fbId);
             [self.selectedMusicAmbassadorIndexes addObject:ambassador.fbId];
         }
     }
