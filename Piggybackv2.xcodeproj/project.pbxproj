@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E2FAA2E15943BC000142705 /* ListenTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2FAA2D15943BC000142705 /* ListenTableViewController.m */; };
 		3E3165331593D51700344F36 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3165321593D51700344F36 /* SystemConfiguration.framework */; };
 		3E3165351593D51C00344F36 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3165341593D51C00344F36 /* CFNetwork.framework */; };
 		3E3165371593D52000344F36 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3165361593D52000344F36 /* libstdc++.dylib */; };
@@ -74,7 +73,6 @@
 		3E9A5D551593C92D00635873 /* BZFoursquareRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A5D531593C92D00635873 /* BZFoursquareRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3E9A5D571593C96E00635873 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9A5D561593C96E00635873 /* MobileCoreServices.framework */; };
 		3E9F8F2A1594453A006526B4 /* ListenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9F8F291594453A006526B4 /* ListenCell.m */; };
-		3E9F8F3915944B37006526B4 /* SongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9F8F3815944B37006526B4 /* SongViewController.m */; };
 		3EE8DB0E1593BF9A009DCCA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8DB0D1593BF9A009DCCA3 /* UIKit.framework */; };
 		3EE8DB101593BF9A009DCCA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8DB0F1593BF9A009DCCA3 /* Foundation.framework */; };
 		3EE8DB121593BF9A009DCCA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8DB111593BF9A009DCCA3 /* CoreGraphics.framework */; };
@@ -94,7 +92,6 @@
 		F90780CE15C6ED8400B36C82 /* play-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780CA15C6ED8400B36C82 /* play-button.png */; };
 		F90780CF15C6ED8400B36C82 /* play-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780CB15C6ED8400B36C82 /* play-button@2x.png */; };
 		F91B3D9B15A6340300D8E815 /* SetAmbassadorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F91B3D9A15A6340300D8E815 /* SetAmbassadorCell.m */; };
-		F91B3D9E15A6365100D8E815 /* SetAmbassadorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F91B3D9D15A6365100D8E815 /* SetAmbassadorsViewController.m */; };
 		F91B3DAF15A636FD00D8E815 /* follow-header.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3D9F15A636FD00D8E815 /* follow-header.png */; };
 		F91B3DB015A636FD00D8E815 /* follow-header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DA015A636FD00D8E815 /* follow-header@2x.png */; };
 		F91B3DB115A636FD00D8E815 /* follow-i'm-ready-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DA115A636FD00D8E815 /* follow-i'm-ready-button.png */; };
@@ -181,6 +178,7 @@
 		F9C0976A1594E5D8000A0541 /* josh-lu-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */; };
 		F9C0976B1594E5D8000A0541 /* olstein-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */; };
 		F9C0976C1594E5D8000A0541 /* yean-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097681594E5D8000A0541 /* yean-rounded-corners.png */; };
+		F9ED08EF15C9D8D400525624 /* SetAmbassadorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9ED08EE15C9D8D400525624 /* SetAmbassadorsViewController.m */; };
 		F9FD692415C71E2400D86522 /* filter-music.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD691E15C71E2400D86522 /* filter-music.png */; };
 		F9FD692515C71E2400D86522 /* filter-music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD691F15C71E2400D86522 /* filter-music@2x.png */; };
 		F9FD692615C71E2400D86522 /* filter-places.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD692015C71E2400D86522 /* filter-places.png */; };
@@ -291,8 +289,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3E2FAA2C15943BC000142705 /* ListenTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenTableViewController.h; sourceTree = "<group>"; };
-		3E2FAA2D15943BC000142705 /* ListenTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenTableViewController.m; sourceTree = "<group>"; };
 		3E3165321593D51700344F36 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3E3165341593D51C00344F36 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3E3165361593D52000344F36 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
@@ -364,8 +360,6 @@
 		3E9A5D561593C96E00635873 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3E9F8F281594453A006526B4 /* ListenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenCell.h; sourceTree = "<group>"; };
 		3E9F8F291594453A006526B4 /* ListenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenCell.m; sourceTree = "<group>"; };
-		3E9F8F3715944B37006526B4 /* SongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongViewController.h; sourceTree = "<group>"; };
-		3E9F8F3815944B37006526B4 /* SongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongViewController.m; sourceTree = "<group>"; };
 		3EE8DB091593BF9A009DCCA3 /* Piggybackv2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Piggybackv2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE8DB0D1593BF9A009DCCA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3EE8DB0F1593BF9A009DCCA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -406,8 +400,6 @@
 		F90780CB15C6ED8400B36C82 /* play-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button@2x.png"; sourceTree = "<group>"; };
 		F91B3D9915A6340300D8E815 /* SetAmbassadorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorCell.h; sourceTree = "<group>"; };
 		F91B3D9A15A6340300D8E815 /* SetAmbassadorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAmbassadorCell.m; sourceTree = "<group>"; };
-		F91B3D9C15A6365100D8E815 /* SetAmbassadorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorsViewController.h; sourceTree = "<group>"; };
-		F91B3D9D15A6365100D8E815 /* SetAmbassadorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAmbassadorsViewController.m; sourceTree = "<group>"; };
 		F91B3D9F15A636FD00D8E815 /* follow-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow-header.png"; sourceTree = "<group>"; };
 		F91B3DA015A636FD00D8E815 /* follow-header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow-header@2x.png"; sourceTree = "<group>"; };
 		F91B3DA115A636FD00D8E815 /* follow-i'm-ready-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow-i'm-ready-button.png"; sourceTree = "<group>"; };
@@ -515,6 +507,8 @@
 		F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "josh-lu-rounded-corners.png"; sourceTree = "<group>"; };
 		F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olstein-rounded-corners.png"; sourceTree = "<group>"; };
 		F9C097681594E5D8000A0541 /* yean-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yean-rounded-corners.png"; sourceTree = "<group>"; };
+		F9ED08ED15C9D8D400525624 /* SetAmbassadorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorsViewController.h; sourceTree = "<group>"; };
+		F9ED08EE15C9D8D400525624 /* SetAmbassadorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAmbassadorsViewController.m; sourceTree = "<group>"; };
 		F9FD691E15C71E2400D86522 /* filter-music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-music.png"; sourceTree = "<group>"; };
 		F9FD691F15C71E2400D86522 /* filter-music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-music@2x.png"; sourceTree = "<group>"; };
 		F9FD692015C71E2400D86522 /* filter-places.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-places.png"; sourceTree = "<group>"; };
@@ -632,16 +626,12 @@
 				F99F2CB315ACA3F600B5EB36 /* HomeViewController.m */,
 				C4739E7715B88A6600F714A7 /* NewsViewController.h */,
 				C4739E7815B88A6600F714A7 /* NewsViewController.m */,
-				3E2FAA2C15943BC000142705 /* ListenTableViewController.h */,
-				3E2FAA2D15943BC000142705 /* ListenTableViewController.m */,
-				3E9F8F3715944B37006526B4 /* SongViewController.h */,
-				3E9F8F3815944B37006526B4 /* SongViewController.m */,
 				3E9A5D4B1593C66000635873 /* PiggybackTabBarController.h */,
 				3E9A5D4C1593C66000635873 /* PiggybackTabBarController.m */,
+				F9ED08ED15C9D8D400525624 /* SetAmbassadorsViewController.h */,
+				F9ED08EE15C9D8D400525624 /* SetAmbassadorsViewController.m */,
 				3E9A5D471593C48500635873 /* AccountLinkViewController.h */,
 				3E9A5D481593C48500635873 /* AccountLinkViewController.m */,
-				F91B3D9C15A6365100D8E815 /* SetAmbassadorsViewController.h */,
-				F91B3D9D15A6365100D8E815 /* SetAmbassadorsViewController.m */,
 				3EE8DB141593BF9A009DCCA3 /* Supporting Files */,
 			);
 			path = Piggybackv2;
@@ -1193,13 +1183,10 @@
 				3E9A5D4D1593C66000635873 /* PiggybackTabBarController.m in Sources */,
 				3E9A5D541593C92D00635873 /* BZFoursquare.m in Sources */,
 				3E9A5D551593C92D00635873 /* BZFoursquareRequest.m in Sources */,
-				3E2FAA2E15943BC000142705 /* ListenTableViewController.m in Sources */,
 				3E9F8F2A1594453A006526B4 /* ListenCell.m in Sources */,
-				3E9F8F3915944B37006526B4 /* SongViewController.m in Sources */,
 				F99418F11598BE0C00A4B08B /* LoginViewController.m in Sources */,
 				F93C2F77159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld in Sources */,
 				F91B3D9B15A6340300D8E815 /* SetAmbassadorCell.m in Sources */,
-				F91B3D9E15A6365100D8E815 /* SetAmbassadorsViewController.m in Sources */,
 				F92E8D5515A78226002DFCB1 /* FBImageToDataTransformer.m in Sources */,
 				F99F2CB415ACA3F600B5EB36 /* HomeViewController.m in Sources */,
 				F9A4289915B45C7B000D147C /* PBFriend.m in Sources */,
@@ -1221,6 +1208,7 @@
 				F964302F15C32E74006D1715 /* YouTubeView.m in Sources */,
 				F964303215C348DA006D1715 /* HomePlacesCell.m in Sources */,
 				C4B24A6D15C332DD00796C57 /* PBMusicTodo.m in Sources */,
+				F9ED08EF15C9D8D400525624 /* SetAmbassadorsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

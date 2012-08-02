@@ -22,6 +22,7 @@
 @implementation PiggybackTabBarController
 @synthesize currentFbAPICall = _currentFbAPICall;
 @synthesize setAmbassadorsViewController = _setAmbassadorsViewController;
+@synthesize foursquareDelegate = _foursquareDelegate;
 
 #pragma mark - private helper methods
 
@@ -58,9 +59,7 @@
     [facebook requestWithGraphPath:@"me/friends?limit=5000" andDelegate:self];
 }
 
-- (void)storeCurrentUsersFriendsInCoreData:(id)meGraphApiResult {
-//    NSLog(@"friend results are %@",[meGraphApiResult objectForKey:@"data"]);
-    
+- (void)storeCurrentUsersFriendsInCoreData:(id)meGraphApiResult {    
     // add friends to core data if they are not in it yet - do in background thread!
     dispatch_queue_t storeFriendsQueue = dispatch_queue_create("storeFriendsInCoreData",NULL);
     dispatch_async(storeFriendsQueue, ^{
@@ -85,9 +84,18 @@
                     newFriend.lastName = lastName;
                 }
             }
-        }  
-       [[RKObjectManager sharedManager].objectStore save:nil];
-//        [self.setAmbassadorsViewController reloadFriendsList];
+        }
+        [[RKObjectManager sharedManager].objectStore save:nil];
+        NSLog(@"friends are done loading");
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.foursquareDelegate.didFacebookFriendsLoad = YES;
+            if (self.foursquareDelegate.didFacebookFriendsLoad && self.foursquareDelegate.didLoginToFoursquare && !self.foursquareDelegate.didLoadFoursquareFriends) {
+                [self.foursquareDelegate getFoursquareSelf];
+                [self.foursquareDelegate getFoursquareFriends];
+                NSLog(@"loading foursquare friends after friends are done loading");
+            }
+            [self.setAmbassadorsViewController reloadFriendsList];
+        });
     });
 }
 
@@ -179,12 +187,6 @@
 {
     [super viewDidLoad];
     self.setAmbassadorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
-
-    // get videos from youtube ambassadors
-//    NSMutableSet *youtubeAmbassadors = [NSMutableSet setWithObjects:@"nerdsinnewyork",@"mlgao",nil];
-//    YouTubeTableViewController* youtubeVC = (YouTubeTableViewController*)[[self.viewControllers objectAtIndex:2] topViewController];
-//    [youtubeVC getFavoritesFromAmbassadors:youtubeAmbassadors];
-    
 }
 
 - (void)viewDidUnload

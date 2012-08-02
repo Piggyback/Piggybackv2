@@ -367,7 +367,8 @@
                     }
                 }];
             }
-        }    
+        }
+//    });
 }
 
 // get string for time elapsed e.g., "2 days ago"

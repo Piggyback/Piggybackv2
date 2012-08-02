@@ -37,6 +37,8 @@
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
 NSString* RK_BASE_URL = @"http://10.0.4.165:5000"; // kim
 //NSString *RK_BASE_URL = @"http://localhost:5000";
+//NSString *RK_BASE_URL = @"http://10.0.4.173:5000";
+
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
@@ -74,6 +76,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // setting up foursquare
     self.foursquare = [[BZFoursquare alloc] initWithClientID:FSQ_CLIENT_ID callbackURL:FSQ_CALLBACK_URL];
     self.foursquare.sessionDelegate = self;
+    self.foursquareDelegate = [[FoursquareDelegate alloc] init];
+    [(PiggybackTabBarController*)self.window.rootViewController setFoursquareDelegate:self.foursquareDelegate];
     
     // setting up spotify
     [SPSession initializeSharedSessionWithApplicationKey:[NSData dataWithBytes:&g_appkey length:g_appkey_size] 
@@ -82,7 +86,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 												   error:nil];
     [[SPSession sharedSession] setDelegate:self];
     
-    // if re-logging in after being disconected
+    // if re-logging in to spotify after being disconected
     if ([SPSession sharedSession].connectionState == 3) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [[SPSession sharedSession] attemptLoginWithUserName:[defaults objectForKey:@"spotifyUsername"] existingCredential:[defaults objectForKey:@"spotifyCredentials"] rememberCredentials:YES];
@@ -278,9 +282,13 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 #pragma mark - BZFoursquareSessionDelegate protocol methods
 - (void)foursquareDidAuthorize:(BZFoursquare *)foursquare {
     NSLog(@"foursquare did authorize");
-    self.foursquareDelegate = [[FoursquareDelegate alloc] init];
-    [self.foursquareDelegate getFoursquareSelf];
-    [self.foursquareDelegate getFoursquareFriends];
+    NSLog(@"foursquare in app delegate is %@",self.foursquare);
+    self.foursquareDelegate.didLoginToFoursquare = YES;
+    if (self.foursquareDelegate.didFacebookFriendsLoad && self.foursquareDelegate.didLoginToFoursquare && !self.foursquareDelegate.didLoadFoursquareFriends) {
+        [self.foursquareDelegate getFoursquareSelf];
+        [self.foursquareDelegate getFoursquareFriends];
+        NSLog(@"loading foursquare friends after authorization");
+    }
 }
 
 - (void)foursquareDidNotAuthorize:(BZFoursquare *)foursquare error:(NSDictionary *)errorInfo {

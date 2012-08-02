@@ -23,6 +23,9 @@
 @synthesize requestDict = _requestDict;
 @synthesize checkins = _checkins;
 @synthesize delegate = _delegate;
+@synthesize didFacebookFriendsLoad = _didFacebookFriendsLoad;
+@synthesize didLoginToFoursquare = _didLoginToFoursquare;
+@synthesize didLoadFoursquareFriends = _didLoadFoursquareFriends;
 
 #pragma mark - Getters & Setters
 -(NSArray*)checkins {
@@ -42,6 +45,8 @@
 #pragma mark -
 #pragma mark - Public Instance Methods
 - (void)getFoursquareSelf {
+    self.didLoadFoursquareFriends = YES;
+    NSLog(@"foursquare in fs delegate is %@",[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare]);
     BZFoursquareRequest* request = [[(AppDelegate *)[[UIApplication sharedApplication] delegate] foursquare] requestWithPath:@"users/self" HTTPMethod:@"GET" parameters:nil delegate:self];
     [self.requestDict setObject:@"getSelf" forKey:request.description];
     [request start];
