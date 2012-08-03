@@ -87,6 +87,7 @@
 		C422341515ACE528005151A3 /* libCocoaLibSpotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C422341015ACE515005151A3 /* libCocoaLibSpotify.a */; };
 		C448FB3815C8A4D4003A804D /* TodoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C448FB3715C8A4D4003A804D /* TodoViewController.m */; };
 		C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4739E7815B88A6600F714A7 /* NewsViewController.m */; };
+		C47A509215CC433200D80B6D /* PBMusicLike.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509115CC433200D80B6D /* PBMusicLike.m */; };
 		C4B24A6D15C332DD00796C57 /* PBMusicTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */; };
 		F90780CC15C6ED8400B36C82 /* pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C815C6ED8400B36C82 /* pause-button.png */; };
 		F90780CD15C6ED8400B36C82 /* pause-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C915C6ED8400B36C82 /* pause-button@2x.png */; };
@@ -396,6 +397,8 @@
 		C448FB3715C8A4D4003A804D /* TodoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoViewController.m; sourceTree = "<group>"; };
 		C4739E7715B88A6600F714A7 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
 		C4739E7815B88A6600F714A7 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		C47A509015CC433200D80B6D /* PBMusicLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicLike.h; path = Piggybackv2/PBMusicLike.h; sourceTree = "<group>"; };
+		C47A509115CC433200D80B6D /* PBMusicLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicLike.m; path = Piggybackv2/PBMusicLike.m; sourceTree = "<group>"; };
 		C4B24A6B15C332DD00796C57 /* PBMusicTodo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicTodo.h; path = Piggybackv2/PBMusicTodo.h; sourceTree = "<group>"; };
 		C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicTodo.m; path = Piggybackv2/PBMusicTodo.m; sourceTree = "<group>"; };
 		F90780C815C6ED8400B36C82 /* pause-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-button.png"; sourceTree = "<group>"; };
@@ -745,6 +748,8 @@
 				F9A4289815B45C7B000D147C /* PBFriend.m */,
 				C4B24A6B15C332DD00796C57 /* PBMusicTodo.h */,
 				C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */,
+				C47A509015CC433200D80B6D /* PBMusicLike.h */,
+				C47A509115CC433200D80B6D /* PBMusicLike.m */,
 			);
 			name = "PB Core Data Classes";
 			sourceTree = "<group>";
@@ -1221,6 +1226,7 @@
 				F9ED08EF15C9D8D400525624 /* SetAmbassadorsViewController.m in Sources */,
 				F9ED08F215CB0A4000525624 /* HomeFeedNavigationController.m in Sources */,
 				C448FB3815C8A4D4003A804D /* TodoViewController.m in Sources */,
+				C47A509215CC433200D80B6D /* PBMusicLike.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

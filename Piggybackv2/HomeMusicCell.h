@@ -14,6 +14,8 @@
 
 - (void)addMusicTodo:(PBMusicActivity*)musicActivity;
 - (void)removeMusicTodo:(PBMusicActivity*)musicActivity;
+- (void)addMusicLike:(PBMusicActivity*)musicActivity;
+- (void)removeMusicLike:(PBMusicActivity*)musicActivity;
 
 @end
 

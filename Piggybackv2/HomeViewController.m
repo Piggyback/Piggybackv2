@@ -22,6 +22,7 @@
 #import "HomePlacesCell.h"
 #import "YouTubeView.h"
 #import "PBMusicTodo.h"
+#import "PBMusicLike.h"
 #import <RestKit/RKRequestSerialization.h>
 
 @interface HomeViewController ()
@@ -459,7 +460,38 @@
     if (!error) {
         [[RKClient sharedClient] put:@"/removeMusicTodo" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
     }
-        
+}
+
+- (void)addMusicLike:(PBMusicActivity*)musicActivity {
+    // in add music like
+    NSLog(@"in add music like");
+    PBMusicLike *musicLike = [PBMusicLike object];
+    musicLike.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
+    musicLike.follower = [PBUser findByPrimaryKey:musicLike.followerUid];
+    musicLike.musicActivityId = musicActivity.musicActivityId;
+    musicLike.musicActivity = musicActivity;
+    
+    [[RKObjectManager sharedManager] postObject:musicLike delegate:self];
+}
+
+- (void)removeMusicLike:(PBMusicActivity *)musicActivity {
+    NSLog(@"in remove music like");
+    // remove like from core data
+    PBMusicLike *musicLike = [PBMusicLike objectWithPredicate:[NSPredicate predicateWithFormat:@"musicActivityId == %@", musicActivity.musicActivityId]];
+    
+    NSManagedObjectContext *context = [[[RKObjectManager sharedManager] objectStore] managedObjectContextForCurrentThread];
+    [context deleteObject:musicLike];
+    [context save:nil];
+    
+    // set deleted flag to 1 in DB
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:musicActivity.musicActivityId, @"musicActivityId", [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]], @"followerUid", nil];
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    NSError *error = nil;
+    NSString *json = [parser stringFromObject:params error:&error];
+    
+    if (!error) {
+        [[RKClient sharedClient] put:@"/removeMusicLike" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
+    }
 }
 
 #pragma mark - RKObjectLoaderDelegate methods

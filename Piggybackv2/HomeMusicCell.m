@@ -28,8 +28,10 @@
 - (IBAction)heart:(id)sender {
     if (self.heart.selected == NO) {
         self.heart.selected = YES;
+        [self.delegate addMusicLike:self.musicActivity];
     } else {
         self.heart.selected = NO;
+        [self.delegate removeMusicLike:self.musicActivity];
     }
 }
 
