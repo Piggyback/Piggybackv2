@@ -28,6 +28,7 @@
 #import "PBMusicTodo.h"
 #import "PBMusicLike.h"
 #import "PBPlacesTodo.h"
+#import "PBPlacesLike.h"
 #import <RestKit/RKRequestSerialization.h>
 
 @interface AppDelegate ()
@@ -138,6 +139,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [router routeClass:[PBPlacesItem class] toResourcePath:@"/updatePlacesItem" forMethod:RKRequestMethodPUT];
     [router routeClass:[PBPlacesActivity class] toResourcePath:@"/addPlacesActivity" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBPlacesTodo class] toResourcePath:@"/addPlacesTodo" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBPlacesLike class] toResourcePath:@"/addPlacesLike" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBVideosItem class] toResourcePath:@"/addVideosItem" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBVideosActivity class] toResourcePath:@"/addVideosActivity" forMethod:RKRequestMethodPOST];
 }
@@ -155,6 +157,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKManagedObjectMapping* placesItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesItem" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* placesActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesActivity" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping *placesTodoMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesTodo" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping *placesLikeMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesLike" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* videosItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosItem" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* videosActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosActivity" inManagedObjectStore:objectManager.objectStore];
     
@@ -223,6 +226,12 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [placesTodoMapping connectRelationship:@"placesActivity" withObjectForPrimaryKeyAttribute:@"placesActivityId"];
     [objectManager.mappingProvider setMapping:placesTodoMapping forKeyPath:@"PBPlacesTodo"];
     
+    // placesLike mapping
+    [placesLikeMapping mapAttributes:@"dateAdded", @"placesActivityId", nil];
+    [placesLikeMapping mapRelationship:@"placesActivity" withMapping:placesActivityMapping];
+    [placesLikeMapping connectRelationship:@"placesActivity" withObjectForPrimaryKeyAttribute:@"placesActivityId"];
+    [objectManager.mappingProvider setMapping:placesLikeMapping forKeyPath:@"PBPlacesLike"];
+    
     // videosItem mapping
     videosItemMapping.primaryKeyAttribute = @"videosItemId";
     [videosItemMapping mapAttributes:@"videosItemId",@"name",@"videoURL",nil];
@@ -246,6 +255,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKObjectMapping *placesItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *placesActivitySerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *placesTodoSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    RKObjectMapping *placesLikeSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *videosItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *videosActivitySerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
 
@@ -282,6 +292,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     
     // placesActivity serialization
     [placesActivitySerializationMapping mapAttributes:@"placesActivityId",@"uid",@"placesItemId",@"placesActivityType",@"dateAdded",nil];
+    [placesActivitySerializationMapping mapRelationship:@"placesItem" withMapping:placesItemSerializationMapping];
     [objectManager.mappingProvider setSerializationMapping:placesActivitySerializationMapping forClass:[PBPlacesActivity class]];
     
     // placesTodo serialization
@@ -289,6 +300,12 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [placesTodoSerializationMapping mapRelationship:@"placesActivity" withMapping:placesActivitySerializationMapping];
     [placesTodoSerializationMapping mapRelationship:@"follower" withMapping:userSerializationMapping];
     [objectManager.mappingProvider setSerializationMapping:placesTodoSerializationMapping forClass:[PBPlacesTodo class]];
+    
+    // placesLike serialization
+    [placesLikeSerializationMapping mapAttributes:@"placesActivityId", @"followerUid", nil];
+    [placesLikeSerializationMapping mapRelationship:@"placesActivity" withMapping:placesActivitySerializationMapping];
+    [placesLikeSerializationMapping mapRelationship:@"follower" withMapping:userSerializationMapping];
+    [objectManager.mappingProvider setSerializationMapping:placesLikeSerializationMapping forClass:[PBPlacesLike class]];
     
     // videosItem serialization
     [videosItemSerializationMapping mapAttributes:@"videosItemId",@"name",@"videoURL",nil];

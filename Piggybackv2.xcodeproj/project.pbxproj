@@ -89,6 +89,7 @@
 		C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4739E7815B88A6600F714A7 /* NewsViewController.m */; };
 		C47A509215CC433200D80B6D /* PBMusicLike.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509115CC433200D80B6D /* PBMusicLike.m */; };
 		C47A509515CC49E300D80B6D /* PBPlacesTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509415CC49E300D80B6D /* PBPlacesTodo.m */; };
+		C47A509815CC5A8600D80B6D /* PBPlacesLike.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509715CC5A8600D80B6D /* PBPlacesLike.m */; };
 		C4B24A6D15C332DD00796C57 /* PBMusicTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */; };
 		F90780CC15C6ED8400B36C82 /* pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C815C6ED8400B36C82 /* pause-button.png */; };
 		F90780CD15C6ED8400B36C82 /* pause-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C915C6ED8400B36C82 /* pause-button@2x.png */; };
@@ -402,6 +403,8 @@
 		C47A509115CC433200D80B6D /* PBMusicLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicLike.m; path = Piggybackv2/PBMusicLike.m; sourceTree = "<group>"; };
 		C47A509315CC49E300D80B6D /* PBPlacesTodo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesTodo.h; path = Piggybackv2/PBPlacesTodo.h; sourceTree = "<group>"; };
 		C47A509415CC49E300D80B6D /* PBPlacesTodo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesTodo.m; path = Piggybackv2/PBPlacesTodo.m; sourceTree = "<group>"; };
+		C47A509615CC5A8600D80B6D /* PBPlacesLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesLike.h; path = Piggybackv2/PBPlacesLike.h; sourceTree = "<group>"; };
+		C47A509715CC5A8600D80B6D /* PBPlacesLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesLike.m; path = Piggybackv2/PBPlacesLike.m; sourceTree = "<group>"; };
 		C4B24A6B15C332DD00796C57 /* PBMusicTodo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicTodo.h; path = Piggybackv2/PBMusicTodo.h; sourceTree = "<group>"; };
 		C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicTodo.m; path = Piggybackv2/PBMusicTodo.m; sourceTree = "<group>"; };
 		F90780C815C6ED8400B36C82 /* pause-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-button.png"; sourceTree = "<group>"; };
@@ -741,6 +744,8 @@
 				F9A89D4F15BDCCE1007AC27D /* PBPlacesActivity.m */,
 				C47A509315CC49E300D80B6D /* PBPlacesTodo.h */,
 				C47A509415CC49E300D80B6D /* PBPlacesTodo.m */,
+				C47A509615CC5A8600D80B6D /* PBPlacesLike.h */,
+				C47A509715CC5A8600D80B6D /* PBPlacesLike.m */,
 				F9AE7CD315BA71FF001008C7 /* PBPlacesNews.h */,
 				F9AE7CD415BA7200001008C7 /* PBPlacesNews.m */,
 				F9774C8215B722CD00FC6FBC /* PBMusicItem.h */,
@@ -1233,6 +1238,7 @@
 				C448FB3815C8A4D4003A804D /* TodoViewController.m in Sources */,
 				C47A509215CC433200D80B6D /* PBMusicLike.m in Sources */,
 				C47A509515CC49E300D80B6D /* PBPlacesTodo.m in Sources */,
+				C47A509815CC5A8600D80B6D /* PBPlacesLike.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

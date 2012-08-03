@@ -21,6 +21,7 @@
 #import "PBMusicTodo.h"
 #import "PBMusicLike.h"
 #import "PBPlacesTodo.h"
+#import "PBPlacesLike.h"
 #import <RestKit/RKRequestSerialization.h>
 
 @interface HomeViewController ()
@@ -521,6 +522,38 @@
     
     if (!error) {
         [[RKClient sharedClient] put:@"/removePlacesTodo" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
+    }
+}
+
+- (void)addPlacesLike:(PBPlacesActivity*)placesActivity {
+    // in add places like
+    NSLog(@"in add places like");
+    PBPlacesLike *placesLike = [PBPlacesLike object];
+    placesLike.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
+    placesLike.follower = [PBUser findByPrimaryKey:placesLike.followerUid];
+    placesLike.placesActivityId = placesActivity.placesActivityId;
+    placesLike.placesActivity = placesActivity;
+    
+    [[RKObjectManager sharedManager] postObject:placesLike delegate:self];
+}
+
+- (void)removePlacesLike:(PBPlacesActivity *)placesActivity {
+    NSLog(@"in remove places like");
+    // remove like from core data
+    PBPlacesLike *placesLike = [PBPlacesLike objectWithPredicate:[NSPredicate predicateWithFormat:@"placesActivityId == %@", placesActivity.placesActivityId]];
+    
+    NSManagedObjectContext *context = [[[RKObjectManager sharedManager] objectStore] managedObjectContextForCurrentThread];
+    [context deleteObject:placesLike];
+    [context save:nil];
+    
+    // set deleted flag to 1 in DB
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:placesActivity.placesActivityId, @"placesActivityId", [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]], @"followerUid", nil];
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    NSError *error = nil;
+    NSString *json = [parser stringFromObject:params error:&error];
+    
+    if (!error) {
+        [[RKClient sharedClient] put:@"/removePlacesLike" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
     }
 }
 

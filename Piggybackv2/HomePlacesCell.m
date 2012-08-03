@@ -22,7 +22,13 @@
 @synthesize delegate = _delegate;
 
 - (IBAction)heart:(id)sender {
-    [self.heart setImage:[UIImage imageNamed:@"heart-pressed-button"] forState:UIControlStateNormal];
+    if (self.heart.selected == NO) {
+        self.heart.selected = YES;
+        [self.delegate addPlacesLike:self.placesActivity];
+    } else {
+        self.heart.selected = NO;
+        [self.delegate removePlacesLike:self.placesActivity];
+    }
 }
 
 - (IBAction)todo:(id)sender {
