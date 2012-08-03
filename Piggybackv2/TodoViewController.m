@@ -98,6 +98,10 @@
                         [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
                             [self.cachedAlbumCovers setObject:track.album.cover forKey:spotifyURL];
                             [track.album.cover startLoading];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self.tableView reloadData];
+//                              [self.tableView reloadRowsAtIndexPaths:[self.tableView visibleCells] withRowAnimation:UITableViewRowAnimationNone];
+                            });
 //                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadImage" object:nil userInfo:[NSDictionary dictionaryWithObject:spotifyURL forKey:@"spotifyURL"]];
                         }];
                     }
@@ -111,6 +115,10 @@
                 if(photoURL) {
                     UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]]];
                     [self.cachedPlacesPhotos setObject:placesImage forKey:photoURL];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.tableView reloadData];
+//                        [self.tableView reloadRowsAtIndexPaths:[self.tableView visibleCells] withRowAnimation:UITableViewRowAnimationNone];
+                    });
                 }
             }
         }
@@ -118,35 +126,42 @@
 }
 
 -(void)formatAddresses {
-    for (id todo in self.todos) {
-        if ([todo isKindOfClass:[PBPlacesTodo class]]) {
-            PBPlacesTodo* placesTodo = todo;
-            NSString* addr = placesTodo.placesActivity.placesItem.addr;
-            NSString* addrCity = placesTodo.placesActivity.placesItem.addrCity;
-            NSString* addrState = placesTodo.placesActivity.placesItem.addrState;
-            
-            NSMutableString* formattedAddress = [[NSMutableString alloc] init];
-            if ([addr length] != 0 || [addrCity length] != 0 || [addrState length] != 0)  {
-                formattedAddress = [[NSMutableString alloc] init];
-                if ([addr length])
-                    [formattedAddress appendFormat:@"%@", addr];
-                if ([addr length] && ([addrCity length] || [addrState length])) {
-                    [formattedAddress appendFormat:@", "];
-                }
-                if ([addrCity length] || [addrState length]) {
-                    if ([addrCity length]) {
-                        [formattedAddress appendFormat:@"%@",addrCity];
-                        if ([addrState length]) {
-                            [formattedAddress appendFormat:@", %@",addrState];
+    dispatch_queue_t formattedAddressesQueue = dispatch_queue_create("formattedAddressesQueue",NULL);
+    dispatch_async(formattedAddressesQueue, ^{
+        for (id todo in self.todos) {
+            if ([todo isKindOfClass:[PBPlacesTodo class]]) {
+                PBPlacesTodo* placesTodo = todo;
+                NSString* addr = placesTodo.placesActivity.placesItem.addr;
+                NSString* addrCity = placesTodo.placesActivity.placesItem.addrCity;
+                NSString* addrState = placesTodo.placesActivity.placesItem.addrState;
+                
+                NSMutableString* formattedAddress = [[NSMutableString alloc] init];
+                if ([addr length] != 0 || [addrCity length] != 0 || [addrState length] != 0)  {
+                    formattedAddress = [[NSMutableString alloc] init];
+                    if ([addr length])
+                        [formattedAddress appendFormat:@"%@", addr];
+                    if ([addr length] && ([addrCity length] || [addrState length])) {
+                        [formattedAddress appendFormat:@", "];
+                    }
+                    if ([addrCity length] || [addrState length]) {
+                        if ([addrCity length]) {
+                            [formattedAddress appendFormat:@"%@",addrCity];
+                            if ([addrState length]) {
+                                [formattedAddress appendFormat:@", %@",addrState];
+                            }
+                        } else {
+                            [formattedAddress appendFormat:@"%@",addrState];
                         }
-                    } else {
-                        [formattedAddress appendFormat:@"%@",addrState];
                     }
                 }
+                [self.formattedAddresses setObject:formattedAddress forKey:placesTodo.placesActivityId];
             }
-            [self.formattedAddresses setObject:formattedAddress forKey:placesTodo.placesActivityId];
         }
-    }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+//            [self.tableView reloadRowsAtIndexPaths:[self.tableView visibleCells] withRowAnimation:UITableViewRowAnimationNone];
+        });
+    });
 }
 
 // get string for time elapsed e.g., "2 days ago"

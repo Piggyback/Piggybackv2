@@ -16,14 +16,6 @@
 @synthesize coverImage;
 @synthesize playButton;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-    }
-    return self;
-}
-
 -(void)awakeFromNib {
     self.coverImage.layer.cornerRadius = 5.0;
     self.coverImage.layer.masksToBounds = YES;

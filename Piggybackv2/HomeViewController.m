@@ -164,10 +164,8 @@
             dispatch_queue_t getTopTracksQueue = dispatch_queue_create("getTopTracksQueue",NULL);
             dispatch_async(getTopTracksQueue, ^{
                 [SPTrack trackForTrackURL:[NSURL URLWithString:newMusicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
-                    NSLog(@"valid track is %@",track);
                     [self.cachedAlbumCovers setObject:track.album.cover forKey:newMusicItem.spotifyUrl];
                     [track.album.cover startLoading];
-                    NSLog(@"cached album covers are %@",self.cachedAlbumCovers);
                 }];
             });
 
