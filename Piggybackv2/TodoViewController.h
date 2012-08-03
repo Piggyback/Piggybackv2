@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData.h>
+#import "CocoaLibSpotify.h"
 
 @interface TodoViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (strong, nonatomic) SPPlaybackManager *playbackManager;
 @end

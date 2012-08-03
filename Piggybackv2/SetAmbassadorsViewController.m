@@ -278,10 +278,7 @@
     static NSString *CellIdentifier = @"setAmbassadorCell";
     SetAmbassadorCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     cell.setAmbassadorDelegate = self;
-    
-    cell.profilePic.layer.cornerRadius = 5.0;
-    cell.profilePic.layer.masksToBounds = YES;
-    
+
     // get current friend and set cell
     PBFriend* friend = [self.displayFriends objectAtIndex:indexPath.row];
     cell.friend = friend;

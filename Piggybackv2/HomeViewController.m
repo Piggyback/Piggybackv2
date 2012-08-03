@@ -25,6 +25,9 @@
 #import <RestKit/RKRequestSerialization.h>
 
 @interface HomeViewController ()
+@property (nonatomic, strong) NSMutableArray* items;
+@property (nonatomic, strong) NSMutableArray *displayItems;
+
 @property (nonatomic, strong) NSMutableDictionary *topLists;
 
 @property (nonatomic, strong) NSMutableSet* musicAmbassadors;
@@ -345,14 +348,17 @@
 }
 
 -(void)cacheImages {
-//    dispatch_queue_t cacheImagesQueue = dispatch_queue_create("cacheImagesQueue",NULL);
-//    dispatch_async(cacheImagesQueue, ^{
-        // youtube video web views
+    // youtube video web views
+    dispatch_queue_t cacheImagesQueue = dispatch_queue_create("cacheImagesQueue",NULL);
+    dispatch_async(cacheImagesQueue, ^{
         for (id activity in self.items) {
             if ([activity isKindOfClass:[PBVideosActivity class]]) {
                 PBVideosActivity *videosActivity = activity;
-                YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosActivity.videosItem.videoURL frame:CGRectMake(9,38,302,240)];
-                [self.cachedYoutubeWebViews setObject:videoWebView forKey:videosActivity.videosItem.videoURL];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosActivity.videosItem.videoURL frame:CGRectMake(9,38,302,240)];
+                    [self.cachedYoutubeWebViews setObject:videoWebView forKey:videosActivity.videosItem.videoURL];
+                });
+
             }
             
             // foursquare vendor photos
@@ -377,7 +383,7 @@
                 }];
             }
         }
-//    });
+    });
 }
 
 // get string for time elapsed e.g., "2 days ago"
@@ -581,8 +587,6 @@
     if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBMusicActivity class]]) {
         static NSString *CellIdentifier = @"homeMusicCell";
         HomeMusicCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        cell.profilePic.layer.cornerRadius = 5;
-        cell.profilePic.layer.masksToBounds = YES;
         cell.delegate = self;
         
         PBMusicActivity* musicActivity = [self.displayItems objectAtIndex:indexPath.row];
@@ -608,8 +612,6 @@
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
         static NSString *CellIdentifier = @"homePlacesCell";
         HomePlacesCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        cell.profilePic.layer.cornerRadius = 5;
-        cell.profilePic.layer.masksToBounds = YES;
         
         PBPlacesActivity* placesActivity = [self.displayItems objectAtIndex:indexPath.row];
         PBPlacesItem* placesItem = placesActivity.placesItem;
@@ -633,8 +635,6 @@
         
         static NSString *CellIdentifier = @"homeVideosCell";
         HomeVideosCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        cell.profilePic.layer.cornerRadius = 5;
-        cell.profilePic.layer.masksToBounds = YES;
         
         cell.nameOfItem.text = videosItem.name;
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ %@ a new video",user.firstName,user.lastName,videosActivity.videosActivityType];
@@ -697,7 +697,7 @@
     // create segmented control to select type of media to view
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:
                                             [NSArray arrayWithObjects:
-                                             [UIImage imageNamed:@"navbar-todo-icon"],
+                                             @"All",
                                              [UIImage imageNamed:@"filter-music"],
                                              [UIImage imageNamed:@"filter-places"],
                                              [UIImage imageNamed:@"filter-videos"],

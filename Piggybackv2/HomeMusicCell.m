@@ -7,6 +7,7 @@
 //
 
 #import "HomeMusicCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation HomeMusicCell
 
@@ -22,6 +23,12 @@
 @synthesize spotifyURL = _spotifyURL;
 @synthesize musicActivity = _musicActivity;
 @synthesize delegate = _delegate;
+
+#pragma mark - initialization
+-(void)awakeFromNib {
+    self.profilePic.layer.cornerRadius = 5.0;
+    self.profilePic.layer.masksToBounds = YES;
+}
 
 #pragma mark - ib actions
 

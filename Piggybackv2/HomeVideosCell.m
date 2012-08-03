@@ -7,6 +7,7 @@
 //
 
 #import "HomeVideosCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation HomeVideosCell
 
@@ -17,6 +18,12 @@
 @synthesize heart = _heart;
 @synthesize todo = _todo;
 @synthesize icon = _icon;
+
+#pragma mark - initialization
+-(void)awakeFromNib {
+    self.profilePic.layer.cornerRadius = 5.0;
+    self.profilePic.layer.masksToBounds = YES;
+}
 
 - (IBAction)heart:(id)sender {
     [self.heart setImage:[UIImage imageNamed:@"heart-pressed-button"] forState:UIControlStateNormal];
