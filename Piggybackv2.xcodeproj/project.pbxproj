@@ -87,11 +87,13 @@
 		C422341515ACE528005151A3 /* libCocoaLibSpotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C422341015ACE515005151A3 /* libCocoaLibSpotify.a */; };
 		C448FB3815C8A4D4003A804D /* TodoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C448FB3715C8A4D4003A804D /* TodoViewController.m */; };
 		C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4739E7815B88A6600F714A7 /* NewsViewController.m */; };
+		C47A509215CC433200D80B6D /* PBMusicLike.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509115CC433200D80B6D /* PBMusicLike.m */; };
 		C4B24A6D15C332DD00796C57 /* PBMusicTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */; };
 		F90780CC15C6ED8400B36C82 /* pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C815C6ED8400B36C82 /* pause-button.png */; };
 		F90780CD15C6ED8400B36C82 /* pause-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C915C6ED8400B36C82 /* pause-button@2x.png */; };
 		F90780CE15C6ED8400B36C82 /* play-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780CA15C6ED8400B36C82 /* play-button.png */; };
 		F90780CF15C6ED8400B36C82 /* play-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780CB15C6ED8400B36C82 /* play-button@2x.png */; };
+		F90B3A7A15CC5B7C001C7E33 /* PBPlacesTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B3A7915CC5B7B001C7E33 /* PBPlacesTodo.m */; };
 		F91B3D9B15A6340300D8E815 /* SetAmbassadorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F91B3D9A15A6340300D8E815 /* SetAmbassadorCell.m */; };
 		F91B3DAF15A636FD00D8E815 /* follow-header.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3D9F15A636FD00D8E815 /* follow-header.png */; };
 		F91B3DB015A636FD00D8E815 /* follow-header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DA015A636FD00D8E815 /* follow-header@2x.png */; };
@@ -400,12 +402,16 @@
 		C448FB3715C8A4D4003A804D /* TodoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoViewController.m; sourceTree = "<group>"; };
 		C4739E7715B88A6600F714A7 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
 		C4739E7815B88A6600F714A7 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		C47A509015CC433200D80B6D /* PBMusicLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicLike.h; path = Piggybackv2/PBMusicLike.h; sourceTree = "<group>"; };
+		C47A509115CC433200D80B6D /* PBMusicLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicLike.m; path = Piggybackv2/PBMusicLike.m; sourceTree = "<group>"; };
 		C4B24A6B15C332DD00796C57 /* PBMusicTodo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicTodo.h; path = Piggybackv2/PBMusicTodo.h; sourceTree = "<group>"; };
 		C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicTodo.m; path = Piggybackv2/PBMusicTodo.m; sourceTree = "<group>"; };
 		F90780C815C6ED8400B36C82 /* pause-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-button.png"; sourceTree = "<group>"; };
 		F90780C915C6ED8400B36C82 /* pause-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-button@2x.png"; sourceTree = "<group>"; };
 		F90780CA15C6ED8400B36C82 /* play-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button.png"; sourceTree = "<group>"; };
 		F90780CB15C6ED8400B36C82 /* play-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button@2x.png"; sourceTree = "<group>"; };
+		F90B3A7815CC5B7B001C7E33 /* PBPlacesTodo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesTodo.h; path = Piggybackv2/PBPlacesTodo.h; sourceTree = "<group>"; };
+		F90B3A7915CC5B7B001C7E33 /* PBPlacesTodo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesTodo.m; path = Piggybackv2/PBPlacesTodo.m; sourceTree = "<group>"; };
 		F91B3D9915A6340300D8E815 /* SetAmbassadorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorCell.h; sourceTree = "<group>"; };
 		F91B3D9A15A6340300D8E815 /* SetAmbassadorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAmbassadorCell.m; sourceTree = "<group>"; };
 		F91B3D9F15A636FD00D8E815 /* follow-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow-header.png"; sourceTree = "<group>"; };
@@ -741,6 +747,8 @@
 		F93C2F78159A514000FACE47 /* PB Core Data Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F90B3A7815CC5B7B001C7E33 /* PBPlacesTodo.h */,
+				F90B3A7915CC5B7B001C7E33 /* PBPlacesTodo.m */,
 				F957A74D15C0A4D20033CF00 /* PBVideosNews.h */,
 				F957A74E15C0A4D20033CF00 /* PBVideosNews.m */,
 				F957A74715C0A4D20033CF00 /* PBUser.h */,
@@ -759,12 +767,14 @@
 				F9774C8315B722CD00FC6FBC /* PBMusicItem.m */,
 				F9A428C115B46276000D147C /* PBMusicActivity.h */,
 				F9A428C215B46276000D147C /* PBMusicActivity.m */,
+				C4B24A6B15C332DD00796C57 /* PBMusicTodo.h */,
+				C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */,
+				C47A509015CC433200D80B6D /* PBMusicLike.h */,
+				C47A509115CC433200D80B6D /* PBMusicLike.m */,
 				F9A428B815B46276000D147C /* PBMusicNews.h */,
 				F9A428B915B46276000D147C /* PBMusicNews.m */,
 				F9A4289715B45C7B000D147C /* PBFriend.h */,
 				F9A4289815B45C7B000D147C /* PBFriend.m */,
-				C4B24A6B15C332DD00796C57 /* PBMusicTodo.h */,
-				C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */,
 			);
 			name = "PB Core Data Classes";
 			sourceTree = "<group>";
@@ -1245,6 +1255,8 @@
 				F925A3F715CC2896002B3779 /* NewsCell.m in Sources */,
 				F925A3FA15CC4744002B3779 /* TodoNavigationController.m in Sources */,
 				F925A3FD15CC496D002B3779 /* TodoMusicCell.m in Sources */,
+				C47A509215CC433200D80B6D /* PBMusicLike.m in Sources */,
+				F90B3A7A15CC5B7C001C7E33 /* PBPlacesTodo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

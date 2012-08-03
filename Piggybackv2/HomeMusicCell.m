@@ -35,8 +35,10 @@
 - (IBAction)heart:(id)sender {
     if (self.heart.selected == NO) {
         self.heart.selected = YES;
+        [self.delegate addMusicLike:self.musicActivity];
     } else {
         self.heart.selected = NO;
+        [self.delegate removeMusicLike:self.musicActivity];
     }
 }
 
@@ -46,7 +48,6 @@
         [self.delegate addMusicTodo:self.musicActivity];
     } else {
         self.todo.selected = NO;
-        // remove todo from core data
         [self.delegate removeMusicTodo:self.musicActivity];
     }
 }

@@ -10,6 +10,9 @@
 #import "PBMusicTodo.h"
 #import "PBMusicActivity.h"
 #import "PBMusicItem.h"
+#import "PBPlacesTodo.h"
+#import "PBPlacesItem.h"
+#import "PBPlacesActivity.h"
 #import "TodoMusicCell.h"
 #import "Constants.h"
 
@@ -17,6 +20,7 @@
 
 @property (nonatomic, strong) NSMutableArray *todos;
 @property (nonatomic, strong) NSArray *todosToDisplay;
+@property (nonatomic, strong) NSMutableDictionary* cachedPlacesPhotos;
 @property (nonatomic, strong) NSMutableDictionary* cachedAlbumCovers;
 
 @end
@@ -26,6 +30,7 @@
 @synthesize tableView = _tableView;
 @synthesize todosToDisplay = _todosToDisplay;
 @synthesize cachedAlbumCovers = _cachedAlbumCovers;
+@synthesize cachedPlacesPhotos = _cachedPlacesPhotos;
 @synthesize todos = _todos;
 
 #pragma mark - Getters & Setters
@@ -50,9 +55,17 @@
     return _cachedAlbumCovers;
 }
 
+- (NSMutableDictionary*)cachedPlacesPhotos {
+    if (!_cachedPlacesPhotos) {
+        _cachedPlacesPhotos = [[NSMutableDictionary alloc] init];
+    }
+    return _cachedPlacesPhotos;
+}
+
 #pragma mark - Private helper methods
 - (void)loadObjectsFromDataStore {
     self.todos = [NSMutableArray arrayWithArray:[PBMusicTodo allObjects]];
+    [self.todos addObjectsFromArray:[PBPlacesTodo allObjects]];
     self.todosToDisplay = self.todos;
     [self.tableView reloadData];
     
@@ -65,6 +78,8 @@
     dispatch_queue_t cacheImagesQueue = dispatch_queue_create("cacheImagesQueue",NULL);
     dispatch_async(cacheImagesQueue, ^{
         for (id todo in self.todos) {
+            
+            // cache cover albums
             if ([todo isKindOfClass:[PBMusicTodo class]]) {
                 PBMusicTodo *musicTodo = todo;
                 NSString* spotifyURL = musicTodo.musicActivity.musicItem.spotifyUrl;
@@ -77,6 +92,16 @@
                         }];
                     }
                 }];
+            }
+            
+            // cache foursquare vendor photos
+            else if ([todo isKindOfClass:[PBPlacesTodo class]]) {
+                PBPlacesTodo *placesTodo = todo;
+                NSString* photoURL = placesTodo.placesActivity.placesItem.photoURL;
+                if(photoURL) {
+                    UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]]];
+                    [self.cachedPlacesPhotos setObject:placesImage forKey:photoURL];
+                }
             }
         }
     });

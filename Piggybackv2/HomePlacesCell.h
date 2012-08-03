@@ -7,6 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RestKit/RestKit.h>
+#import "PBPlacesActivity.h"
+
+@protocol HomePlacesCellDelegate
+
+- (void)addPlacesTodo:(PBPlacesActivity*)placesActivity;
+- (void)removePlacesTodo:(PBPlacesActivity*)placesActivity;
+- (void)addPlacesLike:(PBPlacesActivity*)placesActivity;
+- (void)removePlacesLike:(PBPlacesActivity*)placesActivity;
+
+@end
 
 @interface HomePlacesCell : UITableViewCell
 
@@ -18,6 +29,8 @@
 @property (nonatomic, weak) IBOutlet UIButton* todo;
 @property (nonatomic, weak) IBOutlet UIImageView* icon;
 @property (nonatomic, weak) IBOutlet UIImageView* mainPic;
+@property (nonatomic, strong) PBPlacesActivity *placesActivity;
+@property (nonatomic, weak) id<HomePlacesCellDelegate> delegate;
 
 - (IBAction)heart:(id)sender;
 - (IBAction)todo:(id)sender;

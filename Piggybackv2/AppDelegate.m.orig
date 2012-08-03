@@ -22,25 +22,39 @@
 #import "PBMusicActivity.h"
 #import "PBPlacesItem.h"
 #import "PBPlacesActivity.h"
+#import "PBVideosItem.h"
+#import "PBVideosActivity.h"
+#import "PBMusicNews.h"
+#import "PBMusicTodo.h"
 #import <RestKit/RKRequestSerialization.h>
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) UILabel *newsNotificationLabel;
 
 @end
 
 @implementation AppDelegate
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
-NSString* RK_BASE_URL = @"http://localhost:5000";
+<<<<<<< HEAD
+//NSString* RK_BASE_URL = @"http://10.0.4.98:5000"; // kim
+NSString *RK_BASE_URL = @"http://10.0.4.178:5000";
+=======
+NSString* RK_BASE_URL = @"http://10.0.4.145:5000"; // kim
+//NSString *RK_BASE_URL = @"http://localhost:5000";
+//NSString *RK_BASE_URL = @"http://10.0.4.173:5000";
+
+>>>>>>> ef29d16d5625069af949f867946b1935fafb4f5d
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 @synthesize window = _window;
 @synthesize foursquare = _foursquare;
-@synthesize playbackManager = _playbackManager;
 @synthesize facebook = _facebook;
 @synthesize foursquareDelegate = _foursquareDelegate;
+@synthesize newsNotificationLabel = _newsNotificationLabel;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {    
@@ -70,6 +84,8 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     // setting up foursquare
     self.foursquare = [[BZFoursquare alloc] initWithClientID:FSQ_CLIENT_ID callbackURL:FSQ_CALLBACK_URL];
     self.foursquare.sessionDelegate = self;
+    self.foursquareDelegate = [[FoursquareDelegate alloc] init];
+    [(PiggybackTabBarController*)self.window.rootViewController setFoursquareDelegate:self.foursquareDelegate];
     
     // setting up spotify
     [SPSession initializeSharedSessionWithApplicationKey:[NSData dataWithBytes:&g_appkey length:g_appkey_size] 
@@ -78,6 +94,13 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 												   error:nil];
     [[SPSession sharedSession] setDelegate:self];
     
+    // if re-logging in to spotify after being disconected
+    if ([SPSession sharedSession].connectionState == 3) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [[SPSession sharedSession] attemptLoginWithUserName:[defaults objectForKey:@"spotifyUsername"] existingCredential:[defaults objectForKey:@"spotifyCredentials"] rememberCredentials:YES];
+    }
+
+
     // setting up facebook
     self.facebook = [[Facebook alloc] initWithAppId:FB_APP_ID andDelegate:self];
     
@@ -88,13 +111,19 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
         self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     }
     
+    [self.window makeKeyAndVisible];
     if (![self.facebook isSessionValid]) {
         LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-        [self.window makeKeyAndVisible];
         [rootViewController presentViewController:loginViewController animated:NO completion:nil];
     } else {
         // do nothing (default behavior is to show tab bar controller)
     }
+    
+    // add news notification label
+    self.newsNotificationLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 420, 20, 20)];
+    self.newsNotificationLabel.text = @"+1";
+    self.newsNotificationLabel.alpha = 0.0;
+    [self.window addSubview:self.newsNotificationLabel];
     
     return YES;
 }
@@ -108,8 +137,12 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [router routeClass:[PBUser class] toResourcePath:@"/updateUser" forMethod:RKRequestMethodPUT];
     [router routeClass:[PBMusicItem class] toResourcePath:@"/addMusicItem" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBMusicActivity class] toResourcePath:@"/addMusicActivity" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBMusicTodo class] toResourcePath:@"/addMusicTodo" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBPlacesItem class] toResourcePath:@"/addPlacesItem" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBPlacesItem class] toResourcePath:@"/updatePlacesItem" forMethod:RKRequestMethodPUT];
     [router routeClass:[PBPlacesActivity class] toResourcePath:@"/addPlacesActivity" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBVideosItem class] toResourcePath:@"/addVideosItem" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBVideosActivity class] toResourcePath:@"/addVideosActivity" forMethod:RKRequestMethodPOST];
 }
 
 - (void)setupRestkitMapping {
@@ -118,16 +151,20 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKObjectManager *objectManager = [RKObjectManager sharedManager];
     RKManagedObjectMapping* userMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBUser" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* musicItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicItem" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping *musicActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicActivity" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping *musicNewsMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicNews" inManagedObjectStore:objectManager.objectStore];
-    RKManagedObjectMapping* musicActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicActivity" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping *musicTodoMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicTodo" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* placesItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesItem" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* placesActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesActivity" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping* videosItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosItem" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping* videosActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosActivity" inManagedObjectStore:objectManager.objectStore];
     
     // user mapping
     userMapping.primaryKeyAttribute = @"uid";
     [userMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
     [userMapping mapRelationship:@"musicAmbassadors" withMapping:userMapping];
     [userMapping mapRelationship:@"placesAmbassadors" withMapping:userMapping];
+    [userMapping mapRelationship:@"videosAmbassadors" withMapping:userMapping];
     [objectManager.mappingProvider setMapping:userMapping forKeyPath:@"PBUser"];
     
     // musicItem mapping
@@ -140,22 +177,30 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [musicActivityMapping mapAttributes:@"musicActivityId",@"uid",@"musicItemId",@"musicActivityType",@"dateAdded",nil];
     [musicActivityMapping mapRelationship:@"musicItem" withMapping:musicItemMapping];
     [musicActivityMapping mapRelationship:@"user" withMapping:userMapping];
+    [musicActivityMapping mapRelationship:@"news" withMapping:musicNewsMapping];
     [musicActivityMapping connectRelationship:@"musicItem" withObjectForPrimaryKeyAttribute:@"musicItemId"];
     [musicActivityMapping connectRelationship:@"user" withObjectForPrimaryKeyAttribute:@"uid"];
     [objectManager.mappingProvider setMapping:musicActivityMapping forKeyPath:@"PBMusicActivity"];
     
     // musicNews mapping
-    musicNewsMapping.primaryKeyAttribute = @"newsId";
-    [musicNewsMapping mapAttributes:@"newsId", @"newsActionType", @"dateAdded", @"followerUid", @"musicActivityId", nil];
+    musicNewsMapping.primaryKeyAttribute = @"musicNewsId";
+    [musicNewsMapping mapAttributes:@"musicNewsId", @"newsActionType", @"dateAdded", @"followerUid", @"musicActivityId", nil];
     [musicNewsMapping mapRelationship:@"follower" withMapping:userMapping];
     [musicNewsMapping mapRelationship:@"musicActivity" withMapping:musicActivityMapping];
     [musicNewsMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerUid"];
     [musicNewsMapping connectRelationship:@"musicActivity" withObjectForPrimaryKeyAttribute:@"musicActivityId"];
     [objectManager.mappingProvider setMapping:musicNewsMapping forKeyPath:@"PBMusicNews"];
-
+    
+    // musicTodo mapping
+    musicTodoMapping.primaryKeyAttribute = @"musicTodoId";
+    [musicTodoMapping mapAttributes:@"musicTodoId", @"dateAdded", @"musicActivityId", nil];
+    [musicTodoMapping mapRelationship:@"musicActivity" withMapping:musicActivityMapping];
+    [musicTodoMapping connectRelationship:@"musicActivity" withObjectForPrimaryKeyAttribute:@"musicActivityId"];
+    [objectManager.mappingProvider setMapping:musicTodoMapping forKeyPath:@"PBMusicTodo"];
+    
     // placesItem mapping
     placesItemMapping.primaryKeyAttribute = @"placesItemId";
-    [placesItemMapping mapAttributes:@"placesItemId",@"addr",@"addrCity",@"addrCountry",@"addrState",@"addrCountry",@"addrZip",@"foursquareReferenceId",@"lat",@"lng",@"name",@"phone",nil];
+    [placesItemMapping mapAttributes:@"placesItemId",@"addr",@"addrCity",@"addrCountry",@"addrState",@"addrCountry",@"addrZip",@"foursquareReferenceId",@"lat",@"lng",@"name",@"phone",@"photoURL",nil];
     [objectManager.mappingProvider setMapping:placesItemMapping forKeyPath:@"PBPlacesItem"];
     
     // placesActivity mapping
@@ -167,12 +212,29 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [placesActivityMapping connectRelationship:@"user" withObjectForPrimaryKeyAttribute:@"uid"];
     [objectManager.mappingProvider setMapping:placesActivityMapping forKeyPath:@"PBPlacesActivity"];
     
+    // videosItem mapping
+    videosItemMapping.primaryKeyAttribute = @"videosItemId";
+    [videosItemMapping mapAttributes:@"videosItemId",@"name",@"videoURL",nil];
+    [objectManager.mappingProvider setMapping:videosItemMapping forKeyPath:@"PBVideosItem"];
+    
+    // videosActivity mapping
+    videosActivityMapping.primaryKeyAttribute = @"videosActivityId";
+    [videosActivityMapping mapAttributes:@"videosActivityId",@"uid",@"videosItemId",@"videosActivityType",@"dateAdded",nil];
+    [videosActivityMapping mapRelationship:@"videosItem" withMapping:videosItemMapping];
+    [videosActivityMapping mapRelationship:@"user" withMapping:userMapping];
+    [videosActivityMapping connectRelationship:@"videosItem" withObjectForPrimaryKeyAttribute:@"videosItemId"];
+    [videosActivityMapping connectRelationship:@"user" withObjectForPrimaryKeyAttribute:@"uid"];
+    [objectManager.mappingProvider setMapping:videosActivityMapping forKeyPath:@"PBVideosActivity"];
+    
     // serialization declarations
     RKObjectMapping *userSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *musicItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *musicActivitySerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    RKObjectMapping *musicTodoSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *placesItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *placesActivitySerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    RKObjectMapping *videosItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    RKObjectMapping *videosActivitySerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
 
     // user serialization
     [userSerializationMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
@@ -186,15 +248,30 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     
     // musicActivity serialization
     [musicActivitySerializationMapping mapAttributes:@"musicActivityId",@"uid",@"musicItemId",@"musicActivityType",@"dateAdded",nil];
+    [musicActivitySerializationMapping mapRelationship:@"musicItem" withMapping:musicItemSerializationMapping];
     [objectManager.mappingProvider setSerializationMapping:musicActivitySerializationMapping forClass:[PBMusicActivity class]];
     
+    // musicTodo serialization
+    [musicTodoSerializationMapping mapAttributes:@"musicActivityId", @"followerUid", nil];
+    [musicTodoSerializationMapping mapRelationship:@"musicActivity" withMapping:musicActivitySerializationMapping];
+    [musicTodoSerializationMapping mapRelationship:@"follower" withMapping:userSerializationMapping];
+    [objectManager.mappingProvider setSerializationMapping:musicTodoSerializationMapping forClass:[PBMusicTodo class]];
+    
     // placesItem serialization
-    [placesItemSerializationMapping mapAttributes:@"placesItemId",@"addr",@"addrCity",@"addrCountry",@"addrState",@"addrCountry",@"addrZip",@"foursquareReferenceId",@"lat",@"lng",@"name",@"phone",nil];
+    [placesItemSerializationMapping mapAttributes:@"placesItemId",@"addr",@"addrCity",@"addrCountry",@"addrState",@"addrCountry",@"addrZip",@"foursquareReferenceId",@"lat",@"lng",@"name",@"phone",@"photoURL",nil];
     [objectManager.mappingProvider setSerializationMapping:placesItemSerializationMapping forClass:[PBPlacesItem class]];
     
     // placesActivity serialization
     [placesActivitySerializationMapping mapAttributes:@"placesActivityId",@"uid",@"placesItemId",@"placesActivityType",@"dateAdded",nil];
     [objectManager.mappingProvider setSerializationMapping:placesActivitySerializationMapping forClass:[PBPlacesActivity class]];
+    
+    // videosItem serialization
+    [videosItemSerializationMapping mapAttributes:@"videosItemId",@"name",@"videoURL",nil];
+    [objectManager.mappingProvider setSerializationMapping:videosItemSerializationMapping forClass:[PBVideosItem class]];
+    
+    // videosActivity serialization
+    [videosActivitySerializationMapping mapAttributes:@"videosActivityId",@"uid",@"videosItemId",@"videosActivityType",@"dateAdded",nil];
+    [objectManager.mappingProvider setSerializationMapping:videosActivitySerializationMapping forClass:[PBVideosActivity class]];
     
 }
 
@@ -221,9 +298,13 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 #pragma mark - BZFoursquareSessionDelegate protocol methods
 - (void)foursquareDidAuthorize:(BZFoursquare *)foursquare {
     NSLog(@"foursquare did authorize");
-    self.foursquareDelegate = [[FoursquareDelegate alloc] init];
-    [self.foursquareDelegate getFoursquareSelf];
-    [self.foursquareDelegate getFoursquareFriends];
+    NSLog(@"foursquare in app delegate is %@",self.foursquare);
+    self.foursquareDelegate.didLoginToFoursquare = YES;
+    if (self.foursquareDelegate.didFacebookFriendsLoad && self.foursquareDelegate.didLoginToFoursquare && !self.foursquareDelegate.didLoadFoursquareFriends) {
+        [self.foursquareDelegate getFoursquareSelf];
+        [self.foursquareDelegate getFoursquareFriends];
+        NSLog(@"loading foursquare friends after authorization");
+    }
 }
 
 - (void)foursquareDidNotAuthorize:(BZFoursquare *)foursquare error:(NSDictionary *)errorInfo {
@@ -239,9 +320,14 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 	return accountLinkViewController;
 }
 
+-(void)session:(SPSession *)aSession didGenerateLoginCredentials:(NSString *)credential forUserName:(NSString *)userName {
+    [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"spotifyUsername"];
+    [[NSUserDefaults standardUserDefaults] setObject:credential forKey:@"spotifyCredentials"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 -(void)sessionDidLoginSuccessfully:(SPSession *)aSession; {
     NSLog(@"logged into spotify");
-    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
 }
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error; {
@@ -283,8 +369,6 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [rootViewController dismissViewControllerAnimated:NO completion:nil]; // dismisses loginViewController
     
     // show account link page when you log in for the first time
-//    SetAmbassadorsViewController* setAmbassadorsViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
-//    [rootViewController presentViewController:setAmbassadorsViewController animated:NO completion:nil];
     AccountLinkViewController *accountLinkViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
     [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];  
     
@@ -381,6 +465,17 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 #pragma mark -
 #pragma mark - AppDelegate methods
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    if (application.applicationState == UIApplicationStateActive) {
+        NSLog(@"received push notification");
+        self.newsNotificationLabel.alpha = 1.0;
+        [UIView animateWithDuration:5.0 animations:^{
+            self.newsNotificationLabel.alpha = 0.0;
+        }];
+    }
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -402,15 +497,20 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-//    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
-//    [(ListenTableViewController*)[[[(PiggybackTabBarController *)self.window.rootViewController viewControllers] objectAtIndex:0] topViewController] getFriendsTopTracks];
+//    NSLog(@"became active");
+//    PiggybackTabBarController* tabBarController = (PiggybackTabBarController*)self.window.rootViewController;
+//    UINavigationController* navigationController = [tabBarController.viewControllers objectAtIndex:0];
+//    HomeViewController* homeViewController = (HomeViewController*)navigationController.topViewController;
+//    [homeViewController fetchAmbassadorFavsFromCoreData];
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    NSLog(@"app will terminate");
 }
 
 @end

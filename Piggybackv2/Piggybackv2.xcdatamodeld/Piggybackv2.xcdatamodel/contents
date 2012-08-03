@@ -16,6 +16,7 @@
         <attribute name="musicActivityType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="musicItemId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="likes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicLike" inverseName="musicActivity" inverseEntity="PBMusicLike" syncable="YES"/>
         <relationship name="musicItem" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBMusicItem" inverseName="musicActivity" inverseEntity="PBMusicItem" syncable="YES"/>
         <relationship name="news" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicNews" inverseName="musicActivity" inverseEntity="PBMusicNews" syncable="YES"/>
         <relationship name="todos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicTodo" inverseName="musicActivity" inverseEntity="PBMusicTodo" syncable="YES"/>
@@ -32,11 +33,17 @@
         <attribute name="spotifyUrl" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="musicActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicActivity" inverseName="musicItem" inverseEntity="PBMusicActivity" syncable="YES"/>
     </entity>
+    <entity name="PBMusicLike" representedClassName="PBMusicLike" syncable="YES">
+        <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="followerUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="musicActivityId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="follower" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="musicLikes" inverseEntity="PBUser" syncable="YES"/>
+        <relationship name="musicActivity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBMusicActivity" inverseName="likes" inverseEntity="PBMusicActivity" syncable="YES"/>
+    </entity>
     <entity name="PBMusicNews" representedClassName="PBMusicNews" syncable="YES">
         <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="followerUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="musicActivityId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="musicNewsId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="newsActionType" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="follower" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="myMusicActions" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="musicActivity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBMusicActivity" inverseName="news" inverseEntity="PBMusicActivity" syncable="YES"/>
@@ -45,7 +52,6 @@
         <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="followerUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="musicActivityId" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="musicTodoId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="follower" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="musicTodos" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="musicActivity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBMusicActivity" inverseName="todos" inverseEntity="PBMusicActivity" syncable="YES"/>
     </entity>
@@ -57,6 +63,7 @@
         <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="news" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBPlacesNews" inverseName="placesActivity" inverseEntity="PBPlacesNews" syncable="YES"/>
         <relationship name="placesItem" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBPlacesItem" inverseName="placesActivity" inverseEntity="PBPlacesItem" syncable="YES"/>
+        <relationship name="todos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBPlacesTodo" inverseName="placesActivity" inverseEntity="PBPlacesTodo" syncable="YES"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="placesActivity" inverseEntity="PBUser" syncable="YES"/>
     </entity>
     <entity name="PBPlacesItem" representedClassName="PBPlacesItem" syncable="YES">
@@ -83,6 +90,13 @@
         <relationship name="follower" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="myPlacesActions" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="placesActivity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBPlacesActivity" inverseName="news" inverseEntity="PBPlacesActivity" syncable="YES"/>
     </entity>
+    <entity name="PBPlacesTodo" representedClassName="PBPlacesTodo" syncable="YES">
+        <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="followerUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="placesActivityId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="follower" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBUser" inverseName="placesTodos" inverseEntity="PBUser" syncable="YES"/>
+        <relationship name="placesActivity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBPlacesActivity" inverseName="todos" inverseEntity="PBPlacesActivity" syncable="YES"/>
+    </entity>
     <entity name="PBUser" representedClassName="PBUser" syncable="YES">
         <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateBecamePbUser" optional="YES" attributeType="Date" syncable="YES"/>
@@ -99,6 +113,7 @@
         <relationship name="musicActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicActivity" inverseName="user" inverseEntity="PBMusicActivity" syncable="YES"/>
         <relationship name="musicAmbassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="musicFollowers" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="musicFollowers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="musicAmbassadors" inverseEntity="PBUser" syncable="YES"/>
+        <relationship name="musicLikes" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PBMusicLike" inverseName="follower" inverseEntity="PBMusicLike" syncable="YES"/>
         <relationship name="musicTodos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicTodo" inverseName="follower" inverseEntity="PBMusicTodo" syncable="YES"/>
         <relationship name="myMusicActions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBMusicNews" inverseName="follower" inverseEntity="PBMusicNews" syncable="YES"/>
         <relationship name="myPlacesActions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBPlacesNews" inverseName="follower" inverseEntity="PBPlacesNews" syncable="YES"/>
@@ -106,6 +121,7 @@
         <relationship name="placesActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBPlacesActivity" inverseName="user" inverseEntity="PBPlacesActivity" syncable="YES"/>
         <relationship name="placesAmbassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="placesFollowers" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="placesFollowers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="placesAmbassadors" inverseEntity="PBUser" syncable="YES"/>
+        <relationship name="placesTodos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBPlacesTodo" inverseName="follower" inverseEntity="PBPlacesTodo" syncable="YES"/>
         <relationship name="videosActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBVideosActivity" inverseName="user" inverseEntity="PBVideosActivity" syncable="YES"/>
         <relationship name="videosAmbassadors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="videosFollowers" inverseEntity="PBUser" syncable="YES"/>
         <relationship name="videosFollowers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBUser" inverseName="videosAmbassadors" inverseEntity="PBUser" syncable="YES"/>
@@ -139,12 +155,14 @@
         <element name="PBFriend" positionX="0" positionY="0" width="128" height="165"/>
         <element name="PBMusicActivity" positionX="0" positionY="0" width="128" height="180"/>
         <element name="PBMusicItem" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="PBMusicLike" positionX="160" positionY="192" width="128" height="120"/>
         <element name="PBMusicNews" positionX="0" positionY="0" width="128" height="150"/>
         <element name="PBMusicTodo" positionX="160" positionY="192" width="128" height="135"/>
         <element name="PBPlacesActivity" positionX="0" positionY="0" width="128" height="165"/>
         <element name="PBPlacesItem" positionX="0" positionY="0" width="128" height="240"/>
         <element name="PBPlacesNews" positionX="0" positionY="0" width="128" height="150"/>
-        <element name="PBUser" positionX="0" positionY="0" width="128" height="420"/>
+        <element name="PBPlacesTodo" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="PBUser" positionX="0" positionY="0" width="128" height="450"/>
         <element name="PBVideosActivity" positionX="0" positionY="0" width="128" height="165"/>
         <element name="PBVideosItem" positionX="0" positionY="0" width="128" height="105"/>
         <element name="PBVideosNews" positionX="0" positionY="0" width="128" height="150"/>
