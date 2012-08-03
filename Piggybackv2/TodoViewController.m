@@ -14,6 +14,7 @@
 #import "PBPlacesItem.h"
 #import "PBPlacesActivity.h"
 #import "TodoMusicCell.h"
+#import "TodoPlacesCell.h"
 #import "Constants.h"
 
 @interface TodoViewController ()
@@ -210,17 +211,35 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"todoMusicTableCell";
-    TodoMusicCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    PBMusicTodo *todo = [self.todosToDisplay objectAtIndex:indexPath.row];
-    PBMusicActivity* musicActivity = todo.musicActivity;
+    // music
+    if ([[self.todosToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBMusicTodo class]]) {
+        static NSString *CellIdentifier = @"todoMusicTableCell";
+        TodoMusicCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        PBMusicTodo *todo = [self.todosToDisplay objectAtIndex:indexPath.row];
+        PBMusicActivity* musicActivity = todo.musicActivity;
+        
+        cell.songTitle.text = musicActivity.musicItem.songTitle;
+        cell.songArtist.text = musicActivity.musicItem.artistName;
+        cell.date.text = [self timeElapsed:todo.dateAdded];
+        cell.coverImage.image = [(SPImage*)[self.cachedAlbumCovers objectForKey:musicActivity.musicItem.spotifyUrl] image];
+        
+        return cell;
+    }
     
-    cell.songTitle.text = musicActivity.musicItem.songTitle;
-    cell.songArtist.text = musicActivity.musicItem.artistName;
-    cell.date.text = [self timeElapsed:todo.dateAdded];
-    cell.coverImage.image = [(SPImage*)[self.cachedAlbumCovers objectForKey:musicActivity.musicItem.spotifyUrl] image];
-
-    return cell;
+    // places
+    else if ([[self.todosToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesTodo class]]) {
+        static NSString *CellIdentifier = @"todoPlacesTableCell";
+        TodoPlacesCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        PBPlacesTodo *todo = [self.todosToDisplay objectAtIndex:indexPath.row];
+        PBPlacesActivity* placesActivity = todo.placesActivity;
+        
+        cell.vendorName.text = placesActivity.placesItem.name;
+        cell.vendorAddress.text = placesActivity.placesItem.addr;
+        cell.date.text = [self timeElapsed:todo.dateAdded];
+        cell.vendorImage.image = [self.cachedPlacesPhotos objectForKey:placesActivity.placesItem.photoURL];
+        
+        return cell;
+    }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath

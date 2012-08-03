@@ -15,9 +15,9 @@
 @synthesize favoritedBy = _favoritedBy;
 @synthesize profilePic = _profilePic;
 @synthesize date = _date;
+@synthesize icon = _icon;
 @synthesize heart = _heart;
 @synthesize todo = _todo;
-@synthesize icon = _icon;
 
 #pragma mark - initialization
 -(void)awakeFromNib {
