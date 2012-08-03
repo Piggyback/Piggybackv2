@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *vendorName;
 @property (weak, nonatomic) IBOutlet UILabel *vendorAddress;
 @property (weak, nonatomic) IBOutlet UILabel *date;
+@property (weak, nonatomic) IBOutlet UILabel *phone;
 
 @end

@@ -14,6 +14,7 @@
 @synthesize vendorName;
 @synthesize vendorAddress;
 @synthesize date;
+@synthesize phone;
 
 -(void)awakeFromNib {
     self.vendorImage.layer.cornerRadius = 5.0;

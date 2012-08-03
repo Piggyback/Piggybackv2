@@ -21,8 +21,9 @@
 
 @property (nonatomic, strong) NSMutableArray *todos;
 @property (nonatomic, strong) NSArray *todosToDisplay;
-@property (nonatomic, strong) NSMutableDictionary* cachedPlacesPhotos;
-@property (nonatomic, strong) NSMutableDictionary* cachedAlbumCovers;
+@property (nonatomic, strong) NSMutableDictionary* cachedPlacesPhotos;  // key is photoURL
+@property (nonatomic, strong) NSMutableDictionary* cachedAlbumCovers;   // key is spotifyURL
+@property (nonatomic, strong) NSMutableDictionary* formattedAddresses;  // key is placeActivityId
 
 @end
 
@@ -32,6 +33,7 @@
 @synthesize todosToDisplay = _todosToDisplay;
 @synthesize cachedAlbumCovers = _cachedAlbumCovers;
 @synthesize cachedPlacesPhotos = _cachedPlacesPhotos;
+@synthesize formattedAddresses = _formattedAddresses;
 @synthesize todos = _todos;
 
 #pragma mark - Getters & Setters
@@ -61,6 +63,13 @@
         _cachedPlacesPhotos = [[NSMutableDictionary alloc] init];
     }
     return _cachedPlacesPhotos;
+}
+
+- (NSMutableDictionary*)formattedAddresses {
+    if (!_formattedAddresses) {
+        _formattedAddresses = [[NSMutableDictionary alloc] init];
+    }
+    return _formattedAddresses;
 }
 
 #pragma mark - Private helper methods
@@ -106,6 +115,38 @@
             }
         }
     });
+}
+
+-(void)formatAddresses {
+    for (id todo in self.todos) {
+        if ([todo isKindOfClass:[PBPlacesTodo class]]) {
+            PBPlacesTodo* placesTodo = todo;
+            NSString* addr = placesTodo.placesActivity.placesItem.addr;
+            NSString* addrCity = placesTodo.placesActivity.placesItem.addrCity;
+            NSString* addrState = placesTodo.placesActivity.placesItem.addrState;
+            
+            NSMutableString* formattedAddress = [[NSMutableString alloc] init];
+            if ([addr length] != 0 || [addrCity length] != 0 || [addrState length] != 0)  {
+                formattedAddress = [[NSMutableString alloc] init];
+                if ([addr length])
+                    [formattedAddress appendFormat:@"%@", addr];
+                if ([addr length] && ([addrCity length] || [addrState length])) {
+                    [formattedAddress appendFormat:@", "];
+                }
+                if ([addrCity length] || [addrState length]) {
+                    if ([addrCity length]) {
+                        [formattedAddress appendFormat:@"%@",addrCity];
+                        if ([addrState length]) {
+                            [formattedAddress appendFormat:@", %@",addrState];
+                        }
+                    } else {
+                        [formattedAddress appendFormat:@"%@",addrState];
+                    }
+                }
+            }
+            [self.formattedAddresses setObject:formattedAddress forKey:placesTodo.placesActivityId];
+        }
+    }
 }
 
 // get string for time elapsed e.g., "2 days ago"
@@ -160,29 +201,29 @@
 
 -(void)changeSegment:(id)sender {
     
-    NSMutableArray* selectedItems = [[NSMutableArray alloc] init];
+    NSMutableArray* selectedTodos = [[NSMutableArray alloc] init];
     
     // all
     if ([sender selectedSegmentIndex] == 0) {
-        //        selectedItems = self.items;
+        selectedTodos = self.todos;
     }
     
     // music
     else if ([sender selectedSegmentIndex] == 1) {
-        //        for (id item in self.items) {
-        //            if ([item isKindOfClass:[PBMusicActivity class]]) {
-        //                [selectedItems addObject:item];
-        //            }
-        //        }
+        for (id todo in self.todos) {
+            if ([todo isKindOfClass:[PBMusicTodo class]]) {
+                [selectedTodos addObject:todo];
+            }
+        }
     }
     
     // places
     else if ([sender selectedSegmentIndex] == 2) {
-        //        for (id item in self.items) {
-        //            if ([item isKindOfClass:[PBPlacesActivity class]]) {
-        //                [selectedItems addObject:item];
-        //            }
-        //        }
+        for (id todo in self.todos) {
+            if ([todo isKindOfClass:[PBPlacesTodo class]]) {
+                [selectedTodos addObject:todo];
+            }
+        }
     }
     
     else if ([sender selectedSegmentIndex] == 3) {
@@ -193,7 +234,7 @@
         //        }
     }
     
-    //    self.displayItems = selectedItems;
+    self.todosToDisplay = selectedTodos;
     [self.tableView reloadData];
 }
 
@@ -234,9 +275,10 @@
         PBPlacesActivity* placesActivity = todo.placesActivity;
         
         cell.vendorName.text = placesActivity.placesItem.name;
-        cell.vendorAddress.text = placesActivity.placesItem.addr;
+        cell.vendorAddress.text = [self.formattedAddresses objectForKey:placesActivity.placesActivityId];
         cell.date.text = [self timeElapsed:todo.dateAdded];
         cell.vendorImage.image = [self.cachedPlacesPhotos objectForKey:placesActivity.placesItem.photoURL];
+        cell.phone.text = placesActivity.placesItem.phone;
         
         return cell;
     }
@@ -257,6 +299,9 @@
 - (void)viewDidAppear:(BOOL)animated {
     // cache images
     [self cacheImages];
+    
+    // cache formatted addresses
+    [self formatAddresses];
 }
 
 - (void)viewDidLoad

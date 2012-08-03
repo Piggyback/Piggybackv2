@@ -345,15 +345,15 @@
                                                     <rect key="frame" x="5" y="4" width="51" height="51"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Boyfriend" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="HCb-G7-LUl">
-                                                    <rect key="frame" x="64" y="1" width="204" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Boyfriend" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="HCb-G7-LUl">
+                                                    <rect key="frame" x="64" y="1" width="219" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Justin Bieber" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Gr3-QT-FTb">
-                                                    <rect key="frame" x="64" y="18" width="204" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Justin Bieber" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="Gr3-QT-FTb">
+                                                    <rect key="frame" x="64" y="18" width="219" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -400,19 +400,16 @@
                                                     <rect key="frame" x="5" y="4" width="51" height="51"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="McDonalds" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Lqi-DJ-OPW">
-                                                    <rect key="frame" x="64" y="1" width="204" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="McDonalds" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="Lqi-DJ-OPW">
+                                                    <rect key="frame" x="64" y="1" width="217" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="pcK-Sq-yPy">
-                                                    <rect key="frame" x="64" y="19" width="204" height="36"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="131 Santa Clara Ave, Sunnyvale CA 95051" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="pcK-Sq-yPy">
+                                                    <rect key="frame" x="64" y="35" width="251" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <string key="text">131 Santa Clara Ave.
-Sunnyvale, CA 95051
-</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -424,11 +421,19 @@ Sunnyvale, CA 95051
                                                     <color key="textColor" white="0.52189781020000003" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="(310) 325-7956" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="qmQ-zg-wYX">
+                                                    <rect key="frame" x="64" y="18" width="196" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
                                             <outlet property="date" destination="W37-P8-mRG" id="aM5-mE-eLu"/>
+                                            <outlet property="phone" destination="qmQ-zg-wYX" id="nDt-gX-Uvh"/>
                                             <outlet property="vendorAddress" destination="pcK-Sq-yPy" id="9da-Dg-ijB"/>
                                             <outlet property="vendorImage" destination="Uca-Aa-22q" id="JBN-KN-Cx0"/>
                                             <outlet property="vendorName" destination="Lqi-DJ-OPW" id="5ZU-oZ-De0"/>
@@ -926,6 +931,7 @@ Sunnyvale, CA 95051
             <relationships>
                 <relationship kind="action" name="continueButton:"/>
                 <relationship kind="action" name="foursquareConnect:"/>
+                <relationship kind="action" name="logout:"/>
                 <relationship kind="action" name="spotifyConnect:"/>
                 <relationship kind="action" name="youtubeConnect:"/>
                 <relationship kind="outlet" name="youtubeToggle" candidateClass="UISwitch"/>
@@ -954,8 +960,6 @@ Sunnyvale, CA 95051
         <class className="HomePlacesCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomePlacesCell.h"/>
             <relationships>
-                <relationship kind="action" name="heart:"/>
-                <relationship kind="action" name="todo:"/>
                 <relationship kind="outlet" name="date" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
@@ -969,8 +973,6 @@ Sunnyvale, CA 95051
         <class className="HomeVideosCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeVideosCell.h"/>
             <relationships>
-                <relationship kind="action" name="heart:"/>
-                <relationship kind="action" name="todo:"/>
                 <relationship kind="outlet" name="date" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
