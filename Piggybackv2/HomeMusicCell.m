@@ -41,7 +41,6 @@
         [self.delegate addMusicTodo:self.musicActivity];
     } else {
         self.todo.selected = NO;
-        // remove todo from core data
         [self.delegate removeMusicTodo:self.musicActivity];
     }
 }

@@ -18,17 +18,21 @@
 @synthesize todo = _todo;
 @synthesize icon = _icon;
 @synthesize mainPic = _mainPic;
+@synthesize placesActivity = _placesActivity;
+@synthesize delegate = _delegate;
 
 - (IBAction)heart:(id)sender {
     [self.heart setImage:[UIImage imageNamed:@"heart-pressed-button"] forState:UIControlStateNormal];
 }
 
 - (IBAction)todo:(id)sender {
-    [self.todo setImage:[UIImage imageNamed:@"todo-added-button"] forState:UIControlStateNormal];
-//    NSLog(@"adding todo from andy's phone");
-//    [[RKClient sharedClient] post:@"/addTodo" usingBlock:^(RKRequest *request) {
-//        
-//    }];
+    if (self.todo.selected == NO) {
+        self.todo.selected = YES;
+        [self.delegate addPlacesTodo:self.placesActivity];
+    } else {
+        self.todo.selected = NO;
+        [self.delegate removePlacesTodo:self.placesActivity];
+    }
 }
 
 @end
