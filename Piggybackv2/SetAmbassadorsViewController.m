@@ -134,6 +134,7 @@
                     // [[RKObjectManager sharedManager] postObject:newAmbassador delegate:self];
                 }
                 
+                // store photo in core data
                 if (!friend.thumbnail) {
                     NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",newUser.fbId];
                     newUser.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
@@ -141,6 +142,18 @@
                 } else {
                     newUser.thumbnail = friend.thumbnail;
                     [[RKObjectManager sharedManager].objectStore save:nil];
+                }
+                
+                // update foursquare id if they didnt have one before but have one now
+                if (!newUser.foursquareId) {
+                    if (friend.foursquareId) {
+                        newUser.foursquareId = friend.foursquareId;
+                        
+                        // update user
+                        [[RKObjectManager sharedManager] putObject:newUser usingBlock:^(RKObjectLoader* loader) {
+                            NSLog(@"user updated with foursquareId");
+                        }];
+                    }
                 }
                 
                 NSLog(@"me is %@",me);
@@ -170,6 +183,20 @@
                 [friendUser addVideosFollowersObject:me];
                 
                 // add ambassador to db
+            }
+        }
+        
+        // add foursquare id if they dont have one
+        if (!friendUser.foursquareId) {
+            NSLog(@"friend user has no fs id");
+            if (friend.foursquareId) {
+                friendUser.foursquareId = friend.foursquareId;
+                NSLog(@"but friend has fs id ");
+                
+                // update user
+                [[RKObjectManager sharedManager] putObject:friendUser usingBlock:^(RKObjectLoader* loader) {
+                    NSLog(@"user updated with foursquareId");
+                }];
             }
         }
             
