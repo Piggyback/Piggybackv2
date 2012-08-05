@@ -26,7 +26,7 @@
 #import "PBVideosActivity.h"
 #import "PBMusicNews.h"
 #import "PBPlacesFeedback.h"
-#import "PBVideosTodo.h"
+#import "PBVideosFeedback.h"
 #import "PBMusicFeedback.h"
 #import <RestKit/RKRequestSerialization.h>
 
@@ -139,7 +139,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [router routeClass:[PBPlacesFeedback class] toResourcePath:@"/addPlacesFeedback" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBVideosItem class] toResourcePath:@"/addVideosItem" forMethod:RKRequestMethodPOST];
     [router routeClass:[PBVideosActivity class] toResourcePath:@"/addVideosActivity" forMethod:RKRequestMethodPOST];
-    [router routeClass:[PBVideosTodo class] toResourcePath:@"/addVideosTodo" forMethod:RKRequestMethodPOST];
+    [router routeClass:[PBVideosFeedback class] toResourcePath:@"/addVideosFeedback" forMethod:RKRequestMethodPOST];
 }
 
 - (void)setupRestkitMapping {
@@ -156,7 +156,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKManagedObjectMapping *placesFeedbackMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesFeedback" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* videosItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosItem" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* videosActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosActivity" inManagedObjectStore:objectManager.objectStore];
-    RKManagedObjectMapping *videosTodoMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosTodo" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping *videosFeedbackMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosFeedback" inManagedObjectStore:objectManager.objectStore];
     
     // user mapping
     userMapping.primaryKeyAttribute = @"uid";
@@ -232,11 +232,12 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [videosActivityMapping connectRelationship:@"user" withObjectForPrimaryKeyAttribute:@"uid"];
     [objectManager.mappingProvider setMapping:videosActivityMapping forKeyPath:@"PBVideosActivity"];
     
-    // videosTodo mapping
-    [videosTodoMapping mapAttributes:@"dateAdded", @"videosActivityId", nil];
-    [videosTodoMapping mapRelationship:@"videosActivity" withMapping:videosActivityMapping];
-    [videosTodoMapping connectRelationship:@"videosActivity" withObjectForPrimaryKeyAttribute:@"videosActivityId"];
-    [objectManager.mappingProvider setMapping:videosTodoMapping forKeyPath:@"PBVideosTodo"];
+    // videosFeedback mapping
+    videosFeedbackMapping.primaryKeyAttribute = @"videosFeedbackId";
+    [videosFeedbackMapping mapAttributes:@"videosFeedbackId", @"dateAdded", @"videosActivityId", @"followerUid", @"videosFeedbackType", nil];
+    [videosFeedbackMapping mapRelationship:@"videosActivity" withMapping:videosActivityMapping];
+    [videosFeedbackMapping connectRelationship:@"videosActivity" withObjectForPrimaryKeyAttribute:@"videosActivityId"];
+    [objectManager.mappingProvider setMapping:videosFeedbackMapping forKeyPath:@"PBVideosFeedback"];
     
     // serialization declarations
     RKObjectMapping *userSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
@@ -248,7 +249,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKObjectMapping *placesFeedbackSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *videosItemSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     RKObjectMapping *videosActivitySerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-    RKObjectMapping *videosTodoSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    RKObjectMapping *videosFeedbackSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
 
     // user serialization
     [userSerializationMapping mapAttributes:@"uid",@"fbId",@"firstName",@"lastName",@"email",@"spotifyUsername",@"youtubeUsername",@"foursquareId",@"isPiggybackUser",@"dateAdded",@"dateBecamePbUser",nil];
@@ -292,13 +293,14 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     
     // videosActivity serialization
     [videosActivitySerializationMapping mapAttributes:@"videosActivityId",@"uid",@"videosItemId",@"videosActivityType",@"dateAdded",nil];
+    [videosActivitySerializationMapping mapRelationship:@"videosItem" withMapping:videosItemSerializationMapping];
     [objectManager.mappingProvider setSerializationMapping:videosActivitySerializationMapping forClass:[PBVideosActivity class]];
     
-    // videosTodo serialization
-    [videosTodoSerializationMapping mapAttributes:@"videosActivityId", @"followerUid", nil];
-    [videosTodoSerializationMapping mapRelationship:@"videosActivity" withMapping:videosActivitySerializationMapping];
-    [videosTodoSerializationMapping mapRelationship:@"follower" withMapping:userSerializationMapping];
-    [objectManager.mappingProvider setSerializationMapping:videosTodoSerializationMapping forClass:[PBVideosTodo class]];
+    // videosFeedback serialization
+    [videosFeedbackSerializationMapping mapAttributes:@"videosFeedbackId", @"videosActivityId", @"followerUid", @"videosFeedbackType", nil];
+    [videosFeedbackSerializationMapping mapRelationship:@"videosActivity" withMapping:videosActivitySerializationMapping];
+    [videosFeedbackSerializationMapping mapRelationship:@"follower" withMapping:userSerializationMapping];
+    [objectManager.mappingProvider setSerializationMapping:videosFeedbackSerializationMapping forClass:[PBVideosFeedback class]];
 }
 
 #pragma mark -

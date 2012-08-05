@@ -20,6 +20,7 @@
 #import "YouTubeView.h"
 #import "PBPlacesFeedback.h"
 #import "PBMusicFeedback.h"
+#import "PBVideosFeedback.h"
 #import <RestKit/RKRequestSerialization.h>
 
 @interface HomeViewController ()
@@ -533,6 +534,59 @@
     }
 }
 
+- (void)addVideosFeedback:(PBVideosActivity *)videosActivity forFeedbackType:(NSString *)feedbackType {
+    PBVideosFeedback *videosFeedback = [PBVideosFeedback object];
+    videosFeedback.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
+    videosFeedback.follower = [PBUser findByPrimaryKey:videosFeedback.followerUid];
+    videosFeedback.videosActivityId = videosActivity.videosActivityId;
+    videosFeedback.videosActivity = videosActivity;
+    videosFeedback.videosFeedbackType = @"todo";
+    videosFeedback.status = [NSNumber numberWithInt:0];
+    
+    if ([feedbackType isEqualToString:@"todo"]) {
+        NSLog(@"in add videos to do");
+        
+        videosFeedback.videosFeedbackType = @"todo";
+        
+        [[RKObjectManager sharedManager] postObject:videosFeedback delegate:self];
+    } else if ([feedbackType isEqualToString:@"like"]) {
+        NSLog(@"in add videos like");
+        
+        videosFeedback.videosFeedbackType = @"like";
+    }
+    
+    [[RKObjectManager sharedManager] postObject:videosFeedback delegate:self];
+}
+
+- (void)removeVideosFeedback:(PBVideosActivity *)videosActivity forFeedbackType:(NSString *)feedbackType {
+    PBVideosFeedback *videosFeedback;
+    
+    if ([feedbackType isEqualToString:@"todo"]) {
+        NSLog(@"in remove videos to do");
+        // remove todo from core data
+        videosFeedback = [PBVideosFeedback objectWithPredicate:[NSPredicate predicateWithFormat:@"(videosActivityId == %@) AND (videosFeedbackType like 'todo')", videosActivity.videosActivityId]];
+    } else if ([feedbackType isEqualToString:@"like"]) {
+        NSLog(@"in remove videos like");
+        videosFeedback = [PBVideosFeedback objectWithPredicate:[NSPredicate predicateWithFormat:@"(videosActivityId == %@) AND (videosFeedbackType like 'like')", videosActivity.videosActivityId]];
+    }
+    
+    NSNumber *videosFeedbackId = videosFeedback.videosFeedbackId;
+    
+    NSManagedObjectContext *context = [[[RKObjectManager sharedManager] objectStore] managedObjectContextForCurrentThread];
+    [context deleteObject:videosFeedback];
+    [context save:nil];
+    
+    // set status flag to 'deleted' in DB
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:videosFeedbackId, @"videosFeedbackId", nil];
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    NSError *error = nil;
+    NSString *json = [parser stringFromObject:params error:&error];
+    
+    if (!error) {
+        [[RKClient sharedClient] put:@"/removeVideosFeedback" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
+    }
+}
+
 #pragma mark - RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
@@ -709,6 +763,8 @@
         HomeVideosCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.profilePic.layer.cornerRadius = 5;
         cell.profilePic.layer.masksToBounds = YES;
+        cell.delegate = self;
+        cell.videosActivity = videosActivity;
         
         cell.nameOfItem.text = videosItem.name;
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ %@ a new video",user.firstName,user.lastName,videosActivity.videosActivityType];

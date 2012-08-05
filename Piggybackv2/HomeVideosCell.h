@@ -7,6 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RestKit/RestKit.h>
+#import "PBVideosActivity.h"
+
+@protocol HomeVideosCellDelegate
+
+- (void)addVideosFeedback:(PBVideosActivity*)videosActivity forFeedbackType:(NSString *)feedbackType;
+- (void)removeVideosFeedback:(PBVideosActivity*)videosActivity forFeedbackType:(NSString *)feedbackType;
+
+@end
 
 @interface HomeVideosCell : UITableViewCell
 
@@ -17,6 +26,8 @@
 @property (nonatomic, weak) IBOutlet UIButton* heart;
 @property (nonatomic, weak) IBOutlet UIButton* todo;
 @property (nonatomic, weak) IBOutlet UIImageView* icon;
+@property (nonatomic, strong) PBVideosActivity *videosActivity;
+@property (nonatomic, weak) id<HomeVideosCellDelegate> delegate;
 
 - (IBAction)heart:(id)sender;
 - (IBAction)todo:(id)sender;
