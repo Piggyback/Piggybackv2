@@ -7,9 +7,9 @@
 //
 
 #import "TodoViewController.h"
-#import "PBMusicTodo.h"
 #import "PBMusicActivity.h"
 #import "PBMusicItem.h"
+#import "PBMusicFeedback.h"
 
 @interface TodoViewController ()
 
@@ -32,10 +32,10 @@
 
 #pragma mark - Private helper methods
 - (void)loadObjectsFromDataStore {
-    NSFetchRequest* request = [PBMusicTodo fetchRequest];
+    NSFetchRequest* request = [PBMusicFeedback fetchRequest];
     //    NSSortDescriptor* descriptor = [NSSortDescriptor sortDescriptorWithKey:@"referralDate" ascending:NO];
     //    [request setSortDescriptors:[NSArray arrayWithObject:descriptor]];
-    self.todosToDisplay = [PBMusicTodo objectsWithFetchRequest:request];
+    self.todosToDisplay = [PBMusicFeedback objectsWithFetchRequest:request];
 }
 
 #pragma mark - Table view data source
@@ -54,7 +54,7 @@
 {
     static NSString *CellIdentifier = @"todoTableCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    PBMusicTodo *todo = [self.todosToDisplay objectAtIndex:indexPath.row];
+    PBMusicFeedback *todo = [self.todosToDisplay objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@", todo.musicActivity.musicItem.songTitle];
     

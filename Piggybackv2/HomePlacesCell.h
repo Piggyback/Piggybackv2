@@ -12,10 +12,8 @@
 
 @protocol HomePlacesCellDelegate
 
-- (void)addPlacesTodo:(PBPlacesActivity*)placesActivity;
-- (void)removePlacesTodo:(PBPlacesActivity*)placesActivity;
-- (void)addPlacesLike:(PBPlacesActivity*)placesActivity;
-- (void)removePlacesLike:(PBPlacesActivity*)placesActivity;
+- (void)addPlacesFeedback:(PBPlacesActivity*)placesActivity forFeedbackType:(NSString *)feedbackType;
+- (void)removePlacesFeedback:(PBPlacesActivity*)placesActivity forFeedbackType:(NSString *)feedbackType;
 
 @end
 

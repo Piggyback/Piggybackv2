@@ -24,20 +24,20 @@
 - (IBAction)heart:(id)sender {
     if (self.heart.selected == NO) {
         self.heart.selected = YES;
-        [self.delegate addPlacesLike:self.placesActivity];
+        [self.delegate addPlacesFeedback:self.placesActivity forFeedbackType:@"like"];
     } else {
         self.heart.selected = NO;
-        [self.delegate removePlacesLike:self.placesActivity];
+        [self.delegate removePlacesFeedback:self.placesActivity forFeedbackType:@"like"];
     }
 }
 
 - (IBAction)todo:(id)sender {
     if (self.todo.selected == NO) {
         self.todo.selected = YES;
-        [self.delegate addPlacesTodo:self.placesActivity];
+        [self.delegate addPlacesFeedback:self.placesActivity forFeedbackType:@"todo"];
     } else {
         self.todo.selected = NO;
-        [self.delegate removePlacesTodo:self.placesActivity];
+        [self.delegate removePlacesFeedback:self.placesActivity forFeedbackType:@"todo"];
     }
 }
 

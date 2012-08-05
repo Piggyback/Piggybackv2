@@ -87,10 +87,9 @@
 		C422341515ACE528005151A3 /* libCocoaLibSpotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C422341015ACE515005151A3 /* libCocoaLibSpotify.a */; };
 		C448FB3815C8A4D4003A804D /* TodoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C448FB3715C8A4D4003A804D /* TodoViewController.m */; };
 		C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4739E7815B88A6600F714A7 /* NewsViewController.m */; };
-		C47A509215CC433200D80B6D /* PBMusicLike.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509115CC433200D80B6D /* PBMusicLike.m */; };
-		C47A509515CC49E300D80B6D /* PBPlacesTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509415CC49E300D80B6D /* PBPlacesTodo.m */; };
-		C47A509815CC5A8600D80B6D /* PBPlacesLike.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509715CC5A8600D80B6D /* PBPlacesLike.m */; };
-		C4B24A6D15C332DD00796C57 /* PBMusicTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */; };
+		C47A509B15CC5CE600D80B6D /* PBVideosTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509A15CC5CE600D80B6D /* PBVideosTodo.m */; };
+		C47A509E15CC711800D80B6D /* PBMusicFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509D15CC711800D80B6D /* PBMusicFeedback.m */; };
+		C4DE6A4D15CF1F0400197EFA /* PBPlacesFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DE6A4C15CF1F0400197EFA /* PBPlacesFeedback.m */; };
 		F90780CC15C6ED8400B36C82 /* pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C815C6ED8400B36C82 /* pause-button.png */; };
 		F90780CD15C6ED8400B36C82 /* pause-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C915C6ED8400B36C82 /* pause-button@2x.png */; };
 		F90780CE15C6ED8400B36C82 /* play-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780CA15C6ED8400B36C82 /* play-button.png */; };
@@ -399,14 +398,12 @@
 		C448FB3715C8A4D4003A804D /* TodoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoViewController.m; sourceTree = "<group>"; };
 		C4739E7715B88A6600F714A7 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
 		C4739E7815B88A6600F714A7 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
-		C47A509015CC433200D80B6D /* PBMusicLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicLike.h; path = Piggybackv2/PBMusicLike.h; sourceTree = "<group>"; };
-		C47A509115CC433200D80B6D /* PBMusicLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicLike.m; path = Piggybackv2/PBMusicLike.m; sourceTree = "<group>"; };
-		C47A509315CC49E300D80B6D /* PBPlacesTodo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesTodo.h; path = Piggybackv2/PBPlacesTodo.h; sourceTree = "<group>"; };
-		C47A509415CC49E300D80B6D /* PBPlacesTodo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesTodo.m; path = Piggybackv2/PBPlacesTodo.m; sourceTree = "<group>"; };
-		C47A509615CC5A8600D80B6D /* PBPlacesLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesLike.h; path = Piggybackv2/PBPlacesLike.h; sourceTree = "<group>"; };
-		C47A509715CC5A8600D80B6D /* PBPlacesLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesLike.m; path = Piggybackv2/PBPlacesLike.m; sourceTree = "<group>"; };
-		C4B24A6B15C332DD00796C57 /* PBMusicTodo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicTodo.h; path = Piggybackv2/PBMusicTodo.h; sourceTree = "<group>"; };
-		C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicTodo.m; path = Piggybackv2/PBMusicTodo.m; sourceTree = "<group>"; };
+		C47A509915CC5CE600D80B6D /* PBVideosTodo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBVideosTodo.h; path = Piggybackv2/PBVideosTodo.h; sourceTree = "<group>"; };
+		C47A509A15CC5CE600D80B6D /* PBVideosTodo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBVideosTodo.m; path = Piggybackv2/PBVideosTodo.m; sourceTree = "<group>"; };
+		C47A509C15CC711800D80B6D /* PBMusicFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicFeedback.h; path = Piggybackv2/PBMusicFeedback.h; sourceTree = "<group>"; };
+		C47A509D15CC711800D80B6D /* PBMusicFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicFeedback.m; path = Piggybackv2/PBMusicFeedback.m; sourceTree = "<group>"; };
+		C4DE6A4B15CF1F0400197EFA /* PBPlacesFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesFeedback.h; path = Piggybackv2/PBPlacesFeedback.h; sourceTree = "<group>"; };
+		C4DE6A4C15CF1F0400197EFA /* PBPlacesFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesFeedback.m; path = Piggybackv2/PBPlacesFeedback.m; sourceTree = "<group>"; };
 		F90780C815C6ED8400B36C82 /* pause-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-button.png"; sourceTree = "<group>"; };
 		F90780C915C6ED8400B36C82 /* pause-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-button@2x.png"; sourceTree = "<group>"; };
 		F90780CA15C6ED8400B36C82 /* play-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button.png"; sourceTree = "<group>"; };
@@ -734,30 +731,28 @@
 				F957A74E15C0A4D20033CF00 /* PBVideosNews.m */,
 				F957A74715C0A4D20033CF00 /* PBUser.h */,
 				F957A74815C0A4D20033CF00 /* PBUser.m */,
-				F957A74415C0A4D20033CF00 /* PBVideosItem.h */,
-				F957A74515C0A4D20033CF00 /* PBVideosItem.m */,
-				F957A75115C0A6BD0033CF00 /* PBVideosActivity.h */,
-				F957A75215C0A6BD0033CF00 /* PBVideosActivity.m */,
-				F9AE7CD915BA7201001008C7 /* PBPlacesItem.h */,
-				F9AE7CDA15BA7202001008C7 /* PBPlacesItem.m */,
-				F9A89D4E15BDCCE1007AC27D /* PBPlacesActivity.h */,
-				F9A89D4F15BDCCE1007AC27D /* PBPlacesActivity.m */,
-				C47A509315CC49E300D80B6D /* PBPlacesTodo.h */,
-				C47A509415CC49E300D80B6D /* PBPlacesTodo.m */,
-				C47A509615CC5A8600D80B6D /* PBPlacesLike.h */,
-				C47A509715CC5A8600D80B6D /* PBPlacesLike.m */,
-				F9AE7CD315BA71FF001008C7 /* PBPlacesNews.h */,
-				F9AE7CD415BA7200001008C7 /* PBPlacesNews.m */,
 				F9774C8215B722CD00FC6FBC /* PBMusicItem.h */,
 				F9774C8315B722CD00FC6FBC /* PBMusicItem.m */,
 				F9A428C115B46276000D147C /* PBMusicActivity.h */,
 				F9A428C215B46276000D147C /* PBMusicActivity.m */,
-				C4B24A6B15C332DD00796C57 /* PBMusicTodo.h */,
-				C4B24A6C15C332DD00796C57 /* PBMusicTodo.m */,
-				C47A509015CC433200D80B6D /* PBMusicLike.h */,
-				C47A509115CC433200D80B6D /* PBMusicLike.m */,
+				C47A509C15CC711800D80B6D /* PBMusicFeedback.h */,
+				C47A509D15CC711800D80B6D /* PBMusicFeedback.m */,
 				F9A428B815B46276000D147C /* PBMusicNews.h */,
 				F9A428B915B46276000D147C /* PBMusicNews.m */,
+				F9AE7CD915BA7201001008C7 /* PBPlacesItem.h */,
+				F9AE7CDA15BA7202001008C7 /* PBPlacesItem.m */,
+				F9A89D4E15BDCCE1007AC27D /* PBPlacesActivity.h */,
+				F9A89D4F15BDCCE1007AC27D /* PBPlacesActivity.m */,
+				C4DE6A4B15CF1F0400197EFA /* PBPlacesFeedback.h */,
+				C4DE6A4C15CF1F0400197EFA /* PBPlacesFeedback.m */,
+				F9AE7CD315BA71FF001008C7 /* PBPlacesNews.h */,
+				F9AE7CD415BA7200001008C7 /* PBPlacesNews.m */,
+				F957A74415C0A4D20033CF00 /* PBVideosItem.h */,
+				F957A74515C0A4D20033CF00 /* PBVideosItem.m */,
+				F957A75115C0A6BD0033CF00 /* PBVideosActivity.h */,
+				F957A75215C0A6BD0033CF00 /* PBVideosActivity.m */,
+				C47A509915CC5CE600D80B6D /* PBVideosTodo.h */,
+				C47A509A15CC5CE600D80B6D /* PBVideosTodo.m */,
 				F9A4289715B45C7B000D147C /* PBFriend.h */,
 				F9A4289815B45C7B000D147C /* PBFriend.m */,
 			);
@@ -1232,13 +1227,12 @@
 				F944281C15C303DE00930EFD /* HomeVideosCell.m in Sources */,
 				F964302F15C32E74006D1715 /* YouTubeView.m in Sources */,
 				F964303215C348DA006D1715 /* HomePlacesCell.m in Sources */,
-				C4B24A6D15C332DD00796C57 /* PBMusicTodo.m in Sources */,
 				F9ED08EF15C9D8D400525624 /* SetAmbassadorsViewController.m in Sources */,
 				F9ED08F215CB0A4000525624 /* HomeFeedNavigationController.m in Sources */,
 				C448FB3815C8A4D4003A804D /* TodoViewController.m in Sources */,
-				C47A509215CC433200D80B6D /* PBMusicLike.m in Sources */,
-				C47A509515CC49E300D80B6D /* PBPlacesTodo.m in Sources */,
-				C47A509815CC5A8600D80B6D /* PBPlacesLike.m in Sources */,
+				C47A509B15CC5CE600D80B6D /* PBVideosTodo.m in Sources */,
+				C47A509E15CC711800D80B6D /* PBMusicFeedback.m in Sources */,
+				C4DE6A4D15CF1F0400197EFA /* PBPlacesFeedback.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

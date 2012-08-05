@@ -18,10 +18,8 @@
 #import "PBVideosItem.h"
 #import "PBVideosActivity.h"
 #import "YouTubeView.h"
-#import "PBMusicTodo.h"
-#import "PBMusicLike.h"
-#import "PBPlacesTodo.h"
-#import "PBPlacesLike.h"
+#import "PBPlacesFeedback.h"
+#import "PBMusicFeedback.h"
 #import <RestKit/RKRequestSerialization.h>
 
 @interface HomeViewController ()
@@ -429,131 +427,109 @@
 }
 
 #pragma mark - home music cell delegate methods
-- (void)addMusicTodo:(PBMusicActivity*)musicActivity {
-    // in add music todo
-    NSLog(@"in add music to do");
-    PBMusicTodo *musicTodo = [PBMusicTodo object];
-    musicTodo.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
-    musicTodo.follower = [PBUser findByPrimaryKey:musicTodo.followerUid];
-    musicTodo.musicActivityId = musicActivity.musicActivityId;
-    musicTodo.musicActivity = musicActivity;
-
-    [[RKObjectManager sharedManager] postObject:musicTodo delegate:self];
+- (void)addMusicFeedback:(PBMusicActivity *)musicActivity forFeedbackType:(NSString *)feedbackType {
+    PBMusicFeedback *musicFeedback = [PBMusicFeedback object];
+    musicFeedback.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
+    musicFeedback.follower = [PBUser findByPrimaryKey:musicFeedback.followerUid];
+    musicFeedback.musicActivityId = musicActivity.musicActivityId;
+    musicFeedback.musicActivity = musicActivity;
+    musicFeedback.musicFeedbackType = @"todo";
+    musicFeedback.status = [NSNumber numberWithInt:0];
+    
+    if ([feedbackType isEqualToString:@"todo"]) {
+        NSLog(@"in add music to do");
+        
+        musicFeedback.musicFeedbackType = @"todo";
+        
+        [[RKObjectManager sharedManager] postObject:musicFeedback delegate:self];
+    } else if ([feedbackType isEqualToString:@"like"]) {
+        NSLog(@"in add music like");
+        
+        musicFeedback.musicFeedbackType = @"like";
+    }
+    
+    [[RKObjectManager sharedManager] postObject:musicFeedback delegate:self];
 }
 
-- (void)removeMusicTodo:(PBMusicActivity *)musicActivity {
-    NSLog(@"in remove music to do");
-    // remove todo from core data
-    PBMusicTodo *musicTodo = [PBMusicTodo objectWithPredicate:[NSPredicate predicateWithFormat:@"musicActivityId == %@", musicActivity.musicActivityId]];
+- (void)removeMusicFeedback:(PBMusicActivity *)musicActivity forFeedbackType:(NSString *)feedbackType {
+    PBMusicFeedback *musicFeedback;
+    
+    if ([feedbackType isEqualToString:@"todo"]) {
+        NSLog(@"in remove music to do");
+        // remove todo from core data
+        musicFeedback = [PBMusicFeedback objectWithPredicate:[NSPredicate predicateWithFormat:@"(musicActivityId == %@) AND (musicFeedbackType like 'todo')", musicActivity.musicActivityId]];
+    } else if ([feedbackType isEqualToString:@"like"]) {
+        NSLog(@"in remove music like");
+        musicFeedback = [PBMusicFeedback objectWithPredicate:[NSPredicate predicateWithFormat:@"(musicActivityId == %@) AND (musicFeedbackType like 'like')", musicActivity.musicActivityId]];
+    }
+    
+    NSNumber *musicFeedbackId = musicFeedback.musicFeedbackId;
     
     NSManagedObjectContext *context = [[[RKObjectManager sharedManager] objectStore] managedObjectContextForCurrentThread];
-    [context deleteObject:musicTodo];
+    [context deleteObject:musicFeedback];
     [context save:nil];
     
     // set status flag to 'deleted' in DB
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:musicActivity.musicActivityId, @"musicActivityId", [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]], @"followerUid", nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:musicFeedbackId, @"musicFeedbackId", nil];
     id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
     NSError *error = nil;
     NSString *json = [parser stringFromObject:params error:&error];
     
     if (!error) {
-        [[RKClient sharedClient] put:@"/removeMusicTodo" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
+        [[RKClient sharedClient] put:@"/removeMusicFeedback" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
     }
 }
 
-- (void)addMusicLike:(PBMusicActivity*)musicActivity {
-    // in add music like
-    NSLog(@"in add music like");
-    PBMusicLike *musicLike = [PBMusicLike object];
-    musicLike.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
-    musicLike.follower = [PBUser findByPrimaryKey:musicLike.followerUid];
-    musicLike.musicActivityId = musicActivity.musicActivityId;
-    musicLike.musicActivity = musicActivity;
+- (void)addPlacesFeedback:(PBPlacesActivity *)placesActivity forFeedbackType:(NSString *)feedbackType {
+    PBPlacesFeedback *placesFeedback = [PBPlacesFeedback object];
+    placesFeedback.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
+    placesFeedback.follower = [PBUser findByPrimaryKey:placesFeedback.followerUid];
+    placesFeedback.placesActivityId = placesActivity.placesActivityId;
+    placesFeedback.placesActivity = placesActivity;
+    placesFeedback.placesFeedbackType = @"todo";
+    placesFeedback.status = [NSNumber numberWithInt:0];
     
-    [[RKObjectManager sharedManager] postObject:musicLike delegate:self];
-}
-
-- (void)removeMusicLike:(PBMusicActivity *)musicActivity {
-    NSLog(@"in remove music like");
-    // remove like from core data
-    PBMusicLike *musicLike = [PBMusicLike objectWithPredicate:[NSPredicate predicateWithFormat:@"musicActivityId == %@", musicActivity.musicActivityId]];
-    
-    NSManagedObjectContext *context = [[[RKObjectManager sharedManager] objectStore] managedObjectContextForCurrentThread];
-    [context deleteObject:musicLike];
-    [context save:nil];
-    
-    // set deleted flag to 1 in DB
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:musicActivity.musicActivityId, @"musicActivityId", [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]], @"followerUid", nil];
-    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
-    NSError *error = nil;
-    NSString *json = [parser stringFromObject:params error:&error];
-    
-    if (!error) {
-        [[RKClient sharedClient] put:@"/removeMusicLike" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
+    if ([feedbackType isEqualToString:@"todo"]) {
+        NSLog(@"in add places to do");
+        
+        placesFeedback.placesFeedbackType = @"todo";
+        
+        [[RKObjectManager sharedManager] postObject:placesFeedback delegate:self];
+    } else if ([feedbackType isEqualToString:@"like"]) {
+        NSLog(@"in add places like");
+        
+        placesFeedback.placesFeedbackType = @"like";
     }
-}
-
-- (void)addPlacesTodo:(PBPlacesActivity*)placesActivity {
-    // in add places todo
-    NSLog(@"in add places to do");
-    PBPlacesTodo *placesTodo = [PBPlacesTodo object];
-    placesTodo.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
-    placesTodo.follower = [PBUser findByPrimaryKey:placesTodo.followerUid];
-    placesTodo.placesActivityId = placesActivity.placesActivityId;
-    placesTodo.placesActivity = placesActivity;
     
-    [[RKObjectManager sharedManager] postObject:placesTodo delegate:self];
+    [[RKObjectManager sharedManager] postObject:placesFeedback delegate:self];
 }
 
-- (void)removePlacesTodo:(PBPlacesActivity *)placesActivity {
-    NSLog(@"in remove places to do");
-    // remove todo from core data
-    PBPlacesTodo *placesTodo = [PBPlacesTodo objectWithPredicate:[NSPredicate predicateWithFormat:@"placesActivityId == %@", placesActivity.placesActivityId]];
+- (void)removePlacesFeedback:(PBPlacesActivity *)placesActivity forFeedbackType:(NSString *)feedbackType {
+    PBPlacesFeedback *placesFeedback;
+    
+    if ([feedbackType isEqualToString:@"todo"]) {
+        NSLog(@"in remove places to do");
+        // remove todo from core data
+        placesFeedback = [PBPlacesFeedback objectWithPredicate:[NSPredicate predicateWithFormat:@"(placesActivityId == %@) AND (placesFeedbackType like 'todo')", placesActivity.placesActivityId]];
+    } else if ([feedbackType isEqualToString:@"like"]) {
+        NSLog(@"in remove places like");
+        placesFeedback = [PBPlacesFeedback objectWithPredicate:[NSPredicate predicateWithFormat:@"(placesActivityId == %@) AND (placesFeedbackType like 'like')", placesActivity.placesActivityId]];
+    }
+    
+    NSNumber *placesFeedbackId = placesFeedback.placesFeedbackId;
     
     NSManagedObjectContext *context = [[[RKObjectManager sharedManager] objectStore] managedObjectContextForCurrentThread];
-    [context deleteObject:placesTodo];
+    [context deleteObject:placesFeedback];
     [context save:nil];
     
     // set status flag to 'deleted' in DB
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:placesActivity.placesActivityId, @"placesActivityId", [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]], @"followerUid", nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:placesFeedbackId, @"placesFeedbackId", nil];
     id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
     NSError *error = nil;
     NSString *json = [parser stringFromObject:params error:&error];
     
     if (!error) {
-        [[RKClient sharedClient] put:@"/removePlacesTodo" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
-    }
-}
-
-- (void)addPlacesLike:(PBPlacesActivity*)placesActivity {
-    // in add places like
-    NSLog(@"in add places like");
-    PBPlacesLike *placesLike = [PBPlacesLike object];
-    placesLike.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
-    placesLike.follower = [PBUser findByPrimaryKey:placesLike.followerUid];
-    placesLike.placesActivityId = placesActivity.placesActivityId;
-    placesLike.placesActivity = placesActivity;
-    
-    [[RKObjectManager sharedManager] postObject:placesLike delegate:self];
-}
-
-- (void)removePlacesLike:(PBPlacesActivity *)placesActivity {
-    NSLog(@"in remove places like");
-    // remove like from core data
-    PBPlacesLike *placesLike = [PBPlacesLike objectWithPredicate:[NSPredicate predicateWithFormat:@"placesActivityId == %@", placesActivity.placesActivityId]];
-    
-    NSManagedObjectContext *context = [[[RKObjectManager sharedManager] objectStore] managedObjectContextForCurrentThread];
-    [context deleteObject:placesLike];
-    [context save:nil];
-    
-    // set deleted flag to 1 in DB
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:placesActivity.placesActivityId, @"placesActivityId", [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]], @"followerUid", nil];
-    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
-    NSError *error = nil;
-    NSString *json = [parser stringFromObject:params error:&error];
-    
-    if (!error) {
-        [[RKClient sharedClient] put:@"/removePlacesLike" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
+        [[RKClient sharedClient] put:@"/removePlacesFeedback" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
     }
 }
 
