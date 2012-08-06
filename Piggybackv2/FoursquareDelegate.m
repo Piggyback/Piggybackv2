@@ -114,12 +114,14 @@
                 for (NSDictionary* photoGroup in photoGroups) {
                     if ([[photoGroup objectForKey:@"name"] isEqualToString:@"Venue photos"]) {
                         for (NSDictionary* photo in [photoGroup objectForKey:@"items"]) {
-                            for (NSDictionary* difSizePhoto in [[photo objectForKey:@"sizes"] objectForKey:@"items"]) {
-                                if ([[difSizePhoto objectForKey:@"height"] isEqualToNumber:[NSNumber numberWithInt:300]]) {
-                                    photoURL = [difSizePhoto objectForKey:@"url"];
-                                    NSLog(@"photoURL is %@",photoURL);
-                                    [self.delegate updateVenuePhoto:photoURL forVendor:vid];
-                                    return;
+                            if ([[photo objectForKey:@"visibility"] isEqualToString:@"public"]) {
+                                for (NSDictionary* difSizePhoto in [[photo objectForKey:@"sizes"] objectForKey:@"items"]) {
+                                    if ([[difSizePhoto objectForKey:@"height"] isEqualToNumber:[NSNumber numberWithInt:300]]) {
+                                        photoURL = [difSizePhoto objectForKey:@"url"];
+                                        NSLog(@"photoURL is %@",photoURL);
+                                        [self.delegate updateVenuePhoto:photoURL forVendor:vid];
+                                        return;
+                                    }
                                 }
                             }
                         }

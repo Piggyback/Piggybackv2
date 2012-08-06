@@ -222,6 +222,16 @@
                 [SPTrack trackForTrackURL:[NSURL URLWithString:newMusicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
                     [self.cachedAlbumCovers setObject:track.album.cover forKey:newMusicItem.spotifyUrl];
                     [track.album.cover startLoading];
+                    
+                    // reload cell if it is visible and the image was just reloaded
+                    for (id cell in [self.tableView visibleCells]) {
+                        if ([cell isKindOfClass:[HomeMusicCell class]]) {
+                            HomeMusicCell* musicCell = cell;
+                            if (musicCell.musicActivity.musicItem.musicItemId == newMusicItem.musicItemId) {
+                                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                            }
+                        }
+                    }
                 }];
             });
 
@@ -295,6 +305,17 @@
     YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:newVideosItem.videoURL frame:CGRectMake(9,38,302,240)];
     [self.cachedYoutubeWebViews setObject:videoWebView forKey:newVideosItem.videoURL];
     
+    // reload cell if it is visible and the image was just reloaded
+    for (id cell in [self.tableView visibleCells]) {
+        if ([cell isKindOfClass:[HomeVideosCell class]]) {
+            HomeVideosCell* videosCell = cell;
+            if (videosCell.videosActivity.videosItem.videosItemId == newVideosItem.videosItemId) {
+                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }
+    }
+
+    
     [[RKObjectManager sharedManager] postObject:newVideosItem usingBlock:^(RKObjectLoader* loader) {
         loader.onDidLoadObject = ^(id object) {
             for (PBUser* videosAmbassador in self.videosAmbassadors) {
@@ -326,8 +347,16 @@
         if(placesItem.photoURL) {
             UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
             [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.photoURL];
-            [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
-        }
+            
+            // reload cell if it is visible and the image was just reloaded
+            for (id cell in [self.tableView visibleCells]) {
+                if ([cell isKindOfClass:[HomePlacesCell class]]) {
+                    HomePlacesCell* placesCell = cell;
+                    if (placesCell.placesActivity.placesItem.placesItemId == placesItem.placesItemId) {
+                        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                    }
+                }
+            }        }
         
         // store photoURLs in core data and db
         [[RKObjectManager sharedManager] putObject:placesItem usingBlock:^(RKObjectLoader* loader) {
@@ -493,10 +522,10 @@
                             // reload cell if it is visible and the image was just reloaded
                             for (id cell in [self.tableView visibleCells]) {
                                 if ([cell isKindOfClass:[HomeMusicCell class]]) {
-                                    HomeMusicCell* musicCell = cell;
-                                    if (musicCell.musicActivity.musicItem.musicItemId == musicActivity.musicItem.musicItemId) {
+//                                    HomeMusicCell* musicCell = cell;
+//                                    if (musicCell.musicActivity.musicItem.musicItemId == musicActivity.musicItem.musicItemId) {
                                         [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
-                                    }
+//                                    }
                                 }
                             }
                         }];
