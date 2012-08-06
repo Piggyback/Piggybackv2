@@ -75,8 +75,16 @@
 
 #pragma mark - Private helper methods
 - (void)loadObjectsFromDataStore {
-    self.todos = [NSMutableArray arrayWithArray:[PBMusicFeedback allObjects]];
-    [self.todos addObjectsFromArray:[PBPlacesFeedback allObjects]];
+    // get todos
+    NSPredicate *musicTodoPredicate = [NSPredicate predicateWithFormat:@"musicFeedbackType = %@",@"todo"];
+    NSPredicate *placesTodoPredicate = [NSPredicate predicateWithFormat:@"placesFeedbackType = %@",@"todo"];
+//    NSPredicate *videosTodoPredicate = [NSPredicate predicateWithFormat:@"videosFeedbackType = %@",@"todo"];
+    self.todos = [NSMutableArray arrayWithArray:[PBMusicFeedback objectsWithPredicate:musicTodoPredicate]];
+    [self.todos addObjectsFromArray:[PBPlacesFeedback objectsWithPredicate:placesTodoPredicate]];
+//    [self.todos addObjectsFromArray:[PBVideosFeedback objectsWithPredicate:videosTodoPredicate]];
+    NSLog(@"todos are %@",self.todos);
+    
+    // display todos
     self.todosToDisplay = self.todos;
     [self.tableView reloadData];
     
@@ -88,12 +96,12 @@
 -(void)cacheImages {
     dispatch_queue_t cacheImagesQueue = dispatch_queue_create("cacheImagesQueue",NULL);
     dispatch_async(cacheImagesQueue, ^{
-        for (id feedback in self.todos) {
+        for (id todo in self.todos) {
             
             // cache cover albums
-            if ([feedback isKindOfClass:[PBMusicFeedback class]]) {
-                PBMusicFeedback *musicFeedback = feedback;
-                NSString* spotifyURL = musicFeedback.musicActivity.musicItem.spotifyUrl;
+            if ([todo isKindOfClass:[PBMusicFeedback class]]) {
+                PBMusicFeedback *musicTodo = todo;
+                NSString* spotifyURL = musicTodo.musicActivity.musicItem.spotifyUrl;
                 [[SPSession sharedSession] trackForURL:[NSURL URLWithString:spotifyURL] callback:^(SPTrack *track) {
                     if (track != nil) {
                         [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
@@ -110,9 +118,9 @@
             }
             
             // cache foursquare vendor photos
-            else if ([feedback isKindOfClass:[PBPlacesFeedback class]]) {
-                PBPlacesFeedback *placesFeedback = feedback;
-                NSString* photoURL = placesFeedback.placesActivity.placesItem.photoURL;
+            else if ([todo isKindOfClass:[PBPlacesFeedback class]]) {
+                PBPlacesFeedback *placesTodo = todo;
+                NSString* photoURL = placesTodo.placesActivity.placesItem.photoURL;
                 if(photoURL) {
                     UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]]];
                     [self.cachedPlacesPhotos setObject:placesImage forKey:photoURL];
@@ -129,12 +137,12 @@
 -(void)formatAddresses {
     dispatch_queue_t formattedAddressesQueue = dispatch_queue_create("formattedAddressesQueue",NULL);
     dispatch_async(formattedAddressesQueue, ^{
-        for (id feedback in self.todos) {
-            if ([feedback isKindOfClass:[PBPlacesFeedback class]]) {
-                PBPlacesFeedback* placesFeedback = feedback;
-                NSString* addr = placesFeedback.placesActivity.placesItem.addr;
-                NSString* addrCity = placesFeedback.placesActivity.placesItem.addrCity;
-                NSString* addrState = placesFeedback.placesActivity.placesItem.addrState;
+        for (id todo in self.todos) {
+            if ([todo isKindOfClass:[PBPlacesFeedback class]]) {
+                PBPlacesFeedback* placesTodo = todo;
+                NSString* addr = placesTodo.placesActivity.placesItem.addr;
+                NSString* addrCity = placesTodo.placesActivity.placesItem.addrCity;
+                NSString* addrState = placesTodo.placesActivity.placesItem.addrState;
                 
                 NSMutableString* formattedAddress = [[NSMutableString alloc] init];
                 if ([addr length] != 0 || [addrCity length] != 0 || [addrState length] != 0)  {
@@ -155,7 +163,7 @@
                         }
                     }
                 }
-                [self.formattedAddresses setObject:formattedAddress forKey:placesFeedback.placesActivityId];
+                [self.formattedAddresses setObject:formattedAddress forKey:placesTodo.placesActivityId];
             }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -298,6 +306,7 @@
         
         return cell;
     }
+    
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath
