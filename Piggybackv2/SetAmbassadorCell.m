@@ -10,6 +10,7 @@
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData.h>
 #import "PBUser.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface SetAmbassadorCell ()
 
@@ -24,6 +25,12 @@
 @synthesize followVideos = _followVideos;
 @synthesize setAmbassadorDelegate = _setAmbassadorDelegate;
 @synthesize friend = _friend;
+
+#pragma mark - initialization
+-(void)awakeFromNib {
+    self.profilePic.layer.cornerRadius = 5.0;
+    self.profilePic.layer.masksToBounds = YES;
+}
 
 #pragma mark - ib actions
 

@@ -7,6 +7,7 @@
 //
 
 #import "HomeVideosCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation HomeVideosCell
 
@@ -14,11 +15,17 @@
 @synthesize favoritedBy = _favoritedBy;
 @synthesize profilePic = _profilePic;
 @synthesize date = _date;
+@synthesize icon = _icon;
 @synthesize heart = _heart;
 @synthesize todo = _todo;
-@synthesize icon = _icon;
 @synthesize videosActivity = _videosActivity;
 @synthesize delegate = _delegate;
+
+#pragma mark - initialization
+-(void)awakeFromNib {
+    self.profilePic.layer.cornerRadius = 5.0;
+    self.profilePic.layer.masksToBounds = YES;
+}
 
 - (IBAction)heart:(id)sender {
     if (self.heart.selected == NO) {

@@ -7,19 +7,24 @@
 //
 
 #import "HomePlacesCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation HomePlacesCell
-
 @synthesize nameOfItem = _nameOfItem;
 @synthesize favoritedBy = _favoritedBy;
 @synthesize profilePic = _profilePic;
-@synthesize date = _date;
-@synthesize heart = _heart;
-@synthesize todo = _todo;
 @synthesize icon = _icon;
 @synthesize mainPic = _mainPic;
 @synthesize placesActivity = _placesActivity;
 @synthesize delegate = _delegate;
+@synthesize heart = _heart;
+@synthesize todo = _todo;
+
+#pragma mark - initialization
+-(void)awakeFromNib {
+    self.profilePic.layer.cornerRadius = 5.0;
+    self.profilePic.layer.masksToBounds = YES;
+}
 
 - (IBAction)heart:(id)sender {
     if (self.heart.selected == NO) {
@@ -34,9 +39,11 @@
 - (IBAction)todo:(id)sender {
     if (self.todo.selected == NO) {
         self.todo.selected = YES;
+        [self.todo setImage:[UIImage imageNamed:@"todo-added-button"] forState:UIControlStateNormal];
         [self.delegate addPlacesFeedback:self.placesActivity forFeedbackType:@"todo"];
     } else {
         self.todo.selected = NO;
+        [self.todo setImage:[UIImage imageNamed:@"todo-button"] forState:UIControlStateNormal];
         [self.delegate removePlacesFeedback:self.placesActivity forFeedbackType:@"todo"];
     }
 }

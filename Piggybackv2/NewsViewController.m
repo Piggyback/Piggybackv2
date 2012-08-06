@@ -11,6 +11,9 @@
 #import "PBUser.h"
 #import "PBMusicActivity.h"
 #import "PBMusicItem.h"
+#import "Constants.h"
+#import "NewsCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface NewsViewController ()
 
@@ -37,6 +40,54 @@
 //    NSSortDescriptor* descriptor = [NSSortDescriptor sortDescriptorWithKey:@"referralDate" ascending:NO];
 //    [request setSortDescriptors:[NSArray arrayWithObject:descriptor]];
     self.newsToDisplay = [PBMusicNews objectsWithFetchRequest:request];
+}
+
+// get string for time elapsed e.g., "2 days ago"
+- (NSString*)timeElapsed:(NSDate*)date {
+    NSUInteger desiredComponents = NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit |  NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents* elapsedTimeUnits = [[NSCalendar currentCalendar] components:desiredComponents fromDate:date toDate:[NSDate date] options:0];
+    
+    NSInteger number = 0;
+    NSString* unit;
+    
+    if ([elapsedTimeUnits year] > 0) {
+        number = [elapsedTimeUnits year];
+        unit = [NSString stringWithFormat:@"yr"];
+    }
+    else if ([elapsedTimeUnits month] > 0) {
+        number = [elapsedTimeUnits month];
+        unit = [NSString stringWithFormat:@"mo"];
+    }
+    else if ([elapsedTimeUnits week] > 0) {
+        number = [elapsedTimeUnits week];
+        unit = [NSString stringWithFormat:@"wk"];
+    }
+    else if ([elapsedTimeUnits day] > 0) {
+        number = [elapsedTimeUnits day];
+        unit = [NSString stringWithFormat:@"d"];
+    }
+    else if ([elapsedTimeUnits hour] > 0) {
+        number = [elapsedTimeUnits hour];
+        unit = [NSString stringWithFormat:@"hr"];
+    }
+    else if ([elapsedTimeUnits minute] > 0) {
+        number = [elapsedTimeUnits minute];
+        unit = [NSString stringWithFormat:@"min"];
+    }
+    else if ([elapsedTimeUnits second] > 0) {
+        number = [elapsedTimeUnits second];
+        unit = [NSString stringWithFormat:@"sec"];
+    } else if ([elapsedTimeUnits second] <= 0) {
+        number = 0;
+    }
+    
+    NSString* elapsedTime = [NSString stringWithFormat:@"%d%@",number,unit];
+    
+    if (number == 0) {
+        elapsedTime = @"1sec";
+    }
+    
+    return elapsedTime;
 }
 
 - (void)loadData {
@@ -83,18 +134,38 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"newsTableCell";
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    PBMusicNews *newsItem = [self.newsToDisplay objectAtIndex:indexPath.row];
+    NewsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@ - %@", newsItem.follower.firstName, newsItem.newsActionType, newsItem.musicActivity.musicItem.songTitle];
-    
+    if ([[self.newsToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBMusicNews class]]) {
+        PBMusicNews *newsItem = [self.newsToDisplay objectAtIndex:indexPath.row];
+        PBUser* follower = newsItem.follower;
+        
+        cell.profilePic.image = follower.thumbnail;
+        
+        NSString* lastInitial;
+        if (follower.lastName) {
+            lastInitial = [NSString stringWithFormat:@" %@.",[follower.lastName substringToIndex:1]];
+        } else {
+            lastInitial = @"";
+        }
+        
+        NSString* action;
+        if ([newsItem.newsActionType isEqualToString:@"todo"]) {
+            action = @"todo'ed";
+        } else if ([newsItem.newsActionType isEqualToString:@"like"]) {
+            action = @"liked";
+        }
+        
+        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ your song \"%@\"", follower.firstName, lastInitial, action, newsItem.musicActivity.musicItem.songTitle];
+        cell.date.text = [self timeElapsed:newsItem.dateAdded];
+    }
     return cell;
 }
 
-//- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath 
-//{
-//    return HOMETABLEROWHEIGHT;
-//}
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath 
+{
+    return NEWSTABLEROWHEIGHT;
+}
 
 #pragma mark - Table view delegate
 

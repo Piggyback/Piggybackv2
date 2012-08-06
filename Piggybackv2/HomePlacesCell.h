@@ -23,14 +23,11 @@
 @property (nonatomic, weak) IBOutlet UILabel* favoritedBy;
 @property (nonatomic, weak) IBOutlet UIImageView* profilePic;
 @property (nonatomic, weak) IBOutlet UILabel* date;
-@property (nonatomic, weak) IBOutlet UIButton* heart;
-@property (nonatomic, weak) IBOutlet UIButton* todo;
 @property (nonatomic, weak) IBOutlet UIImageView* icon;
-@property (nonatomic, weak) IBOutlet UIImageView* mainPic;
+@property (weak, nonatomic) IBOutlet UIImageView *mainPic;
 @property (nonatomic, strong) PBPlacesActivity *placesActivity;
 @property (nonatomic, weak) id<HomePlacesCellDelegate> delegate;
-
-- (IBAction)heart:(id)sender;
-- (IBAction)todo:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *heart;
+@property (weak, nonatomic) IBOutlet UIButton *todo;
 
 @end

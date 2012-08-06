@@ -56,7 +56,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     PiggybackTabBarController *rootViewController = (PiggybackTabBarController *)self.window.rootViewController;
     
-    // set up restkit object manager
+    // set up restkit object manager (for core data)
     RKObjectManager* objectManager = [RKObjectManager objectManagerWithBaseURL:[NSURL URLWithString:RK_BASE_URL]];
     objectManager.acceptMIMEType = RKMIMETypeJSON;
     objectManager.serializationMIMEType = RKMIMETypeJSON;

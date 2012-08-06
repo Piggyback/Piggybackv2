@@ -22,8 +22,6 @@
 @property (nonatomic, strong) FoursquareDelegate* foursquareDelegate;
 @property (nonatomic, strong) YoutubeDelegate* youtubeDelegate;
 @property (strong, nonatomic) SPPlaybackManager *playbackManager;
-@property (nonatomic, strong) NSMutableArray* items;
-@property (nonatomic, strong) NSMutableArray *displayItems;
 
 - (void)loadAmbassadorData;
 - (void)fetchAmbassadorFavsFromCoreData;

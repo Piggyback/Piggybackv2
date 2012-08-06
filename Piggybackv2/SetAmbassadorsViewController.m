@@ -87,8 +87,7 @@
 - (void)setAmbassador:(PBFriend*)friend ForType:(NSString *)type {
     // get me
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSPredicate *getMyUserPredicate = [NSPredicate predicateWithFormat:@"uid = %@",[defaults objectForKey:@"UID"]];
-    PBUser *me = [PBUser objectWithPredicate:getMyUserPredicate];
+    PBUser *me = [PBUser findByPrimaryKey:[defaults objectForKey:@"UID"]];
     NSLog(@" i am %@ ", me);
     
     // check if user exists already
@@ -134,6 +133,7 @@
                     // [[RKObjectManager sharedManager] postObject:newAmbassador delegate:self];
                 }
                 
+                // store photo in core data
                 if (!friend.thumbnail) {
                     NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",newUser.fbId];
                     newUser.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
@@ -141,6 +141,18 @@
                 } else {
                     newUser.thumbnail = friend.thumbnail;
                     [[RKObjectManager sharedManager].objectStore save:nil];
+                }
+                
+                // update foursquare id if they didnt have one before but have one now
+                if (!newUser.foursquareId) {
+                    if (friend.foursquareId) {
+                        newUser.foursquareId = friend.foursquareId;
+                        
+                        // update user
+                        [[RKObjectManager sharedManager] putObject:newUser usingBlock:^(RKObjectLoader* loader) {
+                            NSLog(@"user updated with foursquareId");
+                        }];
+                    }
                 }
                 
                 NSLog(@"me is %@",me);
@@ -170,6 +182,20 @@
                 [friendUser addVideosFollowersObject:me];
                 
                 // add ambassador to db
+            }
+        }
+        
+        // add foursquare id if they dont have one
+        if (!friendUser.foursquareId) {
+            NSLog(@"friend user has no fs id");
+            if (friend.foursquareId) {
+                friendUser.foursquareId = friend.foursquareId;
+                NSLog(@"but friend has fs id ");
+                
+                // update user
+                [[RKObjectManager sharedManager] putObject:friendUser usingBlock:^(RKObjectLoader* loader) {
+                    NSLog(@"user updated with foursquareId");
+                }];
             }
         }
             
@@ -278,10 +304,7 @@
     static NSString *CellIdentifier = @"setAmbassadorCell";
     SetAmbassadorCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     cell.setAmbassadorDelegate = self;
-    
-    cell.profilePic.layer.cornerRadius = 5.0;
-    cell.profilePic.layer.masksToBounds = YES;
-    
+
     // get current friend and set cell
     PBFriend* friend = [self.displayFriends objectAtIndex:indexPath.row];
     cell.friend = friend;
@@ -309,7 +332,6 @@
         [cell.followVideos setImage:[UIImage imageNamed:@"follow-video-button-normal"] forState:UIControlStateNormal];
     }
     
-//    cell.profilePic.image = [self.cachedProfilePics objectForKey:[friend.fbId stringValue]];
     // if thumbnail already stored in local friend array, then display thumbnail
     if (friend.thumbnail) {
         cell.profilePic.image = friend.thumbnail;
@@ -328,14 +350,14 @@
                 PBFriend* newFriend = [friendArray objectAtIndex:0];
                 newFriend.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
                 [[RKObjectManager sharedManager].objectStore save:nil];
-                
-                // display thumbnail in tableview
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.profilePic.image = newFriend.thumbnail;
-                });
-                
+
                 // set thumbnail in local friend array to reflect core data
-                if (friend.fbId = newFriend.fbId) {
+                if ([friend.fbId isEqualToNumber:newFriend.fbId]) {
+                    // display thumbnail in tableview
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if ([cell.friend.fbId isEqualToNumber:newFriend.fbId])
+                            cell.profilePic.image = newFriend.thumbnail;
+                    });
                     friend.thumbnail = newFriend.thumbnail;
                 }
             }

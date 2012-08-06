@@ -23,9 +23,9 @@
 @property (nonatomic, weak) IBOutlet UILabel* favoritedBy;
 @property (nonatomic, weak) IBOutlet UIImageView* profilePic;
 @property (nonatomic, weak) IBOutlet UILabel* date;
-@property (nonatomic, weak) IBOutlet UIButton* heart;
-@property (nonatomic, weak) IBOutlet UIButton* todo;
 @property (nonatomic, weak) IBOutlet UIImageView* icon;
+@property (weak, nonatomic) IBOutlet UIButton *heart;
+@property (weak, nonatomic) IBOutlet UIButton *todo;
 @property (nonatomic, strong) PBVideosActivity *videosActivity;
 @property (nonatomic, weak) id<HomeVideosCellDelegate> delegate;
 
