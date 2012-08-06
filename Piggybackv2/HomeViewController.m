@@ -251,6 +251,9 @@
                 };
             }];
         }
+    } else if ([keyPath isEqualToString:@"mainPic"]) {
+        NSLog(@"album cover loaded!");
+        
     }
 }
 
@@ -522,10 +525,11 @@
                             // reload cell if it is visible and the image was just reloaded
                             for (id cell in [self.tableView visibleCells]) {
                                 if ([cell isKindOfClass:[HomeMusicCell class]]) {
-//                                    HomeMusicCell* musicCell = cell;
-//                                    if (musicCell.musicActivity.musicItem.musicItemId == musicActivity.musicItem.musicItemId) {
-                                        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
-//                                    }
+                                    HomeMusicCell* musicCell = cell;
+                                    if (musicCell.musicActivity.musicItem.musicItemId == musicActivity.musicItem.musicItemId) {
+                                        [musicCell addObserver:self forKeyPath:@"mainPic" options:nil context:nil];
+//                                        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                                    }
                                 }
                             }
                         }];
