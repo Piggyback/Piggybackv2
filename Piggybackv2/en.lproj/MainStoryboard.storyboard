@@ -439,6 +439,35 @@
                                             <outlet property="vendorName" destination="Lqi-DJ-OPW" id="5ZU-oZ-De0"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="todoVideosTableCell" rowHeight="60" id="Qls-oN-g2y" customClass="TodoVideosCell">
+                                        <rect key="frame" x="0.0" y="142" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="I Like Turtles" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="gJE-CE-mFC">
+                                                    <rect key="frame" x="64" y="1" width="217" height="38"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="8 hr" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="U2Y-wB-8CV">
+                                                    <rect key="frame" x="275" y="0.0" width="40" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="0.52189781020000003" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="date" destination="U2Y-wB-8CV" id="Hit-qB-Kgk"/>
+                                            <outlet property="videoName" destination="gJE-CE-mFC" id="HMx-vx-xmw"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Co3-3W-e3f" id="YNg-E3-YUg"/>
@@ -931,7 +960,6 @@
             <relationships>
                 <relationship kind="action" name="continueButton:"/>
                 <relationship kind="action" name="foursquareConnect:"/>
-                <relationship kind="action" name="logout:"/>
                 <relationship kind="action" name="spotifyConnect:"/>
                 <relationship kind="action" name="youtubeConnect:"/>
                 <relationship kind="outlet" name="youtubeToggle" candidateClass="UISwitch"/>
@@ -973,6 +1001,8 @@
         <class className="HomeVideosCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeVideosCell.h"/>
             <relationships>
+                <relationship kind="action" name="heart:"/>
+                <relationship kind="action" name="todo:"/>
                 <relationship kind="outlet" name="date" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
@@ -1052,9 +1082,17 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TodoPlacesCell.h"/>
             <relationships>
                 <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="phone" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="vendorAddress" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="vendorImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="vendorName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TodoVideosCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TodoVideosCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="videoName" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="TodoViewController" superclassName="UIViewController">

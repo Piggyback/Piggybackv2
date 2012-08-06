@@ -117,6 +117,7 @@
 		F91B3DD415A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DD215A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png */; };
 		F91B3DD515A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DD315A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png */; };
 		F91B3DD715A778A600D8E815 /* blankFacebookPhoto.gif in Resources */ = {isa = PBXBuildFile; fileRef = F91B3DD615A778A600D8E815 /* blankFacebookPhoto.gif */; };
+		F92457D915D01EB20074292E /* TodoVideosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F92457D815D01EB20074292E /* TodoVideosCell.m */; };
 		F925A35E15CB2C35002B3779 /* NewsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F925A35D15CB2C35002B3779 /* NewsNavigationController.m */; };
 		F925A3F715CC2896002B3779 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F925A3F615CC2896002B3779 /* NewsCell.m */; };
 		F925A3FA15CC4744002B3779 /* TodoNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F925A3F915CC4743002B3779 /* TodoNavigationController.m */; };
@@ -441,6 +442,8 @@
 		F91B3DD215A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 30x30 300dpi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search magnfiying glass tab bar engraved 30x30 300dpi.png"; sourceTree = "<group>"; };
 		F91B3DD315A6A4ED00D8E815 /* Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search magnfiying glass tab bar engraved 60x60 300dpi (retina).png"; sourceTree = "<group>"; };
 		F91B3DD615A778A600D8E815 /* blankFacebookPhoto.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = blankFacebookPhoto.gif; sourceTree = "<group>"; };
+		F92457D715D01EB20074292E /* TodoVideosCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoVideosCell.h; sourceTree = "<group>"; };
+		F92457D815D01EB20074292E /* TodoVideosCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoVideosCell.m; sourceTree = "<group>"; };
 		F925A35C15CB2C35002B3779 /* NewsNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsNavigationController.h; sourceTree = "<group>"; };
 		F925A35D15CB2C35002B3779 /* NewsNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsNavigationController.m; sourceTree = "<group>"; };
 		F925A3F515CC2896002B3779 /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
@@ -706,6 +709,8 @@
 				F925A3FC15CC496D002B3779 /* TodoMusicCell.m */,
 				F90B3A7B15CC6952001C7E33 /* TodoPlacesCell.h */,
 				F90B3A7C15CC6952001C7E33 /* TodoPlacesCell.m */,
+				F92457D715D01EB20074292E /* TodoVideosCell.h */,
+				F92457D815D01EB20074292E /* TodoVideosCell.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1272,6 +1277,7 @@
 				C47A509E15CC711800D80B6D /* PBMusicFeedback.m in Sources */,
 				C4DE6A4D15CF1F0400197EFA /* PBPlacesFeedback.m in Sources */,
 				C4DE6A5015CF2D7100197EFA /* PBVideosFeedback.m in Sources */,
+				F92457D915D01EB20074292E /* TodoVideosCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,8 +8,14 @@
 
 #import "NewsViewController.h"
 #import "PBMusicNews.h"
+#import "PBPlacesNews.h"
+#import "PBVideosNews.h"
 #import "PBUser.h"
 #import "PBMusicActivity.h"
+#import "PBPlacesActivity.h"
+#import "PBPlacesItem.h"
+#import "PBVideosActivity.h"
+#import "PBVideosItem.h"
 #import "PBMusicItem.h"
 #import "Constants.h"
 #import "NewsCell.h"
@@ -151,7 +157,7 @@
         
         NSString* action;
         if ([newsItem.newsActionType isEqualToString:@"todo"]) {
-            action = @"todo'ed";
+            action = @"saved";
         } else if ([newsItem.newsActionType isEqualToString:@"like"]) {
             action = @"liked";
         }
@@ -159,6 +165,55 @@
         cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ your song \"%@\"", follower.firstName, lastInitial, action, newsItem.musicActivity.musicItem.songTitle];
         cell.date.text = [self timeElapsed:newsItem.dateAdded];
     }
+    
+    else if ([[self.newsToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesNews class]]) {
+        PBPlacesNews *newsItem = [self.newsToDisplay objectAtIndex:indexPath.row];
+        PBUser* follower = newsItem.follower;
+        
+        cell.profilePic.image = follower.thumbnail;
+        
+        NSString* lastInitial;
+        if (follower.lastName) {
+            lastInitial = [NSString stringWithFormat:@" %@.",[follower.lastName substringToIndex:1]];
+        } else {
+            lastInitial = @"";
+        }
+        
+        NSString* action;
+        if ([newsItem.newsActionType isEqualToString:@"todo"]) {
+            action = @"saved";
+        } else if ([newsItem.newsActionType isEqualToString:@"like"]) {
+            action = @"liked";
+        }
+        
+        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ a place you went to \"%@\"", follower.firstName, lastInitial, action, newsItem.placesActivity.placesItem.name];
+        cell.date.text = [self timeElapsed:newsItem.dateAdded];
+    }
+    
+    else if ([[self.newsToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBVideosNews class]]) {
+        PBVideosNews *newsItem = [self.newsToDisplay objectAtIndex:indexPath.row];
+        PBUser* follower = newsItem.follower;
+        
+        cell.profilePic.image = follower.thumbnail;
+        
+        NSString* lastInitial;
+        if (follower.lastName) {
+            lastInitial = [NSString stringWithFormat:@" %@.",[follower.lastName substringToIndex:1]];
+        } else {
+            lastInitial = @"";
+        }
+        
+        NSString* action;
+        if ([newsItem.newsActionType isEqualToString:@"todo"]) {
+            action = @"saved";
+        } else if ([newsItem.newsActionType isEqualToString:@"like"]) {
+            action = @"liked";
+        }
+        
+        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ a place you went to \"%@\"", follower.firstName, lastInitial, action, newsItem.videosActivity.videosItem.name];
+        cell.date.text = [self timeElapsed:newsItem.dateAdded];
+    }
+    
     return cell;
 }
 

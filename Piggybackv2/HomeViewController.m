@@ -352,7 +352,7 @@
             if ([activity isKindOfClass:[PBVideosActivity class]]) {
                 PBVideosActivity *videosActivity = activity;
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosActivity.videosItem.videoURL frame:CGRectMake(9,38,302,240)];
+                    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosActivity.videosItem.videoURL frame:CGRectMake(9,38,302,290)];
                     [self.cachedYoutubeWebViews setObject:videoWebView forKey:videosActivity.videosItem.videoURL];
                 });
 

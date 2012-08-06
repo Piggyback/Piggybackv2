@@ -17,6 +17,10 @@
 #import "PBMusicFeedback.h"
 #import "PBVideosFeedback.h"
 #import "PBPlacesFeedback.h"
+#import "TodoVideosCell.h"
+#import "PBVideosItem.h"
+#import "PBVideosActivity.h"
+#import "YouTubeView.h"
 
 @interface TodoViewController ()
 
@@ -24,6 +28,7 @@
 @property (nonatomic, strong) NSArray *todosToDisplay;
 @property (nonatomic, strong) NSMutableDictionary* cachedPlacesPhotos;  // key is photoURL
 @property (nonatomic, strong) NSMutableDictionary* cachedAlbumCovers;   // key is spotifyURL
+@property (nonatomic, strong) NSMutableDictionary* cachedYoutubeWebViews; // key is videoURL
 @property (nonatomic, strong) NSMutableDictionary* formattedAddresses;  // key is placeActivityId
 
 @end
@@ -34,6 +39,7 @@
 @synthesize todosToDisplay = _todosToDisplay;
 @synthesize cachedAlbumCovers = _cachedAlbumCovers;
 @synthesize cachedPlacesPhotos = _cachedPlacesPhotos;
+@synthesize cachedYoutubeWebViews = _cachedYoutubeWebViews;
 @synthesize formattedAddresses = _formattedAddresses;
 @synthesize todos = _todos;
 
@@ -73,15 +79,22 @@
     return _formattedAddresses;
 }
 
+- (NSMutableDictionary*)cachedYoutubeWebViews {
+    if (!_cachedYoutubeWebViews) {
+        _cachedYoutubeWebViews = [[NSMutableDictionary alloc] init];
+    }
+    return _cachedYoutubeWebViews;
+}
+
 #pragma mark - Private helper methods
 - (void)loadObjectsFromDataStore {
     // get todos
     NSPredicate *musicTodoPredicate = [NSPredicate predicateWithFormat:@"musicFeedbackType = %@",@"todo"];
     NSPredicate *placesTodoPredicate = [NSPredicate predicateWithFormat:@"placesFeedbackType = %@",@"todo"];
-//    NSPredicate *videosTodoPredicate = [NSPredicate predicateWithFormat:@"videosFeedbackType = %@",@"todo"];
+    NSPredicate *videosTodoPredicate = [NSPredicate predicateWithFormat:@"videosFeedbackType = %@",@"todo"];
     self.todos = [NSMutableArray arrayWithArray:[PBMusicFeedback objectsWithPredicate:musicTodoPredicate]];
     [self.todos addObjectsFromArray:[PBPlacesFeedback objectsWithPredicate:placesTodoPredicate]];
-//    [self.todos addObjectsFromArray:[PBVideosFeedback objectsWithPredicate:videosTodoPredicate]];
+    [self.todos addObjectsFromArray:[PBVideosFeedback objectsWithPredicate:videosTodoPredicate]];
     NSLog(@"todos are %@",self.todos);
     
     // display todos
@@ -129,6 +142,15 @@
 //                        [self.tableView reloadRowsAtIndexPaths:[self.tableView visibleCells] withRowAnimation:UITableViewRowAnimationNone];
                     });
                 }
+            }
+            
+            else if ([todo isKindOfClass:[PBVideosFeedback class]]) {
+                PBVideosFeedback *videosTodo = todo;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosTodo.videosActivity.videosItem.videoURL frame:CGRectMake(5,4,51,51)];
+                    [self.cachedYoutubeWebViews setObject:videoWebView forKey:videosTodo.videosActivity.videosItem.videoURL];
+                });
+                
             }
         }
     });
@@ -251,11 +273,11 @@
     }
     
     else if ([sender selectedSegmentIndex] == 3) {
-        //        for (id item in self.items) {
-        //            if ([item isKindOfClass:[PBVideosActivity class]]) {
-        //                [selectedItems addObject:item];
-        //            }
-        //        }
+        for (id todo in self.todos) {
+            if ([todo isKindOfClass:[PBVideosFeedback class]]) {
+                [selectedTodos addObject:todo];
+            }
+        }
     }
     
     self.todosToDisplay = selectedTodos;
@@ -307,6 +329,25 @@
         return cell;
     }
     
+    // videos
+    else if ([[self.todosToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBVideosFeedback class]]) {
+        static NSString *CellIdentifier = @"todoVideosTableCell";
+        TodoVideosCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        PBVideosFeedback *feedback = [self.todosToDisplay objectAtIndex:indexPath.row];
+        PBVideosActivity* videosActivity = feedback.videosActivity;
+        
+        // set name of video and top align
+        cell.videoName.text = videosActivity.videosItem.name;
+        cell.videoName.numberOfLines = 0;
+        [cell.videoName sizeToFit];
+        
+        cell.date.text = [self timeElapsed:feedback.dateAdded];
+        
+        YouTubeView* videoWebView = [self.cachedYoutubeWebViews objectForKey:videosActivity.videosItem.videoURL];
+        [cell.contentView addSubview:videoWebView];
+        
+        return cell;
+    }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath
