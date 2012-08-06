@@ -99,15 +99,16 @@
     self.todos = [NSMutableArray arrayWithArray:[PBMusicFeedback objectsWithPredicate:musicTodoPredicate]];
     [self.todos addObjectsFromArray:[PBPlacesFeedback objectsWithPredicate:placesTodoPredicate]];
     [self.todos addObjectsFromArray:[PBVideosFeedback objectsWithPredicate:videosTodoPredicate]];
-    NSLog(@"todos are %@",self.todos);
     
+    // sort todos with most recent at top
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateAdded" ascending:NO];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray = [self.todos sortedArrayUsingDescriptors:sortDescriptors];
+    self.todos = [sortedArray mutableCopy];
+
     // display todos
     self.todosToDisplay = self.todos;
     [self.tableView reloadData];
-    
-//    NSFetchRequest* request = [PBMusicTodo fetchRequest];
-    //    NSSortDescriptor* descriptor = [NSSortDescriptor sortDescriptorWithKey:@"referralDate" ascending:NO];
-    //    [request setSortDescriptors:[NSArray arrayWithObject:descriptor]];
 }
 
 -(void)cacheImages {
@@ -125,10 +126,8 @@
                             [self.cachedAlbumCovers setObject:track.album.cover forKey:spotifyURL];
                             [track.album.cover startLoading];
                             dispatch_async(dispatch_get_main_queue(), ^{
-//                                [self.tableView reloadData];
                                 [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                             });
-//                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadImage" object:nil userInfo:[NSDictionary dictionaryWithObject:spotifyURL forKey:@"spotifyURL"]];
                         }];
                     }
                 }];
@@ -142,7 +141,6 @@
                     UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]]];
                     [self.cachedPlacesPhotos setObject:placesImage forKey:photoURL];
                     dispatch_async(dispatch_get_main_queue(), ^{
-//                        [self.tableView reloadData];
                         [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                     });
                 }

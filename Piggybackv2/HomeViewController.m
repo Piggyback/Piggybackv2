@@ -448,6 +448,16 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosActivity.videosItem.videoURL frame:CGRectMake(9,38,302,290)];
                     [self.cachedYoutubeWebViews setObject:videoWebView forKey:videosActivity.videosItem.videoURL];
+                    
+                    // reload cell if it is visible and the image was just reloaded
+                    for (id cell in [self.tableView visibleCells]) {
+                        if ([cell isKindOfClass:[HomeVideosCell class]]) {
+                            HomeVideosCell* videosCell = cell;
+                            if (videosCell.videosActivity.videosItem.videosItemId == videosActivity.videosItem.videosItemId) {
+                                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                            }
+                        }
+                    }
                 });
 
             }
@@ -458,6 +468,16 @@
                 if(placesActivity.placesItem.photoURL) {
                     UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesActivity.placesItem.photoURL]]];
                     [self.cachedPlacesPhotos setObject:placesImage forKey:placesActivity.placesItem.photoURL];
+                    
+                    // reload cell if it is visible and the image was just reloaded
+                    for (id cell in [self.tableView visibleCells]) {
+                        if ([cell isKindOfClass:[HomePlacesCell class]]) {
+                            HomePlacesCell* placesCell = cell;
+                            if (placesCell.placesActivity.placesItem.placesItemId == placesActivity.placesItem.placesItemId) {
+                                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                            }
+                        }
+                    }
                 }
             }
             
@@ -469,6 +489,16 @@
                         [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
                             [self.cachedAlbumCovers setObject:track.album.cover forKey:musicActivity.musicItem.spotifyUrl];
                             [track.album.cover startLoading];
+                            
+                            // reload cell if it is visible and the image was just reloaded
+                            for (id cell in [self.tableView visibleCells]) {
+                                if ([cell isKindOfClass:[HomeMusicCell class]]) {
+                                    HomeMusicCell* musicCell = cell;
+                                    if (musicCell.musicActivity.musicItem.musicItemId == musicActivity.musicItem.musicItemId) {
+                                        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                                    }
+                                }
+                            }
                         }];
                     }
                 }];

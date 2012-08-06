@@ -46,6 +46,14 @@
 //    NSSortDescriptor* descriptor = [NSSortDescriptor sortDescriptorWithKey:@"referralDate" ascending:NO];
 //    [request setSortDescriptors:[NSArray arrayWithObject:descriptor]];
     self.newsToDisplay = [PBMusicNews objectsWithFetchRequest:request];
+    
+    for (PBMusicNews* news in self.newsToDisplay) {
+        if(!news.follower.thumbnail) {
+            NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",news.follower.fbId];
+            news.follower.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
+            [[RKObjectManager sharedManager].objectStore save:nil];
+        }
+    }
 }
 
 // get string for time elapsed e.g., "2 days ago"
