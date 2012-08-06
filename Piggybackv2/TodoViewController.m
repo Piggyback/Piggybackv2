@@ -7,15 +7,16 @@
 //
 
 #import "TodoViewController.h"
-#import "PBMusicTodo.h"
 #import "PBMusicActivity.h"
 #import "PBMusicItem.h"
-#import "PBPlacesTodo.h"
 #import "PBPlacesItem.h"
 #import "PBPlacesActivity.h"
 #import "TodoMusicCell.h"
 #import "TodoPlacesCell.h"
 #import "Constants.h"
+#import "PBMusicFeedback.h"
+#import "PBVideosFeedback.h"
+#import "PBPlacesFeedback.h"
 
 @interface TodoViewController ()
 
@@ -74,8 +75,8 @@
 
 #pragma mark - Private helper methods
 - (void)loadObjectsFromDataStore {
-    self.todos = [NSMutableArray arrayWithArray:[PBMusicTodo allObjects]];
-    [self.todos addObjectsFromArray:[PBPlacesTodo allObjects]];
+    self.todos = [NSMutableArray arrayWithArray:[PBMusicFeedback allObjects]];
+    [self.todos addObjectsFromArray:[PBPlacesFeedback allObjects]];
     self.todosToDisplay = self.todos;
     [self.tableView reloadData];
     
@@ -87,12 +88,12 @@
 -(void)cacheImages {
     dispatch_queue_t cacheImagesQueue = dispatch_queue_create("cacheImagesQueue",NULL);
     dispatch_async(cacheImagesQueue, ^{
-        for (id todo in self.todos) {
+        for (id feedback in self.todos) {
             
             // cache cover albums
-            if ([todo isKindOfClass:[PBMusicTodo class]]) {
-                PBMusicTodo *musicTodo = todo;
-                NSString* spotifyURL = musicTodo.musicActivity.musicItem.spotifyUrl;
+            if ([feedback isKindOfClass:[PBMusicFeedback class]]) {
+                PBMusicFeedback *musicFeedback = feedback;
+                NSString* spotifyURL = musicFeedback.musicActivity.musicItem.spotifyUrl;
                 [[SPSession sharedSession] trackForURL:[NSURL URLWithString:spotifyURL] callback:^(SPTrack *track) {
                     if (track != nil) {
                         [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
@@ -109,9 +110,9 @@
             }
             
             // cache foursquare vendor photos
-            else if ([todo isKindOfClass:[PBPlacesTodo class]]) {
-                PBPlacesTodo *placesTodo = todo;
-                NSString* photoURL = placesTodo.placesActivity.placesItem.photoURL;
+            else if ([feedback isKindOfClass:[PBPlacesFeedback class]]) {
+                PBPlacesFeedback *placesFeedback = feedback;
+                NSString* photoURL = placesFeedback.placesActivity.placesItem.photoURL;
                 if(photoURL) {
                     UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]]];
                     [self.cachedPlacesPhotos setObject:placesImage forKey:photoURL];
@@ -128,12 +129,12 @@
 -(void)formatAddresses {
     dispatch_queue_t formattedAddressesQueue = dispatch_queue_create("formattedAddressesQueue",NULL);
     dispatch_async(formattedAddressesQueue, ^{
-        for (id todo in self.todos) {
-            if ([todo isKindOfClass:[PBPlacesTodo class]]) {
-                PBPlacesTodo* placesTodo = todo;
-                NSString* addr = placesTodo.placesActivity.placesItem.addr;
-                NSString* addrCity = placesTodo.placesActivity.placesItem.addrCity;
-                NSString* addrState = placesTodo.placesActivity.placesItem.addrState;
+        for (id feedback in self.todos) {
+            if ([feedback isKindOfClass:[PBPlacesFeedback class]]) {
+                PBPlacesFeedback* placesFeedback = feedback;
+                NSString* addr = placesFeedback.placesActivity.placesItem.addr;
+                NSString* addrCity = placesFeedback.placesActivity.placesItem.addrCity;
+                NSString* addrState = placesFeedback.placesActivity.placesItem.addrState;
                 
                 NSMutableString* formattedAddress = [[NSMutableString alloc] init];
                 if ([addr length] != 0 || [addrCity length] != 0 || [addrState length] != 0)  {
@@ -154,7 +155,7 @@
                         }
                     }
                 }
-                [self.formattedAddresses setObject:formattedAddress forKey:placesTodo.placesActivityId];
+                [self.formattedAddresses setObject:formattedAddress forKey:placesFeedback.placesActivityId];
             }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -226,7 +227,7 @@
     // music
     else if ([sender selectedSegmentIndex] == 1) {
         for (id todo in self.todos) {
-            if ([todo isKindOfClass:[PBMusicTodo class]]) {
+            if ([todo isKindOfClass:[PBMusicFeedback class]]) {
                 [selectedTodos addObject:todo];
             }
         }
@@ -235,7 +236,7 @@
     // places
     else if ([sender selectedSegmentIndex] == 2) {
         for (id todo in self.todos) {
-            if ([todo isKindOfClass:[PBPlacesTodo class]]) {
+            if ([todo isKindOfClass:[PBPlacesFeedback class]]) {
                 [selectedTodos addObject:todo];
             }
         }
@@ -268,30 +269,30 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // music
-    if ([[self.todosToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBMusicTodo class]]) {
+    if ([[self.todosToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBMusicFeedback class]]) {
         static NSString *CellIdentifier = @"todoMusicTableCell";
         TodoMusicCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        PBMusicTodo *todo = [self.todosToDisplay objectAtIndex:indexPath.row];
-        PBMusicActivity* musicActivity = todo.musicActivity;
+        PBMusicFeedback *feedback = [self.todosToDisplay objectAtIndex:indexPath.row];
+        PBMusicActivity* musicActivity = feedback.musicActivity;
         
         cell.songTitle.text = musicActivity.musicItem.songTitle;
         cell.songArtist.text = musicActivity.musicItem.artistName;
-        cell.date.text = [self timeElapsed:todo.dateAdded];
+        cell.date.text = [self timeElapsed:feedback.dateAdded];
         cell.coverImage.image = [(SPImage*)[self.cachedAlbumCovers objectForKey:musicActivity.musicItem.spotifyUrl] image];
         
         return cell;
     }
-    
+
     // places
-    else if ([[self.todosToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesTodo class]]) {
+    else if ([[self.todosToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesFeedback class]]) {
         static NSString *CellIdentifier = @"todoPlacesTableCell";
         TodoPlacesCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        PBPlacesTodo *todo = [self.todosToDisplay objectAtIndex:indexPath.row];
-        PBPlacesActivity* placesActivity = todo.placesActivity;
+        PBPlacesFeedback *feedback = [self.todosToDisplay objectAtIndex:indexPath.row];
+        PBPlacesActivity* placesActivity = feedback.placesActivity;
         
         cell.vendorName.text = placesActivity.placesItem.name;
         cell.vendorAddress.text = [self.formattedAddresses objectForKey:placesActivity.placesActivityId];
-        cell.date.text = [self timeElapsed:todo.dateAdded];
+        cell.date.text = [self timeElapsed:feedback.dateAdded];
         cell.vendorImage.image = [self.cachedPlacesPhotos objectForKey:placesActivity.placesItem.photoURL];
         cell.phone.text = placesActivity.placesItem.phone;
         

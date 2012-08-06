@@ -12,10 +12,8 @@
 
 @protocol HomeMusicCellDelegate
 
-- (void)addMusicTodo:(PBMusicActivity*)musicActivity;
-- (void)removeMusicTodo:(PBMusicActivity*)musicActivity;
-- (void)addMusicLike:(PBMusicActivity*)musicActivity;
-- (void)removeMusicLike:(PBMusicActivity*)musicActivity;
+- (void)addMusicFeedback:(PBMusicActivity*)musicActivity forFeedbackType:(NSString *)feedbackType;
+- (void)removeMusicFeedback:(PBMusicActivity*)musicActivity forFeedbackType:(NSString *)feedbackType;
 
 @end
 

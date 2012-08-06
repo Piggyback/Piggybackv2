@@ -35,20 +35,20 @@
 - (IBAction)heart:(id)sender {
     if (self.heart.selected == NO) {
         self.heart.selected = YES;
-        [self.delegate addMusicLike:self.musicActivity];
+        [self.delegate addMusicFeedback:self.musicActivity forFeedbackType:@"like"];
     } else {
         self.heart.selected = NO;
-        [self.delegate removeMusicLike:self.musicActivity];
+        [self.delegate removeMusicFeedback:self.musicActivity forFeedbackType:@"like"];
     }
 }
 
 - (IBAction)todo:(id)sender {
     if (self.todo.selected == NO) {
         self.todo.selected = YES;
-        [self.delegate addMusicTodo:self.musicActivity];
+        [self.delegate addMusicFeedback:self.musicActivity forFeedbackType:@"todo"];
     } else {
         self.todo.selected = NO;
-        [self.delegate removeMusicTodo:self.musicActivity];
+        [self.delegate removeMusicFeedback:self.musicActivity forFeedbackType:@"todo"];
     }
 }
 

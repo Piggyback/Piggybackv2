@@ -16,7 +16,7 @@
 #import "HomePlacesCell.h"
 #import "HomeVideosCell.h"
 
-@interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RKObjectLoaderDelegate, FoursquareCheckinDelegate, YoutubeDelegate, HomeMusicCellDelegate, HomePlacesCellDelegate, RKRequestDelegate>
+@interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RKObjectLoaderDelegate, FoursquareCheckinDelegate, YoutubeDelegate, HomeMusicCellDelegate, HomePlacesCellDelegate, HomeVideosCellDelegate, RKRequestDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) FoursquareDelegate* foursquareDelegate;

@@ -27,18 +27,24 @@
 }
 
 - (IBAction)heart:(id)sender {
-    [self.heart setImage:[UIImage imageNamed:@"heart-pressed-button"] forState:UIControlStateNormal];
+    if (self.heart.selected == NO) {
+        self.heart.selected = YES;
+        [self.delegate addPlacesFeedback:self.placesActivity forFeedbackType:@"like"];
+    } else {
+        self.heart.selected = NO;
+        [self.delegate removePlacesFeedback:self.placesActivity forFeedbackType:@"like"];
+    }
 }
 
 - (IBAction)todo:(id)sender {
     if (self.todo.selected == NO) {
         self.todo.selected = YES;
         [self.todo setImage:[UIImage imageNamed:@"todo-added-button"] forState:UIControlStateNormal];
-        [self.delegate addPlacesTodo:self.placesActivity];
+        [self.delegate addPlacesFeedback:self.placesActivity forFeedbackType:@"todo"];
     } else {
         self.todo.selected = NO;
         [self.todo setImage:[UIImage imageNamed:@"todo-button"] forState:UIControlStateNormal];
-        [self.delegate removePlacesTodo:self.placesActivity];
+        [self.delegate removePlacesFeedback:self.placesActivity forFeedbackType:@"todo"];
     }
 }
 
