@@ -410,9 +410,6 @@
 {
     [super viewDidLoad];
     
-    // set up playback manager
-//    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
-    
     // register for notifications from music cell play button
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playTrack:) name:@"clickPlayMusic" object:nil];
     

@@ -400,6 +400,44 @@
     NSLog(@"items are %@",self.items);
 }
 
+-(void)getExistingFeedback {
+    dispatch_queue_t getMusicFeedbackQueue = dispatch_queue_create("getMusicFeedbackQueue",NULL);
+    dispatch_async(getMusicFeedbackQueue, ^{
+        NSArray *existingMusicFeedback = [PBMusicFeedback allObjects];
+        for (PBMusicFeedback* musicFeedback in existingMusicFeedback) {
+            if ([musicFeedback.musicFeedbackType isEqualToString:@"todo"]) {
+                [self.todoedMusic addObject:musicFeedback.musicActivity.musicItem.musicItemId];
+            } else if ([musicFeedback.musicFeedbackType isEqualToString:@"like"]) {
+                [self.heartedMusic addObject:musicFeedback.musicActivity.musicItem.musicItemId];
+            }
+        }
+    });
+
+    dispatch_queue_t getPlacesFeedbackQueue = dispatch_queue_create("getPlacesFeedbackQueue",NULL);
+    dispatch_async(getPlacesFeedbackQueue, ^{
+        NSArray *existingPlacesFeedback = [PBPlacesFeedback allObjects];
+        for (PBPlacesFeedback* placesFeedback in existingPlacesFeedback) {
+            if ([placesFeedback.placesFeedbackType isEqualToString:@"todo"]) {
+                [self.todoedPlaces addObject:placesFeedback.placesActivity.placesItem.placesItemId];
+            } else if ([placesFeedback.placesFeedbackType isEqualToString:@"like"]) {
+                [self.heartedPlaces addObject:placesFeedback.placesActivity.placesItem.placesItemId];
+            }
+        }
+    });
+       
+    dispatch_queue_t getVideosFeedbackQueue = dispatch_queue_create("getVideosFeedbackQueue",NULL);
+    dispatch_async(getVideosFeedbackQueue, ^{
+        NSArray *existingVideosFeedback = [PBVideosFeedback allObjects];
+        for (PBVideosFeedback* videosFeedback in existingVideosFeedback) {
+            if ([videosFeedback.videosFeedbackType isEqualToString:@"todo"]) {
+                [self.todoedVideos addObject:videosFeedback.videosActivity.videosItem.videosItemId];
+            } else if ([videosFeedback.videosFeedbackType isEqualToString:@"like"]) {
+                [self.heartedVideos addObject:videosFeedback.videosActivity.videosItem.videosItemId];
+            }
+        }
+    });
+}
+
 -(void)cacheImages {
     // youtube video web views
     dispatch_queue_t cacheImagesQueue = dispatch_queue_create("cacheImagesQueue",NULL);
@@ -993,6 +1031,7 @@
     [self fetchAmbassadorFavsFromCoreData];
     [self cacheImages];
     [self getAmbassadorsTopTracks];
+    [self getExistingFeedback];
     
     // register for notifications from music cell play button
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playTrack:) name:@"clickPlayMusic" object:nil];
