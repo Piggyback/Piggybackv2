@@ -17,6 +17,10 @@
 #import "PBMusicFeedback.h"
 #import "PBVideosFeedback.h"
 #import "PBPlacesFeedback.h"
+#import "TodoVideosCell.h"
+#import "PBVideosItem.h"
+#import "PBVideosActivity.h"
+#import "YouTubeView.h"
 
 @interface TodoViewController ()
 
@@ -24,7 +28,10 @@
 @property (nonatomic, strong) NSArray *todosToDisplay;
 @property (nonatomic, strong) NSMutableDictionary* cachedPlacesPhotos;  // key is photoURL
 @property (nonatomic, strong) NSMutableDictionary* cachedAlbumCovers;   // key is spotifyURL
+@property (nonatomic, strong) NSMutableDictionary* cachedYoutubeWebViews; // key is videoURL
 @property (nonatomic, strong) NSMutableDictionary* formattedAddresses;  // key is placeActivityId
+@property BOOL isPlaying;
+@property (nonatomic, strong) NSString* currentlyPlayingSpotifyURL;
 
 @end
 
@@ -34,8 +41,11 @@
 @synthesize todosToDisplay = _todosToDisplay;
 @synthesize cachedAlbumCovers = _cachedAlbumCovers;
 @synthesize cachedPlacesPhotos = _cachedPlacesPhotos;
+@synthesize cachedYoutubeWebViews = _cachedYoutubeWebViews;
 @synthesize formattedAddresses = _formattedAddresses;
 @synthesize todos = _todos;
+@synthesize isPlaying = _isPlaying;
+@synthesize currentlyPlayingSpotifyURL = _currentlyPlayingSpotifyURL;
 
 #pragma mark - Getters & Setters
 -(NSMutableArray*)todos {
@@ -73,24 +83,32 @@
     return _formattedAddresses;
 }
 
+- (NSMutableDictionary*)cachedYoutubeWebViews {
+    if (!_cachedYoutubeWebViews) {
+        _cachedYoutubeWebViews = [[NSMutableDictionary alloc] init];
+    }
+    return _cachedYoutubeWebViews;
+}
+
 #pragma mark - Private helper methods
 - (void)loadObjectsFromDataStore {
     // get todos
     NSPredicate *musicTodoPredicate = [NSPredicate predicateWithFormat:@"musicFeedbackType = %@",@"todo"];
     NSPredicate *placesTodoPredicate = [NSPredicate predicateWithFormat:@"placesFeedbackType = %@",@"todo"];
-//    NSPredicate *videosTodoPredicate = [NSPredicate predicateWithFormat:@"videosFeedbackType = %@",@"todo"];
+    NSPredicate *videosTodoPredicate = [NSPredicate predicateWithFormat:@"videosFeedbackType = %@",@"todo"];
     self.todos = [NSMutableArray arrayWithArray:[PBMusicFeedback objectsWithPredicate:musicTodoPredicate]];
     [self.todos addObjectsFromArray:[PBPlacesFeedback objectsWithPredicate:placesTodoPredicate]];
-//    [self.todos addObjectsFromArray:[PBVideosFeedback objectsWithPredicate:videosTodoPredicate]];
-    NSLog(@"todos are %@",self.todos);
+    [self.todos addObjectsFromArray:[PBVideosFeedback objectsWithPredicate:videosTodoPredicate]];
     
+    // sort todos with most recent at top
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateAdded" ascending:NO];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray = [self.todos sortedArrayUsingDescriptors:sortDescriptors];
+    self.todos = [sortedArray mutableCopy];
+
     // display todos
     self.todosToDisplay = self.todos;
     [self.tableView reloadData];
-    
-//    NSFetchRequest* request = [PBMusicTodo fetchRequest];
-    //    NSSortDescriptor* descriptor = [NSSortDescriptor sortDescriptorWithKey:@"referralDate" ascending:NO];
-    //    [request setSortDescriptors:[NSArray arrayWithObject:descriptor]];
 }
 
 -(void)cacheImages {
@@ -108,10 +126,8 @@
                             [self.cachedAlbumCovers setObject:track.album.cover forKey:spotifyURL];
                             [track.album.cover startLoading];
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                [self.tableView reloadData];
-//                              [self.tableView reloadRowsAtIndexPaths:[self.tableView visibleCells] withRowAnimation:UITableViewRowAnimationNone];
+                                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                             });
-//                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadImage" object:nil userInfo:[NSDictionary dictionaryWithObject:spotifyURL forKey:@"spotifyURL"]];
                         }];
                     }
                 }];
@@ -125,10 +141,19 @@
                     UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]]];
                     [self.cachedPlacesPhotos setObject:placesImage forKey:photoURL];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.tableView reloadData];
-//                        [self.tableView reloadRowsAtIndexPaths:[self.tableView visibleCells] withRowAnimation:UITableViewRowAnimationNone];
+                        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                     });
                 }
+            }
+            
+            else if ([todo isKindOfClass:[PBVideosFeedback class]]) {
+                PBVideosFeedback *videosTodo = todo;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosTodo.videosActivity.videosItem.videoURL frame:CGRectMake(5,4,51,51)];
+                    [self.cachedYoutubeWebViews setObject:videoWebView forKey:videosTodo.videosActivity.videosItem.videoURL];
+                    [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                });
+                
             }
         }
     });
@@ -221,6 +246,32 @@
     return elapsedTime;
 }
 
+#pragma mark - play song notification callback
+
+-(void)playTrack:(NSNotification*)notification {
+    // start new song
+    if (![self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]]) {
+        NSLog(@"start new song");
+        self.currentlyPlayingSpotifyURL = [[notification userInfo] objectForKey:@"spotifyURL"];
+        self.isPlaying = YES;
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+    
+    // pause current song
+    else if ([self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]] && self.isPlaying) {
+        NSLog(@"pause current song");
+        self.isPlaying = NO;
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+    
+    // resume current song
+    else if ([self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]] && !self.isPlaying) {
+        NSLog(@"resume current song");
+        self.isPlaying = YES;
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
 #pragma mark - segmented control delegate
 
 -(void)changeSegment:(id)sender {
@@ -251,11 +302,11 @@
     }
     
     else if ([sender selectedSegmentIndex] == 3) {
-        //        for (id item in self.items) {
-        //            if ([item isKindOfClass:[PBVideosActivity class]]) {
-        //                [selectedItems addObject:item];
-        //            }
-        //        }
+        for (id todo in self.todos) {
+            if ([todo isKindOfClass:[PBVideosFeedback class]]) {
+                [selectedTodos addObject:todo];
+            }
+        }
     }
     
     self.todosToDisplay = selectedTodos;
@@ -287,6 +338,13 @@
         cell.songArtist.text = musicActivity.musicItem.artistName;
         cell.date.text = [self timeElapsed:feedback.dateAdded];
         cell.coverImage.image = [(SPImage*)[self.cachedAlbumCovers objectForKey:musicActivity.musicItem.spotifyUrl] image];
+        cell.spotifyURL = musicActivity.musicItem.spotifyUrl;
+
+        if ([cell.spotifyURL isEqualToString:self.currentlyPlayingSpotifyURL] && self.isPlaying) {
+            cell.playButton.imageView.image = [UIImage imageNamed:@"pause-button"];
+        } else {
+            cell.playButton.imageView.image = [UIImage imageNamed:@"play-button"];
+        }
         
         return cell;
     }
@@ -307,6 +365,23 @@
         return cell;
     }
     
+    // videos
+    else if ([[self.todosToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBVideosFeedback class]]) {
+        static NSString *CellIdentifier = @"todoVideosTableCell";
+        TodoVideosCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        PBVideosFeedback *feedback = [self.todosToDisplay objectAtIndex:indexPath.row];
+        PBVideosActivity* videosActivity = feedback.videosActivity;
+        
+        // set name of video and top align
+        cell.videoName.text = videosActivity.videosItem.name;
+        
+        cell.date.text = [self timeElapsed:feedback.dateAdded];
+        
+        YouTubeView* videoWebView = [self.cachedYoutubeWebViews objectForKey:videosActivity.videosItem.videoURL];
+        [cell.contentView addSubview:videoWebView];
+        
+        return cell;
+    }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath
@@ -333,8 +408,8 @@
 {
     [super viewDidLoad];
     
-    // set up playback manager
-    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
+    // register for notifications from music cell play button
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playTrack:) name:@"clickPlayMusic" object:nil];
     
     // create segmented control to select type of media to view
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:

@@ -37,6 +37,13 @@
 @property (nonatomic, strong) NSMutableDictionary* cachedYoutubeWebViews;
 @property (nonatomic, strong) NSMutableDictionary* cachedAlbumCovers;
 
+@property (nonatomic, strong) NSMutableSet* heartedMusic;
+@property (nonatomic, strong) NSMutableSet* heartedPlaces;
+@property (nonatomic, strong) NSMutableSet* heartedVideos;
+@property (nonatomic, strong) NSMutableSet* todoedMusic;
+@property (nonatomic, strong) NSMutableSet* todoedPlaces;
+@property (nonatomic, strong) NSMutableSet* todoedVideos;
+
 @property (nonatomic, strong) NSString* currentlyPlayingSpotifyURL;
 @property BOOL isPlaying;
 
@@ -60,6 +67,13 @@
 @synthesize cachedPlacesPhotos = _cachedPlacesPhotos;
 @synthesize cachedYoutubeWebViews = _cachedYoutubeWebViews;
 @synthesize cachedAlbumCovers = _cachedAlbumCovers;
+
+@synthesize heartedMusic = _heartedMusic;
+@synthesize heartedPlaces = _heartedPlaces;
+@synthesize heartedVideos = _heartedVideos;
+@synthesize todoedMusic = _todoedMusic;
+@synthesize todoedPlaces = _todoedPlaces;
+@synthesize todoedVideos = _todoedVideos;
 
 @synthesize currentlyPlayingSpotifyURL = _currentlyPlayingSpotifyURL;
 @synthesize isPlaying = _isPlaying;
@@ -129,6 +143,48 @@
     return _cachedAlbumCovers;
 }
 
+- (NSMutableSet*)heartedMusic {
+    if (!_heartedMusic) {
+        _heartedMusic = [[NSMutableSet alloc] init];
+    }
+    return _heartedMusic;
+}
+
+- (NSMutableSet*)heartedPlaces {
+    if (!_heartedPlaces) {
+        _heartedPlaces = [[NSMutableSet alloc] init];
+    }
+    return _heartedPlaces;
+}
+
+- (NSMutableSet*)heartedVideos {
+    if (!_heartedVideos) {
+        _heartedVideos = [[NSMutableSet alloc] init];
+    }
+    return _heartedVideos;
+}
+
+- (NSMutableSet*)todoedMusic {
+    if (!_todoedMusic) {
+        _todoedMusic = [[NSMutableSet alloc] init];
+    }
+    return _todoedMusic;
+}
+
+- (NSMutableSet*)todoedPlaces {
+    if (!_todoedPlaces) {
+        _todoedPlaces = [[NSMutableSet alloc] init];
+    }
+    return _todoedPlaces;
+}
+
+- (NSMutableSet*)todoedVideos {
+    if (!_todoedVideos) {
+        _todoedVideos = [[NSMutableSet alloc] init];
+    }
+    return _todoedVideos;
+}
+
 #pragma mark - public helper methods
 
 - (void)loadAmbassadorData {
@@ -166,6 +222,16 @@
                 [SPTrack trackForTrackURL:[NSURL URLWithString:newMusicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
                     [self.cachedAlbumCovers setObject:track.album.cover forKey:newMusicItem.spotifyUrl];
                     [track.album.cover startLoading];
+                    
+                    // reload cell if it is visible and the image was just reloaded
+                    for (id cell in [self.tableView visibleCells]) {
+                        if ([cell isKindOfClass:[HomeMusicCell class]]) {
+                            HomeMusicCell* musicCell = cell;
+                            if (musicCell.musicActivity.musicItem.musicItemId == newMusicItem.musicItemId) {
+                                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                            }
+                        }
+                    }
                 }];
             });
 
@@ -239,6 +305,17 @@
     YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:newVideosItem.videoURL frame:CGRectMake(9,38,302,240)];
     [self.cachedYoutubeWebViews setObject:videoWebView forKey:newVideosItem.videoURL];
     
+    // reload cell if it is visible and the image was just reloaded
+    for (id cell in [self.tableView visibleCells]) {
+        if ([cell isKindOfClass:[HomeVideosCell class]]) {
+            HomeVideosCell* videosCell = cell;
+            if (videosCell.videosActivity.videosItem.videosItemId == newVideosItem.videosItemId) {
+                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }
+    }
+
+    
     [[RKObjectManager sharedManager] postObject:newVideosItem usingBlock:^(RKObjectLoader* loader) {
         loader.onDidLoadObject = ^(id object) {
             for (PBUser* videosAmbassador in self.videosAmbassadors) {
@@ -270,8 +347,16 @@
         if(placesItem.photoURL) {
             UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
             [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.photoURL];
-            NSLog(@"places photos are %@",self.cachedPlacesPhotos);
-        }
+            
+            // reload cell if it is visible and the image was just reloaded
+            for (id cell in [self.tableView visibleCells]) {
+                if ([cell isKindOfClass:[HomePlacesCell class]]) {
+                    HomePlacesCell* placesCell = cell;
+                    if (placesCell.placesActivity.placesItem.placesItemId == placesItem.placesItemId) {
+                        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                    }
+                }
+            }        }
         
         // store photoURLs in core data and db
         [[RKObjectManager sharedManager] putObject:placesItem usingBlock:^(RKObjectLoader* loader) {
@@ -344,6 +429,44 @@
     NSLog(@"items are %@",self.items);
 }
 
+-(void)getExistingFeedback {
+    dispatch_queue_t getMusicFeedbackQueue = dispatch_queue_create("getMusicFeedbackQueue",NULL);
+    dispatch_async(getMusicFeedbackQueue, ^{
+        NSArray *existingMusicFeedback = [PBMusicFeedback allObjects];
+        for (PBMusicFeedback* musicFeedback in existingMusicFeedback) {
+            if ([musicFeedback.musicFeedbackType isEqualToString:@"todo"]) {
+                [self.todoedMusic addObject:musicFeedback.musicActivity.musicItem.musicItemId];
+            } else if ([musicFeedback.musicFeedbackType isEqualToString:@"like"]) {
+                [self.heartedMusic addObject:musicFeedback.musicActivity.musicItem.musicItemId];
+            }
+        }
+    });
+
+    dispatch_queue_t getPlacesFeedbackQueue = dispatch_queue_create("getPlacesFeedbackQueue",NULL);
+    dispatch_async(getPlacesFeedbackQueue, ^{
+        NSArray *existingPlacesFeedback = [PBPlacesFeedback allObjects];
+        for (PBPlacesFeedback* placesFeedback in existingPlacesFeedback) {
+            if ([placesFeedback.placesFeedbackType isEqualToString:@"todo"]) {
+                [self.todoedPlaces addObject:placesFeedback.placesActivity.placesItem.placesItemId];
+            } else if ([placesFeedback.placesFeedbackType isEqualToString:@"like"]) {
+                [self.heartedPlaces addObject:placesFeedback.placesActivity.placesItem.placesItemId];
+            }
+        }
+    });
+       
+    dispatch_queue_t getVideosFeedbackQueue = dispatch_queue_create("getVideosFeedbackQueue",NULL);
+    dispatch_async(getVideosFeedbackQueue, ^{
+        NSArray *existingVideosFeedback = [PBVideosFeedback allObjects];
+        for (PBVideosFeedback* videosFeedback in existingVideosFeedback) {
+            if ([videosFeedback.videosFeedbackType isEqualToString:@"todo"]) {
+                [self.todoedVideos addObject:videosFeedback.videosActivity.videosItem.videosItemId];
+            } else if ([videosFeedback.videosFeedbackType isEqualToString:@"like"]) {
+                [self.heartedVideos addObject:videosFeedback.videosActivity.videosItem.videosItemId];
+            }
+        }
+    });
+}
+
 -(void)cacheImages {
     // youtube video web views
     dispatch_queue_t cacheImagesQueue = dispatch_queue_create("cacheImagesQueue",NULL);
@@ -352,8 +475,18 @@
             if ([activity isKindOfClass:[PBVideosActivity class]]) {
                 PBVideosActivity *videosActivity = activity;
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosActivity.videosItem.videoURL frame:CGRectMake(9,38,302,240)];
+                    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosActivity.videosItem.videoURL frame:CGRectMake(9,38,302,290)];
                     [self.cachedYoutubeWebViews setObject:videoWebView forKey:videosActivity.videosItem.videoURL];
+                    
+                    // reload cell if it is visible and the image was just reloaded
+                    for (id cell in [self.tableView visibleCells]) {
+                        if ([cell isKindOfClass:[HomeVideosCell class]]) {
+                            HomeVideosCell* videosCell = cell;
+                            if (videosCell.videosActivity.videosItem.videosItemId == videosActivity.videosItem.videosItemId) {
+                                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                            }
+                        }
+                    }
                 });
 
             }
@@ -364,6 +497,16 @@
                 if(placesActivity.placesItem.photoURL) {
                     UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesActivity.placesItem.photoURL]]];
                     [self.cachedPlacesPhotos setObject:placesImage forKey:placesActivity.placesItem.photoURL];
+                    
+                    // reload cell if it is visible and the image was just reloaded
+                    for (id cell in [self.tableView visibleCells]) {
+                        if ([cell isKindOfClass:[HomePlacesCell class]]) {
+                            HomePlacesCell* placesCell = cell;
+                            if (placesCell.placesActivity.placesItem.placesItemId == placesActivity.placesItem.placesItemId) {
+                                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                            }
+                        }
+                    }
                 }
             }
             
@@ -375,6 +518,16 @@
                         [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
                             [self.cachedAlbumCovers setObject:track.album.cover forKey:musicActivity.musicItem.spotifyUrl];
                             [track.album.cover startLoading];
+                            
+                            // reload cell if it is visible and the image was just reloaded
+                            for (id cell in [self.tableView visibleCells]) {
+                                if ([cell isKindOfClass:[HomeMusicCell class]]) {
+//                                    HomeMusicCell* musicCell = cell;
+//                                    if (musicCell.musicActivity.musicItem.musicItemId == musicActivity.musicItem.musicItemId) {
+                                        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+//                                    }
+                                }
+                            }
                         }];
                     }
                 }];
@@ -432,13 +585,39 @@
 }
 
 #pragma mark - home music cell delegate methods
+- (void)heartMusic:(NSNotification*)notification {
+    PBMusicActivity* musicActivity = [[notification userInfo] objectForKey:@"musicActivity"];
+    if ([self.heartedMusic containsObject:musicActivity.musicItem.musicItemId]) {
+        [self removeMusicFeedback:musicActivity forFeedbackType:@"like"];
+        [self.heartedMusic removeObject:musicActivity.musicItem.musicItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [self addMusicFeedback:musicActivity forFeedbackType:@"like"];
+        [self.heartedMusic addObject:musicActivity.musicItem.musicItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+- (void)todoMusic:(NSNotification*)notification {
+    PBMusicActivity* musicActivity = [[notification userInfo] objectForKey:@"musicActivity"];
+    if ([self.todoedMusic containsObject:musicActivity.musicItem.musicItemId]) {
+        [self removeMusicFeedback:musicActivity forFeedbackType:@"todo"];
+        [self.todoedMusic removeObject:musicActivity.musicItem.musicItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [self addMusicFeedback:musicActivity forFeedbackType:@"todo"];
+        [self.todoedMusic addObject:musicActivity.musicItem.musicItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
 - (void)addMusicFeedback:(PBMusicActivity *)musicActivity forFeedbackType:(NSString *)feedbackType {
     PBMusicFeedback *musicFeedback = [PBMusicFeedback object];
     musicFeedback.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
     musicFeedback.follower = [PBUser findByPrimaryKey:musicFeedback.followerUid];
     musicFeedback.musicActivityId = musicActivity.musicActivityId;
     musicFeedback.musicActivity = musicActivity;
-    musicFeedback.musicFeedbackType = @"todo";
+//    musicFeedback.musicFeedbackType = @"todo";
     musicFeedback.status = [NSNumber numberWithInt:0];
     
     if ([feedbackType isEqualToString:@"todo"]) {
@@ -485,13 +664,39 @@
     }
 }
 
+- (void)heartPlaces:(NSNotification*)notification {
+    PBPlacesActivity* placesActivity = [[notification userInfo] objectForKey:@"placesActivity"];
+    if ([self.heartedPlaces containsObject:placesActivity.placesItem.placesItemId]) {
+        [self removePlacesFeedback:placesActivity forFeedbackType:@"like"];
+        [self.heartedPlaces removeObject:placesActivity.placesItem.placesItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [self addPlacesFeedback:placesActivity forFeedbackType:@"like"];
+        [self.heartedPlaces addObject:placesActivity.placesItem.placesItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+- (void)todoPlaces:(NSNotification*)notification {
+    PBPlacesActivity* placesActivity = [[notification userInfo] objectForKey:@"placesActivity"];
+    if ([self.todoedPlaces containsObject:placesActivity.placesItem.placesItemId]) {
+        [self removePlacesFeedback:placesActivity forFeedbackType:@"todo"];
+        [self.todoedPlaces removeObject:placesActivity.placesItem.placesItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [self addPlacesFeedback:placesActivity forFeedbackType:@"todo"];
+        [self.todoedPlaces addObject:placesActivity.placesItem.placesItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
 - (void)addPlacesFeedback:(PBPlacesActivity *)placesActivity forFeedbackType:(NSString *)feedbackType {
     PBPlacesFeedback *placesFeedback = [PBPlacesFeedback object];
     placesFeedback.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
     placesFeedback.follower = [PBUser findByPrimaryKey:placesFeedback.followerUid];
     placesFeedback.placesActivityId = placesActivity.placesActivityId;
     placesFeedback.placesActivity = placesActivity;
-    placesFeedback.placesFeedbackType = @"todo";
+//    placesFeedback.placesFeedbackType = @"todo";
     placesFeedback.status = [NSNumber numberWithInt:0];
     
     if ([feedbackType isEqualToString:@"todo"]) {
@@ -538,13 +743,39 @@
     }
 }
 
+- (void)heartVideos:(NSNotification*)notification {
+    PBVideosActivity* videosActivity = [[notification userInfo] objectForKey:@"videosActivity"];
+    if ([self.heartedVideos containsObject:videosActivity.videosItem.videosItemId]) {
+        [self removeVideosFeedback:videosActivity forFeedbackType:@"like"];
+        [self.heartedVideos removeObject:videosActivity.videosItem.videosItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [self addVideosFeedback:videosActivity forFeedbackType:@"like"];
+        [self.heartedVideos addObject:videosActivity.videosItem.videosItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+- (void)todoVideos:(NSNotification*)notification {
+    PBVideosActivity* videosActivity = [[notification userInfo] objectForKey:@"videosActivity"];
+    if ([self.todoedVideos containsObject:videosActivity.videosItem.videosItemId]) {
+        [self removeVideosFeedback:videosActivity forFeedbackType:@"todo"];
+        [self.todoedMusic removeObject:videosActivity.videosItem.videosItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [self addVideosFeedback:videosActivity forFeedbackType:@"todo"];
+        [self.todoedVideos addObject:videosActivity.videosItem.videosItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
 - (void)addVideosFeedback:(PBVideosActivity *)videosActivity forFeedbackType:(NSString *)feedbackType {
     PBVideosFeedback *videosFeedback = [PBVideosFeedback object];
     videosFeedback.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
     videosFeedback.follower = [PBUser findByPrimaryKey:videosFeedback.followerUid];
     videosFeedback.videosActivityId = videosActivity.videosActivityId;
     videosFeedback.videosActivity = videosActivity;
-    videosFeedback.videosFeedbackType = @"todo";
+//    videosFeedback.videosFeedbackType = @"todo";
     videosFeedback.status = [NSNumber numberWithInt:0];
     
     if ([feedbackType isEqualToString:@"todo"]) {
@@ -717,18 +948,31 @@
         PBUser* user = musicActivity.user;
         
         cell.musicActivity = musicActivity;
-        
-        cell.spotifyURL = musicItem.spotifyUrl;
-        cell.nameOfItem.text = [NSString stringWithFormat:@"%@ - %@",musicItem.artistName, musicItem.songTitle]; 
+        cell.nameOfItem.text = [NSString stringWithFormat:@"%@ - %@",musicItem.artistName, musicItem.songTitle];
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ added a new top track",user.firstName, user.lastName];
         cell.icon.image = [UIImage imageNamed:@"music-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
         cell.mainPic.image = [(SPImage*)[self.cachedAlbumCovers objectForKey:musicItem.spotifyUrl] image];
         
-        if ([cell.spotifyURL isEqualToString:self.currentlyPlayingSpotifyURL] && self.isPlaying) {
+        // play button
+        if ([cell.musicActivity.musicItem.spotifyUrl isEqualToString:self.currentlyPlayingSpotifyURL] && self.isPlaying) {
             cell.playButton.imageView.image = [UIImage imageNamed:@"pause-button"];
         } else {
             cell.playButton.imageView.image = [UIImage imageNamed:@"play-button"];
+        }
+        
+        // heart
+        if ([self.heartedMusic containsObject:musicActivity.musicItem.musicItemId]) {
+            cell.heart.imageView.image = [UIImage imageNamed:@"heart-pressed-button"];
+        } else {
+            cell.heart.imageView.image = [UIImage imageNamed:@"heart-button"];
+        }
+        
+        // todo
+        if ([self.todoedMusic containsObject:musicActivity.musicItem.musicItemId]) {
+            cell.todo.imageView.image = [UIImage imageNamed:@"todo-added-button"];
+        } else {
+            cell.todo.imageView.image = [UIImage imageNamed:@"todo-button"];
         }
         
         return cell;
@@ -753,6 +997,20 @@
             cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.photoURL];
         }
         
+        // heart
+        if ([self.heartedPlaces containsObject:placesActivity.placesItem.placesItemId]) {
+            cell.heart.imageView.image = [UIImage imageNamed:@"heart-pressed-button"];
+        } else {
+            cell.heart.imageView.image = [UIImage imageNamed:@"heart-button"];
+        }
+        
+        // todo
+        if ([self.todoedPlaces containsObject:placesActivity.placesItem.placesItemId]) {
+            cell.todo.imageView.image = [UIImage imageNamed:@"todo-added-button"];
+        } else {
+            cell.todo.imageView.image = [UIImage imageNamed:@"todo-button"];
+        }
+        
         return cell;
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBVideosActivity class]]) {
         PBVideosActivity* videosActivity = [self.displayItems objectAtIndex:indexPath.row];
@@ -774,6 +1032,20 @@
         cell.icon.image = [UIImage imageNamed:@"movie-icon-badge.png"];
         [cell.contentView bringSubviewToFront:cell.icon];
 
+        // heart
+        if ([self.heartedVideos containsObject:videosActivity.videosItem.videosItemId]) {
+            cell.heart.imageView.image = [UIImage imageNamed:@"heart-pressed-button"];
+        } else {
+            cell.heart.imageView.image = [UIImage imageNamed:@"heart-button"];
+        }
+        
+        // todo
+        if ([self.todoedVideos containsObject:videosActivity.videosItem.videosItemId]) {
+            cell.todo.imageView.image = [UIImage imageNamed:@"todo-added-button"];
+        } else {
+            cell.todo.imageView.image = [UIImage imageNamed:@"todo-button"];
+        }
+        
         return cell;
     }
 }
@@ -818,9 +1090,16 @@
     [self fetchAmbassadorFavsFromCoreData];
     [self cacheImages];
     [self getAmbassadorsTopTracks];
+    [self getExistingFeedback];
     
     // register for notifications from music cell play button
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playTrack:) name:@"clickPlayMusic" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(heartMusic:) name:@"heartMusic" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(todoMusic:) name:@"todoMusic" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(heartPlaces:) name:@"heartPlaces" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(todoPlaces:) name:@"todoPlaces" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(heartVideos:) name:@"heartVideos" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(todoVideos:) name:@"todoVideos" object:nil];
     
     // create segmented control to select type of media to view
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:
