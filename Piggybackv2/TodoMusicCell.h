@@ -15,5 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *songArtist;
 @property (weak, nonatomic) IBOutlet UIImageView *coverImage;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (nonatomic, strong) NSString* spotifyURL;
+
+- (IBAction)clickPlay:(id)sender;
 
 @end

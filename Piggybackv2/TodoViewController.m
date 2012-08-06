@@ -30,6 +30,8 @@
 @property (nonatomic, strong) NSMutableDictionary* cachedAlbumCovers;   // key is spotifyURL
 @property (nonatomic, strong) NSMutableDictionary* cachedYoutubeWebViews; // key is videoURL
 @property (nonatomic, strong) NSMutableDictionary* formattedAddresses;  // key is placeActivityId
+@property BOOL isPlaying;
+@property (nonatomic, strong) NSString* currentlyPlayingSpotifyURL;
 
 @end
 
@@ -42,6 +44,8 @@
 @synthesize cachedYoutubeWebViews = _cachedYoutubeWebViews;
 @synthesize formattedAddresses = _formattedAddresses;
 @synthesize todos = _todos;
+@synthesize isPlaying = _isPlaying;
+@synthesize currentlyPlayingSpotifyURL = _currentlyPlayingSpotifyURL;
 
 #pragma mark - Getters & Setters
 -(NSMutableArray*)todos {
@@ -243,6 +247,32 @@
     return elapsedTime;
 }
 
+#pragma mark - play song notification callback
+
+-(void)playTrack:(NSNotification*)notification {
+    // start new song
+    if (![self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]]) {
+        NSLog(@"start new song");
+        self.currentlyPlayingSpotifyURL = [[notification userInfo] objectForKey:@"spotifyURL"];
+        self.isPlaying = YES;
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+    
+    // pause current song
+    else if ([self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]] && self.isPlaying) {
+        NSLog(@"pause current song");
+        self.isPlaying = NO;
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+    
+    // resume current song
+    else if ([self.currentlyPlayingSpotifyURL isEqualToString:[[notification userInfo] objectForKey:@"spotifyURL"]] && !self.isPlaying) {
+        NSLog(@"resume current song");
+        self.isPlaying = YES;
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
 #pragma mark - segmented control delegate
 
 -(void)changeSegment:(id)sender {
@@ -309,6 +339,13 @@
         cell.songArtist.text = musicActivity.musicItem.artistName;
         cell.date.text = [self timeElapsed:feedback.dateAdded];
         cell.coverImage.image = [(SPImage*)[self.cachedAlbumCovers objectForKey:musicActivity.musicItem.spotifyUrl] image];
+        cell.spotifyURL = musicActivity.musicItem.spotifyUrl;
+
+        if ([cell.spotifyURL isEqualToString:self.currentlyPlayingSpotifyURL] && self.isPlaying) {
+            cell.playButton.imageView.image = [UIImage imageNamed:@"pause-button"];
+        } else {
+            cell.playButton.imageView.image = [UIImage imageNamed:@"play-button"];
+        }
         
         return cell;
     }
@@ -375,7 +412,10 @@
     [super viewDidLoad];
     
     // set up playback manager
-    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
+//    self.playbackManager = [[SPPlaybackManager alloc] initWithPlaybackSession:[SPSession sharedSession]];
+    
+    // register for notifications from music cell play button
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playTrack:) name:@"clickPlayMusic" object:nil];
     
     // create segmented control to select type of media to view
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:
