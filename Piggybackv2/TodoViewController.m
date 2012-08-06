@@ -125,8 +125,8 @@
                             [self.cachedAlbumCovers setObject:track.album.cover forKey:spotifyURL];
                             [track.album.cover startLoading];
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                [self.tableView reloadData];
-//                              [self.tableView reloadRowsAtIndexPaths:[self.tableView visibleCells] withRowAnimation:UITableViewRowAnimationNone];
+//                                [self.tableView reloadData];
+                                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                             });
 //                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadImage" object:nil userInfo:[NSDictionary dictionaryWithObject:spotifyURL forKey:@"spotifyURL"]];
                         }];
@@ -142,8 +142,8 @@
                     UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]]];
                     [self.cachedPlacesPhotos setObject:placesImage forKey:photoURL];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.tableView reloadData];
-//                        [self.tableView reloadRowsAtIndexPaths:[self.tableView visibleCells] withRowAnimation:UITableViewRowAnimationNone];
+//                        [self.tableView reloadData];
+                        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                     });
                 }
             }
@@ -153,6 +153,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosTodo.videosActivity.videosItem.videoURL frame:CGRectMake(5,4,51,51)];
                     [self.cachedYoutubeWebViews setObject:videoWebView forKey:videosTodo.videosActivity.videosItem.videoURL];
+                    [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                 });
                 
             }
@@ -375,8 +376,6 @@
         
         // set name of video and top align
         cell.videoName.text = videosActivity.videosItem.name;
-        cell.videoName.numberOfLines = 0;
-        [cell.videoName sizeToFit];
         
         cell.date.text = [self timeElapsed:feedback.dateAdded];
         

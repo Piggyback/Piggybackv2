@@ -37,6 +37,13 @@
 @property (nonatomic, strong) NSMutableDictionary* cachedYoutubeWebViews;
 @property (nonatomic, strong) NSMutableDictionary* cachedAlbumCovers;
 
+@property (nonatomic, strong) NSMutableSet* heartedMusic;
+@property (nonatomic, strong) NSMutableSet* heartedPlaces;
+@property (nonatomic, strong) NSMutableSet* heartedVideos;
+@property (nonatomic, strong) NSMutableSet* todoedMusic;
+@property (nonatomic, strong) NSMutableSet* todoedPlaces;
+@property (nonatomic, strong) NSMutableSet* todoedVideos;
+
 @property (nonatomic, strong) NSString* currentlyPlayingSpotifyURL;
 @property BOOL isPlaying;
 
@@ -60,6 +67,13 @@
 @synthesize cachedPlacesPhotos = _cachedPlacesPhotos;
 @synthesize cachedYoutubeWebViews = _cachedYoutubeWebViews;
 @synthesize cachedAlbumCovers = _cachedAlbumCovers;
+
+@synthesize heartedMusic = _heartedMusic;
+@synthesize heartedPlaces = _heartedPlaces;
+@synthesize heartedVideos = _heartedVideos;
+@synthesize todoedMusic = _todoedMusic;
+@synthesize todoedPlaces = _todoedPlaces;
+@synthesize todoedVideos = _todoedVideos;
 
 @synthesize currentlyPlayingSpotifyURL = _currentlyPlayingSpotifyURL;
 @synthesize isPlaying = _isPlaying;
@@ -127,6 +141,48 @@
         _cachedAlbumCovers = [[NSMutableDictionary alloc] init];
     }
     return _cachedAlbumCovers;
+}
+
+- (NSMutableSet*)heartedMusic {
+    if (!_heartedMusic) {
+        _heartedMusic = [[NSMutableSet alloc] init];
+    }
+    return _heartedMusic;
+}
+
+- (NSMutableSet*)heartedPlaces {
+    if (!_heartedPlaces) {
+        _heartedPlaces = [[NSMutableSet alloc] init];
+    }
+    return _heartedPlaces;
+}
+
+- (NSMutableSet*)heartedVideos {
+    if (!_heartedVideos) {
+        _heartedVideos = [[NSMutableSet alloc] init];
+    }
+    return _heartedVideos;
+}
+
+- (NSMutableSet*)todoedMusic {
+    if (!_todoedMusic) {
+        _todoedMusic = [[NSMutableSet alloc] init];
+    }
+    return _todoedMusic;
+}
+
+- (NSMutableSet*)todoedPlaces {
+    if (!_todoedPlaces) {
+        _todoedPlaces = [[NSMutableSet alloc] init];
+    }
+    return _todoedPlaces;
+}
+
+- (NSMutableSet*)todoedVideos {
+    if (!_todoedVideos) {
+        _todoedVideos = [[NSMutableSet alloc] init];
+    }
+    return _todoedVideos;
 }
 
 #pragma mark - public helper methods
@@ -270,7 +326,7 @@
         if(placesItem.photoURL) {
             UIImage* placesImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:placesItem.photoURL]]];
             [self.cachedPlacesPhotos setObject:placesImage forKey:placesItem.photoURL];
-            NSLog(@"places photos are %@",self.cachedPlacesPhotos);
+            [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
         }
         
         // store photoURLs in core data and db
@@ -432,13 +488,39 @@
 }
 
 #pragma mark - home music cell delegate methods
+- (void)heartMusic:(NSNotification*)notification {
+    PBMusicActivity* musicActivity = [[notification userInfo] objectForKey:@"musicActivity"];
+    if ([self.heartedMusic containsObject:musicActivity.musicItem.musicItemId]) {
+        [self removeMusicFeedback:musicActivity forFeedbackType:@"like"];
+        [self.heartedMusic removeObject:musicActivity.musicItem.musicItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [self addMusicFeedback:musicActivity forFeedbackType:@"like"];
+        [self.heartedMusic addObject:musicActivity.musicItem.musicItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+- (void)todoMusic:(NSNotification*)notification {
+    PBMusicActivity* musicActivity = [[notification userInfo] objectForKey:@"musicActivity"];
+    if ([self.todoedMusic containsObject:musicActivity.musicItem.musicItemId]) {
+        [self removeMusicFeedback:musicActivity forFeedbackType:@"todo"];
+        [self.todoedMusic removeObject:musicActivity.musicItem.musicItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [self addMusicFeedback:musicActivity forFeedbackType:@"todo"];
+        [self.todoedMusic addObject:musicActivity.musicItem.musicItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
 - (void)addMusicFeedback:(PBMusicActivity *)musicActivity forFeedbackType:(NSString *)feedbackType {
     PBMusicFeedback *musicFeedback = [PBMusicFeedback object];
     musicFeedback.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
     musicFeedback.follower = [PBUser findByPrimaryKey:musicFeedback.followerUid];
     musicFeedback.musicActivityId = musicActivity.musicActivityId;
     musicFeedback.musicActivity = musicActivity;
-    musicFeedback.musicFeedbackType = @"todo";
+//    musicFeedback.musicFeedbackType = @"todo";
     musicFeedback.status = [NSNumber numberWithInt:0];
     
     if ([feedbackType isEqualToString:@"todo"]) {
@@ -485,13 +567,39 @@
     }
 }
 
+- (void)heartPlaces:(NSNotification*)notification {
+    PBPlacesActivity* placesActivity = [[notification userInfo] objectForKey:@"placesActivity"];
+    if ([self.heartedPlaces containsObject:placesActivity.placesItem.placesItemId]) {
+        [self removePlacesFeedback:placesActivity forFeedbackType:@"like"];
+        [self.heartedPlaces removeObject:placesActivity.placesItem.placesItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [self addPlacesFeedback:placesActivity forFeedbackType:@"like"];
+        [self.heartedPlaces addObject:placesActivity.placesItem.placesItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+- (void)todoPlaces:(NSNotification*)notification {
+    PBPlacesActivity* placesActivity = [[notification userInfo] objectForKey:@"placesActivity"];
+    if ([self.todoedPlaces containsObject:placesActivity.placesItem.placesItemId]) {
+        [self removePlacesFeedback:placesActivity forFeedbackType:@"todo"];
+        [self.todoedPlaces removeObject:placesActivity.placesItem.placesItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [self addPlacesFeedback:placesActivity forFeedbackType:@"todo"];
+        [self.todoedPlaces addObject:placesActivity.placesItem.placesItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
 - (void)addPlacesFeedback:(PBPlacesActivity *)placesActivity forFeedbackType:(NSString *)feedbackType {
     PBPlacesFeedback *placesFeedback = [PBPlacesFeedback object];
     placesFeedback.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
     placesFeedback.follower = [PBUser findByPrimaryKey:placesFeedback.followerUid];
     placesFeedback.placesActivityId = placesActivity.placesActivityId;
     placesFeedback.placesActivity = placesActivity;
-    placesFeedback.placesFeedbackType = @"todo";
+//    placesFeedback.placesFeedbackType = @"todo";
     placesFeedback.status = [NSNumber numberWithInt:0];
     
     if ([feedbackType isEqualToString:@"todo"]) {
@@ -538,13 +646,39 @@
     }
 }
 
+- (void)heartVideos:(NSNotification*)notification {
+    PBVideosActivity* videosActivity = [[notification userInfo] objectForKey:@"videosActivity"];
+    if ([self.heartedVideos containsObject:videosActivity.videosItem.videosItemId]) {
+        [self removeVideosFeedback:videosActivity forFeedbackType:@"like"];
+        [self.heartedVideos removeObject:videosActivity.videosItem.videosItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [self addVideosFeedback:videosActivity forFeedbackType:@"like"];
+        [self.heartedVideos addObject:videosActivity.videosItem.videosItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+- (void)todoVideos:(NSNotification*)notification {
+    PBVideosActivity* videosActivity = [[notification userInfo] objectForKey:@"videosActivity"];
+    if ([self.todoedVideos containsObject:videosActivity.videosItem.videosItemId]) {
+        [self removeVideosFeedback:videosActivity forFeedbackType:@"todo"];
+        [self.todoedMusic removeObject:videosActivity.videosItem.videosItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [self addVideosFeedback:videosActivity forFeedbackType:@"todo"];
+        [self.todoedVideos addObject:videosActivity.videosItem.videosItemId];
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
 - (void)addVideosFeedback:(PBVideosActivity *)videosActivity forFeedbackType:(NSString *)feedbackType {
     PBVideosFeedback *videosFeedback = [PBVideosFeedback object];
     videosFeedback.followerUid = [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]];
     videosFeedback.follower = [PBUser findByPrimaryKey:videosFeedback.followerUid];
     videosFeedback.videosActivityId = videosActivity.videosActivityId;
     videosFeedback.videosActivity = videosActivity;
-    videosFeedback.videosFeedbackType = @"todo";
+//    videosFeedback.videosFeedbackType = @"todo";
     videosFeedback.status = [NSNumber numberWithInt:0];
     
     if ([feedbackType isEqualToString:@"todo"]) {
@@ -717,18 +851,31 @@
         PBUser* user = musicActivity.user;
         
         cell.musicActivity = musicActivity;
-        
-        cell.spotifyURL = musicItem.spotifyUrl;
-        cell.nameOfItem.text = [NSString stringWithFormat:@"%@ - %@",musicItem.artistName, musicItem.songTitle]; 
+        cell.nameOfItem.text = [NSString stringWithFormat:@"%@ - %@",musicItem.artistName, musicItem.songTitle];
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ added a new top track",user.firstName, user.lastName];
         cell.icon.image = [UIImage imageNamed:@"music-icon-badge.png"];
         cell.profilePic.image = user.thumbnail;
         cell.mainPic.image = [(SPImage*)[self.cachedAlbumCovers objectForKey:musicItem.spotifyUrl] image];
         
-        if ([cell.spotifyURL isEqualToString:self.currentlyPlayingSpotifyURL] && self.isPlaying) {
+        // play button
+        if ([cell.musicActivity.musicItem.spotifyUrl isEqualToString:self.currentlyPlayingSpotifyURL] && self.isPlaying) {
             cell.playButton.imageView.image = [UIImage imageNamed:@"pause-button"];
         } else {
             cell.playButton.imageView.image = [UIImage imageNamed:@"play-button"];
+        }
+        
+        // heart
+        if ([self.heartedMusic containsObject:musicActivity.musicItem.musicItemId]) {
+            cell.heart.imageView.image = [UIImage imageNamed:@"heart-pressed-button"];
+        } else {
+            cell.heart.imageView.image = [UIImage imageNamed:@"heart-button"];
+        }
+        
+        // todo
+        if ([self.todoedMusic containsObject:musicActivity.musicItem.musicItemId]) {
+            cell.todo.imageView.image = [UIImage imageNamed:@"todo-added-button"];
+        } else {
+            cell.todo.imageView.image = [UIImage imageNamed:@"todo-button"];
         }
         
         return cell;
@@ -753,6 +900,20 @@
             cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.photoURL];
         }
         
+        // heart
+        if ([self.heartedPlaces containsObject:placesActivity.placesItem.placesItemId]) {
+            cell.heart.imageView.image = [UIImage imageNamed:@"heart-pressed-button"];
+        } else {
+            cell.heart.imageView.image = [UIImage imageNamed:@"heart-button"];
+        }
+        
+        // todo
+        if ([self.todoedPlaces containsObject:placesActivity.placesItem.placesItemId]) {
+            cell.todo.imageView.image = [UIImage imageNamed:@"todo-added-button"];
+        } else {
+            cell.todo.imageView.image = [UIImage imageNamed:@"todo-button"];
+        }
+        
         return cell;
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBVideosActivity class]]) {
         PBVideosActivity* videosActivity = [self.displayItems objectAtIndex:indexPath.row];
@@ -774,6 +935,20 @@
         cell.icon.image = [UIImage imageNamed:@"movie-icon-badge.png"];
         [cell.contentView bringSubviewToFront:cell.icon];
 
+        // heart
+        if ([self.heartedVideos containsObject:videosActivity.videosItem.videosItemId]) {
+            cell.heart.imageView.image = [UIImage imageNamed:@"heart-pressed-button"];
+        } else {
+            cell.heart.imageView.image = [UIImage imageNamed:@"heart-button"];
+        }
+        
+        // todo
+        if ([self.todoedVideos containsObject:videosActivity.videosItem.videosItemId]) {
+            cell.todo.imageView.image = [UIImage imageNamed:@"todo-added-button"];
+        } else {
+            cell.todo.imageView.image = [UIImage imageNamed:@"todo-button"];
+        }
+        
         return cell;
     }
 }
@@ -821,6 +996,12 @@
     
     // register for notifications from music cell play button
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playTrack:) name:@"clickPlayMusic" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(heartMusic:) name:@"heartMusic" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(todoMusic:) name:@"todoMusic" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(heartPlaces:) name:@"heartPlaces" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(todoPlaces:) name:@"todoPlaces" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(heartVideos:) name:@"heartVideos" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(todoVideos:) name:@"todoVideos" object:nil];
     
     // create segmented control to select type of media to view
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
 #import "PBMusicActivity.h"
+#import "PBMusicItem.h"
 
 @protocol HomeMusicCellDelegate
 
@@ -28,7 +29,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView* icon;
 @property (nonatomic, weak) IBOutlet UIImageView* mainPic;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
-@property (nonatomic, strong) NSString* spotifyURL;
+//@property (nonatomic, strong) NSString* spotifyURL;
 @property (nonatomic, strong) PBMusicActivity *musicActivity;
 @property (nonatomic, weak) id<HomeMusicCellDelegate> delegate;
 

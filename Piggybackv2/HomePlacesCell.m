@@ -27,25 +27,27 @@
 }
 
 - (IBAction)heart:(id)sender {
-    if (self.heart.selected == NO) {
-        self.heart.selected = YES;
-        [self.delegate addPlacesFeedback:self.placesActivity forFeedbackType:@"like"];
-    } else {
-        self.heart.selected = NO;
-        [self.delegate removePlacesFeedback:self.placesActivity forFeedbackType:@"like"];
-    }
+    NSDictionary* userInfoDict = [NSDictionary dictionaryWithObject:self.placesActivity forKey:@"placesActivity"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"heartPlaces" object:self userInfo:userInfoDict];
+//    if (self.heart.selected == NO) {
+//        self.heart.selected = YES;
+//        [self.delegate addPlacesFeedback:self.placesActivity forFeedbackType:@"like"];
+//    } else {
+//        self.heart.selected = NO;
+//        [self.delegate removePlacesFeedback:self.placesActivity forFeedbackType:@"like"];
+//    }
 }
 
 - (IBAction)todo:(id)sender {
-    if (self.todo.selected == NO) {
-        self.todo.selected = YES;
-        [self.todo setImage:[UIImage imageNamed:@"todo-added-button"] forState:UIControlStateNormal];
-        [self.delegate addPlacesFeedback:self.placesActivity forFeedbackType:@"todo"];
-    } else {
-        self.todo.selected = NO;
-        [self.todo setImage:[UIImage imageNamed:@"todo-button"] forState:UIControlStateNormal];
-        [self.delegate removePlacesFeedback:self.placesActivity forFeedbackType:@"todo"];
-    }
+    NSDictionary* userInfoDict = [NSDictionary dictionaryWithObject:self.placesActivity forKey:@"placesActivity"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"todoPlaces" object:self userInfo:userInfoDict];
+//    if (self.todo.selected == NO) {
+//        self.todo.selected = YES;
+//        [self.delegate addPlacesFeedback:self.placesActivity forFeedbackType:@"todo"];
+//    } else {
+//        self.todo.selected = NO;
+//        [self.delegate removePlacesFeedback:self.placesActivity forFeedbackType:@"todo"];
+//    }
 }
 
 @end

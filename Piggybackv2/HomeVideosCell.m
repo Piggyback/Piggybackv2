@@ -28,23 +28,27 @@
 }
 
 - (IBAction)heart:(id)sender {
-    if (self.heart.selected == NO) {
-        self.heart.selected = YES;
-        [self.delegate addVideosFeedback:self.videosActivity forFeedbackType:@"like"];
-    } else {
-        self.heart.selected = NO;
-        [self.delegate removeVideosFeedback:self.videosActivity forFeedbackType:@"like"];
-    }
+    NSDictionary* userInfoDict = [NSDictionary dictionaryWithObject:self.videosActivity forKey:@"videosActivity"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"heartVideos" object:self userInfo:userInfoDict];
+//    if (self.heart.selected == NO) {
+//        self.heart.selected = YES;
+//        [self.delegate addVideosFeedback:self.videosActivity forFeedbackType:@"like"];
+//    } else {
+//        self.heart.selected = NO;
+//        [self.delegate removeVideosFeedback:self.videosActivity forFeedbackType:@"like"];
+//    }
 }
 
 - (IBAction)todo:(id)sender {
-    if (self.todo.selected == NO) {
-        self.todo.selected = YES;
-        [self.delegate addVideosFeedback:self.videosActivity forFeedbackType:@"todo"];
-    } else {
-        self.todo.selected = NO;
-        [self.delegate removeVideosFeedback:self.videosActivity forFeedbackType:@"todo"];
-    }
+    NSDictionary* userInfoDict = [NSDictionary dictionaryWithObject:self.videosActivity forKey:@"videosActivity"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"todoVideos" object:self userInfo:userInfoDict];
+//    if (self.todo.selected == NO) {
+//        self.todo.selected = YES;
+//        [self.delegate addVideosFeedback:self.videosActivity forFeedbackType:@"todo"];
+//    } else {
+//        self.todo.selected = NO;
+//        [self.delegate removeVideosFeedback:self.videosActivity forFeedbackType:@"todo"];
+//    }
 }
 
 @end
