@@ -87,8 +87,7 @@
 - (void)setAmbassador:(PBFriend*)friend ForType:(NSString *)type {
     // get me
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSPredicate *getMyUserPredicate = [NSPredicate predicateWithFormat:@"uid = %@",[defaults objectForKey:@"UID"]];
-    PBUser *me = [PBUser objectWithPredicate:getMyUserPredicate];
+    PBUser *me = [PBUser findByPrimaryKey:[defaults objectForKey:@"UID"]];
     NSLog(@" i am %@ ", me);
     
     // check if user exists already
@@ -351,14 +350,14 @@
                 PBFriend* newFriend = [friendArray objectAtIndex:0];
                 newFriend.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
                 [[RKObjectManager sharedManager].objectStore save:nil];
-                
-                // display thumbnail in tableview
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.profilePic.image = newFriend.thumbnail;
-                });
-                
+
                 // set thumbnail in local friend array to reflect core data
-                if (friend.fbId = newFriend.fbId) {
+                if ([friend.fbId isEqualToNumber:newFriend.fbId]) {
+                    // display thumbnail in tableview
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if ([cell.friend.fbId isEqualToNumber:newFriend.fbId])
+                            cell.profilePic.image = newFriend.thumbnail;
+                    });
                     friend.thumbnail = newFriend.thumbnail;
                 }
             }

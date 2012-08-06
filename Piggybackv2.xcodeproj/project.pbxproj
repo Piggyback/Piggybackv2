@@ -86,7 +86,6 @@
 		C422341515ACE528005151A3 /* libCocoaLibSpotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C422341015ACE515005151A3 /* libCocoaLibSpotify.a */; };
 		C448FB3815C8A4D4003A804D /* TodoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C448FB3715C8A4D4003A804D /* TodoViewController.m */; };
 		C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4739E7815B88A6600F714A7 /* NewsViewController.m */; };
-		C47A509215CC433200D80B6D /* PBMusicLike.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509115CC433200D80B6D /* PBMusicLike.m */; };
 		C47A509E15CC711800D80B6D /* PBMusicFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509D15CC711800D80B6D /* PBMusicFeedback.m */; };
 		C4DE6A4D15CF1F0400197EFA /* PBPlacesFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DE6A4C15CF1F0400197EFA /* PBPlacesFeedback.m */; };
 		C4DE6A5015CF2D7100197EFA /* PBVideosFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DE6A4F15CF2D7100197EFA /* PBVideosFeedback.m */; };
@@ -94,7 +93,6 @@
 		F90780CD15C6ED8400B36C82 /* pause-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C915C6ED8400B36C82 /* pause-button@2x.png */; };
 		F90780CE15C6ED8400B36C82 /* play-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780CA15C6ED8400B36C82 /* play-button.png */; };
 		F90780CF15C6ED8400B36C82 /* play-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780CB15C6ED8400B36C82 /* play-button@2x.png */; };
-		F90B3A7A15CC5B7C001C7E33 /* PBPlacesTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B3A7915CC5B7B001C7E33 /* PBPlacesTodo.m */; };
 		F90B3A7D15CC6952001C7E33 /* TodoPlacesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B3A7C15CC6952001C7E33 /* TodoPlacesCell.m */; };
 		F91B3D9B15A6340300D8E815 /* SetAmbassadorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F91B3D9A15A6340300D8E815 /* SetAmbassadorCell.m */; };
 		F91B3DAF15A636FD00D8E815 /* follow-header.png in Resources */ = {isa = PBXBuildFile; fileRef = F91B3D9F15A636FD00D8E815 /* follow-header.png */; };
@@ -403,7 +401,6 @@
 		C448FB3715C8A4D4003A804D /* TodoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoViewController.m; sourceTree = "<group>"; };
 		C4739E7715B88A6600F714A7 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
 		C4739E7815B88A6600F714A7 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
-		C47A509115CC433200D80B6D /* PBMusicLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicLike.m; path = Piggybackv2/PBMusicLike.m; sourceTree = "<group>"; };
 		C47A509C15CC711800D80B6D /* PBMusicFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicFeedback.h; path = Piggybackv2/PBMusicFeedback.h; sourceTree = "<group>"; };
 		C47A509D15CC711800D80B6D /* PBMusicFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicFeedback.m; path = Piggybackv2/PBMusicFeedback.m; sourceTree = "<group>"; };
 		C4DE6A4B15CF1F0400197EFA /* PBPlacesFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesFeedback.h; path = Piggybackv2/PBPlacesFeedback.h; sourceTree = "<group>"; };
@@ -414,8 +411,6 @@
 		F90780C915C6ED8400B36C82 /* pause-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-button@2x.png"; sourceTree = "<group>"; };
 		F90780CA15C6ED8400B36C82 /* play-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button.png"; sourceTree = "<group>"; };
 		F90780CB15C6ED8400B36C82 /* play-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button@2x.png"; sourceTree = "<group>"; };
-		F90B3A7815CC5B7B001C7E33 /* PBPlacesTodo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesTodo.h; path = Piggybackv2/PBPlacesTodo.h; sourceTree = "<group>"; };
-		F90B3A7915CC5B7B001C7E33 /* PBPlacesTodo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesTodo.m; path = Piggybackv2/PBPlacesTodo.m; sourceTree = "<group>"; };
 		F90B3A7B15CC6952001C7E33 /* TodoPlacesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoPlacesCell.h; sourceTree = "<group>"; };
 		F90B3A7C15CC6952001C7E33 /* TodoPlacesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoPlacesCell.m; sourceTree = "<group>"; };
 		F91B3D9915A6340300D8E815 /* SetAmbassadorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorCell.h; sourceTree = "<group>"; };
@@ -757,8 +752,6 @@
 		F93C2F78159A514000FACE47 /* PB Core Data Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F90B3A7815CC5B7B001C7E33 /* PBPlacesTodo.h */,
-				F90B3A7915CC5B7B001C7E33 /* PBPlacesTodo.m */,
 				F957A74D15C0A4D20033CF00 /* PBVideosNews.h */,
 				F957A74E15C0A4D20033CF00 /* PBVideosNews.m */,
 				F957A74715C0A4D20033CF00 /* PBUser.h */,
@@ -1265,8 +1258,6 @@
 				F925A3F715CC2896002B3779 /* NewsCell.m in Sources */,
 				F925A3FA15CC4744002B3779 /* TodoNavigationController.m in Sources */,
 				F925A3FD15CC496D002B3779 /* TodoMusicCell.m in Sources */,
-				C47A509215CC433200D80B6D /* PBMusicLike.m in Sources */,
-				F90B3A7A15CC5B7C001C7E33 /* PBPlacesTodo.m in Sources */,
 				F90B3A7D15CC6952001C7E33 /* TodoPlacesCell.m in Sources */,
 				C47A509E15CC711800D80B6D /* PBMusicFeedback.m in Sources */,
 				C4DE6A4D15CF1F0400197EFA /* PBPlacesFeedback.m in Sources */,
