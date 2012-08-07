@@ -110,6 +110,8 @@
             newUser.youtubeUsername = @"NerdsInNewYork";
         } else if ([newUser.firstName isEqualToString:@"Lianna"]) {
             newUser.youtubeUsername = @"mlgao";
+        } else if ([newUser.lastName isEqualToString:@"Gao"]) {
+            newUser.youtubeUsername = @"mlgao";
         }
         
         // add user and add ambassador

@@ -23,7 +23,7 @@
 
 @interface NewsViewController ()
 
-@property (nonatomic, strong) NSArray *newsToDisplay;
+@property (nonatomic, strong) NSMutableArray *newsToDisplay;
 
 @end
 
@@ -33,25 +33,48 @@
 @synthesize newsToDisplay = _newsToDisplay;
 
 #pragma mark - Getters & Setters
-- (void)setNewsToDisplay:(NSArray *)newsToDisplay {
-    if (_newsToDisplay != newsToDisplay) {
-        _newsToDisplay = newsToDisplay;
-        [self.tableView reloadData];
+-(NSMutableArray*)newsToDisplay {
+    if (!_newsToDisplay) {
+        _newsToDisplay = [[NSMutableArray alloc] init];
     }
+    return _newsToDisplay;
 }
 
 #pragma mark - Private helper methods
 - (void)loadObjectsFromDataStore {
-    NSFetchRequest* request = [PBMusicNews fetchRequest];
-//    NSSortDescriptor* descriptor = [NSSortDescriptor sortDescriptorWithKey:@"referralDate" ascending:NO];
-//    [request setSortDescriptors:[NSArray arrayWithObject:descriptor]];
-    self.newsToDisplay = [PBMusicNews objectsWithFetchRequest:request];
+    [self.newsToDisplay addObjectsFromArray:[PBMusicNews allObjects]];
+    [self.newsToDisplay addObjectsFromArray:[PBPlacesNews allObjects]];
+    [self.newsToDisplay addObjectsFromArray:[PBVideosNews allObjects]];
+
+    // sort news with most recent at top
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateAdded" ascending:NO];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray = [self.newsToDisplay sortedArrayUsingDescriptors:sortDescriptors];
+    self.newsToDisplay = [sortedArray mutableCopy];
     
-    for (PBMusicNews* news in self.newsToDisplay) {
-        if(!news.follower.thumbnail) {
-            NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",news.follower.fbId];
-            news.follower.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
-            [[RKObjectManager sharedManager].objectStore save:nil];
+    // load profile pic thumbnails into core data if they are not yet
+    for (id news in self.newsToDisplay) {
+        if ([news isKindOfClass:[PBMusicNews class]]) {
+            PBMusicNews *musicNews = news;
+            if(!musicNews.follower.thumbnail) {
+                NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",musicNews.follower.fbId];
+                musicNews.follower.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
+                [[RKObjectManager sharedManager].objectStore save:nil];
+            }
+        } else if ([news isKindOfClass:[PBPlacesNews class]]) {
+            PBPlacesNews *placesNews = news;
+            if(!placesNews.follower.thumbnail) {
+                NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",placesNews.follower.fbId];
+                placesNews.follower.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
+                [[RKObjectManager sharedManager].objectStore save:nil];
+            }
+        } else if ([news isKindOfClass:[PBVideosNews class]]) {
+            PBVideosNews *videosNews = news;
+            if(!videosNews.follower.thumbnail) {
+                NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",videosNews.follower.fbId];
+                videosNews.follower.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
+                [[RKObjectManager sharedManager].objectStore save:nil];
+            }
         }
     }
 }

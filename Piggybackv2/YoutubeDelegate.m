@@ -38,7 +38,7 @@
     for (PBUser* ambassador in videosAmbassadors) {
         if ([ambassador.firstName isEqualToString:@"Haines"]) {
             userNames = [NSString stringWithFormat:@"%@,%@",userNames,@"NerdsInNewYork"];
-        } else if ([ambassador.firstName isEqualToString:@"Lianna"]) {
+        } else if ([ambassador.firstName isEqualToString:@"Michael"]) {
             userNames = [NSString stringWithFormat:@"%@,%@",userNames,@"mlgao"];
         }
     }
