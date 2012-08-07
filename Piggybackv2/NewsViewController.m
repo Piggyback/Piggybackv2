@@ -107,14 +107,30 @@
 - (void)loadData {
     // load the object model via RestKit
     RKObjectManager* objManager = [RKObjectManager sharedManager];
-    RKObjectMapping *responseMapping = (RKObjectMapping*)[objManager.mappingProvider mappingForKeyPath:@"PBMusicActivity"];
+    RKObjectMapping *musicResponseMapping = (RKObjectMapping*)[objManager.mappingProvider mappingForKeyPath:@"PBMusicActivity"];
+    musicResponseMapping.rootKeyPath = @"PBMusicActivity";
+    RKObjectMapping *placesResponseMapping = (RKObjectMapping*)[objManager.mappingProvider mappingForKeyPath:@"PBPlacesActivity"];
+    placesResponseMapping.rootKeyPath = @"PBPlacesActivity";
+    RKObjectMapping *videosResponseMapping = (RKObjectMapping*)[objManager.mappingProvider mappingForKeyPath:@"PBVideosActivity"];
+    videosResponseMapping.rootKeyPath = @"PBVideosActivity";
     NSDictionary *newsParam = [NSDictionary dictionaryWithKeysAndObjects:@"uid", [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]], nil];
     
-    [objManager loadObjectsAtResourcePath:[@"/news" stringByAppendingQueryParameters:newsParam] usingBlock:^(RKObjectLoader *loader) {
+    [objManager loadObjectsAtResourcePath:[@"/musicNews" stringByAppendingQueryParameters:newsParam] usingBlock:^(RKObjectLoader *loader) {
         loader.serializationMIMEType = RKMIMETypeJSON;
         loader.delegate = self;
-        responseMapping.rootKeyPath = @"PBMusicActivity";
-        loader.objectMapping = responseMapping;
+        loader.objectMapping = musicResponseMapping;
+    }];
+    
+    [objManager loadObjectsAtResourcePath:[@"/placesNews" stringByAppendingQueryParameters:newsParam] usingBlock:^(RKObjectLoader *loader) {
+        loader.serializationMIMEType = RKMIMETypeJSON;
+        loader.delegate = self;
+        loader.objectMapping = placesResponseMapping;
+    }];
+    
+    [objManager loadObjectsAtResourcePath:[@"/videosNews" stringByAppendingQueryParameters:newsParam] usingBlock:^(RKObjectLoader *loader) {
+        loader.serializationMIMEType = RKMIMETypeJSON;
+        loader.delegate = self;
+        loader.objectMapping = videosResponseMapping;
     }];
 }
 
