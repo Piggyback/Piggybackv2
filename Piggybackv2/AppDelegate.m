@@ -152,9 +152,11 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     RKManagedObjectMapping *musicFeedbackMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBMusicFeedback" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* placesItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesItem" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* placesActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesActivity" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping *placesNewsMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesNews" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping *placesFeedbackMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBPlacesFeedback" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* videosItemMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosItem" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping* videosActivityMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosActivity" inManagedObjectStore:objectManager.objectStore];
+    RKManagedObjectMapping *videosNewsMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosNews" inManagedObjectStore:objectManager.objectStore];
     RKManagedObjectMapping *videosFeedbackMapping = [RKManagedObjectMapping mappingForEntityWithName:@"PBVideosFeedback" inManagedObjectStore:objectManager.objectStore];
     
     // user mapping
@@ -206,9 +208,19 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [placesActivityMapping mapAttributes:@"placesActivityId",@"uid",@"placesItemId",@"placesActivityType",@"dateAdded",nil];
     [placesActivityMapping mapRelationship:@"placesItem" withMapping:placesItemMapping];
     [placesActivityMapping mapRelationship:@"user" withMapping:userMapping];
+    [placesActivityMapping mapRelationship:@"news" withMapping:placesNewsMapping];
     [placesActivityMapping connectRelationship:@"placesItem" withObjectForPrimaryKeyAttribute:@"placesItemId"];
     [placesActivityMapping connectRelationship:@"user" withObjectForPrimaryKeyAttribute:@"uid"];
     [objectManager.mappingProvider setMapping:placesActivityMapping forKeyPath:@"PBPlacesActivity"];
+    
+    // placesNews mapping
+    placesNewsMapping.primaryKeyAttribute = @"placesNewsId";
+    [placesNewsMapping mapAttributes:@"placesNewsId", @"newsActionType", @"dateAdded", @"followerUid", @"placesActivityId", nil];
+    [placesNewsMapping mapRelationship:@"follower" withMapping:userMapping];
+    [placesNewsMapping mapRelationship:@"placesActivity" withMapping:placesActivityMapping];
+    [placesNewsMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerUid"];
+    [placesNewsMapping connectRelationship:@"placesActivity" withObjectForPrimaryKeyAttribute:@"placesActivityId"];
+    [objectManager.mappingProvider setMapping:placesNewsMapping forKeyPath:@"PBPlacesNews"];
     
     // placesFeedback mapping
     placesFeedbackMapping.primaryKeyAttribute = @"placesFeedbackId";
@@ -227,9 +239,19 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [videosActivityMapping mapAttributes:@"videosActivityId",@"uid",@"videosItemId",@"videosActivityType",@"dateAdded",nil];
     [videosActivityMapping mapRelationship:@"videosItem" withMapping:videosItemMapping];
     [videosActivityMapping mapRelationship:@"user" withMapping:userMapping];
+    [videosActivityMapping mapRelationship:@"news" withMapping:videosNewsMapping];
     [videosActivityMapping connectRelationship:@"videosItem" withObjectForPrimaryKeyAttribute:@"videosItemId"];
     [videosActivityMapping connectRelationship:@"user" withObjectForPrimaryKeyAttribute:@"uid"];
     [objectManager.mappingProvider setMapping:videosActivityMapping forKeyPath:@"PBVideosActivity"];
+    
+    // videosNews mapping
+    videosNewsMapping.primaryKeyAttribute = @"videosNewsId";
+    [videosNewsMapping mapAttributes:@"videosNewsId", @"newsActionType", @"dateAdded", @"followerUid", @"videosActivityId", nil];
+    [videosNewsMapping mapRelationship:@"follower" withMapping:userMapping];
+    [videosNewsMapping mapRelationship:@"videosActivity" withMapping:videosActivityMapping];
+    [videosNewsMapping connectRelationship:@"follower" withObjectForPrimaryKeyAttribute:@"followerUid"];
+    [videosNewsMapping connectRelationship:@"videosActivity" withObjectForPrimaryKeyAttribute:@"videosActivityId"];
+    [objectManager.mappingProvider setMapping:videosNewsMapping forKeyPath:@"PBVideosNews"];
     
     // videosFeedback mapping
     videosFeedbackMapping.primaryKeyAttribute = @"videosFeedbackId";
