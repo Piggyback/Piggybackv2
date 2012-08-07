@@ -42,16 +42,18 @@
 
 #pragma mark - Private helper methods
 - (void)loadObjectsFromDataStore {
-    [self.newsToDisplay addObjectsFromArray:[PBMusicNews allObjects]];
+    self.newsToDisplay = [[PBMusicNews allObjects] mutableCopy];
     [self.newsToDisplay addObjectsFromArray:[PBPlacesNews allObjects]];
     [self.newsToDisplay addObjectsFromArray:[PBVideosNews allObjects]];
-
+    [self.tableView reloadData];
+    NSLog(@"news to display is %@",self.newsToDisplay);
+    
     // sort news with most recent at top
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateAdded" ascending:NO];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray = [self.newsToDisplay sortedArrayUsingDescriptors:sortDescriptors];
     self.newsToDisplay = [sortedArray mutableCopy];
-    
+
     // load profile pic thumbnails into core data if they are not yet
     for (id news in self.newsToDisplay) {
         if ([news isKindOfClass:[PBMusicNews class]]) {
