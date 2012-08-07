@@ -40,6 +40,8 @@
             userNames = [NSString stringWithFormat:@"%@,%@",userNames,@"NerdsInNewYork"];
         } else if ([ambassador.firstName isEqualToString:@"Michael"]) {
             userNames = [NSString stringWithFormat:@"%@,%@",userNames,@"mlgao"];
+        } else if ([ambassador.lastName isEqualToString:@"Hsiao"]) {
+            userNames = [NSString stringWithFormat:@"%@,%@",userNames,@"kimikul"];
         }
     }
     
