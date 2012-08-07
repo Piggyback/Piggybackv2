@@ -140,8 +140,7 @@
             // get info for initial favorited / liked videos
             else if ([[[self.currentConnections objectForKey:currentConnection] objectForKey:@"userInfo"] isEqualToString:@"initialVideoInfo"]) {
                 NSError *error = nil;
-                NSDictionary *youtubeVideoInfoDict = [[NSDictionary alloc] init];
-                youtubeVideoInfoDict = [NSJSONSerialization JSONObjectWithData:[[self.currentConnections objectForKey:currentConnection] objectForKey:@"responseData"] options:NSJSONWritingPrettyPrinted error:&error];
+                NSDictionary *youtubeVideoInfoDict = [NSJSONSerialization JSONObjectWithData:[[self.currentConnections objectForKey:currentConnection] objectForKey:@"responseData"] options:NSJSONWritingPrettyPrinted error:&error];
                 
                 // add one new video to video list
                 NSDictionary *videoArray = [youtubeVideoInfoDict objectForKey:@"entry"];

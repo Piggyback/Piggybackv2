@@ -192,8 +192,8 @@
             }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-//            [self.tableView reloadRowsAtIndexPaths:[self.tableView visibleCells] withRowAnimation:UITableViewRowAnimationNone];
+//            [self.tableView reloadData];
+            [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
         });
     });
 }

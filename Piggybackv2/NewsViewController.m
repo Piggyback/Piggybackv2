@@ -235,7 +235,7 @@
             action = @"liked";
         }
         
-        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ a place you went to \"%@\"", follower.firstName, lastInitial, action, newsItem.placesActivity.placesItem.name];
+        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ your check-in at \"%@\"", follower.firstName, lastInitial, action, newsItem.placesActivity.placesItem.name];
         cell.date.text = [self timeElapsed:newsItem.dateAdded];
     }
     
@@ -259,7 +259,7 @@
             action = @"liked";
         }
         
-        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ a place you went to \"%@\"", follower.firstName, lastInitial, action, newsItem.videosActivity.videosItem.name];
+        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ your video \"%@\"", follower.firstName, lastInitial, action, newsItem.videosActivity.videosItem.name];
         cell.date.text = [self timeElapsed:newsItem.dateAdded];
     }
     
