@@ -22,6 +22,7 @@
 #import "PBMusicFeedback.h"
 #import "PBVideosFeedback.h"
 #import <RestKit/RKRequestSerialization.h>
+#import "PlacesItemViewController.h"
 
 @interface HomeViewController ()
 @property (nonatomic, strong) NSMutableArray* items;
@@ -302,7 +303,7 @@
     newVideosItem.name = [video objectForKey:@"name"];
     newVideosItem.videoURL = [video objectForKey:@"url"];
     
-    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:newVideosItem.videoURL frame:CGRectMake(9,38,302,240)];
+    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:newVideosItem.videoURL frame:CGRectMake(9,38,302,290)];
     [self.cachedYoutubeWebViews setObject:videoWebView forKey:newVideosItem.videoURL];
     
     // reload cell if it is visible and the image was just reloaded
@@ -1059,7 +1060,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+//    if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
+//        NSLog(@"clicked on place");
+//        [self performSegueWithIdentifier:@"toPlacesItemPage" sender:[tableView cellForRowAtIndexPath:indexPath]];
+//    }
+//    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 #pragma mark - searchbar delegate methods
@@ -1144,6 +1150,18 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"toPlacesItemPage"]) {
+        PlacesItemViewController* dest = [segue destinationViewController];
+        dest.placesItem = [[(HomePlacesCell*)sender placesActivity] placesItem];
+        [dest.photos addObject:[[(HomePlacesCell*)sender mainPic] image]];
+        [dest.photos addObject:[[(HomePlacesCell*)sender mainPic] image]];
+        [dest.photos addObject:[[(HomePlacesCell*)sender mainPic] image]];
+    }
 }
 
 @end

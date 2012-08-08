@@ -179,6 +179,13 @@
 		F9A4289915B45C7B000D147C /* PBFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4289815B45C7B000D147C /* PBFriend.m */; };
 		F9A428BA15B46276000D147C /* PBMusicNews.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428B915B46276000D147C /* PBMusicNews.m */; };
 		F9A428C315B46276000D147C /* PBMusicActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428C215B46276000D147C /* PBMusicActivity.m */; };
+		F9A8431815D181BB00233D3F /* PlacesItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A8431715D181BA00233D3F /* PlacesItemViewController.m */; };
+		F9A8431F15D1AE8700233D3F /* Geolocation-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F9A8431D15D1AE8700233D3F /* Geolocation-icon.png */; };
+		F9A8432015D1AE8700233D3F /* Geolocation-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9A8431E15D1AE8700233D3F /* Geolocation-icon@2x.png */; };
+		F9A8432315D1AEAD00233D3F /* phone_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F9A8432115D1AEAD00233D3F /* phone_icon.png */; };
+		F9A8432415D1AEAD00233D3F /* phone_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9A8432215D1AEAD00233D3F /* phone_icon@2x.png */; };
+		F9A8432715D1AF6100233D3F /* piggyback_titlebar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = F9A8432515D1AF6100233D3F /* piggyback_titlebar_background.png */; };
+		F9A8432815D1AF6100233D3F /* piggyback_titlebar_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9A8432615D1AF6100233D3F /* piggyback_titlebar_background@2x.png */; };
 		F9A89D5015BDCCE1007AC27D /* PBPlacesActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A89D4F15BDCCE1007AC27D /* PBPlacesActivity.m */; };
 		F9AE7CCC15B9E9DE001008C7 /* FoursquareDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AE7CCB15B9E9DE001008C7 /* FoursquareDelegate.m */; };
 		F9AE7CD515BA7200001008C7 /* PBPlacesNews.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AE7CD415BA7200001008C7 /* PBPlacesNews.m */; };
@@ -523,6 +530,14 @@
 		F9A428B915B46276000D147C /* PBMusicNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicNews.m; path = Piggybackv2/PBMusicNews.m; sourceTree = "<group>"; };
 		F9A428C115B46276000D147C /* PBMusicActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicActivity.h; path = Piggybackv2/PBMusicActivity.h; sourceTree = "<group>"; };
 		F9A428C215B46276000D147C /* PBMusicActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicActivity.m; path = Piggybackv2/PBMusicActivity.m; sourceTree = "<group>"; };
+		F9A8431615D181BA00233D3F /* PlacesItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesItemViewController.h; sourceTree = "<group>"; };
+		F9A8431715D181BA00233D3F /* PlacesItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesItemViewController.m; sourceTree = "<group>"; };
+		F9A8431D15D1AE8700233D3F /* Geolocation-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Geolocation-icon.png"; sourceTree = "<group>"; };
+		F9A8431E15D1AE8700233D3F /* Geolocation-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Geolocation-icon@2x.png"; sourceTree = "<group>"; };
+		F9A8432115D1AEAD00233D3F /* phone_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone_icon.png; sourceTree = "<group>"; };
+		F9A8432215D1AEAD00233D3F /* phone_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone_icon@2x.png"; sourceTree = "<group>"; };
+		F9A8432515D1AF6100233D3F /* piggyback_titlebar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piggyback_titlebar_background.png; sourceTree = "<group>"; };
+		F9A8432615D1AF6100233D3F /* piggyback_titlebar_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "piggyback_titlebar_background@2x.png"; sourceTree = "<group>"; };
 		F9A89D4E15BDCCE1007AC27D /* PBPlacesActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesActivity.h; path = Piggybackv2/PBPlacesActivity.h; sourceTree = "<group>"; };
 		F9A89D4F15BDCCE1007AC27D /* PBPlacesActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesActivity.m; path = Piggybackv2/PBPlacesActivity.m; sourceTree = "<group>"; };
 		F9AE7CCA15B9E9DE001008C7 /* FoursquareDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareDelegate.h; sourceTree = "<group>"; };
@@ -660,6 +675,8 @@
 				F99418F01598BE0C00A4B08B /* LoginViewController.m */,
 				F99F2CB215ACA3F600B5EB36 /* HomeViewController.h */,
 				F99F2CB315ACA3F600B5EB36 /* HomeViewController.m */,
+				F9A8431615D181BA00233D3F /* PlacesItemViewController.h */,
+				F9A8431715D181BA00233D3F /* PlacesItemViewController.m */,
 				C4739E7715B88A6600F714A7 /* NewsViewController.h */,
 				C4739E7815B88A6600F714A7 /* NewsViewController.m */,
 				C448FB3615C8A4D4003A804D /* TodoViewController.h */,
@@ -804,6 +821,12 @@
 		F9B478711593C16F00C20A53 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F9A8432515D1AF6100233D3F /* piggyback_titlebar_background.png */,
+				F9A8432615D1AF6100233D3F /* piggyback_titlebar_background@2x.png */,
+				F9A8432115D1AEAD00233D3F /* phone_icon.png */,
+				F9A8432215D1AEAD00233D3F /* phone_icon@2x.png */,
+				F9A8431D15D1AE8700233D3F /* Geolocation-icon.png */,
+				F9A8431E15D1AE8700233D3F /* Geolocation-icon@2x.png */,
 				F90780C815C6ED8400B36C82 /* pause-button.png */,
 				F90780C915C6ED8400B36C82 /* pause-button@2x.png */,
 				F90780CA15C6ED8400B36C82 /* play-button.png */,
@@ -1216,6 +1239,12 @@
 				F9FD692715C71E2400D86522 /* filter-places@2x.png in Resources */,
 				F9FD692815C71E2400D86522 /* filter-videos.png in Resources */,
 				F9FD692915C71E2400D86522 /* filter-videos@2x.png in Resources */,
+				F9A8431F15D1AE8700233D3F /* Geolocation-icon.png in Resources */,
+				F9A8432015D1AE8700233D3F /* Geolocation-icon@2x.png in Resources */,
+				F9A8432315D1AEAD00233D3F /* phone_icon.png in Resources */,
+				F9A8432415D1AEAD00233D3F /* phone_icon@2x.png in Resources */,
+				F9A8432715D1AF6100233D3F /* piggyback_titlebar_background.png in Resources */,
+				F9A8432815D1AF6100233D3F /* piggyback_titlebar_background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1268,6 +1297,7 @@
 				C4DE6A4D15CF1F0400197EFA /* PBPlacesFeedback.m in Sources */,
 				C4DE6A5015CF2D7100197EFA /* PBVideosFeedback.m in Sources */,
 				F92457D915D01EB20074292E /* TodoVideosCell.m in Sources */,
+				F9A8431815D181BB00233D3F /* PlacesItemViewController.m in Sources */,
 				C4AC60CC15D1B9F400B09413 /* ProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

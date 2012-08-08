@@ -109,7 +109,7 @@
             // get venue photo
             else if ([[self.requestDict objectForKey:currentRequest] isEqualToString:@"getVenuePhoto"]) {
                 NSString* vid = [[request.response objectForKey:@"venue"] objectForKey:@"id"];
-                NSString* photoURL = [[NSString alloc] init];
+                NSString* photoURL;
                 NSArray* photoGroups = [[[request.response objectForKey:@"venue"] objectForKey:@"photos"] objectForKey:@"groups"];
                 for (NSDictionary* photoGroup in photoGroups) {
                     if ([[photoGroup objectForKey:@"name"] isEqualToString:@"Venue photos"]) {
