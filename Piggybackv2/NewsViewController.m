@@ -59,23 +59,26 @@
         if ([news isKindOfClass:[PBMusicNews class]]) {
             PBMusicNews *musicNews = news;
             if(!musicNews.follower.thumbnail) {
+                NSLog(@"music thumbnail");
                 NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",musicNews.follower.fbId];
                 musicNews.follower.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
-                [[RKObjectManager sharedManager].objectStore save:nil];
+//                [[RKObjectManager sharedManager].objectStore save:nil];
             }
         } else if ([news isKindOfClass:[PBPlacesNews class]]) {
             PBPlacesNews *placesNews = news;
             if(!placesNews.follower.thumbnail) {
+                NSLog(@"places thumbnail");
                 NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",placesNews.follower.fbId];
                 placesNews.follower.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
-                [[RKObjectManager sharedManager].objectStore save:nil];
+//                [[RKObjectManager sharedManager].objectStore save:nil];
             }
         } else if ([news isKindOfClass:[PBVideosNews class]]) {
             PBVideosNews *videosNews = news;
             if(!videosNews.follower.thumbnail) {
+                NSLog(@"videos thumbnail");
                 NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",videosNews.follower.fbId];
                 videosNews.follower.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
-                [[RKObjectManager sharedManager].objectStore save:nil];
+//                [[RKObjectManager sharedManager].objectStore save:nil];
             }
         }
     }
