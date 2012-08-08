@@ -148,7 +148,8 @@
                         }
                     }
                 }
-                [[RKObjectManager sharedManager].objectStore save:nil];
+                NSLog(@"hey mike & kim");
+//                [[RKObjectManager sharedManager].objectStore save:nil];
             }
             [self.requestDict removeObjectForKey:request.description];
             NSLog(@"current requests includes %@",self.requestDict);

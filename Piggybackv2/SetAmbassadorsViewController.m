@@ -164,10 +164,10 @@
                 if (!friend.thumbnail) {
                     NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",newUser.fbId];
                     newUser.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
-                    [[RKObjectManager sharedManager].objectStore save:nil];
+//                    [[RKObjectManager sharedManager].objectStore save:nil];
                 } else {
                     newUser.thumbnail = friend.thumbnail;
-                    [[RKObjectManager sharedManager].objectStore save:nil];
+//                    [[RKObjectManager sharedManager].objectStore save:nil];
                 }
                 
                 // update foursquare id if they didnt have one before but have one now
