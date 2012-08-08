@@ -421,9 +421,14 @@
 }
 
 -(void)fetchAmbassadorFavsFromCoreData {
-    self.items = [NSMutableArray arrayWithArray:[PBMusicActivity allObjects]];
-    [self.items addObjectsFromArray:[PBPlacesActivity allObjects]];
-    [self.items addObjectsFromArray:[PBVideosActivity allObjects]];
+    NSNumber *myUID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UID"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(uid != %@)", myUID];
+    self.items = [NSMutableArray arrayWithArray:[PBMusicActivity objectsWithPredicate:predicate]];
+    [self.items addObjectsFromArray:[PBPlacesActivity objectsWithPredicate:predicate]];
+    [self.items addObjectsFromArray:[PBVideosActivity objectsWithPredicate:predicate]];
+//    self.items = [NSMutableArray arrayWithArray:[PBMusicActivity allObjects]];
+//    [self.items addObjectsFromArray:[PBPlacesActivity allObjects]];
+//    [self.items addObjectsFromArray:[PBVideosActivity allObjects]];
     self.displayItems = self.items;
     [self.tableView reloadData];
     
