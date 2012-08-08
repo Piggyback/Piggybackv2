@@ -39,7 +39,7 @@
 @implementation AppDelegate
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
-NSString *RK_BASE_URL = @"http://10.0.4.156:5000";
+NSString *RK_BASE_URL = @"http://localhost:5000";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";

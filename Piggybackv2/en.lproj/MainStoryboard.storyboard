@@ -491,10 +491,10 @@
             </objects>
             <point key="canvasLocation" x="1344" y="490"/>
         </scene>
-        <!--View Controller - You-->
+        <!--Profile View Controller - You-->
         <scene sceneID="erL-uI-L4t">
             <objects>
-                <viewController id="YXN-sj-C8o" sceneMemberID="viewController">
+                <viewController id="YXN-sj-C8o" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XCU-mM-m2T">
                         <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

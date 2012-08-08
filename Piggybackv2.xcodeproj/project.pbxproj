@@ -87,6 +87,7 @@
 		C448FB3815C8A4D4003A804D /* TodoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C448FB3715C8A4D4003A804D /* TodoViewController.m */; };
 		C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4739E7815B88A6600F714A7 /* NewsViewController.m */; };
 		C47A509E15CC711800D80B6D /* PBMusicFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509D15CC711800D80B6D /* PBMusicFeedback.m */; };
+		C4AC60CC15D1B9F400B09413 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC60CB15D1B9F400B09413 /* ProfileViewController.m */; };
 		C4DE6A4D15CF1F0400197EFA /* PBPlacesFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DE6A4C15CF1F0400197EFA /* PBPlacesFeedback.m */; };
 		C4DE6A5015CF2D7100197EFA /* PBVideosFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DE6A4F15CF2D7100197EFA /* PBVideosFeedback.m */; };
 		F90780CC15C6ED8400B36C82 /* pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C815C6ED8400B36C82 /* pause-button.png */; };
@@ -410,6 +411,8 @@
 		C4739E7815B88A6600F714A7 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
 		C47A509C15CC711800D80B6D /* PBMusicFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicFeedback.h; path = Piggybackv2/PBMusicFeedback.h; sourceTree = "<group>"; };
 		C47A509D15CC711800D80B6D /* PBMusicFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicFeedback.m; path = Piggybackv2/PBMusicFeedback.m; sourceTree = "<group>"; };
+		C4AC60CA15D1B9F400B09413 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		C4AC60CB15D1B9F400B09413 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		C4DE6A4B15CF1F0400197EFA /* PBPlacesFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesFeedback.h; path = Piggybackv2/PBPlacesFeedback.h; sourceTree = "<group>"; };
 		C4DE6A4C15CF1F0400197EFA /* PBPlacesFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesFeedback.m; path = Piggybackv2/PBPlacesFeedback.m; sourceTree = "<group>"; };
 		C4DE6A4E15CF2D7100197EFA /* PBVideosFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBVideosFeedback.h; path = Piggybackv2/PBVideosFeedback.h; sourceTree = "<group>"; };
@@ -684,6 +687,8 @@
 				F9ED08EE15C9D8D400525624 /* SetAmbassadorsViewController.m */,
 				3E9A5D471593C48500635873 /* AccountLinkViewController.h */,
 				3E9A5D481593C48500635873 /* AccountLinkViewController.m */,
+				C4AC60CA15D1B9F400B09413 /* ProfileViewController.h */,
+				C4AC60CB15D1B9F400B09413 /* ProfileViewController.m */,
 				3EE8DB141593BF9A009DCCA3 /* Supporting Files */,
 			);
 			path = Piggybackv2;
@@ -1293,6 +1298,7 @@
 				C4DE6A5015CF2D7100197EFA /* PBVideosFeedback.m in Sources */,
 				F92457D915D01EB20074292E /* TodoVideosCell.m in Sources */,
 				F9A8431815D181BB00233D3F /* PlacesItemViewController.m in Sources */,
+				C4AC60CC15D1B9F400B09413 /* ProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
