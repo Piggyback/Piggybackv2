@@ -13,20 +13,16 @@
 
 @property (nonatomic, strong) PBUser *me;
 @property (nonatomic, strong) NSNumber *numAmbassadors;
-@property (nonatomic, strong) NSNumber *numPiggybackers;
-@property (nonatomic, strong) NSNumber *numLikes;
-@property (nonatomic, strong) NSNumber *numSaves;
 
 @end
 
 @implementation ProfileViewController
 @synthesize profilePic = _profilePic;
-
-@synthesize me = _me;
-@synthesize numAmbassadors = _numAmbassadors;
 @synthesize numPiggybackers = _numPiggybackers;
 @synthesize numLikes = _numLikes;
 @synthesize numSaves = _numSaves;
+@synthesize me = _me;
+@synthesize numAmbassadors = _numAmbassadors;
 
 - (void)loadData {
     NSDictionary *profileParam = [NSDictionary dictionaryWithKeysAndObjects:@"uid", [NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]], nil];
@@ -38,11 +34,11 @@
 - (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response {
     NSLog(@"profile page loaded successfully");
     NSDictionary *profileResponse = [response parsedBody:nil];
-    self.numPiggybackers = [profileResponse objectForKey:@"numPiggybackers"];
-    self.numLikes = [profileResponse objectForKey:@"numLikes"];
-    self.numSaves = [profileResponse objectForKey:@"numSaves"];
+    self.numPiggybackers.text = [[profileResponse objectForKey:@"numPiggybackers"] stringValue];
+    self.numLikes.text = [[profileResponse objectForKey:@"numLikes"] stringValue];
+    self.numSaves.text = [[profileResponse objectForKey:@"numSaves"] stringValue];
     
-    NSLog(@"numPiggybackers: %@, numLikes: %@, numSaves: %@", self.numPiggybackers, self.numLikes, self.numSaves);
+//    NSLog(@"numPiggybackers: %@, numLikes: %@, numSaves: %@", self.numPiggybackers, self.numLikes, self.numSaves);
 }
 
 - (void)request:(RKRequest *)request didFailLoadWithError:(NSError *)error {
@@ -56,7 +52,7 @@
     [self loadData];
     self.me = [PBUser findByPrimaryKey:[NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]]];
     self.numAmbassadors = [NSNumber numberWithInt:([self.me.musicAmbassadors count] + [self.me.placesAmbassadors count] + [self.me.videosAmbassadors count])];
-    
+
     self.profilePic.image = self.me.thumbnail;
     
     NSLog(@"num of ambassadors: %@", self.numAmbassadors);
@@ -65,6 +61,9 @@
 - (void)viewDidUnload
 {
     [self setProfilePic:nil];
+    [self setNumPiggybackers:nil];
+    [self setNumLikes:nil];
+    [self setNumSaves:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

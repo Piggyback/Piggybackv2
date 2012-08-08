@@ -12,5 +12,8 @@
 
 @interface ProfileViewController : UIViewController <RKRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profilePic;
+@property (weak, nonatomic) IBOutlet UILabel *numPiggybackers;
+@property (weak, nonatomic) IBOutlet UILabel *numLikes;
+@property (weak, nonatomic) IBOutlet UILabel *numSaves;
 
 @end
