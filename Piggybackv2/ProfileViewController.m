@@ -18,9 +18,17 @@
 
 @implementation ProfileViewController
 @synthesize profilePic = _profilePic;
-@synthesize numPiggybackers = _numPiggybackers;
-@synthesize numLikes = _numLikes;
-@synthesize numSaves = _numSaves;
+@synthesize statusBar = _statusBar;
+@synthesize numMusicPiggybackers = _numMusicPiggybackers;
+@synthesize numPlacesPiggybackers = _numPlacesPiggybackers;
+@synthesize numVideosPiggybackers = _numVideosPiggybackers;
+@synthesize numMusicLikes = _numMusicLikes;
+@synthesize numPlacesLikes = _numPlacesLikes;
+@synthesize numVideosLikes = _numVideosLikes;
+@synthesize numMusicSaves = _numMusicSaves;
+@synthesize numPlacesSaves = _numPlacesSaves;
+@synthesize numVideosSaves = _numVideosSaves;
+@synthesize progressText = _progressText;
 @synthesize me = _me;
 @synthesize numAmbassadors = _numAmbassadors;
 
@@ -34,11 +42,15 @@
 - (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response {
     NSLog(@"profile page loaded successfully");
     NSDictionary *profileResponse = [response parsedBody:nil];
-    self.numPiggybackers.text = [[profileResponse objectForKey:@"numPiggybackers"] stringValue];
-    self.numLikes.text = [[profileResponse objectForKey:@"numLikes"] stringValue];
-    self.numSaves.text = [[profileResponse objectForKey:@"numSaves"] stringValue];
-    
-//    NSLog(@"numPiggybackers: %@, numLikes: %@, numSaves: %@", self.numPiggybackers, self.numLikes, self.numSaves);
+    self.numMusicPiggybackers.text = [[profileResponse objectForKey:@"numMusicPiggybackers"] stringValue];
+    self.numPlacesPiggybackers.text = [[profileResponse objectForKey:@"numPlacesPiggybackers"] stringValue];
+    self.numVideosPiggybackers.text = [[profileResponse objectForKey:@"numVideosPiggybackers"] stringValue];
+    self.numMusicLikes.text = [[profileResponse objectForKey:@"numMusicLikes"] stringValue];
+    self.numPlacesLikes.text = [[profileResponse objectForKey:@"numPlacesLikes"] stringValue];
+    self.numVideosLikes.text = [[profileResponse objectForKey:@"numVideosLikes"] stringValue];
+    self.numMusicSaves.text = [[profileResponse objectForKey:@"numMusicSaves"] stringValue];
+    self.numPlacesSaves.text = [[profileResponse objectForKey:@"numPlacesSaves"] stringValue];
+    self.numVideosSaves.text = [[profileResponse objectForKey:@"numVideosSaves"] stringValue];
 }
 
 - (void)request:(RKRequest *)request didFailLoadWithError:(NSError *)error {
@@ -56,14 +68,42 @@
     self.profilePic.image = self.me.thumbnail;
     
     NSLog(@"num of ambassadors: %@", self.numAmbassadors);
+    
+    // get percent complete
+    float progress = 0;
+    float total = 3;
+    if (self.me.spotifyUsername) {
+        progress = progress + 1;
+    }
+    
+    if (self.me.youtubeUsername) {
+        progress = progress + 1;
+    }
+    
+    if (self.me.foursquareId) {
+        progress = progress + 1;
+    }
+    progress = 3;
+    self.statusBar.progress = progress/total;
+    if (self.statusBar.progress == 1.0f) {
+        self.progressText.text = @"Congratulations, you have connected all of your accounts! You're ready to piggyback your friends!";
+    }
 }
 
 - (void)viewDidUnload
 {
     [self setProfilePic:nil];
-    [self setNumPiggybackers:nil];
-    [self setNumLikes:nil];
-    [self setNumSaves:nil];
+    [self setNumMusicPiggybackers:nil];
+    [self setNumPlacesPiggybackers:nil];
+    [self setNumVideosPiggybackers:nil];
+    [self setNumMusicLikes:nil];
+    [self setNumPlacesLikes:nil];
+    [self setNumVideosLikes:nil];
+    [self setNumMusicSaves:nil];
+    [self setNumPlacesSaves:nil];
+    [self setNumVideosSaves:nil];
+    [self setStatusBar:nil];
+    [self setProgressText:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

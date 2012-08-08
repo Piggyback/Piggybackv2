@@ -249,6 +249,9 @@
     
     // spotify cover album finished loading
     else if ([keyPath isEqualToString:@"image"]) {
+        // remove observer
+        [object removeObserver:self forKeyPath:@"image"];
+        
         for (id cell in [self.tableView visibleCells]) {
             if ([cell isKindOfClass:[HomeMusicCell class]]) {
                 dispatch_async(dispatch_get_main_queue(), ^{

@@ -137,8 +137,10 @@
 		F964302F15C32E74006D1715 /* YouTubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F964302E15C32E73006D1715 /* YouTubeView.m */; };
 		F964303215C348DA006D1715 /* HomePlacesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F964303115C348DA006D1715 /* HomePlacesCell.m */; };
 		F9712A8615D2DEBC00F75A3E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9712A8515D2DEBC00F75A3E /* SettingsViewController.m */; };
-		F9712A8915D2E4B400F75A3E /* settings-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F9712A8715D2E4B400F75A3E /* settings-button.png */; };
-		F9712A8A15D2E4B400F75A3E /* settings-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9712A8815D2E4B400F75A3E /* settings-button@2x.png */; };
+		F9712A8D15D2F92000F75A3E /* profile-stat-path.png in Resources */ = {isa = PBXBuildFile; fileRef = F9712A8B15D2F92000F75A3E /* profile-stat-path.png */; };
+		F9712A8E15D2F92000F75A3E /* profile-stat-path@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9712A8C15D2F92000F75A3E /* profile-stat-path@2x.png */; };
+		F9712A9515D331B900F75A3E /* settings-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F9712A9315D331B900F75A3E /* settings-button.png */; };
+		F9712A9615D331B900F75A3E /* settings-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9712A9415D331B900F75A3E /* settings-button@2x.png */; };
 		F9774C8415B722CD00FC6FBC /* PBMusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F9774C8315B722CD00FC6FBC /* PBMusicItem.m */; };
 		F99418F11598BE0C00A4B08B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99418F01598BE0C00A4B08B /* LoginViewController.m */; };
 		F99418F81598BEDA00A4B08B /* LoginWithFacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = F99418F61598BEDA00A4B08B /* LoginWithFacebookNormal.png */; };
@@ -486,8 +488,10 @@
 		F964303115C348DA006D1715 /* HomePlacesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePlacesCell.m; sourceTree = "<group>"; };
 		F9712A8415D2DEBC00F75A3E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		F9712A8515D2DEBC00F75A3E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		F9712A8715D2E4B400F75A3E /* settings-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-button.png"; sourceTree = "<group>"; };
-		F9712A8815D2E4B400F75A3E /* settings-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-button@2x.png"; sourceTree = "<group>"; };
+		F9712A8B15D2F92000F75A3E /* profile-stat-path.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-stat-path.png"; sourceTree = "<group>"; };
+		F9712A8C15D2F92000F75A3E /* profile-stat-path@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-stat-path@2x.png"; sourceTree = "<group>"; };
+		F9712A9315D331B900F75A3E /* settings-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-button.png"; sourceTree = "<group>"; };
+		F9712A9415D331B900F75A3E /* settings-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-button@2x.png"; sourceTree = "<group>"; };
 		F9774C8215B722CD00FC6FBC /* PBMusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicItem.h; path = Piggybackv2/PBMusicItem.h; sourceTree = "<group>"; };
 		F9774C8315B722CD00FC6FBC /* PBMusicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicItem.m; path = Piggybackv2/PBMusicItem.m; sourceTree = "<group>"; };
 		F99418EF1598BE0C00A4B08B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -835,8 +839,6 @@
 		F9B478711593C16F00C20A53 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F9712A8715D2E4B400F75A3E /* settings-button.png */,
-				F9712A8815D2E4B400F75A3E /* settings-button@2x.png */,
 				F9A8432515D1AF6100233D3F /* piggyback_titlebar_background.png */,
 				F9A8432615D1AF6100233D3F /* piggyback_titlebar_background@2x.png */,
 				F9A8432115D1AEAD00233D3F /* phone_icon.png */,
@@ -845,6 +847,8 @@
 				F9A8431E15D1AE8700233D3F /* Geolocation-icon@2x.png */,
 				F90780C815C6ED8400B36C82 /* pause-button.png */,
 				F90780C915C6ED8400B36C82 /* pause-button@2x.png */,
+				F9712A9315D331B900F75A3E /* settings-button.png */,
+				F9712A9415D331B900F75A3E /* settings-button@2x.png */,
 				F90780CA15C6ED8400B36C82 /* play-button.png */,
 				F90780CB15C6ED8400B36C82 /* play-button@2x.png */,
 				F99F2C9E15AC9E3700B5EB36 /* header-news.png */,
@@ -944,6 +948,8 @@
 				3E51D6CF1593E04F00EEBD36 /* music-icon-badge@2x.png */,
 				3E51D6D01593E04F00EEBD36 /* music-icon.png */,
 				3E51D6D11593E04F00EEBD36 /* music-icon@2x.png */,
+				F9712A8B15D2F92000F75A3E /* profile-stat-path.png */,
+				F9712A8C15D2F92000F75A3E /* profile-stat-path@2x.png */,
 				3E51D6D21593E04F00EEBD36 /* music-section-divider.png */,
 				3E51D6D31593E04F00EEBD36 /* music-section-divider@2x.png */,
 				3E51D6D41593E04F00EEBD36 /* pelberg-rounded-corners.png */,
@@ -1261,8 +1267,10 @@
 				F9A8432415D1AEAD00233D3F /* phone_icon@2x.png in Resources */,
 				F9A8432715D1AF6100233D3F /* piggyback_titlebar_background.png in Resources */,
 				F9A8432815D1AF6100233D3F /* piggyback_titlebar_background@2x.png in Resources */,
-				F9712A8915D2E4B400F75A3E /* settings-button.png in Resources */,
-				F9712A8A15D2E4B400F75A3E /* settings-button@2x.png in Resources */,
+				F9712A8D15D2F92000F75A3E /* profile-stat-path.png in Resources */,
+				F9712A8E15D2F92000F75A3E /* profile-stat-path@2x.png in Resources */,
+				F9712A9515D331B900F75A3E /* settings-button.png in Resources */,
+				F9712A9615D331B900F75A3E /* settings-button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
