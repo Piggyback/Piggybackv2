@@ -79,6 +79,8 @@
 @synthesize currentlyPlayingSpotifyURL = _currentlyPlayingSpotifyURL;
 @synthesize isPlaying = _isPlaying;
 
+@synthesize piggybackPlaylist = _piggybackPlaylist;
+
 #pragma mark - setters and getters 
 
 - (NSMutableArray*)items {
@@ -223,16 +225,7 @@
                 [SPTrack trackForTrackURL:[NSURL URLWithString:newMusicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
                     [self.cachedAlbumCovers setObject:track.album.cover forKey:newMusicItem.spotifyUrl];
                     [track.album.cover startLoading];
-                    
-                    // reload cell if it is visible and the image was just reloaded
-                    for (id cell in [self.tableView visibleCells]) {
-                        if ([cell isKindOfClass:[HomeMusicCell class]]) {
-                            HomeMusicCell* musicCell = cell;
-                            if (musicCell.musicActivity.musicItem.musicItemId == newMusicItem.musicItemId) {
-                                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
-                            }
-                        }
-                    }
+                    [track.album.cover addObserver:self forKeyPath:@"image" options:0 context:nil];
                 }];
             });
 
@@ -251,6 +244,17 @@
                     }];
                 };
             }];
+        }
+    }
+    
+    // spotify cover album finished loading
+    else if ([keyPath isEqualToString:@"image"]) {
+        for (id cell in [self.tableView visibleCells]) {
+            if ([cell isKindOfClass:[HomeMusicCell class]]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                });
+            }
         }
     }
 }
@@ -311,7 +315,10 @@
         if ([cell isKindOfClass:[HomeVideosCell class]]) {
             HomeVideosCell* videosCell = cell;
             if (videosCell.videosActivity.videosItem.videosItemId == newVideosItem.videosItemId) {
-                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSLog(@"reloading the visible cel that was just loaded");
+                    [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                });
             }
         }
     }
@@ -354,10 +361,13 @@
                 if ([cell isKindOfClass:[HomePlacesCell class]]) {
                     HomePlacesCell* placesCell = cell;
                     if (placesCell.placesActivity.placesItem.placesItemId == placesItem.placesItemId) {
-                        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                        });
                     }
                 }
-            }        }
+            }
+        }
         
         // store photoURLs in core data and db
         [[RKObjectManager sharedManager] putObject:placesItem usingBlock:^(RKObjectLoader* loader) {
@@ -421,9 +431,14 @@
 }
 
 -(void)fetchAmbassadorFavsFromCoreData {
-    self.items = [NSMutableArray arrayWithArray:[PBMusicActivity allObjects]];
-    [self.items addObjectsFromArray:[PBPlacesActivity allObjects]];
-    [self.items addObjectsFromArray:[PBVideosActivity allObjects]];
+    NSNumber *myUID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UID"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(uid != %@)", myUID];
+    self.items = [NSMutableArray arrayWithArray:[PBMusicActivity objectsWithPredicate:predicate]];
+    [self.items addObjectsFromArray:[PBPlacesActivity objectsWithPredicate:predicate]];
+    [self.items addObjectsFromArray:[PBVideosActivity objectsWithPredicate:predicate]];
+//    self.items = [NSMutableArray arrayWithArray:[PBMusicActivity allObjects]];
+//    [self.items addObjectsFromArray:[PBPlacesActivity allObjects]];
+//    [self.items addObjectsFromArray:[PBVideosActivity allObjects]];
     self.displayItems = self.items;
     [self.tableView reloadData];
     
@@ -482,11 +497,7 @@
                     // reload cell if it is visible and the image was just reloaded
                     for (id cell in [self.tableView visibleCells]) {
                         if ([cell isKindOfClass:[HomeVideosCell class]]) {
-                            HomeVideosCell* videosCell = cell;
-                            if (videosCell.videosActivity.videosItem.videosItemId == videosActivity.videosItem.videosItemId) {
-                                NSLog(@"reload video path");
-                                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
-                            }
+                            [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                         }
                     }
                 });
@@ -505,8 +516,9 @@
                         if ([cell isKindOfClass:[HomePlacesCell class]]) {
                             HomePlacesCell* placesCell = cell;
                             if (placesCell.placesActivity.placesItem.placesItemId == placesActivity.placesItem.placesItemId) {
-                                NSLog(@"reload vendor path");
-                                [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+                                });
                             }
                         }
                     }
@@ -521,17 +533,7 @@
                         [SPAsyncLoading waitUntilLoaded:track timeout:10.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
                             [self.cachedAlbumCovers setObject:track.album.cover forKey:musicActivity.musicItem.spotifyUrl];
                             [track.album.cover startLoading];
-                            
-                            // reload cell if it is visible and the image was just reloaded
-                            for (id cell in [self.tableView visibleCells]) {
-                                if ([cell isKindOfClass:[HomeMusicCell class]]) {
-                                    HomeMusicCell* musicCell = cell;
-                                    if (musicCell.musicActivity.musicItem.musicItemId == musicActivity.musicItem.musicItemId) {
-                                        NSLog(@"reload music path");
-                                        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
-                                    }
-                                }
-                            }
+                            [track.album.cover addObserver:self forKeyPath:@"image" options:0 context:nil];
                         }];
                     }
                 }];
@@ -612,6 +614,13 @@
         [self addMusicFeedback:musicActivity forFeedbackType:@"todo"];
         [self.todoedMusic addObject:musicActivity.musicItem.musicItemId];
         [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+        
+        // add song to spotify playlist
+        [SPTrack trackForTrackURL:[NSURL URLWithString:musicActivity.musicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
+            [self.piggybackPlaylist addItem:track atIndex:0 callback:^(NSError *error) {
+                NSLog(@"song added to spotify playlist");
+            }];
+        }];
     }
 }
 
@@ -944,6 +953,8 @@
 {
     if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBMusicActivity class]]) {
         static NSString *CellIdentifier = @"homeMusicCell";
+        NSLog(@"loading music cell");
+
         HomeMusicCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.delegate = self;
         
@@ -982,6 +993,7 @@
         return cell;
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
         NSLog(@"loading places cell");
+        NSLog(@"photos are %@",self.cachedPlacesPhotos);
         static NSString *CellIdentifier = @"homePlacesCell";
         HomePlacesCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.delegate = self;
@@ -998,9 +1010,11 @@
         cell.profilePic.image = user.thumbnail;
         
         // if photo exists, display
-        if (placesItem.photoURL) {
+        if ([self.cachedPlacesPhotos objectForKey:placesItem.photoURL]) {
             NSLog(@"places photo exists");
             cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.photoURL];
+        } else {
+            NSLog(@"places photo doesnt exist");
         }
         
         // heart
@@ -1133,12 +1147,11 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"view will appear");
 
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-
+    
 }
 
 - (void)viewDidUnload

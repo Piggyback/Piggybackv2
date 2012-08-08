@@ -136,6 +136,9 @@
 		F957A75615C0AFE80033CF00 /* YoutubeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F957A75515C0AFE80033CF00 /* YoutubeDelegate.m */; };
 		F964302F15C32E74006D1715 /* YouTubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F964302E15C32E73006D1715 /* YouTubeView.m */; };
 		F964303215C348DA006D1715 /* HomePlacesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F964303115C348DA006D1715 /* HomePlacesCell.m */; };
+		F9712A8615D2DEBC00F75A3E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9712A8515D2DEBC00F75A3E /* SettingsViewController.m */; };
+		F9712A8915D2E4B400F75A3E /* settings-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F9712A8715D2E4B400F75A3E /* settings-button.png */; };
+		F9712A8A15D2E4B400F75A3E /* settings-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9712A8815D2E4B400F75A3E /* settings-button@2x.png */; };
 		F9774C8415B722CD00FC6FBC /* PBMusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F9774C8315B722CD00FC6FBC /* PBMusicItem.m */; };
 		F99418F11598BE0C00A4B08B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99418F01598BE0C00A4B08B /* LoginViewController.m */; };
 		F99418F81598BEDA00A4B08B /* LoginWithFacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = F99418F61598BEDA00A4B08B /* LoginWithFacebookNormal.png */; };
@@ -481,6 +484,10 @@
 		F964302E15C32E73006D1715 /* YouTubeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeView.m; sourceTree = "<group>"; };
 		F964303015C348D9006D1715 /* HomePlacesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePlacesCell.h; sourceTree = "<group>"; };
 		F964303115C348DA006D1715 /* HomePlacesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePlacesCell.m; sourceTree = "<group>"; };
+		F9712A8415D2DEBC00F75A3E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		F9712A8515D2DEBC00F75A3E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		F9712A8715D2E4B400F75A3E /* settings-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-button.png"; sourceTree = "<group>"; };
+		F9712A8815D2E4B400F75A3E /* settings-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-button@2x.png"; sourceTree = "<group>"; };
 		F9774C8215B722CD00FC6FBC /* PBMusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicItem.h; path = Piggybackv2/PBMusicItem.h; sourceTree = "<group>"; };
 		F9774C8315B722CD00FC6FBC /* PBMusicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicItem.m; path = Piggybackv2/PBMusicItem.m; sourceTree = "<group>"; };
 		F99418EF1598BE0C00A4B08B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -694,6 +701,8 @@
 				3E9A5D481593C48500635873 /* AccountLinkViewController.m */,
 				C4AC60CA15D1B9F400B09413 /* ProfileViewController.h */,
 				C4AC60CB15D1B9F400B09413 /* ProfileViewController.m */,
+				F9712A8415D2DEBC00F75A3E /* SettingsViewController.h */,
+				F9712A8515D2DEBC00F75A3E /* SettingsViewController.m */,
 				3EE8DB141593BF9A009DCCA3 /* Supporting Files */,
 			);
 			path = Piggybackv2;
@@ -826,6 +835,8 @@
 		F9B478711593C16F00C20A53 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F9712A8715D2E4B400F75A3E /* settings-button.png */,
+				F9712A8815D2E4B400F75A3E /* settings-button@2x.png */,
 				F9A8432515D1AF6100233D3F /* piggyback_titlebar_background.png */,
 				F9A8432615D1AF6100233D3F /* piggyback_titlebar_background@2x.png */,
 				F9A8432115D1AEAD00233D3F /* phone_icon.png */,
@@ -1250,6 +1261,8 @@
 				F9A8432415D1AEAD00233D3F /* phone_icon@2x.png in Resources */,
 				F9A8432715D1AF6100233D3F /* piggyback_titlebar_background.png in Resources */,
 				F9A8432815D1AF6100233D3F /* piggyback_titlebar_background@2x.png in Resources */,
+				F9712A8915D2E4B400F75A3E /* settings-button.png in Resources */,
+				F9712A8A15D2E4B400F75A3E /* settings-button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1305,6 +1318,7 @@
 				F9A8431815D181BB00233D3F /* PlacesItemViewController.m in Sources */,
 				C4AC60CC15D1B9F400B09413 /* ProfileViewController.m in Sources */,
 				F9CFF50315D1F2C4007B65EE /* ProfileNavigationController.m in Sources */,
+				F9712A8615D2DEBC00F75A3E /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

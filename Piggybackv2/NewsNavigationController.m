@@ -22,13 +22,13 @@
                                                 [UIColor clearColor], UITextAttributeTextShadowColor,
                                                 nil]];
     
-    CGRect titleFrame = CGRectMake(0, 0, 320, 44);
-    UILabel *label = [[UILabel alloc] initWithFrame:titleFrame];
-    label.backgroundColor = [UIColor clearColor];
-    label.textAlignment = UITextAlignmentCenter;
-    label.font = [UIFont fontWithName:@"Futura-Medium" size:24.0f];
-    label.text = @"YOUR NEWS";
-    [self.navigationBar addSubview:label];
+//    CGRect titleFrame = CGRectMake(0, 0, 320, 44);
+//    UILabel *label = [[UILabel alloc] initWithFrame:titleFrame];
+//    label.backgroundColor = [UIColor clearColor];
+//    label.textAlignment = UITextAlignmentCenter;
+//    label.font = [UIFont fontWithName:@"Futura-Medium" size:24.0f];
+//    label.text = @"YOUR NEWS";
+//    [self.navigationBar addSubview:label];
 }
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController
