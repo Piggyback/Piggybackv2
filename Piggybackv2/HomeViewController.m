@@ -484,6 +484,7 @@
                         if ([cell isKindOfClass:[HomeVideosCell class]]) {
                             HomeVideosCell* videosCell = cell;
                             if (videosCell.videosActivity.videosItem.videosItemId == videosActivity.videosItem.videosItemId) {
+                                NSLog(@"reload video path");
                                 [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                             }
                         }
@@ -504,6 +505,7 @@
                         if ([cell isKindOfClass:[HomePlacesCell class]]) {
                             HomePlacesCell* placesCell = cell;
                             if (placesCell.placesActivity.placesItem.placesItemId == placesActivity.placesItem.placesItemId) {
+                                NSLog(@"reload vendor path");
                                 [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                             }
                         }
@@ -525,6 +527,7 @@
                                 if ([cell isKindOfClass:[HomeMusicCell class]]) {
                                     HomeMusicCell* musicCell = cell;
                                     if (musicCell.musicActivity.musicItem.musicItemId == musicActivity.musicItem.musicItemId) {
+                                        NSLog(@"reload music path");
                                         [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                                     }
                                 }
@@ -978,6 +981,7 @@
         
         return cell;
     } else if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
+        NSLog(@"loading places cell");
         static NSString *CellIdentifier = @"homePlacesCell";
         HomePlacesCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.delegate = self;
@@ -995,6 +999,7 @@
         
         // if photo exists, display
         if (placesItem.photoURL) {
+            NSLog(@"places photo exists");
             cell.mainPic.image = [self.cachedPlacesPhotos objectForKey:placesItem.photoURL];
         }
         
