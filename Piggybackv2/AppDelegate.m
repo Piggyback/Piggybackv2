@@ -377,6 +377,14 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 -(void)sessionDidLoginSuccessfully:(SPSession *)aSession; {
     NSLog(@"logged into spotify");
+    NSLog(@"attempting to set up PB playlist connection");
+    [SPPlaylist playlistWithPlaylistURL:[NSURL URLWithString:@"spotify:user:lemikegao:playlist:7AfXjZ6JxsEpccXstktwxD"] inSession:[SPSession sharedSession] callback:^(SPPlaylist *playlist) {
+        NSLog(@"connected to PB playlist");
+        PiggybackTabBarController* tabBarController = (PiggybackTabBarController*)self.window.rootViewController;
+        UINavigationController* navigationController = [tabBarController.viewControllers objectAtIndex:0];
+        HomeViewController* homeViewController = (HomeViewController*)navigationController.topViewController;
+        [homeViewController setPiggybackPlaylist:playlist];
+    }];
 }
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error; {

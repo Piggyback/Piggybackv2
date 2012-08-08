@@ -22,6 +22,7 @@
 @property (nonatomic, strong) FoursquareDelegate* foursquareDelegate;
 @property (nonatomic, strong) YoutubeDelegate* youtubeDelegate;
 @property (strong, nonatomic) SPPlaybackManager *playbackManager;
+@property (nonatomic, strong) SPPlaylist *piggybackPlaylist;
 
 - (void)loadAmbassadorData;
 - (void)fetchAmbassadorFavsFromCoreData;

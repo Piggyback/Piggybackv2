@@ -79,6 +79,8 @@
 @synthesize currentlyPlayingSpotifyURL = _currentlyPlayingSpotifyURL;
 @synthesize isPlaying = _isPlaying;
 
+@synthesize piggybackPlaylist = _piggybackPlaylist;
+
 #pragma mark - setters and getters 
 
 - (NSMutableArray*)items {
@@ -614,6 +616,13 @@
         [self addMusicFeedback:musicActivity forFeedbackType:@"todo"];
         [self.todoedMusic addObject:musicActivity.musicItem.musicItemId];
         [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+        
+        // add song to spotify playlist
+        [SPTrack trackForTrackURL:[NSURL URLWithString:musicActivity.musicItem.spotifyUrl] inSession:[SPSession sharedSession] callback:^(SPTrack *track) {
+            [self.piggybackPlaylist addItem:track atIndex:0 callback:^(NSError *error) {
+                NSLog(@"song added to spotify playlist");
+            }];
+        }];
     }
 }
 
@@ -1133,12 +1142,11 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"view will appear");
 
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-
+    
 }
 
 - (void)viewDidUnload
