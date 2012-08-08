@@ -11,5 +11,6 @@
 #import <RestKit/CoreData.h>
 
 @interface ProfileViewController : UIViewController <RKRequestDelegate>
+@property (weak, nonatomic) IBOutlet UIImageView *profilePic;
 
 @end

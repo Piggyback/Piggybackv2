@@ -20,6 +20,7 @@
 @end
 
 @implementation ProfileViewController
+@synthesize profilePic = _profilePic;
 
 @synthesize me = _me;
 @synthesize numAmbassadors = _numAmbassadors;
@@ -55,11 +56,15 @@
     [self loadData];
     self.me = [PBUser findByPrimaryKey:[NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]]];
     self.numAmbassadors = [NSNumber numberWithInt:([self.me.musicAmbassadors count] + [self.me.placesAmbassadors count] + [self.me.videosAmbassadors count])];
+    
+    self.profilePic.image = self.me.thumbnail;
+    
     NSLog(@"num of ambassadors: %@", self.numAmbassadors);
 }
 
 - (void)viewDidUnload
 {
+    [self setProfilePic:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

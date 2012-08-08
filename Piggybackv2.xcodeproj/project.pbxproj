@@ -194,6 +194,7 @@
 		F9C0976A1594E5D8000A0541 /* josh-lu-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */; };
 		F9C0976B1594E5D8000A0541 /* olstein-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */; };
 		F9C0976C1594E5D8000A0541 /* yean-rounded-corners.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C097681594E5D8000A0541 /* yean-rounded-corners.png */; };
+		F9CFF50315D1F2C4007B65EE /* ProfileNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CFF50215D1F2C4007B65EE /* ProfileNavigationController.m */; };
 		F9ED08EF15C9D8D400525624 /* SetAmbassadorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9ED08EE15C9D8D400525624 /* SetAmbassadorsViewController.m */; };
 		F9ED08F215CB0A4000525624 /* HomeFeedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9ED08F115CB0A3F00525624 /* HomeFeedNavigationController.m */; };
 		F9FD692415C71E2400D86522 /* filter-music.png in Resources */ = {isa = PBXBuildFile; fileRef = F9FD691E15C71E2400D86522 /* filter-music.png */; };
@@ -550,6 +551,8 @@
 		F9C097661594E5D8000A0541 /* josh-lu-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "josh-lu-rounded-corners.png"; sourceTree = "<group>"; };
 		F9C097671594E5D8000A0541 /* olstein-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olstein-rounded-corners.png"; sourceTree = "<group>"; };
 		F9C097681594E5D8000A0541 /* yean-rounded-corners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yean-rounded-corners.png"; sourceTree = "<group>"; };
+		F9CFF50115D1F2C4007B65EE /* ProfileNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileNavigationController.h; sourceTree = "<group>"; };
+		F9CFF50215D1F2C4007B65EE /* ProfileNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileNavigationController.m; sourceTree = "<group>"; };
 		F9ED08ED15C9D8D400525624 /* SetAmbassadorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorsViewController.h; sourceTree = "<group>"; };
 		F9ED08EE15C9D8D400525624 /* SetAmbassadorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAmbassadorsViewController.m; sourceTree = "<group>"; };
 		F9ED08F015CB0A3F00525624 /* HomeFeedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFeedNavigationController.h; sourceTree = "<group>"; };
@@ -667,6 +670,8 @@
 				F925A35D15CB2C35002B3779 /* NewsNavigationController.m */,
 				F925A3F815CC4743002B3779 /* TodoNavigationController.h */,
 				F925A3F915CC4743002B3779 /* TodoNavigationController.m */,
+				F9CFF50115D1F2C4007B65EE /* ProfileNavigationController.h */,
+				F9CFF50215D1F2C4007B65EE /* ProfileNavigationController.m */,
 				F9AE7CCA15B9E9DE001008C7 /* FoursquareDelegate.h */,
 				F9AE7CCB15B9E9DE001008C7 /* FoursquareDelegate.m */,
 				F957A75415C0AFE80033CF00 /* YoutubeDelegate.h */,
@@ -1299,6 +1304,7 @@
 				F92457D915D01EB20074292E /* TodoVideosCell.m in Sources */,
 				F9A8431815D181BB00233D3F /* PlacesItemViewController.m in Sources */,
 				C4AC60CC15D1B9F400B09413 /* ProfileViewController.m in Sources */,
+				F9CFF50315D1F2C4007B65EE /* ProfileNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

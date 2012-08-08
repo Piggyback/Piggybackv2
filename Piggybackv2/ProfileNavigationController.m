@@ -1,18 +1,18 @@
 //
-//  NewsNavigationController.m
+//  YouNavigationController.m
 //  Piggybackv2
 //
-//  Created by Kimberly Hsiao on 8/2/12.
+//  Created by Kimberly Hsiao on 8/7/12.
 //  Copyright (c) 2012 Calimucho. All rights reserved.
 //
 
-#import "NewsNavigationController.h"
+#import "ProfileNavigationController.h"
 
-@interface NewsNavigationController ()
+@interface ProfileNavigationController ()
 
 @end
 
-@implementation NewsNavigationController
+@implementation ProfileNavigationController
 
 - (void)customizeNavigationBar {
     self.navigationBar.tintColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
@@ -27,7 +27,7 @@
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = UITextAlignmentCenter;
     label.font = [UIFont fontWithName:@"Futura-Medium" size:24.0f];
-    label.text = @"YOUR NEWS";
+    label.text = @"YOUR PROFILE";
     [self.navigationBar addSubview:label];
 }
 
