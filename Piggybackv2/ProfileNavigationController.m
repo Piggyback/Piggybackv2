@@ -15,7 +15,7 @@
 @implementation ProfileNavigationController
 
 - (void)customizeNavigationBar {
-    self.navigationBar.tintColor = [UIColor colorWithRed:0.6f green:0.6f blue:0.6f alpha:0];
+    self.navigationBar.tintColor = [UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:0];
     [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"piggyback_titlebar_background"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                 [UIColor blackColor], UITextAttributeTextColor,
