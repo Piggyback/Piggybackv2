@@ -14,6 +14,7 @@
 #import "PiggybackTabBarController.h"
 #import "AppDelegate.h"
 #import "HomeViewController.h"
+#import <RestKit/RKRequestSerialization.h>
 
 @interface SetAmbassadorsViewController ()
 @property (nonatomic, strong) NSArray* friends;
@@ -82,6 +83,28 @@
     [self.view endEditing:YES];
 }
 
+- (void)addAmbassadorToDb:(NSNumber*)ambassadorUid forFollower:(NSNumber*)followerUid forType:(NSString*)type {
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:followerUid, @"followerUid", ambassadorUid, @"ambassadorUid", type, @"ambassadorType", nil];
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    NSError *error = nil;
+    NSString *json = [parser stringFromObject:params error:&error];
+    
+    if (!error) {
+        [[RKClient sharedClient] post:@"/addAmbassador" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
+    }
+}
+
+- (void)removeAmbassadorFromDb:(NSNumber*)ambassadorUid forFollower:(NSNumber*)followerUid forType:(NSString*)type {
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:followerUid, @"followerUid", ambassadorUid, @"ambassadorUid", type, @"ambassadorType", nil];
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    NSError *error = nil;
+    NSString *json = [parser stringFromObject:params error:&error];
+    
+    if (!error) {
+        [[RKClient sharedClient] put:@"/removeAmbassador" params:[RKRequestSerialization serializationWithData:[json dataUsingEncoding:NSUTF8StringEncoding] MIMEType:RKMIMETypeJSON] delegate:self];
+    }
+}
+
 #pragma mark - SetAmbassadorDelegate methods
 
 - (void)setAmbassador:(PBFriend*)friend ForType:(NSString *)type {
@@ -122,7 +145,6 @@
                     
                     // add ambassador to db
                     // [[RKObjectManager sharedManager] postObject:newAmbassador delegate:self];
-                    
                 } else if ([type isEqualToString:@"places"]) {
                     [newUser addPlacesFollowersObject:me];
                     
@@ -134,6 +156,9 @@
                     // add ambassador to db
                     // [[RKObjectManager sharedManager] postObject:newAmbassador delegate:self];
                 }
+                
+                // add ambassador to DB
+                [self addAmbassadorToDb:newUser.uid forFollower:me.uid forType:type];
                 
                 // store photo in core data
                 if (!friend.thumbnail) {
@@ -187,6 +212,9 @@
             }
         }
         
+        // add ambassador to DB
+        [self addAmbassadorToDb:friendUser.uid forFollower:me.uid forType:type];
+        
         // add foursquare id if they dont have one
         if (!friendUser.foursquareId) {
             NSLog(@"friend user has no fs id");
@@ -228,8 +256,11 @@
             
             // remove ambassador from database
         } else if ([type isEqualToString:@"videos"]) {
-            
+            [me removeVideosAmbassadorsObject:removedUser];
         }
+        
+        // remove ambassador from DB
+        [self removeAmbassadorFromDb:removedUser.uid forFollower:me.uid forType:type];
     
         // if removed user has no other followers and is not my follower, remove user from core data
         int count = [removedUser.musicFollowers count] + [removedUser.placesFollowers count];
