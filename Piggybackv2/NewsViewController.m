@@ -286,7 +286,6 @@
     }
     
     PBTextLayer *newsTextLayer = [[PBTextLayer alloc] init];
-    newsTextLayer.backgroundColor = [UIColor clearColor].CGColor;
     newsTextLayer.wrapped = YES;
     CALayer *cellLayer = cell.contentView.layer;
     newsTextLayer.contentsScale = [[UIScreen mainScreen] scale];
