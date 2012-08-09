@@ -389,9 +389,10 @@
         }
         
         // store photoURLs in core data and db
-        [[RKObjectManager sharedManager] putObject:placesItem usingBlock:^(RKObjectLoader* loader) {
-        }];
-
+        if (placesItem) {
+            [[RKObjectManager sharedManager] putObject:placesItem usingBlock:^(RKObjectLoader* loader) {
+            }];
+        }
     });
     
     [self fetchAmbassadorFavsFromCoreData];
