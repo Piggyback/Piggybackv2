@@ -9,6 +9,7 @@
 #import "TodoVideosCell.h"
 
 @implementation TodoVideosCell
+@synthesize thumbnail;
 
 @synthesize videoName;
 

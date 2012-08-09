@@ -35,7 +35,8 @@
 @property (nonatomic, strong) NSMutableSet* videosAmbassadors;
 
 @property (nonatomic, strong) NSMutableDictionary* cachedPlacesPhotos;
-@property (nonatomic, strong) NSMutableDictionary* cachedYoutubeWebViews;
+@property (nonatomic, strong) NSMutableDictionary* cachedYoutubeWebViews;   // for actual app
+@property (nonatomic, strong) NSMutableDictionary* cachedYoutubeThumbnails;  // for display on demo
 @property (nonatomic, strong) NSMutableDictionary* cachedAlbumCovers;
 
 @property (nonatomic, strong) NSMutableSet* heartedMusic;
@@ -67,6 +68,7 @@
 
 @synthesize cachedPlacesPhotos = _cachedPlacesPhotos;
 @synthesize cachedYoutubeWebViews = _cachedYoutubeWebViews;
+@synthesize cachedYoutubeThumbnails = _cachedYoutubeThumbnails;
 @synthesize cachedAlbumCovers = _cachedAlbumCovers;
 
 @synthesize heartedMusic = _heartedMusic;
@@ -137,6 +139,13 @@
         _cachedYoutubeWebViews = [[NSMutableDictionary alloc] init];
     }
     return _cachedYoutubeWebViews;
+}
+
+- (NSMutableDictionary*)cachedYoutubeThumbnails {
+    if (!_cachedYoutubeThumbnails) {
+        _cachedYoutubeThumbnails = [[NSMutableDictionary alloc] init];
+    }
+    return _cachedYoutubeThumbnails;
 }
 
 - (NSMutableDictionary*)cachedAlbumCovers {
@@ -310,9 +319,15 @@
     PBVideosItem* newVideosItem = [PBVideosItem object];
     newVideosItem.name = [video objectForKey:@"name"];
     newVideosItem.videoURL = [video objectForKey:@"url"];
+    newVideosItem.thumbnailURL = [video objectForKey:@"thumbnailURL"];
     
-    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:newVideosItem.videoURL frame:CGRectMake(9,38,302,290)];
-    [self.cachedYoutubeWebViews setObject:videoWebView forKey:newVideosItem.videoURL];
+    // uncomment this to cache the actual videos instead of the thumbnail
+//    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:newVideosItem.videoURL frame:CGRectMake(9,38,302,290)];
+//    [self.cachedYoutubeWebViews setObject:videoWebView forKey:newVideosItem.videoURL];
+    
+    // cache video thumbnail
+    UIImage* videosImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:newVideosItem.thumbnailURL]]];
+    [self.cachedYoutubeThumbnails setObject:videosImage forKey:newVideosItem.thumbnailURL];
     
     // reload cell if it is visible and the image was just reloaded
     for (id cell in [self.tableView visibleCells]) {
@@ -495,8 +510,12 @@
             if ([activity isKindOfClass:[PBVideosActivity class]]) {
                 PBVideosActivity *videosActivity = activity;
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosActivity.videosItem.videoURL frame:CGRectMake(9,38,302,290)];
-                    [self.cachedYoutubeWebViews setObject:videoWebView forKey:videosActivity.videosItem.videoURL];
+                    // uncomment this to actually load the video instead of just a thumbnail
+//                    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosActivity.videosItem.videoURL frame:CGRectMake(9,38,302,290)];
+//                    [self.cachedYoutubeWebViews setObject:videoWebView forKey:videosActivity.videosItem.videoURL];
+                    
+                    UIImage* videosImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:videosActivity.videosItem.thumbnailURL]]];
+                    [self.cachedYoutubeThumbnails setObject:videosImage forKey:videosActivity.videosItem.thumbnailURL];
                     
                     // reload cell if it is visible and the image was just reloaded
                     for (id cell in [self.tableView visibleCells]) {
@@ -1050,8 +1069,12 @@
         cell.favoritedBy.text = [NSString stringWithFormat:@"%@ %@ %@ a new video",user.firstName,user.lastName,videosActivity.videosActivityType];
         cell.profilePic.image = user.thumbnail;
 
-        YouTubeView* videoWebView = [self.cachedYoutubeWebViews objectForKey:videosItem.videoURL];
-        [cell.contentView addSubview:videoWebView];
+        // uncomment this to actually display video instead of thumbnail
+//        YouTubeView* videoWebView = [self.cachedYoutubeWebViews objectForKey:videosItem.videoURL];
+//        [cell.contentView addSubview:videoWebView];
+        
+        // this is only for demo purposes - show thumbnail
+        cell.thumbnail.image = [self.cachedYoutubeThumbnails objectForKey:videosActivity.videosItem.thumbnailURL];
         
         cell.icon.image = [UIImage imageNamed:@"movie-icon-badge.png"];
         [cell.contentView bringSubviewToFront:cell.icon];
@@ -1083,11 +1106,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesActivity class]]) {
-//        NSLog(@"clicked on place");
-//        [self performSegueWithIdentifier:@"toPlacesItemPage" sender:[tableView cellForRowAtIndexPath:indexPath]];
-//    }
-//    
+    // play video using browser instead of within app - only for demo purposes
+    if ([[self.displayItems objectAtIndex:indexPath.row] isKindOfClass:[PBVideosActivity class]]) {
+        PBVideosActivity *videosActivity = [self.displayItems objectAtIndex:indexPath.row];
+        NSString* videoURL = videosActivity.videosItem.videoURL;
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:videoURL]];
+    }
+    
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 

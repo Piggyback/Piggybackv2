@@ -47,7 +47,7 @@
         newUser.lastName = [defaults objectForKey:@"LastName"];
         newUser.isPiggybackUser = [NSNumber numberWithBool:YES];
         
-        NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large",newUser.fbId];
+        NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",newUser.fbId];
         newUser.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
         
         [[RKObjectManager sharedManager] postObject:newUser delegate:self];

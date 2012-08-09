@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="12A269" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="PBFriend" representedClassName="PBFriend" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fbId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -148,6 +148,7 @@
     </entity>
     <entity name="PBVideosItem" representedClassName="PBVideosItem" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videosItemId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="videoURL" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="videosActivity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PBVideosActivity" inverseName="videosItem" inverseEntity="PBVideosActivity" syncable="YES"/>
@@ -174,7 +175,7 @@
         <element name="PBUser" positionX="0" positionY="0" width="128" height="450"/>
         <element name="PBVideosActivity" positionX="0" positionY="0" width="128" height="180"/>
         <element name="PBVideosFeedback" positionX="0" positionY="0" width="128" height="165"/>
-        <element name="PBVideosItem" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="PBVideosItem" positionX="0" positionY="0" width="128" height="120"/>
         <element name="PBVideosNews" positionX="0" positionY="0" width="128" height="150"/>
     </elements>
 </model>

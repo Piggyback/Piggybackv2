@@ -382,7 +382,6 @@
                 NSString* thumbnailURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",friend.fbId];
                 PBFriend* newFriend = [friendArray objectAtIndex:0];
                 newFriend.thumbnail = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:thumbnailURL]]];
-                [[RKObjectManager sharedManager].objectStore save:nil];
 
                 // set thumbnail in local friend array to reflect core data
                 if ([friend.fbId isEqualToNumber:newFriend.fbId]) {
@@ -392,6 +391,7 @@
                             cell.profilePic.image = newFriend.thumbnail;
                     });
                     friend.thumbnail = newFriend.thumbnail;
+                    [[RKObjectManager sharedManager].objectStore save:nil];
                 }
             }
         });
