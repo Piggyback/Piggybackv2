@@ -305,8 +305,8 @@
     [attrStr addAttributes:subAttributes range:NSMakeRange(piggybacker.length, actionAndItem.length+1)];
     
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef) attrStr);
-    CGSize labelSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,0), NULL, CGSizeMake(230.0f, CGFLOAT_MAX), NULL);
-    newsTextLayer.frame = CGRectMake(53.0f, 10.0f, 230.0f, labelSize.height);
+    CGSize labelSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,0), NULL, CGSizeMake(220.0f, CGFLOAT_MAX), NULL);
+    newsTextLayer.frame = CGRectMake(53.0f, 10.0f, 220.0f, labelSize.height);
     
     [cellLayer addSublayer:newsTextLayer];
     newsTextLayer.string = attrStr;
@@ -402,7 +402,7 @@
     [attrStr addAttributes:subAttributes range:NSMakeRange(piggybacker.length, actionAndItem.length+1)];
     
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef) attrStr);
-    CGSize labelSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,0), NULL, CGSizeMake(230.0f, CGFLOAT_MAX), NULL);
+    CGSize labelSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,0), NULL, CGSizeMake(220.0f, CGFLOAT_MAX), NULL);
     
     if ((labelSize.height + 5) <= NEWSTABLEROWHEIGHT)
         return NEWSTABLEROWHEIGHT;
