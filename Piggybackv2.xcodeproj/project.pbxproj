@@ -141,6 +141,8 @@
 		F9712A8E15D2F92000F75A3E /* profile-stat-path@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9712A8C15D2F92000F75A3E /* profile-stat-path@2x.png */; };
 		F9712A9515D331B900F75A3E /* settings-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F9712A9315D331B900F75A3E /* settings-button.png */; };
 		F9712A9615D331B900F75A3E /* settings-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9712A9415D331B900F75A3E /* settings-button@2x.png */; };
+		F9712AA115D33CCB00F75A3E /* AccountLinkNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9712AA015D33CCA00F75A3E /* AccountLinkNavigationController.m */; };
+		F9712AA415D33CDC00F75A3E /* SetAmbassadorsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9712AA315D33CDB00F75A3E /* SetAmbassadorsNavigationController.m */; };
 		F9774C8415B722CD00FC6FBC /* PBMusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F9774C8315B722CD00FC6FBC /* PBMusicItem.m */; };
 		F99418F11598BE0C00A4B08B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99418F01598BE0C00A4B08B /* LoginViewController.m */; };
 		F99418F81598BEDA00A4B08B /* LoginWithFacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = F99418F61598BEDA00A4B08B /* LoginWithFacebookNormal.png */; };
@@ -492,6 +494,10 @@
 		F9712A8C15D2F92000F75A3E /* profile-stat-path@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-stat-path@2x.png"; sourceTree = "<group>"; };
 		F9712A9315D331B900F75A3E /* settings-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-button.png"; sourceTree = "<group>"; };
 		F9712A9415D331B900F75A3E /* settings-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-button@2x.png"; sourceTree = "<group>"; };
+		F9712A9F15D33CCA00F75A3E /* AccountLinkNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountLinkNavigationController.h; sourceTree = "<group>"; };
+		F9712AA015D33CCA00F75A3E /* AccountLinkNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountLinkNavigationController.m; sourceTree = "<group>"; };
+		F9712AA215D33CDB00F75A3E /* SetAmbassadorsNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetAmbassadorsNavigationController.h; sourceTree = "<group>"; };
+		F9712AA315D33CDB00F75A3E /* SetAmbassadorsNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetAmbassadorsNavigationController.m; sourceTree = "<group>"; };
 		F9774C8215B722CD00FC6FBC /* PBMusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBMusicItem.h; path = Piggybackv2/PBMusicItem.h; sourceTree = "<group>"; };
 		F9774C8315B722CD00FC6FBC /* PBMusicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicItem.m; path = Piggybackv2/PBMusicItem.m; sourceTree = "<group>"; };
 		F99418EF1598BE0C00A4B08B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -675,6 +681,10 @@
 				F93C2F75159A4E4E00FACE47 /* Piggybackv2.xcdatamodeld */,
 				3EE8DB1C1593BF9A009DCCA3 /* AppDelegate.h */,
 				3EE8DB1D1593BF9A009DCCA3 /* AppDelegate.m */,
+				F9712A9F15D33CCA00F75A3E /* AccountLinkNavigationController.h */,
+				F9712AA015D33CCA00F75A3E /* AccountLinkNavigationController.m */,
+				F9712AA215D33CDB00F75A3E /* SetAmbassadorsNavigationController.h */,
+				F9712AA315D33CDB00F75A3E /* SetAmbassadorsNavigationController.m */,
 				F9ED08F015CB0A3F00525624 /* HomeFeedNavigationController.h */,
 				F9ED08F115CB0A3F00525624 /* HomeFeedNavigationController.m */,
 				F925A35C15CB2C35002B3779 /* NewsNavigationController.h */,
@@ -1327,6 +1337,8 @@
 				C4AC60CC15D1B9F400B09413 /* ProfileViewController.m in Sources */,
 				F9CFF50315D1F2C4007B65EE /* ProfileNavigationController.m in Sources */,
 				F9712A8615D2DEBC00F75A3E /* SettingsViewController.m in Sources */,
+				F9712AA115D33CCB00F75A3E /* AccountLinkNavigationController.m in Sources */,
+				F9712AA415D33CDC00F75A3E /* SetAmbassadorsNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

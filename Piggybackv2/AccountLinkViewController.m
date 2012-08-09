@@ -90,7 +90,7 @@
     // display set ambassadors view
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     PiggybackTabBarController* rootViewController = (PiggybackTabBarController*)appDelegate.window.rootViewController;
-    [self presentViewController:rootViewController.setAmbassadorsViewController animated:YES completion:nil];
+    [self presentViewController:rootViewController.setAmbassadorsNavigationController animated:YES completion:nil];
 }
 
 #pragma mark - youtube alert delegate

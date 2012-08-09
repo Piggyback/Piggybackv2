@@ -8,6 +8,7 @@
 
 #import "PiggybackTabBarController.h"
 #import "YouTubeTableViewController.h"
+#import "SetAmbassadorsViewController.h"
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "PBUser.h"
@@ -21,7 +22,7 @@
 
 @implementation PiggybackTabBarController
 @synthesize currentFbAPICall = _currentFbAPICall;
-@synthesize setAmbassadorsViewController = _setAmbassadorsViewController;
+@synthesize setAmbassadorsNavigationController = _setAmbassadorsNavigationController;
 @synthesize foursquareDelegate = _foursquareDelegate;
 
 #pragma mark - private helper methods
@@ -97,7 +98,7 @@
                 [self.foursquareDelegate getFoursquareFriends];
                 NSLog(@"loading foursquare friends after friends are done loading");
             }
-            [self.setAmbassadorsViewController reloadFriendsList];
+            [(SetAmbassadorsViewController*)self.setAmbassadorsNavigationController.topViewController reloadFriendsList];
         });
     });
 }
@@ -189,7 +190,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.setAmbassadorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsViewController"];
+    self.setAmbassadorsNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"setAmbassadorsNavigationViewController"];
 }
 
 - (void)viewDidUnload
