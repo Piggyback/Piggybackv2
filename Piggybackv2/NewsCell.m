@@ -11,7 +11,6 @@
 
 @implementation NewsCell
 @synthesize profilePic;
-@synthesize newsText;
 @synthesize date;
 
 -(void)awakeFromNib {

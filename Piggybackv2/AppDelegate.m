@@ -377,14 +377,6 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 -(void)sessionDidLoginSuccessfully:(SPSession *)aSession; {
     NSLog(@"logged into spotify");
-//    NSLog(@"attempting to set up PB playlist connection");
-//    [SPPlaylist playlistWithPlaylistURL:[NSURL URLWithString:@"spotify:user:lemikegao:playlist:7AfXjZ6JxsEpccXstktwxD"] inSession:[SPSession sharedSession] callback:^(SPPlaylist *playlist) {
-//        NSLog(@"connected to PB playlist");
-//        PiggybackTabBarController* tabBarController = (PiggybackTabBarController*)self.window.rootViewController;
-//        UINavigationController* navigationController = [tabBarController.viewControllers objectAtIndex:0];
-//        HomeViewController* homeViewController = (HomeViewController*)navigationController.topViewController;
-//        [homeViewController setPiggybackPlaylist:playlist];
-//    }];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *playlistStringURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"PBPlaylistURL"];
     if (!playlistStringURL) {
@@ -394,7 +386,6 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
             SPPlaylistContainer *plContainer = aSession.userPlaylists;
             [SPAsyncLoading waitUntilLoaded:plContainer timeout:5.0f then:^(NSArray *loadedItems, NSArray *notLoadedItems) {
                 [plContainer createPlaylistWithName:@"Piggyback songs" callback:^(SPPlaylist *createdPlaylist) {
-                    [[NSUserDefaults standardUserDefaults] setObject:@"test3" forKey:@"PBPlaylistURL"];
 
                     // move playlist to the top in spotify
                     [plContainer moveItem:createdPlaylist toIndex:0 ofNewParent:nil callback:^(NSError *error) {
