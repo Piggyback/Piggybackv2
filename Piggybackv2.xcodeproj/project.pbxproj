@@ -188,10 +188,10 @@
 		F99F2E9715D3455800E98B08 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2E9515D3455800E98B08 /* Icon.png */; };
 		F99F2E9E15D348F600E98B08 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2E9C15D348F600E98B08 /* Default.png */; };
 		F99F2E9F15D348F600E98B08 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2E9D15D348F600E98B08 /* Default@2x.png */; };
-		F99F2EA215D349F100E98B08 /* piggyback-signin.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2EA015D349F100E98B08 /* piggyback-signin.png */; };
-		F99F2EA315D349F100E98B08 /* piggyback-signin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2EA115D349F100E98B08 /* piggyback-signin@2x.png */; };
 		F99F2EA615D34A2900E98B08 /* facebook-signin-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2EA415D34A2900E98B08 /* facebook-signin-button.png */; };
 		F99F2EA715D34A2900E98B08 /* facebook-signin-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2EA515D34A2900E98B08 /* facebook-signin-button@2x.png */; };
+		F99F2EAA15D34CE400E98B08 /* piggyback-signin.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2EA815D34CE300E98B08 /* piggyback-signin.png */; };
+		F99F2EAB15D34CE400E98B08 /* piggyback-signin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2EA915D34CE300E98B08 /* piggyback-signin@2x.png */; };
 		F9A097D015BF0F8C0086C2CB /* HomeMusicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A097CF15BF0F8C0086C2CB /* HomeMusicCell.m */; };
 		F9A4289915B45C7B000D147C /* PBFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4289815B45C7B000D147C /* PBFriend.m */; };
 		F9A428BA15B46276000D147C /* PBMusicNews.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428B915B46276000D147C /* PBMusicNews.m */; };
@@ -557,10 +557,10 @@
 		F99F2E9515D3455800E98B08 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		F99F2E9C15D348F600E98B08 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		F99F2E9D15D348F600E98B08 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		F99F2EA015D349F100E98B08 /* piggyback-signin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "piggyback-signin.png"; sourceTree = "<group>"; };
-		F99F2EA115D349F100E98B08 /* piggyback-signin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "piggyback-signin@2x.png"; sourceTree = "<group>"; };
 		F99F2EA415D34A2900E98B08 /* facebook-signin-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-signin-button.png"; sourceTree = "<group>"; };
 		F99F2EA515D34A2900E98B08 /* facebook-signin-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-signin-button@2x.png"; sourceTree = "<group>"; };
+		F99F2EA815D34CE300E98B08 /* piggyback-signin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "piggyback-signin.png"; sourceTree = "<group>"; };
+		F99F2EA915D34CE300E98B08 /* piggyback-signin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "piggyback-signin@2x.png"; sourceTree = "<group>"; };
 		F9A097CE15BF0F8C0086C2CB /* HomeMusicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMusicCell.h; sourceTree = "<group>"; };
 		F9A097CF15BF0F8C0086C2CB /* HomeMusicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMusicCell.m; sourceTree = "<group>"; };
 		F9A4289715B45C7B000D147C /* PBFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBFriend.h; path = Piggybackv2/PBFriend.h; sourceTree = "<group>"; };
@@ -874,11 +874,11 @@
 		F9B478711593C16F00C20A53 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F99F2EA815D34CE300E98B08 /* piggyback-signin.png */,
+				F99F2EA915D34CE300E98B08 /* piggyback-signin@2x.png */,
 				F99F2EA415D34A2900E98B08 /* facebook-signin-button.png */,
 				F99F2EA515D34A2900E98B08 /* facebook-signin-button@2x.png */,
 				F99F2E9C15D348F600E98B08 /* Default.png */,
-				F99F2EA015D349F100E98B08 /* piggyback-signin.png */,
-				F99F2EA115D349F100E98B08 /* piggyback-signin@2x.png */,
 				F99F2E9D15D348F600E98B08 /* Default@2x.png */,
 				F9A8432515D1AF6100233D3F /* piggyback_titlebar_background.png */,
 				F9A8432615D1AF6100233D3F /* piggyback_titlebar_background@2x.png */,
@@ -1318,10 +1318,10 @@
 				F99F2E9715D3455800E98B08 /* Icon.png in Resources */,
 				F99F2E9E15D348F600E98B08 /* Default.png in Resources */,
 				F99F2E9F15D348F600E98B08 /* Default@2x.png in Resources */,
-				F99F2EA215D349F100E98B08 /* piggyback-signin.png in Resources */,
-				F99F2EA315D349F100E98B08 /* piggyback-signin@2x.png in Resources */,
 				F99F2EA615D34A2900E98B08 /* facebook-signin-button.png in Resources */,
 				F99F2EA715D34A2900E98B08 /* facebook-signin-button@2x.png in Resources */,
+				F99F2EAA15D34CE400E98B08 /* piggyback-signin.png in Resources */,
+				F99F2EAB15D34CE400E98B08 /* piggyback-signin@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

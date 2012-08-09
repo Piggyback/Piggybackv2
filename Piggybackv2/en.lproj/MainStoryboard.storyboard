@@ -121,7 +121,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NhI-ZE-Y77">
-                                <rect key="frame" x="25" y="303" width="270" height="49"/>
+                                <rect key="frame" x="25" y="310" width="270" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" image="facebook-signin-button.png">
@@ -1546,9 +1546,11 @@ get the full Piggyback experience!</string>
         <class className="ProfileViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="numMusicLikes" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="numMusicPiggybackers" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="numMusicSaves" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numPiggybacking" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="numPlacesLikes" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="numPlacesPiggybackers" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="numPlacesSaves" candidateClass="UILabel"/>
