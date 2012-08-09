@@ -20,6 +20,7 @@
 @synthesize todo = _todo;
 @synthesize videosActivity = _videosActivity;
 @synthesize delegate = _delegate;
+@synthesize thumbnail = _thumbnail;
 
 #pragma mark - initialization
 -(void)awakeFromNib {

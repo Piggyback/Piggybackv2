@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * videosItemId;
 @property (nonatomic, retain) NSString * videoURL;
+@property (nonatomic, retain) NSString * thumbnailURL;
 @property (nonatomic, retain) NSSet *videosActivity;
 @end
 

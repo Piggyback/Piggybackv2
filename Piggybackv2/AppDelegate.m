@@ -231,7 +231,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     
     // videosItem mapping
     videosItemMapping.primaryKeyAttribute = @"videosItemId";
-    [videosItemMapping mapAttributes:@"videosItemId",@"name",@"videoURL",nil];
+    [videosItemMapping mapAttributes:@"videosItemId",@"name",@"videoURL",@"thumbnailURL",nil];
     [objectManager.mappingProvider setMapping:videosItemMapping forKeyPath:@"PBVideosItem"];
     
     // videosActivity mapping
@@ -309,7 +309,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [objectManager.mappingProvider setSerializationMapping:placesFeedbackSerializationMapping forClass:[PBPlacesFeedback class]];
     
     // videosItem serialization
-    [videosItemSerializationMapping mapAttributes:@"videosItemId",@"name",@"videoURL",nil];
+    [videosItemSerializationMapping mapAttributes:@"videosItemId",@"name",@"videoURL",@"thumbnailURL",nil];
     [objectManager.mappingProvider setSerializationMapping:videosItemSerializationMapping forClass:[PBVideosItem class]];
     
     // videosActivity serialization

@@ -16,5 +16,6 @@
 @dynamic videosItemId;
 @dynamic videoURL;
 @dynamic videosActivity;
+@dynamic thumbnailURL;
 
 @end

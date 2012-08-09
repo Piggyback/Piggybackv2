@@ -145,9 +145,21 @@
                 // add one new video to video list
                 NSDictionary *videoArray = [youtubeVideoInfoDict objectForKey:@"entry"];
                 NSArray* videoTypesArray = [[videoArray objectForKey:@"media$group"] objectForKey:@"media$content"];
+                NSArray* thumbnailTypesArray = [[videoArray objectForKey:@"media$group"] objectForKey:@"media$thumbnail"];
+                
+                // initialize return dictionary
+                NSMutableDictionary* videoInformation = [[NSMutableDictionary alloc] init];
+                
+                // get thumbnail
+                for (NSDictionary* thumbnailType in thumbnailTypesArray) {
+                    if ([[thumbnailType objectForKey:@"width"] isEqualToNumber:[NSNumber numberWithInt:480]]) {
+                        [videoInformation setObject:[thumbnailType objectForKey:@"url"] forKey:@"thumbnailURL"];
+                    }
+                }
+                
+                // get video url
                 for (NSDictionary* videoType in videoTypesArray) {
                     if ([[videoType objectForKey:@"type"] isEqualToString:@"application/x-shockwave-flash"]) {
-                        NSMutableDictionary* videoInformation = [[NSMutableDictionary alloc] init];
                         [videoInformation setObject:[videoType objectForKey:@"url"] forKey:@"url"];
                         [videoInformation setObject:[[[videoArray objectForKey:@"media$group"] objectForKey:@"media$title"] objectForKey:@"$t"] forKey:@"name"];
                         [videoInformation setObject:[[self.currentConnections objectForKey:currentConnection] objectForKey:@"youtubeUsername"] forKey:@"youtubeUsername"];
@@ -160,7 +172,6 @@
                         [df setDateFormat:@"yyyy-MM-ddHH:mm:ss"];
                         NSDate *date = [df dateFromString: formattedString];
                         [videoInformation setObject:date forKey:@"date"];
-//                        [self.videoList addObject:videoInformation];
                         [self.delegate updateFavoriteVideos:videoInformation];
                         NSLog(@"video information is %@",videoInformation);
                         break;

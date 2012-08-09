@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *videoName;
 @property (weak, nonatomic) IBOutlet UILabel *date;
+@property (weak, nonatomic) IBOutlet UIImageView *thumbnail;
 
 @end

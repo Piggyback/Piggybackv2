@@ -29,6 +29,9 @@
 @property (nonatomic, strong) PBVideosActivity *videosActivity;
 @property (nonatomic, weak) id<HomeVideosCellDelegate> delegate;
 
+// this is only for demo purposes
+@property (weak, nonatomic) IBOutlet UIImageView *thumbnail;
+
 - (IBAction)heart:(id)sender;
 - (IBAction)todo:(id)sender;
 

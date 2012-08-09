@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSMutableDictionary* cachedPlacesPhotos;  // key is photoURL
 @property (nonatomic, strong) NSMutableDictionary* cachedAlbumCovers;   // key is spotifyURL
 @property (nonatomic, strong) NSMutableDictionary* cachedYoutubeWebViews; // key is videoURL
+@property (nonatomic, strong) NSMutableDictionary* cachedYoutubeThumbnails;  // for display on demo
 @property (nonatomic, strong) NSMutableDictionary* formattedAddresses;  // key is placeActivityId
 @property BOOL isPlaying;
 @property (nonatomic, strong) NSString* currentlyPlayingSpotifyURL;
@@ -42,6 +43,7 @@
 @synthesize cachedAlbumCovers = _cachedAlbumCovers;
 @synthesize cachedPlacesPhotos = _cachedPlacesPhotos;
 @synthesize cachedYoutubeWebViews = _cachedYoutubeWebViews;
+@synthesize cachedYoutubeThumbnails = _cachedYoutubeThumbnails;
 @synthesize formattedAddresses = _formattedAddresses;
 @synthesize todos = _todos;
 @synthesize isPlaying = _isPlaying;
@@ -88,6 +90,13 @@
         _cachedYoutubeWebViews = [[NSMutableDictionary alloc] init];
     }
     return _cachedYoutubeWebViews;
+}
+
+- (NSMutableDictionary*)cachedYoutubeThumbnails {
+    if (!_cachedYoutubeThumbnails) {
+        _cachedYoutubeThumbnails = [[NSMutableDictionary alloc] init];
+    }
+    return _cachedYoutubeThumbnails;
 }
 
 #pragma mark - Private helper methods
@@ -149,8 +158,15 @@
             else if ([todo isKindOfClass:[PBVideosFeedback class]]) {
                 PBVideosFeedback *videosTodo = todo;
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosTodo.videosActivity.videosItem.videoURL frame:CGRectMake(5,4,51,51)];
-                    [self.cachedYoutubeWebViews setObject:videoWebView forKey:videosTodo.videosActivity.videosItem.videoURL];
+                    
+                    // uncomment this to actually play video instead of just show thumbnail
+//                    YouTubeView* videoWebView = [[YouTubeView alloc] initWithStringAsURL:videosTodo.videosActivity.videosItem.videoURL frame:CGRectMake(5,4,51,51)];
+//                    [self.cachedYoutubeWebViews setObject:videoWebView forKey:videosTodo.videosActivity.videosItem.videoURL];
+                    
+                    // this is for demo only
+                    UIImage* videosImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:videosTodo.videosActivity.videosItem.thumbnailURL]]];
+                    [self.cachedYoutubeThumbnails setObject:videosImage forKey:videosTodo.videosActivity.videosItem.thumbnailURL];
+                    
                     [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
                 });
                 
@@ -374,8 +390,8 @@
         
         // set name of video and top align
         cell.videoName.text = videosActivity.videosItem.name;
-        
         cell.date.text = [self timeElapsed:feedback.dateAdded];
+        cell.thumbnail.image = [self.cachedYoutubeThumbnails objectForKey:videosActivity.videosItem.thumbnailURL];
         
         YouTubeView* videoWebView = [self.cachedYoutubeWebViews objectForKey:videosActivity.videosItem.videoURL];
         [cell.contentView addSubview:videoWebView];
