@@ -184,6 +184,10 @@
 		F99F2CB015AC9E3700B5EB36 /* header-you.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2CA615AC9E3700B5EB36 /* header-you.png */; };
 		F99F2CB115AC9E3700B5EB36 /* header-you@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2CA715AC9E3700B5EB36 /* header-you@2x.png */; };
 		F99F2CB415ACA3F600B5EB36 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99F2CB315ACA3F600B5EB36 /* HomeViewController.m */; };
+		F99F2E9615D3455800E98B08 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2E9415D3455800E98B08 /* Icon@2x.png */; };
+		F99F2E9715D3455800E98B08 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2E9515D3455800E98B08 /* Icon.png */; };
+		F99F2E9915D3462E00E98B08 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2E9815D3462E00E98B08 /* Icon.png */; };
+		F99F2E9B15D3463900E98B08 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F99F2E9A15D3463900E98B08 /* Icon@2x.png */; };
 		F9A097D015BF0F8C0086C2CB /* HomeMusicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A097CF15BF0F8C0086C2CB /* HomeMusicCell.m */; };
 		F9A4289915B45C7B000D147C /* PBFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4289815B45C7B000D147C /* PBFriend.m */; };
 		F9A428BA15B46276000D147C /* PBMusicNews.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A428B915B46276000D147C /* PBMusicNews.m */; };
@@ -545,6 +549,10 @@
 		F99F2CA715AC9E3700B5EB36 /* header-you@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-you@2x.png"; sourceTree = "<group>"; };
 		F99F2CB215ACA3F600B5EB36 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		F99F2CB315ACA3F600B5EB36 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		F99F2E9415D3455800E98B08 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		F99F2E9515D3455800E98B08 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		F99F2E9815D3462E00E98B08 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		F99F2E9A15D3463900E98B08 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		F9A097CE15BF0F8C0086C2CB /* HomeMusicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMusicCell.h; sourceTree = "<group>"; };
 		F9A097CF15BF0F8C0086C2CB /* HomeMusicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMusicCell.m; sourceTree = "<group>"; };
 		F9A4289715B45C7B000D147C /* PBFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBFriend.h; path = Piggybackv2/PBFriend.h; sourceTree = "<group>"; };
@@ -641,6 +649,8 @@
 		3EE8DAFE1593BF9A009DCCA3 = {
 			isa = PBXGroup;
 			children = (
+				F99F2E9A15D3463900E98B08 /* Icon@2x.png */,
+				F99F2E9815D3462E00E98B08 /* Icon.png */,
 				3EE8DB131593BF9A009DCCA3 /* Piggybackv2 */,
 				F93C2F78159A514000FACE47 /* PB Core Data Classes */,
 				F9B478711593C16F00C20A53 /* Resources */,
@@ -864,6 +874,8 @@
 				F9A8432215D1AEAD00233D3F /* phone_icon@2x.png */,
 				F9A8431D15D1AE8700233D3F /* Geolocation-icon.png */,
 				F9A8431E15D1AE8700233D3F /* Geolocation-icon@2x.png */,
+				F99F2E9415D3455800E98B08 /* Icon@2x.png */,
+				F99F2E9515D3455800E98B08 /* Icon.png */,
 				F90780C815C6ED8400B36C82 /* pause-button.png */,
 				F90780C915C6ED8400B36C82 /* pause-button@2x.png */,
 				F9712A9315D331B900F75A3E /* settings-button.png */,
@@ -1290,6 +1302,10 @@
 				F9712A8E15D2F92000F75A3E /* profile-stat-path@2x.png in Resources */,
 				F9712A9515D331B900F75A3E /* settings-button.png in Resources */,
 				F9712A9615D331B900F75A3E /* settings-button@2x.png in Resources */,
+				F99F2E9615D3455800E98B08 /* Icon@2x.png in Resources */,
+				F99F2E9715D3455800E98B08 /* Icon.png in Resources */,
+				F99F2E9915D3462E00E98B08 /* Icon.png in Resources */,
+				F99F2E9B15D3463900E98B08 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
