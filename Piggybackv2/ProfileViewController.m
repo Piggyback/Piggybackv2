@@ -18,6 +18,8 @@
 
 @implementation ProfileViewController
 @synthesize profilePic = _profilePic;
+@synthesize name = _name;
+@synthesize numPiggybacking = _numPiggybacking;
 @synthesize statusBar = _statusBar;
 @synthesize numMusicPiggybackers = _numMusicPiggybackers;
 @synthesize numPlacesPiggybackers = _numPlacesPiggybackers;
@@ -67,7 +69,9 @@
 
     self.profilePic.image = self.me.thumbnail;
     
-    NSLog(@"num of ambassadors: %@", self.numAmbassadors);
+    self.name.text = [NSString stringWithFormat:@"%@ %@",self.me.firstName, self.me.lastName];
+    
+    self.numPiggybacking.text = [NSString stringWithFormat:@"Piggybacking on %@ friends",[self.numAmbassadors stringValue]];
     
     // get percent complete
     float progress = 0;
@@ -104,6 +108,8 @@
     [self setNumVideosSaves:nil];
     [self setStatusBar:nil];
     [self setProgressText:nil];
+    [self setName:nil];
+    [self setNumPiggybacking:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

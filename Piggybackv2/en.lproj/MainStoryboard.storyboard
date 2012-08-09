@@ -116,11 +116,15 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NhI-ZE-Y77">
-                                <rect key="frame" x="81" y="215" width="159" height="29"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="piggyback-signin.png" id="cmZ-mc-NgX">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NhI-ZE-Y77">
+                                <rect key="frame" x="25" y="303" width="270" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="LoginWithFacebookNormal.png">
+                                <state key="normal" image="facebook-signin-button.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -682,9 +686,11 @@ get the full Piggyback experience!</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="name" destination="9y6-yP-M2l" id="jgh-nC-3fQ"/>
                         <outlet property="numMusicLikes" destination="tfP-fY-gxz" id="283-zV-3c6"/>
                         <outlet property="numMusicPiggybackers" destination="vug-yG-OBh" id="TDO-Jx-Zh5"/>
                         <outlet property="numMusicSaves" destination="28E-8j-bmk" id="SoK-PN-un1"/>
+                        <outlet property="numPiggybacking" destination="2NK-eB-HBR" id="chJ-0P-nHn"/>
                         <outlet property="numPlacesLikes" destination="hcA-DR-J1J" id="2KF-PM-2PT"/>
                         <outlet property="numPlacesPiggybackers" destination="ahM-AF-X3a" id="9Bd-qY-GMN"/>
                         <outlet property="numPlacesSaves" destination="eb5-Kg-yAl" id="m1F-fi-EoC"/>
@@ -1400,8 +1406,8 @@ get the full Piggyback experience!</string>
         </scene>
     </scenes>
     <resources>
-        <image name="LoginWithFacebookNormal.png" width="159" height="29"/>
         <image name="continue-button.png" width="278" height="45"/>
+        <image name="facebook-signin-button.png" width="270" height="49"/>
         <image name="follow-i'm-ready-button.png" width="278" height="45"/>
         <image name="follow-music-button-normal.png" width="44" height="44"/>
         <image name="follow-music-button-pressed.png" width="44" height="44"/>
@@ -1419,6 +1425,7 @@ get the full Piggyback experience!</string>
         <image name="navbar-notification-icon.png" width="26" height="26"/>
         <image name="navbar-todo-icon.png" width="26" height="26"/>
         <image name="navbar-you-icon.png" width="26" height="26"/>
+        <image name="piggyback-signin.png" width="320" height="480"/>
         <image name="places-icon-badge.png" width="100" height="100"/>
         <image name="places-section-divider.png" width="320" height="26"/>
         <image name="play-button.png" width="64" height="64"/>
