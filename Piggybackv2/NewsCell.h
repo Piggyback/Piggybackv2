@@ -10,7 +10,6 @@
 
 @interface NewsCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *profilePic;
-@property (weak, nonatomic) IBOutlet UILabel *newsText;
 @property (weak, nonatomic) IBOutlet UILabel *date;
 
 @end

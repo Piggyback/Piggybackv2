@@ -83,7 +83,7 @@
     if (self.me.foursquareId) {
         progress = progress + 1;
     }
-    progress = 3;
+
     self.statusBar.progress = progress/total;
     if (self.statusBar.progress == 1.0f) {
         self.progressText.text = @"Congratulations, you have connected all of your accounts! You're ready to piggyback your friends!";

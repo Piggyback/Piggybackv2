@@ -1138,7 +1138,7 @@ get the full Piggyback experience!</string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newsTableCell" rowHeight="50" id="5Kh-Jd-Tdv" customClass="NewsCell">
+                                    <tableViewCell opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newsTableCell" rowHeight="50" id="5Kh-Jd-Tdv" customClass="NewsCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1149,13 +1149,6 @@ get the full Piggyback experience!</string>
                                                     <rect key="frame" x="5" y="5" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Andy Jiang liked your check-in at McDonalds" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="zMY-u9-uhQ">
-                                                    <rect key="frame" x="50" y="5" width="233" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="8 hr" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="SpF-9I-8dH">
                                                     <rect key="frame" x="277" y="0.0" width="40" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1168,7 +1161,6 @@ get the full Piggyback experience!</string>
                                         </view>
                                         <connections>
                                             <outlet property="date" destination="SpF-9I-8dH" id="g9r-ny-HzA"/>
-                                            <outlet property="newsText" destination="zMY-u9-uhQ" id="Iec-X2-8D1"/>
                                             <outlet property="profilePic" destination="AkH-D6-gUb" id="QET-c9-gJH"/>
                                         </connections>
                                     </tableViewCell>
@@ -1517,7 +1509,6 @@ get the full Piggyback experience!</string>
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsCell.h"/>
             <relationships>
                 <relationship kind="outlet" name="date" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="newsText" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
             </relationships>
         </class>

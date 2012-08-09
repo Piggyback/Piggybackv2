@@ -84,10 +84,12 @@
 		C4002B5915ACD3C4002F05FC /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4002B5015ACD3C4002F05FC /* libfacebook_ios_sdk.a */; };
 		C422340515ACE513005151A3 /* SPLoginResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C422340415ACE513005151A3 /* SPLoginResources.bundle */; };
 		C422341515ACE528005151A3 /* libCocoaLibSpotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C422341015ACE515005151A3 /* libCocoaLibSpotify.a */; };
+		C422D9CA15D2ED38007F211E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C422D9C915D2ED38007F211E /* CoreText.framework */; };
 		C448FB3815C8A4D4003A804D /* TodoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C448FB3715C8A4D4003A804D /* TodoViewController.m */; };
 		C4739E7915B88A6600F714A7 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4739E7815B88A6600F714A7 /* NewsViewController.m */; };
 		C47A509E15CC711800D80B6D /* PBMusicFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A509D15CC711800D80B6D /* PBMusicFeedback.m */; };
 		C4AC60CC15D1B9F400B09413 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC60CB15D1B9F400B09413 /* ProfileViewController.m */; };
+		C4C9FCB315D33D6A007F2704 /* PBTextLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C9FCB215D33D6A007F2704 /* PBTextLayer.m */; };
 		C4DE6A4D15CF1F0400197EFA /* PBPlacesFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DE6A4C15CF1F0400197EFA /* PBPlacesFeedback.m */; };
 		C4DE6A5015CF2D7100197EFA /* PBVideosFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DE6A4F15CF2D7100197EFA /* PBVideosFeedback.m */; };
 		F90780CC15C6ED8400B36C82 /* pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F90780C815C6ED8400B36C82 /* pause-button.png */; };
@@ -413,6 +415,7 @@
 		C410ECA115AE71EF00E0FE11 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		C422340415ACE513005151A3 /* SPLoginResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SPLoginResources.bundle; path = "spotify-ios-sdk/iOS Library/SPLoginResources.bundle"; sourceTree = SOURCE_ROOT; };
 		C422340615ACE515005151A3 /* CocoaLibSpotify iOS Library.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CocoaLibSpotify iOS Library.xcodeproj"; path = "spotify-ios-sdk/iOS Library/CocoaLibSpotify iOS Library.xcodeproj"; sourceTree = "<group>"; };
+		C422D9C915D2ED38007F211E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		C448FB3615C8A4D4003A804D /* TodoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoViewController.h; sourceTree = "<group>"; };
 		C448FB3715C8A4D4003A804D /* TodoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoViewController.m; sourceTree = "<group>"; };
 		C4739E7715B88A6600F714A7 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
@@ -421,6 +424,8 @@
 		C47A509D15CC711800D80B6D /* PBMusicFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBMusicFeedback.m; path = Piggybackv2/PBMusicFeedback.m; sourceTree = "<group>"; };
 		C4AC60CA15D1B9F400B09413 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		C4AC60CB15D1B9F400B09413 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		C4C9FCB115D33D6A007F2704 /* PBTextLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBTextLayer.h; sourceTree = "<group>"; };
+		C4C9FCB215D33D6A007F2704 /* PBTextLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBTextLayer.m; sourceTree = "<group>"; };
 		C4DE6A4B15CF1F0400197EFA /* PBPlacesFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBPlacesFeedback.h; path = Piggybackv2/PBPlacesFeedback.h; sourceTree = "<group>"; };
 		C4DE6A4C15CF1F0400197EFA /* PBPlacesFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBPlacesFeedback.m; path = Piggybackv2/PBPlacesFeedback.m; sourceTree = "<group>"; };
 		C4DE6A4E15CF2D7100197EFA /* PBVideosFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBVideosFeedback.h; path = Piggybackv2/PBVideosFeedback.h; sourceTree = "<group>"; };
@@ -587,6 +592,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C422D9CA15D2ED38007F211E /* CoreText.framework in Frameworks */,
 				F957A75015C0A5EF0033CF00 /* CoreData.framework in Frameworks */,
 				C422341515ACE528005151A3 /* libCocoaLibSpotify.a in Frameworks */,
 				F93C2F9B159A5BA900FACE47 /* libxml2.dylib in Frameworks */,
@@ -669,6 +675,7 @@
 				3E9A5D561593C96E00635873 /* MobileCoreServices.framework */,
 				3EE8DB0D1593BF9A009DCCA3 /* UIKit.framework */,
 				3EE8DB0F1593BF9A009DCCA3 /* Foundation.framework */,
+				C422D9C915D2ED38007F211E /* CoreText.framework */,
 				3EE8DB111593BF9A009DCCA3 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
@@ -743,6 +750,8 @@
 				3EE8DB1B1593BF9A009DCCA3 /* Piggybackv2-Prefix.pch */,
 				F92E8D5315A78226002DFCB1 /* FBImageToDataTransformer.h */,
 				F92E8D5415A78226002DFCB1 /* FBImageToDataTransformer.m */,
+				C4C9FCB115D33D6A007F2704 /* PBTextLayer.h */,
+				C4C9FCB215D33D6A007F2704 /* PBTextLayer.m */,
 				F925A3F515CC2896002B3779 /* NewsCell.h */,
 				F925A3F615CC2896002B3779 /* NewsCell.m */,
 				F925A3FB15CC496D002B3779 /* TodoMusicCell.h */,
@@ -1339,6 +1348,7 @@
 				F9712A8615D2DEBC00F75A3E /* SettingsViewController.m in Sources */,
 				F9712AA115D33CCB00F75A3E /* AccountLinkNavigationController.m in Sources */,
 				F9712AA415D33CDC00F75A3E /* SetAmbassadorsNavigationController.m in Sources */,
+				C4C9FCB315D33D6A007F2704 /* PBTextLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,6 +20,8 @@
 #import "Constants.h"
 #import "NewsCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import <CoreText/CoreText.h>
+#import "PBTextLayer.h"
 
 @interface NewsViewController ()
 
@@ -45,7 +47,6 @@
     self.newsToDisplay = [[PBMusicNews allObjects] mutableCopy];
     [self.newsToDisplay addObjectsFromArray:[PBPlacesNews allObjects]];
     [self.newsToDisplay addObjectsFromArray:[PBVideosNews allObjects]];
-    [self.tableView reloadData];
     NSLog(@"news to display is %@",self.newsToDisplay);
     
     // sort news with most recent at top
@@ -53,6 +54,8 @@
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray = [self.newsToDisplay sortedArrayUsingDescriptors:sortDescriptors];
     self.newsToDisplay = [sortedArray mutableCopy];
+    
+    [self.tableView reloadData];
 
     // load profile pic thumbnails into core data if they are not yet
     for (id news in self.newsToDisplay) {
@@ -194,6 +197,10 @@
     static NSString *CellIdentifier = @"newsTableCell";
     NewsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    NSString *piggybacker;
+    NSString *actionAndItem;
+    NSString *newsText;
+    
     if ([[self.newsToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBMusicNews class]]) {
         PBMusicNews *newsItem = [self.newsToDisplay objectAtIndex:indexPath.row];
         PBUser* follower = newsItem.follower;
@@ -214,8 +221,12 @@
             action = @"liked";
         }
         
-        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ your song \"%@\"", follower.firstName, lastInitial, action, newsItem.musicActivity.musicItem.songTitle];
+//        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ your song \"%@\"", follower.firstName, lastInitial, action, newsItem.musicActivity.musicItem.songTitle];
         cell.date.text = [self timeElapsed:newsItem.dateAdded];
+        
+        piggybacker = [NSString stringWithFormat:@"%@%@", follower.firstName, lastInitial];
+        actionAndItem = [NSString stringWithFormat:@"%@ your song \"%@\"", action, newsItem.musicActivity.musicItem.songTitle];
+        newsText = [NSString stringWithFormat:@"%@ %@", piggybacker, actionAndItem];
     }
     
     else if ([[self.newsToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesNews class]]) {
@@ -238,8 +249,12 @@
             action = @"liked";
         }
         
-        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ your check-in at \"%@\"", follower.firstName, lastInitial, action, newsItem.placesActivity.placesItem.name];
+//        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ your check-in at \"%@\"", follower.firstName, lastInitial, action, newsItem.placesActivity.placesItem.name];
         cell.date.text = [self timeElapsed:newsItem.dateAdded];
+        
+        piggybacker = [NSString stringWithFormat:@"%@%@", follower.firstName, lastInitial];
+        actionAndItem = [NSString stringWithFormat:@"%@ your check-in at \"%@\"", action, newsItem.placesActivity.placesItem.name];
+        newsText = [NSString stringWithFormat:@"%@ %@", piggybacker, actionAndItem];
     }
     
     else if ([[self.newsToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBVideosNews class]]) {
@@ -262,16 +277,138 @@
             action = @"liked";
         }
         
-        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ your video \"%@\"", follower.firstName, lastInitial, action, newsItem.videosActivity.videosItem.name];
+//        cell.newsText.text = [NSString stringWithFormat:@"%@%@ %@ your video \"%@\"", follower.firstName, lastInitial, action, newsItem.videosActivity.videosItem.name];
         cell.date.text = [self timeElapsed:newsItem.dateAdded];
+        
+        piggybacker = [NSString stringWithFormat:@"%@%@", follower.firstName, lastInitial];
+        actionAndItem = [NSString stringWithFormat:@"%@ your video \"%@\"", action, newsItem.videosActivity.videosItem.name];
+        newsText = [NSString stringWithFormat:@"%@ %@", piggybacker, actionAndItem];
     }
+    
+    PBTextLayer *newsTextLayer = [[PBTextLayer alloc] init];
+    newsTextLayer.backgroundColor = [UIColor clearColor].CGColor;
+    newsTextLayer.wrapped = YES;
+    CALayer *cellLayer = cell.contentView.layer;
+    newsTextLayer.contentsScale = [[UIScreen mainScreen] scale];
+    
+    UIFont *boldFont = [UIFont boldSystemFontOfSize:13];
+    CTFontRef ctBoldFont = CTFontCreateWithName((__bridge CFStringRef)(boldFont.fontName), boldFont.pointSize, NULL);
+    UIFont *font = [UIFont systemFontOfSize:13];
+    CTFontRef ctFont = CTFontCreateWithName((__bridge CFStringRef)(font.fontName), font.pointSize, NULL);
+    CGColorRef cgColor = [UIColor colorWithRed:0 green:104/255.0f blue:204/255.0f alpha:1].CGColor;
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:CFBridgingRelease(ctBoldFont), kCTFontAttributeName, cgColor, kCTForegroundColorAttributeName, nil];
+    //        CFRelease(ctBoldFont);
+    CGColorRef cgSubColor = [UIColor blackColor].CGColor;
+    NSDictionary *subAttributes = [NSDictionary dictionaryWithObjectsAndKeys:CFBridgingRelease(ctFont), kCTFontAttributeName, cgSubColor, kCTForegroundColorAttributeName, nil];
+    //        CFRelease(ctFont);
+    
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:newsText attributes:attributes];
+    [attrStr addAttributes:subAttributes range:NSMakeRange(piggybacker.length, actionAndItem.length+1)];
+    
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef) attrStr);
+    CGSize labelSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,0), NULL, CGSizeMake(240.0f, CGFLOAT_MAX), NULL);
+    newsTextLayer.frame = CGRectMake(53.0f, 10.0f, 240.0f, labelSize.height);
+    
+    [cellLayer addSublayer:newsTextLayer];
+    newsTextLayer.string = attrStr;
     
     return cell;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath 
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath
 {
-    return NEWSTABLEROWHEIGHT;
+    NSString *piggybacker;
+    NSString *actionAndItem;
+    NSString *newsText;
+    
+    if ([[self.newsToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBMusicNews class]]) {
+        PBMusicNews *newsItem = [self.newsToDisplay objectAtIndex:indexPath.row];
+        PBUser* follower = newsItem.follower;
+        NSString *lastInitial;
+        
+        if (follower.lastName) {
+            lastInitial = [NSString stringWithFormat:@" %@.",[follower.lastName substringToIndex:1]];
+        } else {
+            lastInitial = @"";
+        }
+        
+        NSString* action;
+        if ([newsItem.newsActionType isEqualToString:@"todo"]) {
+            action = @"saved";
+        } else if ([newsItem.newsActionType isEqualToString:@"like"]) {
+            action = @"liked";
+        }
+        
+        piggybacker = [NSString stringWithFormat:@"%@%@", follower.firstName, lastInitial];
+        actionAndItem = [NSString stringWithFormat:@"%@ your song \"%@\"", action, newsItem.musicActivity.musicItem.songTitle];
+        newsText = [NSString stringWithFormat:@"%@ %@", piggybacker, actionAndItem];
+    } else if ([[self.newsToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBPlacesNews class]]) {
+        PBPlacesNews *newsItem = [self.newsToDisplay objectAtIndex:indexPath.row];
+        PBUser* follower = newsItem.follower;
+        NSString *lastInitial;
+        
+        if (follower.lastName) {
+            lastInitial = [NSString stringWithFormat:@" %@.",[follower.lastName substringToIndex:1]];
+        } else {
+            lastInitial = @"";
+        }
+        
+        NSString* action;
+        if ([newsItem.newsActionType isEqualToString:@"todo"]) {
+            action = @"saved";
+        } else if ([newsItem.newsActionType isEqualToString:@"like"]) {
+            action = @"liked";
+        }
+        
+        piggybacker = [NSString stringWithFormat:@"%@%@", follower.firstName, lastInitial];
+        actionAndItem = [NSString stringWithFormat:@"%@ your check-in at \"%@\"", action, newsItem.placesActivity.placesItem.name];
+        newsText = [NSString stringWithFormat:@"%@ %@", piggybacker, actionAndItem];
+        
+    } else if ([[self.newsToDisplay objectAtIndex:indexPath.row] isKindOfClass:[PBVideosNews class]]) {
+        PBVideosNews *newsItem = [self.newsToDisplay objectAtIndex:indexPath.row];
+        PBUser* follower = newsItem.follower;
+        NSString *lastInitial;
+        
+        if (follower.lastName) {
+            lastInitial = [NSString stringWithFormat:@" %@.",[follower.lastName substringToIndex:1]];
+        } else {
+            lastInitial = @"";
+        }
+        
+        NSString* action;
+        if ([newsItem.newsActionType isEqualToString:@"todo"]) {
+            action = @"saved";
+        } else if ([newsItem.newsActionType isEqualToString:@"like"]) {
+            action = @"liked";
+        }
+        
+        piggybacker = [NSString stringWithFormat:@"%@%@", follower.firstName, lastInitial];
+        actionAndItem = [NSString stringWithFormat:@"%@ your video \"%@\"", action, newsItem.videosActivity.videosItem.name];
+        newsText = [NSString stringWithFormat:@"%@ %@", piggybacker, actionAndItem];
+    }
+    
+    CGFloat fontSize = 13;
+    UIFont *boldFont = [UIFont boldSystemFontOfSize:fontSize];
+    CTFontRef ctBoldFont = CTFontCreateWithName((__bridge CFStringRef)(boldFont.fontName), boldFont.pointSize, NULL);
+    UIFont *font = [UIFont systemFontOfSize:13];
+    CTFontRef ctFont = CTFontCreateWithName((__bridge CFStringRef)(font.fontName), font.pointSize, NULL);
+    CGColorRef cgColor = [UIColor purpleColor].CGColor;
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:CFBridgingRelease(ctBoldFont), kCTFontAttributeName, cgColor, kCTForegroundColorAttributeName, nil];
+    //        CFRelease(ctBoldFont);
+    CGColorRef cgSubColor = [UIColor blackColor].CGColor;
+    NSDictionary *subAttributes = [NSDictionary dictionaryWithObjectsAndKeys:CFBridgingRelease(ctFont), kCTFontAttributeName, cgSubColor, kCTForegroundColorAttributeName, nil];
+    //        CFRelease(ctFont);
+    
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:newsText attributes:attributes];
+    [attrStr addAttributes:subAttributes range:NSMakeRange(piggybacker.length, actionAndItem.length+1)];
+    
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef) attrStr);
+    CGSize labelSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,0), NULL, CGSizeMake(240.0f, CGFLOAT_MAX), NULL);
+    
+    if ((labelSize.height + 5) <= NEWSTABLEROWHEIGHT)
+        return NEWSTABLEROWHEIGHT;
+    
+    return labelSize.height + 5;
 }
 
 #pragma mark - Table view delegate
