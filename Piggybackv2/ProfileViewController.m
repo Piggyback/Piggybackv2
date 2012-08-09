@@ -41,6 +41,37 @@
     
 }
 
+- (void)getProfileInfo {
+    self.me = [PBUser findByPrimaryKey:[NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]]];
+    self.numAmbassadors = [NSNumber numberWithInt:([self.me.musicAmbassadors count] + [self.me.placesAmbassadors count] + [self.me.videosAmbassadors count])];
+    
+    self.profilePic.image = self.me.thumbnail;
+    
+    self.name.text = [NSString stringWithFormat:@"%@ %@",self.me.firstName, self.me.lastName];
+    
+    self.numPiggybacking.text = [NSString stringWithFormat:@"Piggybacking on %@ friends",[self.numAmbassadors stringValue]];
+    
+    // get percent complete
+    float progress = 0;
+    float total = 3;
+    if (self.me.spotifyUsername) {
+        progress = progress + 1;
+    }
+    
+    if (self.me.youtubeUsername) {
+        progress = progress + 1;
+    }
+    
+    if (self.me.foursquareId) {
+        progress = progress + 1;
+    }
+    
+    self.statusBar.progress = progress/total;
+    if (self.statusBar.progress == 1.0f) {
+        self.progressText.text = @"Congratulations, you have connected all of your accounts! You're ready to piggyback your friends!";
+    }
+}
+
 - (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response {
     NSLog(@"profile page loaded successfully");
     NSDictionary *profileResponse = [response parsedBody:nil];
@@ -62,36 +93,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     [self loadData];
-    self.me = [PBUser findByPrimaryKey:[NSNumber numberWithInt:[[[NSUserDefaults standardUserDefaults] objectForKey:@"UID"] intValue]]];
-    self.numAmbassadors = [NSNumber numberWithInt:([self.me.musicAmbassadors count] + [self.me.placesAmbassadors count] + [self.me.videosAmbassadors count])];
-
-    self.profilePic.image = self.me.thumbnail;
-    
-    self.name.text = [NSString stringWithFormat:@"%@ %@",self.me.firstName, self.me.lastName];
-    
-    self.numPiggybacking.text = [NSString stringWithFormat:@"Piggybacking on %@ friends",[self.numAmbassadors stringValue]];
-    
-    // get percent complete
-    float progress = 0;
-    float total = 3;
-    if (self.me.spotifyUsername) {
-        progress = progress + 1;
-    }
-    
-    if (self.me.youtubeUsername) {
-        progress = progress + 1;
-    }
-    
-    if (self.me.foursquareId) {
-        progress = progress + 1;
-    }
-
-    self.statusBar.progress = progress/total;
-    if (self.statusBar.progress == 1.0f) {
-        self.progressText.text = @"Congratulations, you have connected all of your accounts! You're ready to piggyback your friends!";
-    }
+    [self getProfileInfo];
 }
 
 - (void)viewDidUnload
