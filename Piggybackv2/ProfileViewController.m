@@ -96,8 +96,8 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self loadData];
     [self getProfileInfo];
+    [self loadData];
 }
 
 - (void)viewDidUnload

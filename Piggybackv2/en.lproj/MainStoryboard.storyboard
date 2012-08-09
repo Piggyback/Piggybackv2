@@ -561,7 +561,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="SAVES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Yvd-rW-g7b">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="BOOKMARKS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Yvd-rW-g7b">
                                 <rect key="frame" x="7" y="330" width="88" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -603,7 +603,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="SAVES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="W31-GJ-jyh">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="BOOKMARKS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="W31-GJ-jyh">
                                 <rect key="frame" x="112" y="328" width="88" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -669,7 +669,7 @@ get the full Piggyback experience!</string>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="SAVES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="oYb-Uc-BB1">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="BOOKMARKS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="oYb-Uc-BB1">
                                 <rect key="frame" x="218" y="328" width="88" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -1495,6 +1495,198 @@ get the full Piggyback experience!</string>
         <image name="videos-section-divider.png" width="320" height="26"/>
         <image name="youtube-icon.png" width="50" height="50"/>
     </resources>
+    <classes>
+        <class className="AccountLinkNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AccountLinkNavigationController.h"/>
+        </class>
+        <class className="AccountLinkViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AccountLinkViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="continueButton:"/>
+                <relationship kind="action" name="foursquareConnect:"/>
+                <relationship kind="action" name="spotifyConnect:"/>
+                <relationship kind="action" name="youtubeConnect:"/>
+                <relationship kind="outlet" name="foursquareToggle" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="spotifyToggle" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="youtubeToggle" candidateClass="UISwitch"/>
+            </relationships>
+        </class>
+        <class className="HomeFeedNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeFeedNavigationController.h"/>
+        </class>
+        <class className="HomeMusicCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeMusicCell.h"/>
+            <relationships>
+                <relationship kind="action" name="clickPlay:"/>
+                <relationship kind="action" name="heart:"/>
+                <relationship kind="action" name="todo:"/>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="icon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="mainPic" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="nameOfItem" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="playButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="HomePlacesCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomePlacesCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="icon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="mainPic" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="nameOfItem" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="HomeVideosCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeVideosCell.h"/>
+            <relationships>
+                <relationship kind="action" name="heart:"/>
+                <relationship kind="action" name="todo:"/>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="favoritedBy" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="heart" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="icon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="nameOfItem" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="thumbnail" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="todo" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="HomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginWithFacebook:"/>
+            </relationships>
+        </class>
+        <class className="NewsCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="NewsNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsNavigationController.h"/>
+        </class>
+        <class className="NewsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="PiggybackTabBarController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PiggybackTabBarController.h"/>
+        </class>
+        <class className="PlacesItemViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesItemViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="photoPageControl" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="photoScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="vendorTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ProfileNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileNavigationController.h"/>
+        </class>
+        <class className="ProfileViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numMusicLikes" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numMusicPiggybackers" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numMusicSaves" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numPiggybacking" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numPlacesLikes" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numPlacesPiggybackers" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numPlacesSaves" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numVideosLikes" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numVideosPiggybackers" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numVideosSaves" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="progressText" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="statusBar" candidateClass="UIProgressView"/>
+            </relationships>
+        </class>
+        <class className="SetAmbassadorCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetAmbassadorCell.h"/>
+            <relationships>
+                <relationship kind="action" name="clickFollowMusic"/>
+                <relationship kind="action" name="clickFollowPlaces"/>
+                <relationship kind="action" name="clickFollowVideos"/>
+                <relationship kind="outlet" name="followMusic" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="followPlaces" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="followVideos" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profilePic" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="SetAmbassadorsNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetAmbassadorsNavigationController.h"/>
+        </class>
+        <class className="SetAmbassadorsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetAmbassadorsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="readyButton:"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="SettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
+        </class>
+        <class className="TodoMusicCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TodoMusicCell.h"/>
+            <relationships>
+                <relationship kind="action" name="clickPlay:"/>
+                <relationship kind="outlet" name="coverImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="playButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="songArtist" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="songTitle" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TodoNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TodoNavigationController.h"/>
+        </class>
+        <class className="TodoPlacesCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TodoPlacesCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="phone" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="vendorAddress" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="vendorImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="vendorName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TodoVideosCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TodoVideosCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="thumbnail" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="videoName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TodoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TodoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
