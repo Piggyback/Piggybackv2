@@ -48,7 +48,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 @synthesize facebook = _facebook;
 @synthesize foursquareDelegate = _foursquareDelegate;
 @synthesize newsNotificationLabel = _newsNotificationLabel;
-@synthesize accountLinkViewController = _accountLinkViewController;
+@synthesize accountLinkNavigationController = _accountLinkViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -367,7 +367,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
 //    AccountLinkViewController *accountLinkViewController = [storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
 //	return accountLinkViewController;
-    return self.accountLinkViewController;
+    return self.accountLinkNavigationController;
 }
 
 -(void)session:(SPSession *)aSession didGenerateLoginCredentials:(NSString *)credential forUserName:(NSString *)userName {
@@ -420,12 +420,12 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error; {
     NSLog(@"failed to log into spotify");
-    self.accountLinkViewController.spotifyToggle.on = FALSE;
+//    self.accountLinkViewController.spotifyToggle.on = FALSE;
 }
 
 -(void)sessionDidLogOut:(SPSession *)aSession {
 	NSLog(@"logged out of spotify");
-    self.accountLinkViewController.spotifyToggle.on = FALSE;
+//    self.accountLinkViewController.spotifyToggle.on = FALSE;
 }
 
 -(void)session:(SPSession *)aSession didEncounterNetworkError:(NSError *)error; {}
@@ -459,9 +459,9 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     [rootViewController dismissViewControllerAnimated:NO completion:nil]; // dismisses loginViewController
     
     // show account link page when you log in for the first time
-    AccountLinkViewController *accountLinkViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
-    self.accountLinkViewController = accountLinkViewController;
-    [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];  
+    AccountLinkNavigationController *accountLinkNavigationController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"accountLinkNavigationController"];
+    self.accountLinkNavigationController = accountLinkNavigationController;
+    [rootViewController presentViewController:accountLinkNavigationController animated:NO completion:nil];  
     
     NSLog(@"logged in");
 }

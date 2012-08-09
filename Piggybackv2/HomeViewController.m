@@ -251,6 +251,7 @@
     else if ([keyPath isEqualToString:@"image"]) {
         // remove observer
         [object removeObserver:self forKeyPath:@"image"];
+        NSLog(@"image loaded");
         
         for (id cell in [self.tableView visibleCells]) {
             if ([cell isKindOfClass:[HomeMusicCell class]]) {
