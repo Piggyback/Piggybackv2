@@ -18,6 +18,8 @@
 
 @implementation AccountLinkViewController
 @synthesize youtubeToggle;
+@synthesize spotifyToggle;
+@synthesize foursquareToggle;
 
 - (void)viewDidLoad
 {
@@ -27,6 +29,8 @@
 - (void)viewDidUnload
 {
     [self setYoutubeToggle:nil];
+    [self setSpotifyToggle:nil];
+    [self setFoursquareToggle:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -99,8 +103,8 @@
     }
 }
 
-- (IBAction)logout:(id)sender {
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] facebook] logout];
-}
+//- (IBAction)logout:(id)sender {
+//    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] facebook] logout];
+//}
 
 @end

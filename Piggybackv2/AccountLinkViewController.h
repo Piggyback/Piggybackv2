@@ -15,5 +15,7 @@
 - (IBAction)youtubeConnect:(id)sender;
 - (IBAction)continueButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UISwitch *youtubeToggle;
+@property (weak, nonatomic) IBOutlet UISwitch *spotifyToggle;
+@property (weak, nonatomic) IBOutlet UISwitch *foursquareToggle;
 
 @end

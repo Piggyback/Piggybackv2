@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "PiggybackTabBarController.h"
-#import "AccountLinkViewController.h"
 #include "appkey.c"
 #import "ListenTableViewController.h"
 #import "ExploreTableViewController.h"
@@ -39,7 +38,7 @@
 @implementation AppDelegate
 
 //NSString* RK_BASE_URL = @"http://piggybackv2.herokuapp.com";
-NSString *RK_BASE_URL = @"http://localhost:5000";
+NSString *RK_BASE_URL = @"http://10.0.4.128:5000";
 NSString* const FB_APP_ID = @"316977565057222";
 NSString* const FSQ_CLIENT_ID = @"LBZXOLI3RUL2GDOHGPO5HH4Z101JUATS2ECUZ0QACUJVWUFB";
 NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
@@ -49,6 +48,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 @synthesize facebook = _facebook;
 @synthesize foursquareDelegate = _foursquareDelegate;
 @synthesize newsNotificationLabel = _newsNotificationLabel;
+@synthesize accountLinkViewController = _accountLinkViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -364,9 +364,10 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 #pragma mark SPSessionDelegate Methods
 
 -(UIViewController *)viewControllerToPresentLoginViewForSession:(SPSession *)aSession {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    AccountLinkViewController *accountLinkViewController = [storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
-	return accountLinkViewController;
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+//    AccountLinkViewController *accountLinkViewController = [storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
+//	return accountLinkViewController;
+    return self.accountLinkViewController;
 }
 
 -(void)session:(SPSession *)aSession didGenerateLoginCredentials:(NSString *)credential forUserName:(NSString *)userName {
@@ -419,10 +420,12 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error; {
     NSLog(@"failed to log into spotify");
+    self.accountLinkViewController.spotifyToggle.on = FALSE;
 }
 
 -(void)sessionDidLogOut:(SPSession *)aSession {
 	NSLog(@"logged out of spotify");
+    self.accountLinkViewController.spotifyToggle.on = FALSE;
 }
 
 -(void)session:(SPSession *)aSession didEncounterNetworkError:(NSError *)error; {}
@@ -457,6 +460,7 @@ NSString* const FSQ_CALLBACK_URL = @"piggyback://foursquare";
     
     // show account link page when you log in for the first time
     AccountLinkViewController *accountLinkViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"accountLinkViewController"];
+    self.accountLinkViewController = accountLinkViewController;
     [rootViewController presentViewController:accountLinkViewController animated:NO completion:nil];  
     
     NSLog(@"logged in");

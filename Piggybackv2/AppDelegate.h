@@ -12,6 +12,7 @@
 #import "FBConnect.h"
 #import <RestKit/RestKit.h>
 #import "FoursquareDelegate.h"
+#import "AccountLinkViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, BZFoursquareSessionDelegate, SPSessionDelegate, FBSessionDelegate, RKRequestDelegate>
 
@@ -19,5 +20,5 @@
 @property (strong, nonatomic) BZFoursquare *foursquare;
 @property (strong, nonatomic) Facebook *facebook;
 @property (strong, nonatomic) FoursquareDelegate *foursquareDelegate;
-
+@property (nonatomic, strong) AccountLinkViewController *accountLinkViewController;
 @end

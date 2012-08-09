@@ -74,12 +74,13 @@ const CGFloat photoWidth = 320;
 - (void)displayPhotos {
     dispatch_queue_t downloadImageQueue = dispatch_queue_create("downloadImage",NULL);
     dispatch_async(downloadImageQueue, ^{
-        for (UIImage* image in self.photos) {
+        for (int i = 0; i < [self.photos count]; i++) {
+            UIImage* photo = [self.photos objectAtIndex:i];
             [self.photoPageControl setNumberOfPages:[self.photos count]];
             [self.photoPageControl setCurrentPage:0];
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:photo];
             imageView.contentMode = UIViewContentModeScaleAspectFill;
-            imageView.tag = 0;
+            imageView.tag = i;
             imageView.frame = CGRectMake(0,0,photoWidth,photoHeight);
             [self.photoScrollView addSubview:imageView];
         }
@@ -88,56 +89,6 @@ const CGFloat photoWidth = 320;
             [self layoutPhotoScrollImages];
         });
     });
-    
-//    if ([self.photos count] > 0) {
-//        // create new thread
-//        dispatch_queue_t downloadImageQueue = dispatch_queue_create("downloadImage",NULL);
-//        dispatch_queue_t downloadOtherImagesQueue = dispatch_queue_create("downloadOtherImages",NULL);
-//        
-//        // show first photo immediately
-//        dispatch_async(downloadImageQueue, ^{
-//            
-//            PBVendorPhoto* firstPhoto = [self.photos objectAtIndex:0];
-//            NSString* squareFirstPhotoString = [[firstPhoto.photoURL stringByReplacingOccurrencesOfString:@".jpg" withString:@"_300x300.jpg"] stringByReplacingOccurrencesOfString:@"pix" withString:@"derived_pix"];
-//            UIImage *firstImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:squareFirstPhotoString]]];
-//            UIImageView *firstImageView = [[UIImageView alloc] initWithImage:firstImage];
-//            firstImageView.contentMode = UIViewContentModeScaleAspectFill;
-//            firstImageView.tag = 0;
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                firstImageView.frame = CGRectMake(0,0,photoWidth,photoHeight);
-//                [self.photoScrollView addSubview:firstImageView];
-//            });
-//        });
-//
-//        // download the rest of the photos
-//        dispatch_async(downloadOtherImagesQueue, ^{
-//            for (int i = 1; i < [self.photos count]; i++) {
-//                NSString* squarePhotoString = [[[[self.photos objectAtIndex:i] photoURL] stringByReplacingOccurrencesOfString:@".jpg" withString:@"_300x300.jpg"] stringByReplacingOccurrencesOfString:@"pix" withString:@"derived_pix"];
-//                UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:squarePhotoString]]];
-//                UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-//                imageView.contentMode = UIViewContentModeScaleAspectFill;
-//                CGRect rect = imageView.frame;
-//                rect.size.height = photoHeight;
-//                rect.size.width = photoWidth;
-//                imageView.frame = rect;
-//                imageView.tag = i;
-//                [self.photoScrollView addSubview:imageView];
-//            }
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self layoutPhotoScrollImages];
-//            });
-//        });
-//    } else {
-//        // display icon for no picture
-//        UIImage *image = [UIImage imageNamed:@"no_photo.png"];
-//        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-//        [self.photoScrollView addSubview:imageView];
-//        
-//        // hide spinner bc no photos. done loading.
-//        [MBProgressHUD hideHUDForView:self.view animated:YES];
-//        self.reloading = NO;
-//        [self.refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.scrollView];
-//    }
 }
 
 - (void)layoutPhotoScrollImages {

@@ -1,18 +1,18 @@
 //
-//  TodoNavigationController.m
+//  YouNavigationController.m
 //  Piggybackv2
 //
-//  Created by Kimberly Hsiao on 8/3/12.
+//  Created by Kimberly Hsiao on 8/7/12.
 //  Copyright (c) 2012 Calimucho. All rights reserved.
 //
 
-#import "TodoNavigationController.h"
+#import "ProfileNavigationController.h"
 
-@interface TodoNavigationController ()
+@interface ProfileNavigationController ()
 
 @end
 
-@implementation TodoNavigationController
+@implementation ProfileNavigationController
 
 - (void)customizeNavigationBar {
     self.navigationBar.tintColor = [UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:0];
@@ -21,6 +21,14 @@
                                                 [UIColor blackColor], UITextAttributeTextColor,
                                                 [UIColor clearColor], UITextAttributeTextShadowColor,
                                                 nil]];
+    
+//    CGRect titleFrame = CGRectMake(0, 0, 320, 44);
+//    UILabel *label = [[UILabel alloc] initWithFrame:titleFrame];
+//    label.backgroundColor = [UIColor clearColor];
+//    label.textAlignment = UITextAlignmentCenter;
+//    label.font = [UIFont fontWithName:@"Futura-Medium" size:24.0f];
+//    label.text = @"YOUR PROFILE";
+//    [self.navigationBar addSubview:label];
 }
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController
